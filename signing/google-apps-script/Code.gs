@@ -119,13 +119,52 @@ function snapshot_(o) {
   const total=base+extras.reduce((n,x)=>n+(x.gift?0:x.price*x.quantity),0)-discount;
   if(total<=0||deposit>total)fail_('מחיר או מקדמה אינם תקינים');
   const labels={standard:'Standard - סטילס',premium:'Premium - סטילס, וידאו ואלבומים','premium-plus':'Premium Plus - כולל מגנטים',diamond:'Diamond - החבילה המלאה',custom:'אירוע בהתאמה אישית'};
-  const summary=['המזמין: '+customer,'דוא״ל: '+email+' | טלפון: '+phone,'תאריך: '+o.date+' | מקום: '+venue,'חבילה: '+labels[o.package]+' | שעות: '+o.start+' עד '+o.end,
-    'מחיר החבילה כולל מע״מ: '+money_(base)+' | הנחה: '+money_(discount),'מחיר סופי כולל מע״מ: '+money_(total)+' | מקדמה: '+money_(deposit)+' | יתרה: '+money_(total-deposit)];
-  extras.forEach(x=>summary.push(x.title+' | כמות '+x.quantity+' | '+(x.gift?'מתנה ללא חיוב':'מחיר יחידה '+money_(x.price)+' | סך הכול '+money_(x.price*x.quantity))+' | '+x.details));
-  const notes=text_(o.notes||'',2000,'הסכמות מיוחדות');if(notes)summary.push('הסכמות מיוחדות: '+notes);
-  summary.push('פרטי ההזמנה והמחיר הסופי לעיל גוברים על מחירי הבסיס בתבנית. המקדמה אינה נחשבת משולמת מעצם החתימה.');
-  const remove=/^(שמות המזמינים|דוא״ל לקבלת ההסכם|סוג האירוע|מקום האירוע וכתובתו|מקום התארגנות|איש קשר ביום האירוע|צלם סטילס ראשי:|צלם סטילס נוסף:|וידאו:|מגנטים:|מחיר בסיס החבילה|מחיר החבילה הכולל|מקדמה במועד|תשלום ביום האירוע:|יתרה:|מזמין ראשון:|מזמין שני אם|הספק דור פיינה:|עותק ההסכם המאושר יימסר|___)/;
-  return {customer:customer,email:email,summary:summary,terms:TERMS_[o.package].map(s=>s.filter(x=>!remove.test(x[1]))),total:total,created_at:new Date().toISOString()};
+  const selected=services_(o);
+  const summary=['שם הלקוח: '+customer,'דוא״ל: '+email+' | טלפון: '+phone,'האירוע שלכם: '+o.date+' | '+venue,'החבילה שסיכמנו: '+labels[o.package],'שעות הצילום: '+o.start+' עד '+o.end,'מחיר החבילה כולל מע״מ: '+money_(base)];
+  if(discount)summary.push('הנחה שסוכמה: '+money_(discount));
+  extras.forEach(x=>summary.push(x.title+' · '+x.quantity+' יחידות · '+(x.gift?'מתנה מאיתנו, ללא חיוב':money_(x.price*x.quantity))+(x.details?' · '+x.details:'')));
+  summary.push('סך הכול כולל מע״מ: '+money_(total));
+  if(deposit)summary.push('מקדמה במעמד סגירת ההזמנה: '+money_(deposit));
+  summary.push('יתרה לתשלום: '+money_(total-deposit));
+  const notes=text_(o.notes||'',2000,'הסכמות מיוחדות');if(notes)summary.push('עוד דברים שסיכמנו: '+notes);
+  return {customer:customer,email:email,summary:summary,terms:tailoredTerms_(o.package,selected,deposit),services:selected,total:total,created_at:new Date().toISOString()};
+}
+// Explicit service selection controls every service-specific paragraph. Extras never infer scope from their free-text title.
+function services_(o) {
+  const defaults={standard:['stills'],premium:['stills','video','albums','drone'],'premium-plus':['stills','video','albums','drone','magnets'],diamond:['stills','video','albums','drone','magnets','prints','couple'],custom:['stills']};
+  const list=o.services===undefined?defaults[o.package]:o.services;
+  const allowed=['stills','video','albums','drone','magnets','prints','couple'];
+  if(!Array.isArray(list)||!list.length||list.length>allowed.length||new Set(list).size!==list.length||list.some(x=>!allowed.includes(x)))fail_('יש לבחור את השירותים שסוכמו');
+  if(list.includes('drone')&&!list.includes('video'))fail_('צילום רחפן דורש בחירת וידאו');
+  return list.slice();
+}
+function tailoredTerms_(packageKey,selected,deposit) {
+  const sections=[],has=x=>selected.includes(x),add=(title,lines)=>sections.push([['h',title],...lines.map(t=>['p',t])]);
+  if(has('stills'))add('הצילום שלכם',['צילום סטילס בהובלת דור פיינה, בהתאם לשעות ולצוות שסוכמו בהזמנה. הצילום והעריכה נעשים מתוך שיקול דעת מקצועי ואומנותי.','התמונות יימסרו בגלריה אישית לצפייה, הורדה ושיתוף.']);
+  if(has('video'))add('וידאו ועריכה',['צילום וידאו בשעות שסוכמו, כולל מצלמה נוספת על חצובה בחופה.','התוצרים שסוכמו: סרט מלא, סרט מקוצר באורך 45–60 דקות, היילייטס וטיזר באורך 40–50 שניות. התוצרים יימסרו בקישור להורדה באיכות גבוהה. שינויים בפירוט הזה יירשמו בהסכמות האישיות בהזמנה.']);
+  if(has('drone'))add('צילום רחפן',['צילום הרחפן יבוצע בהתאם למזג האוויר, לתנאי המקום, לאישורים הנדרשים ולכללי הדין והבטיחות.']);
+  if(has('albums'))add('האלבומים שלכם',[(packageKey==='standard'||packageKey==='custom')?'סוג האלבומים, הכמות, המידות והעיצוב הם כפי שנרשמו בתוספות ובהסכמות האישיות.':'בחבילה: אלבום זוגי 30×60 ס״מ ושני אלבומי הורים 20×40 ס״מ, עד 220 תמונות בכל אלבום, בעיצוב זהה ובכריכה מהמגוון. תוספות ושינויים הם לפי הפירוט האישי.','בחירת התמונות תיעשה בתוך חודשיים מהאירוע. תיקוני עיצוב יועברו בתוך 14 ימי עסקים, ואישור העיצוב יינתן בכתב. אם עיכוב גורר עליית מחירי ספקים, כל תוספת תפורט ותוסכם בכתב לפני ביצוע.']);
+  if(has('magnets'))add('מגנטים באירוע',['המגנטים מודפסים באירוע מתמונות צלמי הסטילס, באמצעות איש צוות להדפסה, ללא הגבלה בכמות בשעות השירות שסוכמו.','ברירת המחדל היא 19:30–00:00, עד חמש שעות ולא יאוחר מחצות; שעות אחרות, הגדלות או פוטובלוקים יפורטו בהסכמות האישיות.']);
+  if(has('prints'))add('הדפסות והגדלות',['סוג ההדפסה, המידות והכמות הם לפי החבילה והתוספות שסוכמו בהזמנה.']);
+  if(has('couple'))add('צילומי זוגיות',['מועד, מיקום, משך הצילומים והתוצרים יהיו לפי הפירוט שסוכם בהזמנה ובתיאום עם דור.']);
+  const delivery=[];
+  if(has('stills'))delivery.push('תמונות סטילס: עד 21 יום לאחר האירוע.');
+  if(has('video'))delivery.push('וידאו: עד 45 יום מבחירת השירים.');
+  if(has('albums'))delivery.push('אלבומים: עד 30 יום מאישור העיצוב בכתב.');
+  if(delivery.length)add('מתי מקבלים את הזיכרונות',delivery);
+  add('התשלום ושמירת התאריך',[(deposit?'המקדמה הרשומה בהזמנה תשולם במעמד סגירת ההזמנה. חתימה אינה אישור שהמקדמה התקבלה. ':'')+'שמירת התאריך תאושר על ידי דור לאחר חתימה והסדרת התשלום שסוכם. מועדי ואמצעי תשלום היתרה יסוכמו בכתב. תשלום במזומן ייעשה בגבולות הדין.','בקשה להארכת צילום מעבר לשעות שסוכמו תתואם עם דור, לפי זמינות הצוות, במחיר 500 ₪ לכל צלם לכל שעה נוספת או חלק ממנה.']);
+  add('כדי שהיום יעבור בנחת',['במעמד סגירת ההסכם יש לעדכן אם האולם או מקום האירוע דורשים אישור ביטוח צד ג׳ או אישור ביטוח אחר, ולהעביר את הדרישות הכתובות לבדיקה. אישור יימסר רק לאחר בדיקה ואישור מפורש של דור; אין בהסכם התחייבות לכיסוי ביטוחי שלא אושר.','יש לתאם עם האולם אפשרות לצוות הצילום לאכול ארוחה ולשתות במקום, ללא חיוב הצוות. ההפסקה תתואם ככל האפשר לזמנים שאינם כוללים רגעי צילום מרכזיים.','יש לדאוג לחניה נגישה לצוות. אם החניה בתשלום, עלותה בפועל תתווסף למחיר ההזמנה כנגד אסמכתה. הוצאה חריגה או סידור חניה מיוחד יתואמו מראש.','הצוות יעבוד בהתאם לכללי הבטיחות. יש לתאם עם האולם שלא יופעלו לייזרים באזורי הצילום; במקרה של סיכון, הצוות רשאי לעצור צילום באזור המסוכן עד להסרתו. תאורת המקום ותנאים שאינם בשליטת הצוות עשויים להשפיע על התוצאה.']);
+  // Preserve the existing cancellation, postponement and liability terms; remove only unrelated service text.
+  let active=false,lines=[];
+  TERMS_[packageKey].flat().forEach(([kind,text])=>{
+    if(kind!=='p'){
+      if(active&&lines.length)add(active,lines);
+      active=['ביטול ההזמנה על ידי המזמין','דחייה עקב כוח עליון','מניעה מצד הצלם ואחריות לחומרים'].includes(text)?text:false;lines=[];
+    }else if(active)lines.push(text);
+  });if(active&&lines.length)add(active,lines);
+  if(has('stills')||has('video'))add('שמירה ושימוש בחומרים',['חומרי הגלם יישמרו במשך 14 ימי עסקים לאחר מסירת החומרים. חשוב להוריד ולגבות את הקבצים שנמסרו לכם.','זכויות היוצרים שמורות לצלם בכפוף לדין; תוכלו להשתמש בחומרים לשימוש אישי ולשתף עם משפחה וחברים. פרסום לצורכי שיווק ייעשה לפי הבחירה שלכם בעת החתימה ובכפוף לאישורים הנדרשים בדין.']);
+  add('הסיכום שלנו',['השירותים, התוספות, המתנות, המחיר והשעות המפורטים בהזמנה הם הסיכום בינינו. שינוי ייעשה בהסכמה בכתב. זכויות הצדדים והוראות חובה לפי דין נשמרות.']);
+  return sections;
 }
 function create_(order) {
   if(mailReady_()<3)fail_('מכסת המייל היומית אינה מספיקה כרגע');
@@ -190,8 +229,8 @@ function makePdf_(r,signature) {
   const logo=Utilities.newBlob(Utilities.base64Decode(LOGO_BLACK_),'image/png','logo.png');
   doc.addHeader().appendParagraph('').appendInlineImage(logo).setWidth(180).setHeight(62);
   const p=(text,heading)=>{const paragraph=body.appendParagraph(text);if(heading)paragraph.setHeading(DocumentApp.ParagraphHeading.HEADING2);paragraph.setLeftToRight(false).setAlignment(DocumentApp.HorizontalAlignment.RIGHT).setSpacingAfter(7);paragraph.editAsText().setFontFamily('Arial').setFontSize(heading?14:11);return paragraph;};
-  p('הסכם אישי להזמנת שירותי צילום',true);r.snapshot.summary.forEach(t=>p(t));
-  p('תנאי ההזמנה',true);r.snapshot.terms.forEach(section=>section.forEach(([kind,text])=>p(text,kind!=='p')));
+  p('הרגעים שלכם, הסיכום שלנו',true);r.snapshot.summary.forEach(t=>p(t));
+  p('כל מה שסיכמנו לקראת האירוע',true);r.snapshot.terms.forEach(section=>section.forEach(([kind,text])=>p(text,kind!=='p')));
   body.appendPageBreak();p('חתימת המזמין ואישור ההסכם',true);
   body.appendParagraph('').setAlignment(DocumentApp.HorizontalAlignment.RIGHT).appendInlineImage(signature).setWidth(350).setHeight(105);
   ['שם החותם: '+r.signer,'מועד חתימה UTC: '+r.signed_at,'מזהה הסכם: '+r.id,'אימות: קוד חד־פעמי למייל שהוגדר בהזמנה','אישור פרסום: '+(r.marketing?'מאשר':'אינו מאשר'),'SHA256 גרסת ההסכם: '+r.digest,'SHA256 תמונת החתימה: '+r.signature_hash].forEach(t=>p(t));
