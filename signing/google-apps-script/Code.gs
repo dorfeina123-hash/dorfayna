@@ -17,10 +17,13 @@ function rpc(request) {
     rate_('global',100,600);
     const action = request.action, data=request.data || {};
     if (action === 'login') return {ok:true,data:login_(data.password)};
-    if (['list','create','preview','revoke','ownerPdf','logout'].includes(action)) {
+    if (['list','create','preview','revoke','ownerPdf','logout','templates','saveTemplate','loadTemplate'].includes(action)) {
       admin_(request.session);
       if(action === 'logout') {CacheService.getScriptCache().remove('session:'+hash_(request.session));return {ok:true,data:{}};}
       if(action === 'list') return {ok:true,data:list_()};
+      if(action === 'templates')return {ok:true,data:templates_()};
+      if(action === 'saveTemplate')return {ok:true,data:saveTemplate_(data)};
+      if(action === 'loadTemplate')return {ok:true,data:loadTemplate_(data.id)};
       if(action === 'preview') return {ok:true,data:snapshot_(data)};
       if(action === 'create') return {ok:true,data:create_(data)};
       const record=recordById_(data.id);
@@ -134,7 +137,7 @@ function snapshot_(o) {
   if(deposit)summary.push('מקדמה במעמד סגירת ההזמנה: '+money_(deposit));
   summary.push('יתרה לתשלום: '+money_(total-deposit));
   const notes=text_(o.notes||'',2000,'הסכמות מיוחדות');if(notes)summary.push('עוד דברים שסיכמנו: '+notes);
-  return {customer:customer,email:email,summary:summary,terms:tailoredTerms_(o.package,selected,deposit),services:selected,crew:{stills:crew.stills,video:crew.video,magnets:crew.magnets,other:crew.other},total:total,created_at:new Date().toISOString()};
+  return {customer:customer,email:email,summary:summary,terms:o.customTerms===undefined?tailoredTerms_(o.package,selected,deposit):validateTerms_(o.customTerms),services:selected,crew:{stills:crew.stills,video:crew.video,magnets:crew.magnets,other:crew.other},total:total,created_at:new Date().toISOString()};
 }
 // Explicit service selection controls every service-specific paragraph. Extras never infer scope from their free-text title.
 function services_(o) {
@@ -173,6 +176,16 @@ function tailoredTerms_(packageKey,selected,deposit) {
   add('הסיכום שלנו',['השירותים, התוספות, המתנות, המחיר והשעות המפורטים בהזמנה הם הסיכום בינינו. שינוי ייעשה בהסכמה בכתב. זכויות הצדדים והוראות חובה לפי דין נשמרות.']);
   return sections;
 }
+function validateTerms_(terms) {
+  if(!Array.isArray(terms)||terms.length<1||terms.length>60)fail_('נדרש לפחות סעיף אחד, ועד 60 סעיפים');
+  let size=0;const result=terms.map(section=>{
+    if(!Array.isArray(section)||section.length<2||section.length>60)fail_('יש למלא כותרת ותוכן לכל סעיף');
+    return section.map((row,i)=>{if(!Array.isArray(row)||row.length!==2||row[0]!== (i===0?'h':'p'))fail_('מבנה הסעיפים אינו תקין');const text=text_(row[1],i===0?180:8000,'תוכן הסעיף',1);size+=text.length;return [row[0],text];});
+  });if(size>50000)fail_('נוסח ההסכם ארוך מדי');return result;
+}
+function templates_(){const files=folder_().getFiles(),rows=[];while(files.hasNext()){const f=files.next();if(!/^template-[a-f0-9]{64}\.json$/.test(f.getName()))continue;const t=JSON.parse(f.getBlob().getDataAsString('UTF-8'));rows.push({id:t.id,name:t.name});}return rows.sort((a,b)=>a.name.localeCompare(b.name)).slice(0,100);}
+function saveTemplate_(data){const name=text_(data.name,100,'שם התבנית',2),terms=validateTerms_(data.terms),id=random_();const t={id:id,name:name,terms:terms,created_at:new Date().toISOString()};folder_().createFile(Utilities.newBlob(JSON.stringify(t),'application/json','template-'+id+'.json'));return {id:id,name:name};}
+function loadTemplate_(id){if(typeof id!=='string'||!/^[a-f0-9]{64}$/.test(id))fail_('תבנית אינה תקינה');const files=folder_().getFilesByName('template-'+id+'.json');if(!files.hasNext())fail_('התבנית אינה קיימת');const t=JSON.parse(files.next().getBlob().getDataAsString('UTF-8'));return {name:t.name,terms:validateTerms_(t.terms)};}
 function create_(order) {
   if(mailReady_()<3)fail_('מכסת המייל היומית אינה מספיקה כרגע');
   const url=ScriptApp.getService().getUrl();if(!url||!url.endsWith('/exec'))fail_('יש לפרוס את המערכת כיישום אינטרנט לפני יצירת קישור');
