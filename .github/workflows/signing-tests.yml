@@ -18,3 +18,7 @@ jobs:
         working-directory: signing
       - run: python -m unittest -v test_signing
         working-directory: signing
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node signing/google-apps-script/test_backend.cjs
