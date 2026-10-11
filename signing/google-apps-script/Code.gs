@@ -118,7 +118,7 @@ function snapshot_(o) {
   });
   const total=base+extras.reduce((n,x)=>n+(x.gift?0:x.price*x.quantity),0)-discount;
   if(total<=0||deposit>total)fail_('מחיר או מקדמה אינם תקינים');
-  const labels={standard:'Standard - סטילס',premium:'Premium - סטילס, וידאו ואלבומים','premium-plus':'Premium Plus - כולל מגנטים',diamond:'Diamond - החבילה המלאה',custom:'אירוע בהתאמה אישית'};
+  const labels={standard:'Standard',premium:'Premium','premium-plus':'Premium Plus',diamond:'Diamond',custom:'אירוע בהתאמה אישית'};
   const selected=services_(o);
   const summary=['שם הלקוח: '+customer,'דוא״ל: '+email+' | טלפון: '+phone,'האירוע שלכם: '+o.date+' | '+venue,'החבילה שסיכמנו: '+labels[o.package],'שעות הצילום: '+o.start+' עד '+o.end,'מחיר החבילה כולל מע״מ: '+money_(base)];
   if(discount)summary.push('הנחה שסוכמה: '+money_(discount));
