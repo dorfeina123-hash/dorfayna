@@ -1,7 +1,7 @@
 /* WhatsApp clicks measure intent, not received leads. Analytics loads only after consent. */
 (function () {
   'use strict';
-  var measurementId = 'G-5VN11ZNR5G';
+  var measurementId = 'G-9G009C987J';
   var choiceKey = 'wedding-analytics-choice-v1';
   var started = false;
   var params = new URLSearchParams(window.location.search);
