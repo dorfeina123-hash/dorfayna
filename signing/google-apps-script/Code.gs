@@ -120,14 +120,21 @@ function snapshot_(o) {
   if(total<=0||deposit>total)fail_('מחיר או מקדמה אינם תקינים');
   const labels={standard:'Standard',premium:'Premium','premium-plus':'Premium Plus',diamond:'Diamond',custom:'אירוע בהתאמה אישית'};
   const selected=services_(o);
+  const crew=o.crew;
+  if(!crew||typeof crew!=='object')fail_('יש למלא את הרכב צוות הצילום');
+  const roles=[['stills','צלמי סטילס'],['video','צלמי וידאו'],['magnets','אנשי צוות מגנטים'],['other','אנשי צוות נוספים']];
+  let crewTotal=0;const crewLines=[];
+  roles.forEach(([key,label])=>{const n=crew[key];if(!Number.isInteger(n)||n<0||n>20)fail_('יש לבדוק את מספר אנשי הצוות');if(key!=='other'&&!selected.includes(key)&&n!==0)fail_('יש להתאים את הצוות לשירותים שנבחרו');if(key!=='other'&&selected.includes(key)&&n<1)fail_('יש לציין איש צוות לכל שירות צילום שנבחר');crewTotal+=n;if(n)crewLines.push(label+': '+n);});
+  if(crewTotal<1||crewTotal>40)fail_('יש לבדוק את הרכב הצוות');
   const summary=['שם הלקוח: '+customer,'דוא״ל: '+email+' | טלפון: '+phone,'האירוע שלכם: '+o.date+' | '+venue,'החבילה שסיכמנו: '+labels[o.package],'שעות הצילום: '+o.start+' עד '+o.end,'מחיר החבילה כולל מע״מ: '+money_(base)];
+  summary.splice(5,0,'הצוות באירוע: '+crewTotal+' אנשי צוות',...crewLines);
   if(discount)summary.push('הנחה שסוכמה: '+money_(discount));
   extras.forEach(x=>summary.push(x.title+' · '+x.quantity+' יחידות · '+(x.gift?'מתנה מאיתנו, ללא חיוב':money_(x.price*x.quantity))+(x.details?' · '+x.details:'')));
   summary.push('סך הכול כולל מע״מ: '+money_(total));
   if(deposit)summary.push('מקדמה במעמד סגירת ההזמנה: '+money_(deposit));
   summary.push('יתרה לתשלום: '+money_(total-deposit));
   const notes=text_(o.notes||'',2000,'הסכמות מיוחדות');if(notes)summary.push('עוד דברים שסיכמנו: '+notes);
-  return {customer:customer,email:email,summary:summary,terms:tailoredTerms_(o.package,selected,deposit),services:selected,total:total,created_at:new Date().toISOString()};
+  return {customer:customer,email:email,summary:summary,terms:tailoredTerms_(o.package,selected,deposit),services:selected,crew:{stills:crew.stills,video:crew.video,magnets:crew.magnets,other:crew.other},total:total,created_at:new Date().toISOString()};
 }
 // Explicit service selection controls every service-specific paragraph. Extras never infer scope from their free-text title.
 function services_(o) {
