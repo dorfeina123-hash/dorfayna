@@ -13,6 +13,7 @@
   function savedChoice() { try { return localStorage.getItem(choiceKey); } catch(e) { return null; } }
   function saveChoice(value) { try { localStorage.setItem(choiceKey,value); } catch(e) {} }
   function enable() {
+    window['ga-disable-'+measurementId]=false;
     window.weddingAnalyticsConsent = true;
     if(started) { window.gtag('consent','update',{analytics_storage:'granted'}); return; }
     started = true;
@@ -31,18 +32,23 @@
   }
   var panel=document.createElement('aside');
   panel.setAttribute('aria-label','העדפות מדידה');
-  panel.style.cssText='position:fixed;bottom:80px;left:16px;right:16px;z-index:10;max-width:520px;margin:auto;padding:18px;background:#fffaf4;color:#2c2926;border:1px solid #826338;border-radius:12px;box-shadow:0 5px 30px #0003;font:15px/1.6 Arial;text-align:right';
+  panel.style.cssText='position:fixed;bottom:80px;left:16px;right:16px;z-index:70;max-height:50dvh;overflow:auto;max-width:520px;margin:auto;padding:18px;background:#fffaf4;color:#2c2926;border:1px solid #826338;border-radius:12px;box-shadow:0 5px 30px #0003;font:15px/1.6 Arial;text-align:right';
   var description=document.createElement('p');
   description.textContent='אפשר למדוד ביקורים ולחיצות באתר באמצעות Google Analytics ועוגיות כדי לשפר את השירות. המדידה מופעלת רק באישורכם, ואפשר לשנות את הבחירה בכל עת.';
   description.style.cssText='font-size:15px;color:#2c2926;margin:0 0 12px';
   panel.appendChild(description);
+  var privacy=document.createElement('a');privacy.href='./privacy.html';privacy.textContent='פרטיות, עוגיות והשימוש במידע';privacy.style.cssText='display:block;color:#184d36;text-decoration:underline;margin-bottom:12px';panel.appendChild(privacy);
   function choiceButton(text,value) {
     var button=document.createElement('button');button.type='button';button.textContent=text;
     button.style.cssText='padding:10px 14px;margin:4px;border:1px solid #826338;border-radius:20px;background:#fff;color:#2c2926;font:15px Arial;cursor:pointer';
     button.addEventListener('click',function(){
       saveChoice(value);
       if(value==='granted') enable();
-      else {window.weddingAnalyticsConsent=false;if(started)window.gtag('consent','update',{analytics_storage:'denied'});}
+      else {window.weddingAnalyticsConsent=false;window['ga-disable-'+measurementId]=true;
+        if(started)window.gtag('consent','update',{analytics_storage:'denied'});
+        document.cookie.split(';').forEach(function(item){var key=item.split('=')[0].trim();if(/^_ga(?:_|$)/.test(key)){['/','/dorfayna','/dorfayna/'].forEach(function(path){document.cookie=key+'=; Max-Age=0; path='+path;document.cookie=key+'=; Max-Age=0; path='+path+'; domain='+location.hostname;});}});
+        if(started){location.reload();return;}}
+
       panel.hidden=true;
     });panel.appendChild(button);
   }
@@ -56,7 +62,7 @@
   document.querySelector('footer').appendChild(settings);
   document.querySelectorAll('[data-lead]').forEach(function(link){
     link.addEventListener('click',function(){
-      var payload=Object.assign({placement:link.dataset.lead,page:'weddings'},attribution);
+      var payload=Object.assign({placement:link.dataset.lead,page:location.pathname.endsWith('events.html')?'events':'weddings'},attribution);
       try {
         window.dispatchEvent(new CustomEvent('wedding_whatsapp_click',{detail:payload}));
         if(window.weddingAnalyticsConsent===true && typeof window.gtag==='function')window.gtag('event','wedding_whatsapp_click',payload);
