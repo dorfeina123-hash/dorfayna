@@ -7,6 +7,7 @@ h1,h2,h3,.sec-title{font-family:'Assistant',Arial,sans-serif;font-weight:600;let
 .unified-nav>div{flex:1;justify-content:center;gap:0 16px}.unified-nav a{font-size:16px;font-weight:500;padding:6px 2px}.unified-nav a:hover{color:#e3c68b}
 .unified-nav .nav-phone{background:#fff;color:#222;padding:10px 22px;border-radius:30px;direction:ltr;font-weight:600;white-space:nowrap}
 .menu-toggle{display:none}
+.unified-nav .nav-instagram{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;padding:8px;color:#fff;border:1px solid #ffffff70;border-radius:50%;flex:none}.nav-instagram svg{display:block}.unified-nav .nav-instagram:hover{color:#efdbb2;border-color:#efdbb2}
 .hero{min-height:760px!important;height:100svh;max-height:1050px;align-items:center;padding:120px 24px 80px;text-align:center}
 .hero::before{background-position:center 35%}
 .hero::after{background:linear-gradient(180deg,#0006,#0005 50%,#0008)}
