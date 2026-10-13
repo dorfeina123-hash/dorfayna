@@ -1,4 +1,6 @@
 /* Shared, locally hosted design and accessibility controls. */
+body .a11y-launch{display:inline-flex!important;align-items:center;justify-content:center;width:44px!important;height:44px!important;min-height:44px!important;padding:10px!important;left:0!important;right:auto!important;top:30vh!important;bottom:auto!important;border-radius:0 5px 5px 0!important;background:#234d85!important;color:#fff!important;border:0!important;box-shadow:0 2px 8px #0002!important}
+body .a11y-launch svg{display:block;flex:none}
 .a11y-dialog [data-action="close"]{min-height:44px;padding:10px 16px;border:1px solid #767676;border-radius:10px;background:#fff;color:#191919;cursor:pointer}
 :root{--brand-ink:#191b1a;--brand-gold:#806337;--brand-paper:#f6f1ea;--reader-scale:1}
 body{font-family:Arial,sans-serif;line-height:1.8}a,button{touch-action:manipulation}button{font-family:inherit}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #245b9d!important;outline-offset:4px!important}
