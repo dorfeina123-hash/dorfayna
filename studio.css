@@ -91,3 +91,6 @@ section{padding:88px 0;scroll-margin-top:100px}.wrap{max-width:1180px;padding:0 
 #packages .pkg .pkg-name{font-size:26px}
 }
 #packages .package-contact{display:none}
+
+/* Preserve full package photograph proportions on desktop. */
+@media(min-width:761px){#packages .pkg .pkg-photo{height:auto;min-height:0;align-self:start;aspect-ratio:3/2}#packages .pkg .pkg-photo img{object-fit:cover}#packages .pkg .pkg-photo{position:sticky;top:105px}#packages .pkg.featured>.ribbon{position:absolute}#packages .compact-package .pkg-photo img{object-position:center}}
