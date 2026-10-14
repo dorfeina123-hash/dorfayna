@@ -94,3 +94,14 @@ section{padding:88px 0;scroll-margin-top:100px}.wrap{max-width:1180px;padding:0 
 
 /* Preserve full package photograph proportions on desktop. */
 @media(min-width:761px){#packages .pkg .pkg-photo{height:auto;min-height:0;align-self:start;aspect-ratio:3/2}#packages .pkg .pkg-photo img{object-fit:cover}#packages .pkg .pkg-photo{position:sticky;top:105px}#packages .pkg.featured>.ribbon{position:absolute}#packages .compact-package .pkg-photo img{object-position:center}}
+
+/* Owner requested wide photographs above package content on both pages. */
+#packages .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+#packages .wrap>.pkg{grid-column:auto;display:flex;flex-direction:column;min-width:0}
+#packages .pkg .pkg-photo{position:relative;top:auto;align-self:auto;width:100%;height:auto;min-height:0;aspect-ratio:3/2;flex:none}
+#packages .pkg .pkg-photo picture,#packages .pkg .pkg-photo img{width:100%;height:100%}
+#packages .pkg .pkg-photo img{object-fit:cover}
+#packages .pkg.featured>.ribbon{width:100%}
+#packages .compact-package .pkg-photo{aspect-ratio:3/2}
+#packages .wrap>.package-comparison{grid-column:1/-1}
+@media(max-width:760px){#packages .wrap{grid-template-columns:minmax(0,1fr)}}
