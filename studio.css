@@ -105,3 +105,12 @@ section{padding:88px 0;scroll-margin-top:100px}.wrap{max-width:1180px;padding:0 
 #packages .compact-package .pkg-photo{aspect-ratio:3/2}
 #packages .wrap>.package-comparison{grid-column:1/-1}
 @media(max-width:760px){#packages .wrap{grid-template-columns:minmax(0,1fr)}}
+
+/* Final owner reference: one horizontal card per row, landscape photo. */
+#packages .wrap{grid-template-columns:minmax(0,1fr)}
+#packages .wrap>.pkg{display:grid;grid-template-columns:42% minmax(0,1fr);grid-column:1/-1;align-items:start}
+#packages .pkg .pkg-photo{position:relative;top:auto;align-self:start;height:auto;min-height:0;aspect-ratio:3/2;width:100%}
+#packages .pkg .pkg-photo picture,#packages .pkg .pkg-photo img{display:block;width:100%;height:100%}
+#packages .pkg .pkg-photo img{object-fit:cover}
+#packages .pkg.featured>.ribbon{width:42%}
+@media(max-width:760px){#packages .wrap>.pkg{grid-template-columns:minmax(0,1fr)}#packages .pkg.featured>.ribbon{width:100%}}
