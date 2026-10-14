@@ -57,3 +57,7 @@ section{padding:88px 0;scroll-margin-top:100px}.wrap{max-width:1180px;padding:0 
 .review-stars{display:block;color:#98763d;font-size:23px;letter-spacing:4px;line-height:1;margin-bottom:24px;direction:ltr;text-align:right}
 
 @media(min-width:1601px){.hero::before{background-image:url("./assets/site/dor05083-3200.webp")}}
+
+/* Equal photo proportions; featured label no longer shifts the image row. */
+.pkg{position:relative}.pkg-photo{height:auto;aspect-ratio:3/2;flex:none;overflow:hidden}.pkg-photo picture,.pkg-photo img{height:100%;width:100%}.pkg-photo img{object-fit:cover;object-position:center 40%}.pkg.featured>.ribbon{position:absolute;inset:0 0 auto;z-index:3;text-align:center;padding:8px 16px}.pkg.featured .pkg-photo img{object-position:center 30%}.pkg-photo img[src*="8b30edfa3aee9d10"]{object-position:center 25%}.pkg-name{bottom:16px;line-height:1.2}
+@media(max-width:760px){.pkg-photo{height:auto;aspect-ratio:3/2}.pkg-name{font-size:27px}}
