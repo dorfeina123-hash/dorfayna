@@ -55,3 +55,5 @@ section{padding:88px 0;scroll-margin-top:100px}.wrap{max-width:1180px;padding:0 
 .cover-upgrades{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:850px}.cover-upgrades li+li{border:0}@media(max-width:760px){.cover-upgrades{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 .review-stars{display:block;color:#98763d;font-size:23px;letter-spacing:4px;line-height:1;margin-bottom:24px;direction:ltr;text-align:right}
+
+@media(min-width:1601px){.hero::before{background-image:url("./assets/site/dor05083-3200.webp")}}
