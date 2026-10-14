@@ -49,3 +49,5 @@ section{padding:88px 0;scroll-margin-top:100px}.wrap{max-width:1180px;padding:0 
 
 .pricing-page .unified-nav{background:#202020}.pricing-page .price-page-intro{margin-top:116px}
 @media(max-width:760px){.pricing-page .price-page-intro{margin-top:84px}}
+
+.cover-upgrades{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin:24px auto;max-width:900px;padding:0}.cover-upgrades li{font-size:18px;font-weight:600;line-height:1.6;padding:8px 18px;color:#494949}.cover-upgrades li+li{border-inline-start:1px solid #d7d0c3}@media(max-width:760px){.cover-upgrades{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cover-upgrades li{padding:8px 4px;font-size:16px}.cover-upgrades li+li{border:0}}
