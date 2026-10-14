@@ -22,3 +22,5 @@ body.reading-motion *,body.reading-motion *::before,body.reading-motion *::after
 @media(max-width:760px){.unified-nav{position:relative;flex-direction:column;padding:8px 12px;gap:0}.unified-nav>div{justify-content:center;gap:0 4px}.unified-nav a{font-size:14px;padding:4px 7px}.unified-events-gallery .grid{grid-template-columns:1fr}.unified-events-gallery img{height:280px}.unified-site .hero{min-height:65svh}.unified-site .a11y-launch{top:155px}}
 
 @media(max-width:760px){.unified-nav{position:sticky;top:0}.unified-site section{scroll-margin-top:165px}.unified-nav~.a11y-launch{top:165px}}
+
+.contact-disclosure{font-size:14px;line-height:1.7;max-width:620px;margin:14px auto;color:inherit}.contact-disclosure a{text-decoration:underline;text-underline-offset:3px}.hero-privacy{font-size:13px;color:#fff}.legal-links a[href*="cancellation"]{font-weight:700}
