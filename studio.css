@@ -63,3 +63,4 @@ section{padding:88px 0;scroll-margin-top:100px}.wrap{max-width:1180px;padding:0 
 @media(max-width:760px){.pkg-photo{height:auto;aspect-ratio:3/2}.pkg-name{font-size:27px}}
 
 .package-title{font-size:25px;line-height:1.35;margin:0 0 18px;color:#292929}.compact-package,.package-comparison{grid-column:1/-1}.compact-package .pkg-body{max-width:850px;width:100%;margin:auto;box-sizing:border-box}.comparison-scroll{overflow-x:auto;border:1px solid #dfd9cc;border-radius:6px}.package-comparison table{width:100%;min-width:760px;border-collapse:collapse;text-align:right}.package-comparison caption{padding:14px;font-weight:600}.package-comparison th,.package-comparison td{padding:14px;border-bottom:1px solid #e9e6de}.package-comparison thead{background:#f5f4f1}.package-comparison p{line-height:1.8;margin-top:18px}.package-comparison h3{font-size:28px;margin-bottom:20px}
+.package-comparison,.compact-package{min-width:0}.comparison-scroll{max-width:100%;min-width:0}
