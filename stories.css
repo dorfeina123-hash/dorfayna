@@ -3,3 +3,7 @@
 @media(max-width:760px){.story-header{padding:104px 20px 24px}.story-back{margin-bottom:24px}.story-deck{font-size:18px}.story-header>picture>img{height:420px}.story-copy{padding:12px 22px 48px;font-size:18px}.story-section h2{font-size:25px}.story-copy figure img{max-height:440px}.story-actions{flex-direction:column}.story-page footer{padding-bottom:48px}}
 
 .story-header>picture{display:block;width:100%}
+
+/* Preserve complete photographs and their intrinsic proportions. */
+.story-header>picture{display:flex;justify-content:center}.story-header>picture>img{width:auto;max-width:100%;height:auto;max-height:min(78svh,860px);object-fit:contain;object-position:center}.story-copy figure picture{display:block}.story-copy figure img{width:auto;max-width:100%;height:auto;max-height:680px;object-fit:contain;margin-inline:auto}
+@media(max-width:760px){.story-header>picture>img{height:auto;max-height:72svh}.story-copy figure img{height:auto;max-height:65svh}}
