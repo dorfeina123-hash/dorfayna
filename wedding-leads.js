@@ -25,7 +25,10 @@
     // Strip unknown query parameters and fragments; never send free text/contact fields.
     var safeUrl = new URL(location.origin + location.pathname);
     Object.keys(attribution).forEach(function(k){safeUrl.searchParams.set(k,attribution[k]);});
-    window.gtag('config',measurementId,{page_location:safeUrl.href,page_referrer:'',allow_google_signals:false,allow_ad_personalization_signals:false,transport_type:'beacon'});
+    // Preserve search/referral attribution without forwarding query strings or private paths.
+    var safeReferrer='';
+    try { if(document.referrer) { var ref=new URL(document.referrer); if(/^https?:$/.test(ref.protocol)) safeReferrer=ref.origin+(ref.origin===location.origin?ref.pathname:'/'); } } catch(e) {}
+    window.gtag('config',measurementId,{page_location:safeUrl.href,page_referrer:safeReferrer,allow_google_signals:false,allow_ad_personalization_signals:false,transport_type:'beacon'});
     var script = document.createElement('script'); script.async=true;
     script.src='https://www.googletagmanager.com/gtag/js?id='+measurementId;
     document.head.appendChild(script);
@@ -59,13 +62,18 @@
   var settings=document.createElement('button');settings.type='button';settings.textContent='העדפות מדידה';
   settings.style.cssText='margin:12px;padding:8px 14px;border:1px solid #826338;border-radius:20px;background:transparent;color:inherit;font:13px Arial;cursor:pointer';
   settings.addEventListener('click',function(){panel.hidden=false;panel.querySelector('button').focus();});
-  document.querySelector('footer').appendChild(settings);
-  document.querySelectorAll('[data-lead]').forEach(function(link){
+  (document.querySelector('footer')||document.body).appendChild(settings);
+  document.querySelectorAll('[data-lead],a[href^="https://wa.me/"],a[href^="tel:"]').forEach(function(link){
     link.addEventListener('click',function(){
-      var payload=Object.assign({placement:link.dataset.lead,page:location.pathname.endsWith('events.html')?'events':'weddings'},attribution);
+      var section=link.closest('section');
+      var placement=link.dataset.lead||(link.classList.contains('sticky-bar')?'sticky':section&&section.id||'navigation');
+      var page=location.pathname.split('/').pop()||'index.html';
+      var phone=link.getAttribute('href').indexOf('tel:')===0;
+      var eventName=phone?'phone_click':'wedding_whatsapp_click';
+      var payload=Object.assign({placement:placement,page:page,contact_method:phone?'phone':'whatsapp'},attribution);
       try {
-        window.dispatchEvent(new CustomEvent('wedding_whatsapp_click',{detail:payload}));
-        if(window.weddingAnalyticsConsent===true && typeof window.gtag==='function')window.gtag('event','wedding_whatsapp_click',payload);
+        window.dispatchEvent(new CustomEvent(eventName,{detail:payload}));
+        if(window.weddingAnalyticsConsent===true && typeof window.gtag==='function')window.gtag('event',eventName,payload);
       }catch(e){} // Measurement must not block navigation.
     });
   });
