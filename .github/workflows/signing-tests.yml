@@ -1,0 +1,24 @@
+name: Independent signing tests
+on:
+  pull_request:
+    paths: ['signing/**', '.github/workflows/signing-tests.yml']
+  push:
+    paths: ['signing/**', '.github/workflows/signing-tests.yml']
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-dev.txt
+        working-directory: signing
+      - run: python -m unittest -v test_signing
+        working-directory: signing
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node signing/google-apps-script/test_backend.cjs
