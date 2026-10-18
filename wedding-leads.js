@@ -6,7 +6,7 @@
   var started = false;
   var params = new URLSearchParams(window.location.search);
   var attribution = {};
-  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(key) {
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id','utm_source_platform'].forEach(function(key) {
     var value = params.get(key);
     if(value && /^[a-zA-Z0-9_-]{1,80}$/.test(value)) attribution[key] = value;
   });
@@ -25,6 +25,10 @@
     // Strip unknown query parameters and fragments; never send free text/contact fields.
     var safeUrl = new URL(location.origin + location.pathname);
     Object.keys(attribution).forEach(function(k){safeUrl.searchParams.set(k,attribution[k]);});
+    // Keep Google's auto-tagging identifier in the consented page URL only.
+    // Do not persist it ourselves or copy it into contact links/custom events.
+    var clickId = params.get('gclid');
+    if(clickId && /^[a-zA-Z0-9_-]{1,512}$/.test(clickId)) safeUrl.searchParams.set('gclid',clickId);
     // Preserve search/referral attribution without forwarding query strings or private paths.
     var safeReferrer='';
     try { if(document.referrer) { var ref=new URL(document.referrer); if(/^https?:$/.test(ref.protocol)) safeReferrer=ref.origin+(ref.origin===location.origin?ref.pathname:'/'); } } catch(e) {}
