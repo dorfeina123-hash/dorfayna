@@ -1,4 +1,4 @@
-/* WhatsApp clicks measure intent, not received leads. Analytics loads only after consent. */
+/* WhatsApp clicks measure intent, not received leads. Measurement is on by default; visitors can turn it off in "העדפות מדידה". */
 (function () {
   'use strict';
   var measurementId = 'G-9G009C987J';
@@ -15,6 +15,7 @@
   function enable() {
     window['ga-disable-'+measurementId]=false;
     window.weddingAnalyticsConsent = true;
+    try { window.dispatchEvent(new Event('wedding-consent-granted')); } catch(e) {}
     if(started) { window.gtag('consent','update',{analytics_storage:'granted'}); return; }
     started = true;
     window.dataLayer = window.dataLayer || [];
@@ -41,7 +42,7 @@
   panel.setAttribute('aria-label','העדפות מדידה');
   panel.style.cssText='position:fixed;bottom:80px;left:16px;right:16px;z-index:70;max-height:50dvh;overflow:auto;max-width:520px;margin:auto;padding:18px;background:#fffaf4;color:#2c2926;border:1px solid #826338;border-radius:12px;box-shadow:0 5px 30px #0003;font:15px/1.6 Arial;text-align:right';
   var description=document.createElement('p');
-  description.textContent='אפשר למדוד ביקורים ולחיצות באתר באמצעות Google Analytics ועוגיות כדי לשפר את השירות. המדידה מופעלת רק באישורכם, ואפשר לשנות את הבחירה בכל עת.';
+  description.textContent='האתר מודד ביקורים ולחיצות באמצעות Google Analytics ו-Meta Pixel ועוגיות, כדי לשפר את השירות ולהציג מודעות רלוונטיות. אפשר לכבות את המדידה בכל עת.';
   description.style.cssText='font-size:15px;color:#2c2926;margin:0 0 12px';
   panel.appendChild(description);
   var privacy=document.createElement('a');privacy.href='./privacy.html';privacy.textContent='פרטיות, עוגיות והשימוש במידע';privacy.style.cssText='display:block;color:#184d36;text-decoration:underline;margin-bottom:12px';panel.appendChild(privacy);
@@ -53,7 +54,7 @@
       if(value==='granted') enable();
       else {window.weddingAnalyticsConsent=false;window['ga-disable-'+measurementId]=true;
         if(started)window.gtag('consent','update',{analytics_storage:'denied'});
-        document.cookie.split(';').forEach(function(item){var key=item.split('=')[0].trim();if(/^_ga(?:_|$)/.test(key)){['/','/dorfayna','/dorfayna/'].forEach(function(path){document.cookie=key+'=; Max-Age=0; path='+path;document.cookie=key+'=; Max-Age=0; path='+path+'; domain='+location.hostname;});}});
+        document.cookie.split(';').forEach(function(item){var key=item.split('=')[0].trim();if(/^(?:_ga(?:_|$)|_fbp$|_fbc$)/.test(key)){['/','/dorfayna','/dorfayna/'].forEach(function(path){document.cookie=key+'=; Max-Age=0; path='+path;document.cookie=key+'=; Max-Age=0; path='+path+'; domain='+location.hostname;});}});
         if(started){location.reload();return;}}
 
       panel.hidden=true;
@@ -61,8 +62,8 @@
   }
   choiceButton('אישור מדידה','granted');choiceButton('ללא מדידה','denied');
   document.body.appendChild(panel);
-  var saved=savedChoice();panel.hidden=saved==='granted'||saved==='denied';
-  if(saved==='granted')enable();
+  var saved=savedChoice();panel.hidden=true;
+  if(saved!=='denied')enable();
   var settings=document.createElement('button');settings.type='button';settings.textContent='העדפות מדידה';
   settings.style.cssText='margin:12px;padding:8px 14px;border:1px solid #826338;border-radius:20px;background:transparent;color:inherit;font:13px Arial;cursor:pointer';
   settings.addEventListener('click',function(){panel.hidden=false;panel.querySelector('button').focus();});
