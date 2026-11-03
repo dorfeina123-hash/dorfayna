@@ -67,7 +67,10 @@
   var settings=document.createElement('button');settings.type='button';settings.textContent='העדפות מדידה';
   settings.style.cssText='margin:12px;padding:8px 14px;border:1px solid #826338;border-radius:20px;background:transparent;color:inherit;font:13px Arial;cursor:pointer';
   settings.addEventListener('click',function(){panel.hidden=false;panel.querySelector('button').focus();});
-  (document.querySelector('footer')||document.body).appendChild(settings);
+  var notice=document.createElement('p');notice.textContent='האתר משתמש בעוגיות של Google Analytics ו-Meta Pixel למדידה ולפרסום. אפשר לכבות אותן כאן:';
+  notice.style.cssText='margin:12px 12px 0;font-size:13px';
+  var host=document.querySelector('footer')||document.body;host.appendChild(notice);host.appendChild(settings);
+  panel.addEventListener('keydown',function(e){if(e.key==='Escape'){panel.hidden=true;settings.focus();}});
   document.querySelectorAll('[data-lead],a[href^="https://wa.me/"],a[href^="tel:"]').forEach(function(link){
     link.addEventListener('click',function(){
       var section=link.closest('section');
