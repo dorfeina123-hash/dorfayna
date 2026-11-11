@@ -1,8 +1,8 @@
 (function(){
   'use strict';
   var KEY='df_promo_seen_v1', DAY=86400000;
-  function seenRecently(){try{var v=+localStorage.getItem(KEY);return v&&(Date.now()-v<DAY);}catch(e){return false;}}
-  function markSeen(){try{localStorage.setItem(KEY,String(Date.now()));}catch(e){}}
+  function seenRecently(){try{return sessionStorage.getItem(KEY)==='1';}catch(e){return false;}}
+  function markSeen(){try{sessionStorage.setItem(KEY,'1');}catch(e){}}
   if(seenRecently())return;
   var WA='https://wa.me/972502858162?text='+encodeURIComponent('היי דור, ראיתי באתר את המבצע על החבילות. אשמח לבדוק זמינות. תאריך כולל שנה: __, מקום: __');
   var css='.dfp-back{position:fixed;inset:0;background:rgba(20,16,10,.62);z-index:9998;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .35s}'+
