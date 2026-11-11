@@ -4,7 +4,7 @@
   function seenRecently(){try{var v=+localStorage.getItem(KEY);return v&&(Date.now()-v<DAY);}catch(e){return false;}}
   function markSeen(){try{localStorage.setItem(KEY,String(Date.now()));}catch(e){}}
   if(seenRecently())return;
-  var WA='https://wa.me/972502858162?text='+encodeURIComponent('היי דור, ראיתי באתר את ההנחה של 2,000 ₪ על החבילות. אשמח לבדוק זמינות. תאריך כולל שנה: __, מקום: __');
+  var WA='https://wa.me/972502858162?text='+encodeURIComponent('היי דור, ראיתי באתר את המבצע על החבילות. אשמח לבדוק זמינות. תאריך כולל שנה: __, מקום: __');
   var css='.dfp-back{position:fixed;inset:0;background:rgba(20,16,10,.62);z-index:9998;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .35s}'+
   '.dfp-back.on{opacity:1}'+
   '.dfp{position:relative;background:#fff;max-width:400px;width:100%;max-height:92vh;overflow:auto;border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.35);direction:rtl;text-align:right;font-family:Assistant,Arial,sans-serif;transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}'+
@@ -34,7 +34,7 @@
     var back=document.createElement('div');back.className='dfp-back';
     back.innerHTML='<div class="dfp" role="dialog" aria-modal="true" aria-labelledby="dfp-t">'+
       '<img src="./assets/site/4dfb930b461788c8-960.webp" alt="חתן וכלה בצילומי זוגיות, צילום חתונה של דור פיינה" width="960" height="640">'+
-      '<span class="dfp-ribbon">2,000 ₪ הנחה על כל החבילות</span>'+
+      '<span class="dfp-ribbon">מבצע: 2,000 ₪ הנחה</span>'+
       '<button class="dfp-x" type="button" aria-label="סגירת החלון">×</button>'+
       '<div class="dfp-body"><h2 id="dfp-t">חבילת Premium לחתונה</h2>'+
       '<p class="dfp-sub">סטילס, וידאו ורחפן, מההכנות ועד סוף הצילום</p>'+
