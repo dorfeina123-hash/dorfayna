@@ -25,6 +25,7 @@
   '.dfp-cta{display:flex;justify-content:center;align-items:center;gap:8px;min-height:50px;background:#25a244;color:#fff!important;border-radius:28px;font-weight:700;font-size:17px;text-decoration:none}'+
   '.dfp-more{display:block;text-align:center;margin-top:10px;color:#98763d;font-size:15px}'+
   '.dfp-note{margin:10px 0 0;font-size:12px;color:#8a8172;text-align:center}'+
+  '@media (max-width:480px){.dfp img{height:120px}.dfp-body{padding:14px 18px 18px}.dfp h2{font-size:21px}.dfp .dfp-sub{margin-bottom:8px}.dfp li{padding:4px 0;font-size:14px}.dfp li:nth-child(n+4){display:none}.dfp-price{margin:4px 0 10px}.dfp-price b{font-size:28px}.dfp-note{display:none}}'+
   '@media (prefers-reduced-motion:reduce){.dfp-back,.dfp{transition:none}}';
   function open(){
     if(document.querySelector('.dfp-back'))return;
