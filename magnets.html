@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>בחירת מסגרת למגנטים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&family=Amatic+SC:wght@700&family=Suez+One&display=swap" rel="stylesheet">
+<style>
+/* Layout: a phone-first single column. Header, frame gallery grid, live preview with text inputs, WhatsApp send bar. */
+:root{
+  --bg:#f4f4f6;
+  --surface:#ffffff;
+  --ink:#1d1f2b;
+  --muted:#6b6e7c;
+  --line:#e2e2e8;
+  --accent:#9c3d54;
+  --accent-soft:#f5e7eb;
+  --gold:#b8964f;
+  --wa:#1fa855;
+  --display:"Frank Ruhl Libre", "David", serif;
+  --body:"Heebo", "Arial Hebrew", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15161d; --surface:#1f2029; --ink:#efeff4; --muted:#a2a4b3; --line:#30323e;
+    --accent:#e0849a; --accent-soft:#3a2229; --gold:#d2b26c; --wa:#25c063; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15161d; --surface:#1f2029; --ink:#efeff4; --muted:#a2a4b3; --line:#30323e;
+  --accent:#e0849a; --accent-soft:#3a2229; --gold:#d2b26c; --wa:#25c063; color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:110px}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+header{padding:34px 0 18px;display:grid;gap:6px}
+.brand{font-size:13px;letter-spacing:.04em;color:var(--muted)}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(28px,6vw,40px);line-height:1.15;margin:0;text-wrap:balance}
+.lead{margin:0;color:var(--muted);max-width:60ch}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none}
+.steps li{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 10px;font-size:14px}
+.steps b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px}
+h2{font-family:var(--display);font-weight:500;font-size:22px;margin:30px 0 12px;display:flex;align-items:baseline;gap:10px}
+h2 small{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:400}
+
+/* gallery */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.opt{all:unset;cursor:pointer;display:grid;gap:8px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px;transition:border-color .15s, transform .15s}
+.opt:hover{transform:translateY(-2px)}
+.opt:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.opt[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt .meta{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.opt .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.opt .tick{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:12px;color:#fff}
+.opt[aria-checked="true"] .tick{background:var(--accent);border-color:var(--accent)}
+
+/* the magnet itself */
+.mag{position:relative;aspect-ratio:2/3;width:100%;overflow:hidden;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 6px 16px rgba(0,0,0,.08);container-type:inline-size;background:#fff}
+.photo{position:absolute;background:
+  radial-gradient(120% 80% at 30% 20%, #e9d6c7 0%, transparent 60%),
+  radial-gradient(100% 90% at 80% 90%, #6d7d8f 0%, transparent 65%),
+  linear-gradient(160deg,#c9b4a6,#58626f);
+  display:grid;place-items:center}
+.photo::after{content:"התמונה שלכם";font:400 7cqi var(--body);color:rgba(255,255,255,.75)}
+.cap{position:absolute;left:0;right:0;display:grid;place-items:center;text-align:center;gap:1cqi;padding:0 6cqi}
+.cap .n{font-size:9cqi;line-height:1.1;overflow-wrap:anywhere}
+.cap .d{font-size:5.2cqi;opacity:.85;font-variant-numeric:tabular-nums}
+.cap .x{font-size:4.6cqi;opacity:.8}
+
+/* 1 classic white */
+.f1 .photo{inset:5cqi 5cqi 24cqi 5cqi}
+.f1 .cap{bottom:0;height:24cqi;font-family:var(--display);color:#2a2a2a}
+/* 2 gold double line */
+.f2{background:#fffdf8}
+.f2::before{content:"";position:absolute;inset:3cqi;border:1px solid #b8964f;outline:1px solid #b8964f;outline-offset:-3cqi;z-index:2;pointer-events:none}
+.f2 .photo{inset:9cqi 9cqi 27cqi 9cqi}
+.f2 .cap{bottom:6cqi;height:21cqi;font-family:var(--display);color:#8a6c2e}
+.f2 .n{font-weight:500}
+/* 3 black band */
+.f3{background:#111}
+.f3 .photo{inset:0 0 22cqi 0}
+.f3 .cap{bottom:0;height:22cqi;font-family:var(--body);color:#fff;font-weight:300;letter-spacing:.02em}
+.f3 .n{font-weight:500}
+/* 4 polaroid handwriting */
+.f4{background:#fbfbf9}
+.f4 .photo{inset:6cqi 6cqi 30cqi 6cqi}
+.f4 .cap{bottom:0;height:30cqi;font-family:"Amatic SC",var(--body);color:#2c3550}
+.f4 .n{font-size:13cqi}
+.f4 .d{font-size:7cqi}
+/* 5 arch window */
+.f5{background:#efe9e2}
+.f5 .photo{inset:7cqi 9cqi 27cqi 9cqi;border-radius:50cqi 50cqi 0 0}
+.f5 .cap{bottom:0;height:27cqi;font-family:var(--display);color:#5b4636}
+/* 6 full bleed overlay */
+.f6 .photo{inset:0}
+.f6::after{content:"";position:absolute;inset:55% 0 0 0;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+.f6 .cap{bottom:6cqi;z-index:2;font-family:"Suez One",var(--display);color:#fff}
+.f6 .n{font-size:10cqi}
+/* 7 botanical corners */
+.f7{background:#fff}
+.f7 .photo{inset:10cqi 10cqi 28cqi 10cqi}
+.f7 .cap{bottom:0;height:28cqi;font-family:var(--display);color:#3f5a45}
+.f7 svg{position:absolute;width:30cqi;height:30cqi;z-index:2}
+.f7 .tl{top:0;left:0}
+.f7 .br{bottom:0;right:0;transform:rotate(180deg)}
+/* 8 side strip */
+.f8{background:#fff}
+.f8 .photo{inset:0 22cqi 0 0}
+.f8 .cap{top:0;bottom:0;right:0;left:auto;width:22cqi;padding:0;writing-mode:vertical-rl;font-family:var(--body);color:#1d1f2b;background:#fff}
+.f8 .n{font-size:8cqi;font-weight:500}
+
+/* editor */
+.editor{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+@media (max-width:640px){.editor{grid-template-columns:1fr}.editor .preview{max-width:240px;margin:0 auto;width:100%}}
+.chosen{font-size:14px;color:var(--muted);margin:8px 0 0;text-align:center}
+.chosen b{color:var(--ink)}
+.fields{display:grid;gap:14px}
+label{display:grid;gap:5px;font-size:14px;font-weight:500}
+label span{font-weight:400;color:var(--muted);font-size:13px}
+input,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:70px}
+.example{font-size:12px;color:var(--muted);background:var(--bg);border-radius:8px;padding:8px 10px}
+
+/* bottom bar */
+.bar{position:fixed;inset:auto 0 0 0;background:var(--surface);border-top:1px solid var(--line);padding:12px 18px calc(12px + env(safe-area-inset-bottom))}
+.bar .wrap{display:flex;gap:10px;align-items:center;padding:0}
+.summary{flex:1;min-width:0;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.summary b{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 20px;font:500 15px var(--body);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wa{background:var(--wa);color:#fff}
+.wa[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Dor Fayna Photography</div>
+    <h1>בוחרים מסגרת למגנטים של האירוע</h1>
+    <p class="lead">המגנטים מודפסים באירוע עצמו, והאורחים לוקחים אותם הביתה. בחרו מסגרת, כתבו מה יופיע עליה ושלחו לי בוואטסאפ.</p>
+    <ol class="steps">
+      <li><b>1</b>בחירת מסגרת</li>
+      <li><b>2</b>כתיבת הטקסט</li>
+      <li><b>3</b>שליחה בוואטסאפ</li>
+    </ol>
+  </header>
+
+  <h2>המסגרות <small>הקישו על מסגרת לבחירה</small></h2>
+  <div class="grid" id="grid" role="radiogroup" aria-label="מסגרות"></div>
+
+  <h2>הטקסט על המגנט <small>מתעדכן בתצוגה בזמן ההקלדה</small></h2>
+  <section class="editor">
+    <div class="preview">
+      <div id="preview"></div>
+      <p class="chosen" id="chosen"></p>
+    </div>
+    <div class="fields">
+      <label for="names">שמות <span>כמו שתרצו שיופיע, למשל: נועה & איתי</span>
+        <input id="names" maxlength="34" placeholder="נועה & איתי" autocomplete="off">
+      </label>
+      <label for="date">תאריך האירוע
+        <input id="date" maxlength="20" placeholder="12.03.2027" inputmode="numeric" autocomplete="off">
+      </label>
+      <label for="extra">שורה נוספת <span>לא חובה: משפט קצר, שם האולם, האשטג</span>
+        <input id="extra" maxlength="40" placeholder="תודה שחגגתם איתנו" autocomplete="off">
+      </label>
+      <label for="notes">הערות <span>לא חובה: צבע, גופן או כל בקשה אחרת</span>
+        <textarea id="notes" maxlength="300"></textarea>
+      </label>
+      <div class="example">התמונה בתצוגה היא דוגמה. באירוע יופיעו התמונות שאצלם.</div>
+    </div>
+  </section>
+
+  <footer>Dor Fayna Photography · dorfayna.co.il</footer>
+</div>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="summary" id="summary">עדיין לא נבחרה מסגרת</div>
+    <button class="btn ghost" id="copy" type="button">העתקה</button>
+    <a class="btn wa" id="send" href="#" aria-disabled="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3Z"/></svg>
+      שליחה בוואטסאפ
+    </a>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== הגדרות =====
+   PHONE: מספר הוואטסאפ שאליו נשלחת הבחירה, בפורמט בינלאומי בלי + ובלי מקפים (למשל 972501234567).
+   אם נשאר ריק, הוואטסאפ ייפתח עם ההודעה והלקוח יבחר למי לשלוח. */
+const PHONE = "972502858162";
+
+const leaf = '<svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="#5f7d64" stroke-width="1.4" stroke-linecap="round"><path d="M4 56C14 34 30 18 56 4"/><path d="M14 40c-6-2-9-7-9-12 6 1 10 5 9 12Z" fill="#a9c1a4" stroke="none"/><path d="M24 28c-5-3-7-8-6-13 6 2 9 7 6 13Z" fill="#bcd1b6" stroke="none"/><path d="M36 18c-4-4-5-9-3-13 5 3 7 8 3 13Z" fill="#a9c1a4" stroke="none"/><path d="M20 44c3-6 8-8 13-7-2 6-7 9-13 7Z" fill="#bcd1b6" stroke="none"/><path d="M32 32c3-5 8-7 13-6-3 5-8 8-13 6Z" fill="#a9c1a4" stroke="none"/></g></svg>';
+
+const FRAMES = [
+  {id:1, name:"קלאסי לבן", cls:"f1"},
+  {id:2, name:"קו זהב",     cls:"f2"},
+  {id:3, name:"פס שחור",    cls:"f3"},
+  {id:4, name:"פולארויד",   cls:"f4"},
+  {id:5, name:"קשת",        cls:"f5"},
+  {id:6, name:"תמונה מלאה", cls:"f6"},
+  {id:7, name:"בוטני",      cls:"f7", extra: '<span class="tl">'+leaf+'</span><span class="br">'+leaf+'</span>'},
+  {id:8, name:"פס צד",      cls:"f8"}
+];
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let selected = null;
+
+function text(){
+  return {
+    n: $("names").value.trim() || "נועה & איתי",
+    d: $("date").value.trim() || "12.03.2027",
+    x: $("extra").value.trim()
+  };
+}
+function magnet(f, t){
+  const extra = (f.extra||"").replace(/<span class="(tl|br)">/g,'<span class="$1" style="position:absolute;z-index:2;width:30cqi;height:30cqi;'+'">');
+  return '<div class="mag '+f.cls+'">'+extra+'<div class="photo"></div>'+
+    '<div class="cap"><div><div class="n">'+esc(t.n)+'</div>'+
+    '<div class="d">'+esc(t.d)+'</div>'+(t.x?'<div class="x">'+esc(t.x)+'</div>':'')+'</div></div></div>';
+}
+function renderGrid(){
+  const t = text();
+  $("grid").innerHTML = FRAMES.map(f =>
+    '<button class="opt" type="button" role="radio" aria-checked="'+(selected===f.id)+'" data-id="'+f.id+'">'+
+    magnet(f,t)+'<div class="meta"><span><span class="num">'+f.id+'</span> · '+f.name+'</span><span class="tick">✓</span></div></button>'
+  ).join("");
+}
+function message(){
+  const f = FRAMES.find(x=>x.id===selected);
+  const n=$("names").value.trim(), d=$("date").value.trim(), x=$("extra").value.trim(), notes=$("notes").value.trim();
+  let m = "היי דור! בחרנו מסגרת למגנטים 🎉\n";
+  m += "מסגרת מס' "+f.id+" ("+f.name+")\n";
+  m += "שמות: "+(n||"-")+"\n";
+  m += "תאריך: "+(d||"-");
+  if(x) m += "\nשורה נוספת: "+x;
+  if(notes) m += "\nהערות: "+notes;
+  return m;
+}
+function update(){
+  const f = FRAMES.find(x=>x.id===selected) || FRAMES[0];
+  $("preview").innerHTML = magnet(f, text());
+  $("chosen").innerHTML = selected ? 'נבחרה מסגרת <b>'+f.id+' · '+f.name+'</b>' : 'תצוגה לדוגמה. בחרו מסגרת למעלה';
+  const send = $("send");
+  if(selected){
+    const url = "https://wa.me/"+PHONE+"?text="+encodeURIComponent(message());
+    send.href = url; send.setAttribute("aria-disabled","false");
+    $("summary").innerHTML = 'מסגרת <b>'+f.id+'</b> · '+esc($("names").value.trim()||"בלי שמות עדיין");
+  } else {
+    send.href="#"; send.setAttribute("aria-disabled","true");
+    $("summary").textContent = "עדיין לא נבחרה מסגרת";
+  }
+}
+function toast(s){const t=$("toast");t.textContent=s;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1800)}
+
+$("grid").addEventListener("click", e=>{
+  const b = e.target.closest(".opt"); if(!b) return;
+  selected = +b.dataset.id;
+  document.querySelectorAll(".opt").forEach(o=>o.setAttribute("aria-checked", +o.dataset.id===selected));
+  update();
+  if(window.innerWidth<700) document.querySelector(".editor").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth", block:"start"});
+});
+let tmr;
+["names","date","extra","notes"].forEach(id=>$(id).addEventListener("input",()=>{update();clearTimeout(tmr);tmr=setTimeout(renderGrid,250)}));
+$("copy").addEventListener("click", async()=>{
+  if(!selected){toast("קודם בחרו מסגרת");return}
+  try{await navigator.clipboard.writeText(message());toast("ההודעה הועתקה")}catch(e){toast("לא הצלחתי להעתיק, נסו את כפתור הוואטסאפ")}
+});
+$("send").addEventListener("click", e=>{ if(!selected){e.preventDefault();toast("קודם בחרו מסגרת")} });
+
+renderGrid(); update();
+</script>
+</body>
+</html>
