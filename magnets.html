@@ -116,7 +116,7 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
         <input id="names" maxlength="40" placeholder="נועה & איתי" autocomplete="off">
       </label>
       <label for="date">תאריך האירוע
-        <input id="date" maxlength="20" placeholder="12.03.2027" inputmode="numeric" autocomplete="off">
+        <input id="date" maxlength="20" placeholder="12.03.2027" inputmode="decimal" autocomplete="off">
       </label>
       <label for="extra">שורה נוספת <span>לא חובה: משפט קצר, שם האולם, האשטג</span>
         <input id="extra" maxlength="50" placeholder="תודה שחגגתם איתנו" autocomplete="off">
@@ -190,6 +190,7 @@ function message(){
   m += "תאריך: " + (d || "-");
   if (x) m += "\nשורה נוספת: " + x;
   if (notes) m += "\nהערות: " + notes;
+  m += "\n\nהמסגרת שבחרנו:\n" + img(s.f[0], 1200);
   return m;
 }
 function update(){
@@ -265,6 +266,24 @@ $("lbStage").addEventListener("touchend", e => {
   const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
   if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) lbShow(dx < 0 ? lbI+1 : lbI-1);
 }, {passive:true});
+/* תאריך: נקודות נכנסות אוטומטית (12032027 → 12.03.2027), ואפשר גם להקליד נקודה לבד */
+$("date").addEventListener("input", e => {
+  if (e.inputType && e.inputType.indexOf("delete") === 0) return;
+  const el = e.target;
+  let v = el.value.replace(/[\/\-\s,]/g, ".").replace(/\.{2,}/g, ".");
+  if (/^\d+$/.test(v)){
+    const d = v.slice(0, 8);
+    v = d.slice(0, 2);
+    if (d.length >= 2) v += ".";
+    if (d.length > 2) v += d.slice(2, 4);
+    if (d.length >= 4) v += ".";
+    if (d.length > 4) v += d.slice(4);
+  } else if (/^\d{1,2}(\.\d{1,2})?$/.test(v)){
+    const parts = v.split(".");
+    if (parts[parts.length - 1].length === 2) v += ".";
+  }
+  el.value = v;
+});
 ["names","date","extra","notes"].forEach(id => $(id).addEventListener("input", update));
 $("copy").addEventListener("click", async () => {
   if (!sel){ toast("קודם בחרו מסגרת"); return; }
