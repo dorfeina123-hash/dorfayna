@@ -4,119 +4,52 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>בחירת מסגרת למגנטים</title>
+<title>בחירת מסגרת למגנטים | דור פיינה צילום</title>
+<link rel="canonical" href="https://dorfayna.co.il/magnets.html">
+<link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&family=Amatic+SC:wght@700&family=Suez+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Layout: a phone-first single column. Header, frame gallery grid, live preview with text inputs, WhatsApp send bar. */
-:root{
-  --bg:#f4f4f6;
-  --surface:#ffffff;
-  --ink:#1d1f2b;
-  --muted:#6b6e7c;
-  --line:#e2e2e8;
-  --accent:#9c3d54;
-  --accent-soft:#f5e7eb;
-  --gold:#b8964f;
-  --wa:#1fa855;
-  --display:"Frank Ruhl Libre", "David", serif;
-  --body:"Heebo", "Arial Hebrew", Arial, sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#15161d; --surface:#1f2029; --ink:#efeff4; --muted:#a2a4b3; --line:#30323e;
-    --accent:#e0849a; --accent-soft:#3a2229; --gold:#d2b26c; --wa:#25c063; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#15161d; --surface:#1f2029; --ink:#efeff4; --muted:#a2a4b3; --line:#30323e;
-  --accent:#e0849a; --accent-soft:#3a2229; --gold:#d2b26c; --wa:#25c063; color-scheme: dark;
-}
-*{box-sizing:border-box}
-html,body{margin:0}
+:root{--bg:#f4f4f6;--surface:#fff;--ink:#1d1f2b;--muted:#6b6e7c;--line:#e2e2e8;--accent:#9c3d54;--accent-soft:#f5e7eb;--wa:#1fa855;--display:"Frank Ruhl Libre","David",serif;--body:"Heebo","Arial Hebrew",Arial,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15161d;--surface:#1f2029;--ink:#efeff4;--muted:#a2a4b3;--line:#30323e;--accent:#e0849a;--accent-soft:#3a2229;--wa:#25c063;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15161d;--surface:#1f2029;--ink:#efeff4;--muted:#a2a4b3;--line:#30323e;--accent:#e0849a;--accent-soft:#3a2229;--wa:#25c063;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:110px}
-.wrap{max-width:860px;margin:0 auto;padding:0 18px}
-header{padding:34px 0 18px;display:grid;gap:6px}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header{padding:30px 0 12px;display:grid;gap:6px}
 .brand{font-size:13px;letter-spacing:.04em;color:var(--muted)}
 h1{font-family:var(--display);font-weight:500;font-size:clamp(28px,6vw,40px);line-height:1.15;margin:0;text-wrap:balance}
-.lead{margin:0;color:var(--muted);max-width:60ch}
-.steps{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none}
+.lead{margin:0;color:var(--muted);max-width:62ch}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none}
 .steps li{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 10px;font-size:14px}
 .steps b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px}
-h2{font-family:var(--display);font-weight:500;font-size:22px;margin:30px 0 12px;display:flex;align-items:baseline;gap:10px}
+h2{font-family:var(--display);font-weight:500;font-size:22px;margin:26px 0 12px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 h2 small{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:400}
-
-/* gallery */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-.opt{all:unset;cursor:pointer;display:grid;gap:8px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px;transition:border-color .15s, transform .15s}
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{all:unset;cursor:pointer;white-space:nowrap;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-size:15px}
+.tab span{color:var(--muted);font-size:13px;margin-inline-start:4px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab[aria-selected="true"] span{color:#ffffffcc}
+.tab:focus-visible,.opt:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.note{font-size:13px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin:4px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+@media (max-width:420px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+.opt{all:unset;cursor:pointer;display:grid;gap:6px;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:8px;transition:border-color .15s,transform .15s}
 .opt:hover{transform:translateY(-2px)}
-.opt:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .opt[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.thumb{aspect-ratio:1/1;display:grid;place-items:center;background:#fff;border-radius:6px;overflow:hidden}
+.thumb img{max-width:100%;max-height:100%;display:block}
 .opt .meta{display:flex;justify-content:space-between;align-items:center;font-size:14px}
 .opt .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
 .opt .tick{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:12px;color:#fff}
 .opt[aria-checked="true"] .tick{background:var(--accent);border-color:var(--accent)}
-
-/* the magnet itself */
-.mag{position:relative;aspect-ratio:2/3;width:100%;overflow:hidden;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 6px 16px rgba(0,0,0,.08);container-type:inline-size;background:#fff}
-.photo{position:absolute;background:
-  radial-gradient(120% 80% at 30% 20%, #e9d6c7 0%, transparent 60%),
-  radial-gradient(100% 90% at 80% 90%, #6d7d8f 0%, transparent 65%),
-  linear-gradient(160deg,#c9b4a6,#58626f);
-  display:grid;place-items:center}
-.photo::after{content:"התמונה שלכם";font:400 7cqi var(--body);color:rgba(255,255,255,.75)}
-.cap{position:absolute;left:0;right:0;display:grid;place-items:center;text-align:center;gap:1cqi;padding:0 6cqi}
-.cap .n{font-size:9cqi;line-height:1.1;overflow-wrap:anywhere}
-.cap .d{font-size:5.2cqi;opacity:.85;font-variant-numeric:tabular-nums}
-.cap .x{font-size:4.6cqi;opacity:.8}
-
-/* 1 classic white */
-.f1 .photo{inset:5cqi 5cqi 24cqi 5cqi}
-.f1 .cap{bottom:0;height:24cqi;font-family:var(--display);color:#2a2a2a}
-/* 2 gold double line */
-.f2{background:#fffdf8}
-.f2::before{content:"";position:absolute;inset:3cqi;border:1px solid #b8964f;outline:1px solid #b8964f;outline-offset:-3cqi;z-index:2;pointer-events:none}
-.f2 .photo{inset:9cqi 9cqi 27cqi 9cqi}
-.f2 .cap{bottom:6cqi;height:21cqi;font-family:var(--display);color:#8a6c2e}
-.f2 .n{font-weight:500}
-/* 3 black band */
-.f3{background:#111}
-.f3 .photo{inset:0 0 22cqi 0}
-.f3 .cap{bottom:0;height:22cqi;font-family:var(--body);color:#fff;font-weight:300;letter-spacing:.02em}
-.f3 .n{font-weight:500}
-/* 4 polaroid handwriting */
-.f4{background:#fbfbf9}
-.f4 .photo{inset:6cqi 6cqi 30cqi 6cqi}
-.f4 .cap{bottom:0;height:30cqi;font-family:"Amatic SC",var(--body);color:#2c3550}
-.f4 .n{font-size:13cqi}
-.f4 .d{font-size:7cqi}
-/* 5 arch window */
-.f5{background:#efe9e2}
-.f5 .photo{inset:7cqi 9cqi 27cqi 9cqi;border-radius:50cqi 50cqi 0 0}
-.f5 .cap{bottom:0;height:27cqi;font-family:var(--display);color:#5b4636}
-/* 6 full bleed overlay */
-.f6 .photo{inset:0}
-.f6::after{content:"";position:absolute;inset:55% 0 0 0;background:linear-gradient(transparent,rgba(0,0,0,.65))}
-.f6 .cap{bottom:6cqi;z-index:2;font-family:"Suez One",var(--display);color:#fff}
-.f6 .n{font-size:10cqi}
-/* 7 botanical corners */
-.f7{background:#fff}
-.f7 .photo{inset:10cqi 10cqi 28cqi 10cqi}
-.f7 .cap{bottom:0;height:28cqi;font-family:var(--display);color:#3f5a45}
-.f7 svg{position:absolute;width:30cqi;height:30cqi;z-index:2}
-.f7 .tl{top:0;left:0}
-.f7 .br{bottom:0;right:0;transform:rotate(180deg)}
-/* 8 side strip */
-.f8{background:#fff}
-.f8 .photo{inset:0 22cqi 0 0}
-.f8 .cap{top:0;bottom:0;right:0;left:auto;width:22cqi;padding:0;writing-mode:vertical-rl;font-family:var(--body);color:#1d1f2b;background:#fff}
-.f8 .n{font-size:8cqi;font-weight:500}
-
-/* editor */
-.editor{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
-@media (max-width:640px){.editor{grid-template-columns:1fr}.editor .preview{max-width:240px;margin:0 auto;width:100%}}
+.editor{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+@media (max-width:680px){.editor{grid-template-columns:1fr}}
+.big{background:#fff;border-radius:10px;border:1px solid var(--line);min-height:200px;display:grid;place-items:center;overflow:hidden}
+.big img{max-width:100%;display:block}
+.big .empty{color:#6b6e7c;font-size:14px;padding:30px;text-align:center}
 .chosen{font-size:14px;color:var(--muted);margin:8px 0 0;text-align:center}
 .chosen b{color:var(--ink)}
 .fields{display:grid;gap:14px}
@@ -125,19 +58,15 @@ label span{font-weight:400;color:var(--muted);font-size:13px}
 input,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
 input:focus,textarea:focus{outline:none;border-color:var(--accent)}
 textarea{resize:vertical;min-height:70px}
-.example{font-size:12px;color:var(--muted);background:var(--bg);border-radius:8px;padding:8px 10px}
-
-/* bottom bar */
-.bar{position:fixed;inset:auto 0 0 0;background:var(--surface);border-top:1px solid var(--line);padding:12px 18px calc(12px + env(safe-area-inset-bottom))}
+.bar{position:fixed;inset:auto 0 0 0;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));z-index:10}
 .bar .wrap{display:flex;gap:10px;align-items:center;padding:0}
 .summary{flex:1;min-width:0;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .summary b{color:var(--ink)}
-.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 20px;font:500 15px var(--body);cursor:pointer;text-decoration:none;white-space:nowrap}
-.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 18px;font:500 15px var(--body);cursor:pointer;text-decoration:none;white-space:nowrap}
 .wa{background:var(--wa);color:#fff}
 .wa[aria-disabled="true"]{opacity:.45;pointer-events:none}
 .ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
 .toast.on{opacity:1}
 footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -148,7 +77,7 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
   <header>
     <div class="brand">Dor Fayna Photography</div>
     <h1>בוחרים מסגרת למגנטים של האירוע</h1>
-    <p class="lead">המגנטים מודפסים באירוע עצמו, והאורחים לוקחים אותם הביתה. בחרו מסגרת, כתבו מה יופיע עליה ושלחו לי בוואטסאפ.</p>
+    <p class="lead">המגנטים מודפסים באירוע עצמו, והאורחים לוקחים אותם הביתה. בחרו את סוג האירוע ומסגרת, כתבו מה יופיע עליה ושלחו לי בוואטסאפ.</p>
     <ol class="steps">
       <li><b>1</b>בחירת מסגרת</li>
       <li><b>2</b>כתיבת הטקסט</li>
@@ -157,28 +86,29 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
   </header>
 
   <h2>המסגרות <small>הקישו על מסגרת לבחירה</small></h2>
+  <div class="tabs" id="tabs" role="tablist" aria-label="סוג האירוע"></div>
+  <p class="note">השמות והתאריכים שמופיעים במסגרות הם דוגמה מאירועים קודמים. על המגנטים שלכם יופיעו הפרטים שתכתבו כאן.</p>
   <div class="grid" id="grid" role="radiogroup" aria-label="מסגרות"></div>
 
-  <h2>הטקסט על המגנט <small>מתעדכן בתצוגה בזמן ההקלדה</small></h2>
-  <section class="editor">
-    <div class="preview">
-      <div id="preview"></div>
+  <h2 id="editor-title">הטקסט על המגנט <small>מה יופיע במקום הדוגמה</small></h2>
+  <section class="editor" aria-labelledby="editor-title">
+    <div>
+      <div class="big" id="big"><div class="empty">עדיין לא נבחרה מסגרת</div></div>
       <p class="chosen" id="chosen"></p>
     </div>
     <div class="fields">
-      <label for="names">שמות <span>כמו שתרצו שיופיע, למשל: נועה & איתי</span>
-        <input id="names" maxlength="34" placeholder="נועה & איתי" autocomplete="off">
+      <label for="names">שמות <span>כמו שתרצו שיופיע, למשל: נועה &amp; איתי</span>
+        <input id="names" maxlength="40" placeholder="נועה & איתי" autocomplete="off">
       </label>
       <label for="date">תאריך האירוע
         <input id="date" maxlength="20" placeholder="12.03.2027" inputmode="numeric" autocomplete="off">
       </label>
       <label for="extra">שורה נוספת <span>לא חובה: משפט קצר, שם האולם, האשטג</span>
-        <input id="extra" maxlength="40" placeholder="תודה שחגגתם איתנו" autocomplete="off">
+        <input id="extra" maxlength="50" placeholder="תודה שחגגתם איתנו" autocomplete="off">
       </label>
       <label for="notes">הערות <span>לא חובה: צבע, גופן או כל בקשה אחרת</span>
         <textarea id="notes" maxlength="300"></textarea>
       </label>
-      <div class="example">התמונה בתצוגה היא דוגמה. באירוע יופיעו התמונות שאצלם.</div>
     </div>
   </section>
 
@@ -189,7 +119,7 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
   <div class="wrap">
     <div class="summary" id="summary">עדיין לא נבחרה מסגרת</div>
     <button class="btn ghost" id="copy" type="button">העתקה</button>
-    <a class="btn wa" id="send" href="#" aria-disabled="true">
+    <a class="btn wa" id="send" href="#" target="_blank" rel="noopener" aria-disabled="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3Z"/></svg>
       שליחה בוואטסאפ
     </a>
@@ -198,91 +128,88 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* ===== הגדרות =====
-   PHONE: מספר הוואטסאפ שאליו נשלחת הבחירה, בפורמט בינלאומי בלי + ובלי מקפים (למשל 972501234567).
-   אם נשאר ריק, הוואטסאפ ייפתח עם ההודעה והלקוח יבחר למי לשלוח. */
+/* מספר הוואטסאפ שאליו נשלחת הבחירה */
 const PHONE = "972502858162";
-
-const leaf = '<svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="#5f7d64" stroke-width="1.4" stroke-linecap="round"><path d="M4 56C14 34 30 18 56 4"/><path d="M14 40c-6-2-9-7-9-12 6 1 10 5 9 12Z" fill="#a9c1a4" stroke="none"/><path d="M24 28c-5-3-7-8-6-13 6 2 9 7 6 13Z" fill="#bcd1b6" stroke="none"/><path d="M36 18c-4-4-5-9-3-13 5 3 7 8 3 13Z" fill="#a9c1a4" stroke="none"/><path d="M20 44c3-6 8-8 13-7-2 6-7 9-13 7Z" fill="#bcd1b6" stroke="none"/><path d="M32 32c3-5 8-7 13-6-3 5-8 8-13 6Z" fill="#a9c1a4" stroke="none"/></g></svg>';
-
-const FRAMES = [
-  {id:1, name:"קלאסי לבן", cls:"f1"},
-  {id:2, name:"קו זהב",     cls:"f2"},
-  {id:3, name:"פס שחור",    cls:"f3"},
-  {id:4, name:"פולארויד",   cls:"f4"},
-  {id:5, name:"קשת",        cls:"f5"},
-  {id:6, name:"תמונה מלאה", cls:"f6"},
-  {id:7, name:"בוטני",      cls:"f7", extra: '<span class="tl">'+leaf+'</span><span class="br">'+leaf+'</span>'},
-  {id:8, name:"פס צד",      cls:"f8"}
-];
+/* המסגרות מהתיקייה "מסגרות לבחירה" בגוגל דרייב: [מזהה בדרייב, מספר מוצג, שם הקובץ] */
+const CATS = [{"k":"wedding","l":"חתונה","f":[["1QHq-CbZDsROnAaIc7M6i5fX-RS4cbbuR","1","1"],["1U9tNSo0Zc4uKBOkGqjHwd42ldZASeJwT","2","2"],["1x5lfAsOmqHS8oyymqjxaS6wVjaa0GaGw","3","3"],["1jU6ToWEi-32TYOVW01G_Q10YWiB3kGCW","4","4"],["1TntLHxcmPLohdAPkM9_VdxBFfFzJyItp","5","5"],["1N0cmh9qMNU4YU-eLBj2IYUOp5Ea4a60C","6","6"],["1po02aAvTl4GxQDMs0LfmH5aaPnRSwMw5","7","7"],["19FJKS37dEXNEH4Hf4UuEa9XjliSlXF6Q","8","8"],["1eccFLExajVvmxLRnEOLajRPyzmPyBrVN","9","9"],["1KlCbjV4DyQvjtTqGmMm_Z7YOyboWsDQx","10","10"],["1MqfEB35Ls-0apNmeXf0NBjfKn77PyKga","11","11"],["1U-jEpw--kObfA4yeSsTETAZ5-VTt5jDe","12","12"],["1MmbD1GjRR82KjWbt_H3zbhwAr8ZsiBnV","13","13"],["1DvvC257Ui2uBcxzDwK3_wuIMsaxsFhh7","14","14"],["1BgC29FtUl5GO9BwbJ8mG6lUgK6rFS-Zi","15","15"],["1RWnBVorcjrrMjiyqjDZoGbDjWUL064gy","16","16"],["1v1kpNK1jMjnZyWCCNX9BiQD9rBnoAOwC","17","17"],["1pwVeCjKYqwuKrw59yGvIToaDTBKMO4tB","18","18"],["1Izz8MCDAhuRb7OjHLukdh81t7EdwGFZx","19","19"],["1ptlzWQXvQtNlzbAukL5VjT_lvixN1G-K","20","20"],["1544FSt6Y79XwErtdWAEaw3kSaSowkkmS","21","21"],["1Fb6vah6yFE4qSqZ9vhuWCApzuhZ1kznh","22","22"],["1jFtZaOkSYtkAVIW-oqiQ_GjrZFFugLej","23","23"],["1WO90OagHaaaspnWcM22535GYKPCsBEdu","24","24"],["1RDxhZsiu9Tkv1vyTWPJxHysz16IGVEDw","25","25"],["11Uemz579zjUU-M3rSVRMdUEnIagXfrja","26","26"],["1K3fZNIIQpNbzWr9qlfBusF95Khw_70Om","27","27"],["1bST5Rz4Tre264-azD-yd14pGsZYB6Elo","28","28"],["1z-OzB6OZhVZJzOZfTqWXFuFeXqUbV_Pe","29","29"],["1WwtIl2fHSEtg-v9lHk8_TH99WH7lOHjH","30","30"],["1gfnfNHOrdLDe4CHOAXRi2jD-N7hz6MaK","31","31"],["1d4QcOt84_BdGjLchF3_Qw_g_gkRdR65t","32","32"],["1VFzsc5fxB6OiH-lw3M7Zl_BjBgPLqiFp","33","33"],["1OWVB7Z5WW2nfpcqee1Ujz9200Rn7gLmw","34","34"],["1xl2qWrT6ejEsNY05oRKsuu9vpcvGjS8D","35","35"],["1E_YxvuZnnuQoDLOGY6fs6UM6dFKr7C0a","36","36"],["1fF2MN_9uwVVE6c3reJyhlqkIDB7f-pGc","37","37"],["1xYZjsCSuGyMlnHEhwTgVoEVi5kWCUM-4","38","38"],["1oQzV3tbkhq72LWapa7lELIC6_6IIYHCA","39","39"],["1ry0SyJqEfvpxhK4TkLAS9j6y4AKYI1oe","40","40"],["11daw23Z6BIMHhpPrsOR4Zfgi9gjDfu1V","41","41"],["1ZCbvcKUKwCUeB-r7TLrp17x1dETWEgOi","42","42"],["1XbuYJ8XgvHd3DeVFymxroohkQi5XtFTP","43","43"],["1aDsuwt_QIF6xirRdOduHqD8V8NH_slsX","44","44"],["1wT20ffFa3K7XjwAxn5Cn3Kt2c742TqAn","45","45"],["1NylcJml9FXpVUf8nCPaTR7b88-fz_efV","46","46"],["1WLs0LNXNkCuHEYPYi0mj-9YBof7FACC3","47","47"],["1sYLcOdv6M-OYIjtn1bitbT5UY4Oia_6x","48","48"],["1K26FOia2EnWY9nTC1aLWuK3xVkxDAkDT","49","49"],["1yyX93JPOtdHrRwS3iTYkIjPRpOa1s7S6","51","51"],["1Y58CF8GiIrHBzncpqi40qgfVufabd6Kf","52","52"],["1U69SUcpnLPFNJKsvK71mokKLKiUUkVcN","53","53"],["1GCyqu_c8_hyYKhYFQSbRqZgn5zTuFO0l","54","54"],["1HcaOhgyhSUvhfBjBzjXlQha4nC9_haLc","55","55"],["1w7zlQpwzmOPaet6azcCkrD3bOIjqEKUp","56","56"],["1buO4zZ-Oi8C3dUH_6gDIx-K3dX3MgwwT","57","57"],["10JkVu4xgBE0pBCs9N_k810uh2l-UBK5t","58","58"],["1qHbbZE1SvRzJ-JjA_C6AjNYKldjD2e-0","59","59"],["1lvGBpnxivJi8mftF6OUWPQpf9ts0C0yl","60","60"],["16Uev38v6WlMVq7pQwKIh4pX42nJVxyoY","61","61"],["13dOaEOqpERtRsBcRla99xTY1irvUYrSv","62","62"],["1u0VfEfAuQQ68zflqLkCoBXiGB5Q2tYq8","63","63"],["1DoUL6wN8NMaQTzsFycWb4dXJ3DHHVjJb","64","64"],["1M3D5ZiluEO0ZPDe4eyHEkVEAuRkXrZ1C","65","65"],["1zCC-GgcyFIrsn3KNqREd9WEXNE4dGL_b","66","66"],["1mpQmnwxavRKR1mrcY8pDDGn6HMa_9reM","67","67"],["1NV7Qgsv8bEE8e-g4bjHFnGgN5MGISFlY","68","68"],["1XDCYWycgRq7qlqsl8gLJgmPl04RwWwRT","69","69"],["1-M1Z2Wg6XD6WGqFwynW4pDQ966ULohhh","70","70"],["11BdBdP9FsOAVNBHQLoKpdj2sJRwxMCOR","71","71"],["199g1dRJO542KDuc9aJQCGr4kihmc0j5H","72","72"],["1cRPlU_dsczhsOItpaxo_-AhYiAIQPGuV","74","74"],["1Q8IxbywqCafUChCVUjJnf9H_E5zukC6q","75","75"],["1V0XkKrQQvF2Fyxy26OfBGaHg_LjI-_Jw","76","76"],["1SkgSpwNaBTx5ixvMia8YqXTNXP4bAHNm","77","77"],["1qc7hzQT0PQZio8wkewAys61d9cWbm7ca","78","78"],["1hNTDVxI5Av9UWQhKOZ-TYU6CF8uSl-7f","79","79"],["1JickjGCT83da5e-FbaKaf3uT8cR1Bgvo","80","80"],["1wvxiV2Fja7y7IM8P1w_Gr5CkzFf7XjnK","81","81"],["1p22vU4NTKcliPqqJK5L4y7JGF9FFSN0i","82","82"],["1O2E1M_fciDdwv0dAo6DXQ_6LEsYMVNAu","83","83"],["1EYB9MWCyHyXps-oa0QFXwcQWbkz2KW6t","84","84"],["1M3GZlI7kAGDqRJ1FBpL1OwkQXsvuN5f5","85","85"],["1o_BHT9qYkiA23ZywWA7nWKQUydarFqkE","86","86"],["1dS9W-foEUFQGcNLgf0LQ69jelm1yRx46","87","87"],["1rVH5FuJCbskD0gdvYiURTuwq0LFt34lf","88","88"],["1R_O-0qFW7QmFuHi-9LbYdVdO5tArqgCX","89","89"],["1nayfvdnF4U3dtMd_2KtMkNL50OUbCfbx","90","90"],["14Y08YVL4xoifLiwNIBYhCjLWTCS95v5w","91","91"],["1BKi76EgAcx6RwDNsdcXA0hFHMo1xu-Kj","92","92"],["109UzOfvqyA8pJT21ncfoZPN65ceE3x2H","93","93"],["1rFEc-Ia8n8xFsXIi5NuzLVys1as1dyCz","94","94"],["1iZ9jWpWD81yQKFZXbbH4GbxV1p6LuiHo","95","95"],["1uHjyA-4r1S1OBugSMi6_S_2UW9co6s0E","96","96"],["1BsbT2h9a1OEFT3ZJpWfUmLNHbJiE_EbM","97","97"],["1u3NK1EXtS9qw0JIk69MXd_0X4gvRfVZr","98","98"],["1SDtayFJRLK-j-mXjI6emOo5U5y6mIVQl","99","99"],["1-FrFCoSTYWYvhhAAgrBtVFOuT4kDe6bz","100","100"],["1HQkTNv6ZoGaVSnWD7RRSKwTx1jnBLqZh","101","101"],["1xdujxhJDImChEFWn2YH-RePyAjIyHxVJ","102","102"],["1LRPQ7r7hQ0feQc8lg5j0i9L4dUzUT9sS","103","103"],["11VsUUGmoNZk41qKqqf9lG3dILw0RPuO0","104","104"],["1np62_nvO7tWKBvzIYgyY3rzUUUYhySgA","105","105"],["1PbhrH_GXNy4OVw7IuX1IOeGHIuwFIqko","106","106"],["1d5EoRcUBzVyjgwIL4B6eiq1nJN93qs8c","107","107"],["1DoCdl4kPQy5tdZ1-OQs27V3V7s_gBbw1","108","108"],["11uP0sUJ1N_Nbp2p0k6BW20VsA3Vh1-9m","109","109"],["1HQyxVC4K9G5KvH7jKozrurdoRtAzDhTN","110","110"],["1bzFwog8k9HEXzzUuhjb9PII9ExS37YgA","111","111"],["1Q08W3va3-z991yU2KbZPH30KgaJvIv2b","112","112"],["169chaIv9zKGV9GW0w3WNdcJnQpLWULiH","113","113"],["10C4NdR0dNxAE4T_aFeQ_9_E_Y7sKDbTh","114","114"],["1Jb0vTKumTNK8vZcAND4f623K2JD6ZP7k","115","115"],["1EbwmdSiyavjlxQlnT2rfARiWYrxx66Fj","116","116"],["1Lzr8CQQ3IdKWhGRLXPRgU3KWLgADBhN2","117","117"],["19XDorHU4l9MozRomWk3d9A-oWht0iaUU","118","118"],["1CWCmbVlfV00upq8Dh-GbXpt89U-bKfPz","119","119"],["1sFhwS1BkcQKaeTjw5larAVbC2HomuRMn","120","120"],["1-2OsSdABqNgaYw8OfEsVOWbvt6zrQXAJ","121","121"]]},{"k":"henna","l":"חינה","f":[["1n9Dze-JHzFw34OImL0b0E9VoXyjOfr9L","1","33c184e3-21ab-46ba-bc64-9fb8f70120d5"],["1PdEcf3p7cABwVfVQMi2VO_ctpee-O6T8","2","הילה חינה"],["1jCw7Yb4drZRDlZAwyu94xDkQn39JnicG","3","חינ"],["12DIu9ipTi9Tz3QAjOAS8vilZFRmpPb5-","4","חינה איריס ואורן"],["1B2q2JUt4h1_BC3unyDGJzlSArOvvvGgQ","5","חינה3"],["1QRUWteNee1QpAcf-Rabfda0XuHg4GLUY","6","חינה4"],["1HUp5_AX0BZ5Yywn5G_qRjlw7dDszylNz","7","חינהה"],["1dRJPxkYW74xyO2iEc27ljdmALJnOh0ok","8","חינהה2"],["1qSlvccQb5GS1JLRk8PNBsPKHpreLLv0b","9","חינההה"],["1gq4QpykuBpcfm7Cu7gVJdfNbnel6bGZj","10","חינננהההנה"],["15c3436R6i4DOXf2QR3dZ63Dg71NYbACa","11","חמסה444"],["1gVoTSyAaewmSGcuVKqaV3IXIlxfVhfA9","12","מר"],["1p3DK1ZS41Q8Pl1uHVdBLqHaypO-OlW3-","13","פרח ויהודה חינה"],["1N81-siA4Ng_9SIOvIfxu9qPbq1HhGdZF","14","ררררר"],["1saDKyTEzrRfqnBCBWNXdWcnZwc38ncCs","15","bez dav"],["17WAQ6ZB9xdHtEKqJ_0BgH8tl79EzRADv","16","df"],["1-OkHStG008mjAf3vJbAuDeA06fwq7Q5X","17","hh-2"],["13QeLSgoxmX4SEXUFjPoBJqxoRX60prxX","18","hhhh-11"],["1CE_eX-aIaB81ddN_up9xxMVpBPDCoyQY","19","hhhhi"],["1yBLKoklZGB5cEX-oR3HjuGP-qoS15muq","20","hhiinnaa"],["1PECgB_TtPntOAGJtLpHl_WKtmDkmS_FT","21","hhinna-6"],["1u9dTNfdC6OAlbaoHM4TdEcFBoh3FINCm","22","hhujjuu"],["1d1J7h7JEt2mfk1UYtX7IVNjCagQw3Bho","23","pero"],["14nBZ7F1FMVaB3v1rWrTw5qWh3I9Tw6IW","24","WhatsApp Image 2018-05-08 at 20.57.23"],["15XMr8vHUAzCUmUH4xND2Nzu7nsSG1i3m","25","zvccc"]]},{"k":"bar","l":"בר מצווה","f":[["16NRdQgxGoGuv625WnwA8TrdorhDzG-_y","1","0ee019b0-a2c4-4257-8827-d6356bc87db3"],["1Y1_o1Du1NO0CpaN4YMDgoU8e0Gvwemo1","2","1 (2)"],["1JeehvB4lpnJiV_6DaKBXNQ0KS3KeJvcp","3","2 (2)"],["1A8AQaxUzue2DcIi9v77Dwj5OqPS95ODK","4","5b307a99-cda5-4094-b0ac-66356dc8dd45"],["1fkrGOUlsKuOb39M1m642-WBqpG5tP8fa","5","6e7fe1c9-1944-4bce-8f15-abf13424d000"],["1aQb05dxJmnVkCODnfi338XoQ1igUZ80-","6","38 (3)"],["1lb35IHgCR8rk2PNSoIF83xyGqfBJUEjL","7","56"],["12Q0Gs2yY4RuRDIeNgQFWO8NWu5ijbXZW","8","77f27c6a-1004-4a90-a3ef-de6a20edc1fc"],["1h_CxHW5GQQR89mdez0MQhF0Pr2Z-mtaO","9","82b01826-76b0-4967-ace4-06cf279ce9d5"],["1a8HWVaeABpmuK1kKcxqyVMWQl2KvA97k","10","אורי_1"],["1pfB6HFtUD4NOBPxKW47g4CzNpANp-aGi","11","איתי 2_1"],["13CRQVZ_lwB5bxPOZuz3CXEDG-P5fFiGm","12","איתי_2"],["1JBuxT9_8kdfDIGfFr6yqhxDT65NkZCJr","13","בר מצווה"],["1GVJwSEGRzeZBFamA1Yb7CMrFnX3ZkW3F","14","בר מצווהההה"],["1VAtLi6A3G-iu20TvgOdr4UeR0JtMD7gz","15","בר-מצווה"],["14HPHYZrEaEQBC2LAni8Wpv8Kfakz7lup","16","מגן דוד"],["1i0AygoJcPPtL-ai7ptffCRDk6tkU9zHz","17","מסגרת_לבנה_מגן_דוד"],["1VWqN9MxpDoE31wanNCYrWyvbdzX1_UIr","18","מסגרת_לכותל"],["1QtyFbf_qBZAbxDFobl0O27kmP1bAPcMj","19","נאור"],["1HWghO4EG3RInK9qdQXtnttHOq4mzyhfp","20","תפילין"],["1RAS0AzpgZnWL_YVRLYT1JMn5sAsJMov_","21","BAARR-1"],["1k5Vas1wqQDf3CUELJ8E2UCmj9M0HhzTB","22","BAARR-2"],["1BPHMLMX59UgDjY3Hvh6-FhWbCcAqUEd3","23","bam---55"],["1eYVEIaV0-SsB41xKKTulh67X6jcwm4J6","24","bar-1"],["1vY8tzpqecWgJ5BCC7B4bm7zrnXoo1rU-","25","d1447933-5aba-4f68-9407-058c951cb6ea"],["1w-ielyzRoI8vUTxGSo6Ke_3WPHs9SRa_","26","ddssv3v"],["1NlIBVC3dVgp8nIVJvXi5Fp1Vi7-U1UAJ","27","ddssvv"],["1nUNUplt4cb9ovNlesX8XoJ8FIQx8HGj6","28","FUTBOL-2"],["1aF89re8XRCyfMSBq1OyImM55mlviuNXG","29","tennis-1"],["1g21BGptvzC0hKhgUCcyz1IjDzdrE7g1D","30","tennis-2"],["1-DtoGs2R1TMNu0c1QHAzg-MbI2hP-FPV","31","unnamed"],["1at-N1EFYHVFtjPfw2NxTmgeyoCF8yKl6","32","XA"]]},{"k":"bat","l":"בת מצווה","f":[["1Eqyg48a0XawtNp88sw3yHFJBmByhFgfo","1","04tt"],["1P8m0eY24zAq6cDu27aes-Q1eqVkLAfAx","2","6"],["1FzZRSWlSC9kKy1DoLi05icAvsy5vLeJ5","3","24.05.11 זיכרונות 0505819906 - עותק"],["1esAMcbOdyun_lOVgWt8DcJj8ojBZ7rha","4","97"],["1aba-HTIrKIibYIh2EL-lqpSRDrmDPvyX","5","432315_231613046935680_100002609580320_463339_884713ווו412_n"],["1c_4O_DCT9ROB2yAaiRgws__D_0kS_yX7","6","1212121212"],["1d2OY8LddySPgzDbWOb0xQb9P-tSmLzDm","7","אגםםם"],["1QEQTzwTw1Vy7HiXdeusK51E2b_UjSHzN","8","אגםםםם_1"],["1w3mlfxSwdCb0bdZxon6W0PUcLz3fGwuy","9","אורי 2"],["1jZIUQESeF7cTCfgPbEuTuN8RcehERiUN","10","אורי_1"],["1F0HSzci12Uq5tXqNI2Zidi3O5wuS0dIw","11","דק"],["1xGjAqoa1YF-2YdzszzuO8Z8SqDl9HLdx","12","לבבות וורוד"],["17nzaB1QNe0tOe-oNy_V9hvePEYASh32M","13","לבבות לבן"],["1V47mD6BjEa8k4WxLUjKl-a8xpj9ky3FC","14","לבת"],["1kBt5TfpQvUmZK6S9OdDTJ-68lCJSpyPA","15","ליהי_3"],["15y-ZvTzUT5tsejWnGmBPGaGV-xTj9X8k","16","מסגרת 444"],["1O16PnYtsxkt-kfgp5VGkRJEQ6JPkU30-","17","סססמצ"],["12iOPq0cxw6fKKbeAYD2DsabR27je9A4i","18","פרפר"],["1TOX9l8dFLpve8aVGwAt61Wwu60XBWYWu","19","cali06 העתק"],["18Ue3lYGn0oLvrodYeDujqgAsgq8XwLwg","20","tdoooo"]]},{"k":"brit","l":"ברית ובריתה","f":[["1BtD09JTZ81otN2XyQ4ncDs4_2Njm0ncS","1","00-1142"],["1D4EfBs1MOf6oepzM0rBFSPgY1Xm2qNqn","2","00-1144"],["1508A-PmCX0aM0gmyb-36iWL9OBH_e86N","3","00-1154"],["1MYGX7th9rlY3lxZKXdHKJyKCChKY8pCB","4","1_(140)"],["1HzYVFkhjlUJqtf4qyaxZwVqsRhZss_dQ","5","6"],["19MMovTAsBe_HV_4-vuqVAZfst47KhlJ1","6","18 blue"],["1zhDeZMnRPPbiMKBbpgUMPqy5lNDhBSwd","7","24.05.11 זיכרונות 0505819906"],["1NfB25oANDQ_ZuY9PrWo_vWeySEGLVvfY","8","0029"],["1zXkpjh_FH_vNg4RsIrowtcOurbHQ81FB","9","0031"],["1EBX51eixJYJS_ZaytpKMBbkjisXlAhdq","10","97"],["1YMvXzlFOQi1xZ03XOh7MdEIFZ3kleOB1","11","140"],["1eK5YqKKuG1HwmRQiNl5yKStLKneiK-7d","12","0183"],["1KY6c0RXdZZTVpUYfvfO1njk4Pkz7TK1U","13","0193"],["19wm6Hr91GhP8fPKAsq4DPwKG-bhdG7Va","14","0203"],["1faexdP0RxUGcRoh-5CqLK31Yd0yjBsSj","15","777"],["1PZzVx_47pN0zxV_RmGKt1ibuMVBxtppC","16","2234"],["1TKNC0r_Mpvo73KehyxT-IdBYdeZx1M95","17","9938"],["1LQGtm4OlGEAPhCS6Bi2ZwNnUwGz0xdOw","18","9945"],["1DQWfE8YhuzI1-DIDlqh7f9Z-vXCFYhzC","19","88777"],["1H3asuYEZPuWRP4VyogMqkuPg3zKe2Qs-","20","אאא_2"],["1W7IaRjeQ2e2AfjVERfr9rNr4OV4DDb-I","21","ברית צבעוני"],["1IrZvwRkfzoCNca6-IOzQ6r79nsU4EmtE","22","ברית"],["1jiGZul3R3TP21QOQw9nT9YrPL98lrINW","23","בריתההההההה"],["1Wozb4tGfVLTs-EWppEP2W27ez5r_G9r7","24","בריתת"],["18NGjnuPfE2y6bZub4OMpy7K0P6EE_GwR","25","בריתתת"],["1WPcHhoVFP_u-K84RVLrfwJQ7cUP44Cll","26","ורוד"],["1re3a6xtc7xAjfSrXU6UjdufAzWWkKc8L","27","חחל"],["18QA9Z_nX6k9_JARkALCpqJLfj6cF3A95","28","ככככ"],["1PD2gRkp0SPng4NYMqSGr2xoRrdf2oZoy","29","לבן עם לב"],["1Cb5jPgRIaZ-Gr6Eg3iIG1FMCyJ55Ts2D","30","מאוס"],["1RxAzRGZiTYmrzMzC_srzyRKzdPLcToDG","31","מאיההה"],["1MTJeJPDfECUU9fGspd-MzeV-cTPPQ8bT","32","מיני"],["1S8yQzfygljvWmr3UWRRxHa3mRuanS4iq","33","מסגרת 444"],["1YzbPtkRcaPX-HiUjT0xf7rULgL3nM6X0","34","מסגרת מס 5"],["1zpIWd32xh7REsMk1W0sbZoAJbuGoltLX","35","עגלה כחולהה"],["1ktVxkuKJ3XNWW3vkh_1MyEjOZ4OVgI4l","36","עגלה"],["1kHY9r0ReZrg8YgTLq8XzR91zCmyLDbWm","37","עדי 3"],["1bnpcM_Ty94op5BFavWjpc9uazI-vpnaB","38","עדי_3"],["1Qc-AYR7zCfBL0m9S39T3Ctn5RcSscAv3","39","עעיינתת"],["1J4wgJ0mINk9gtkd_bEq7oxWGkiMKjt1Y","40","פו"],["1y8H83bf8qIgWrF5jfkuC6VecVPhccO5W","41","פפפ_1"],["1xWYPxPbFtaGH1HD9EtHwmOSgZX3OAsMe","42","פרפר"],["16i0FiH357utxEO7gNjixOJ3UhhKocm2o","43","שמש"],["1AHFEgezJCum98jhKAjY7qWF7dLd6nkG2","44","תפור 2"],["1AY_XSUAocp33HR0MfeP0KXeShzX63Z81","45","תפור"],["1Ivdl_8rOQilhEY9SMD4b71z07R-lPFcY","46","aeac859b-33c9-47a4-b5e4-111d620c1696"],["1q56DlIIzawDp5KZqDA_UVK3rdNXPFYW7","47","b-20"],["12whxg9r5E1Pz8Kx0lhYE4PJCnUnBqj5d","48","babybb"],["1J27hDD1dapRpt1ruYGlt4NurOnOZgyIb","49","bbbbrrrrr"],["15Qp5gpmoinjUajwsQ6CFAz4GLG45KEYN","50","bbbrit-4"],["1CKdl_6AYv5nFKkGrbyCmI8y7Kfedzp79","51","ddddnew"],["1RHjGXWXzfivZOOk1uWQUlTc8TqptITyp","52","frame16-1"],["1wSjJobhjsV4GF9qlYadb4fAUbU0iUI-W","53","IMG-20160419-WA0042"],["1I0auxLiqji2Xkz1UxmjVY-rTcp8oyjCP","54","Screenshot_20180106-211859"]]}];
 
 const $ = id => document.getElementById(id);
-const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let selected = null;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const img = (id, w) => "https://lh3.googleusercontent.com/d/" + id + "=w" + w;
+const fallback = (id, w) => "https://drive.google.com/thumbnail?id=" + id + "&sz=w" + w;
+let cat = CATS[0].k, sel = null; /* sel = {k, i} */
 
-function text(){
-  return {
-    n: $("names").value.trim() || "נועה & איתי",
-    d: $("date").value.trim() || "12.03.2027",
-    x: $("extra").value.trim()
-  };
-}
-function magnet(f, t){
-  const extra = (f.extra||"").replace(/<span class="(tl|br)">/g,'<span class="$1" style="position:absolute;z-index:2;width:30cqi;height:30cqi;'+'">');
-  return '<div class="mag '+f.cls+'">'+extra+'<div class="photo"></div>'+
-    '<div class="cap"><div><div class="n">'+esc(t.n)+'</div>'+
-    '<div class="d">'+esc(t.d)+'</div>'+(t.x?'<div class="x">'+esc(t.x)+'</div>':'')+'</div></div></div>';
+const params = new URLSearchParams(location.search);
+if (CATS.some(c => c.k === params.get("type"))) cat = params.get("type");
+
+function current(){ return CATS.find(c => c.k === cat); }
+function selFrame(){ if(!sel) return null; const c = CATS.find(x => x.k === sel.k); return {c, f: c.f[sel.i]}; }
+
+function renderTabs(){
+  $("tabs").innerHTML = CATS.map(c =>
+    '<button class="tab" role="tab" type="button" data-k="'+c.k+'" aria-selected="'+(c.k===cat)+'">'+esc(c.l)+'<span>'+c.f.length+'</span></button>').join("");
 }
 function renderGrid(){
-  const t = text();
-  $("grid").innerHTML = FRAMES.map(f =>
-    '<button class="opt" type="button" role="radio" aria-checked="'+(selected===f.id)+'" data-id="'+f.id+'">'+
-    magnet(f,t)+'<div class="meta"><span><span class="num">'+f.id+'</span> · '+f.name+'</span><span class="tick">✓</span></div></button>'
-  ).join("");
+  const c = current();
+  $("grid").innerHTML = c.f.map((f, i) =>
+    '<button class="opt" type="button" role="radio" data-i="'+i+'" aria-checked="'+(!!sel && sel.k===c.k && sel.i===i)+'" aria-label="'+esc(c.l)+' מסגרת '+esc(f[1])+'">'+
+    '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'+img(f[0],400)+'" data-fb="'+fallback(f[0],400)+'"></div>'+
+    '<div class="meta"><span>מסגרת <span class="num">'+esc(f[1])+'</span></span><span class="tick">✓</span></div></button>').join("");
 }
 function message(){
-  const f = FRAMES.find(x=>x.id===selected);
+  const s = selFrame();
   const n=$("names").value.trim(), d=$("date").value.trim(), x=$("extra").value.trim(), notes=$("notes").value.trim();
   let m = "היי דור! בחרנו מסגרת למגנטים 🎉\n";
-  m += "מסגרת מס' "+f.id+" ("+f.name+")\n";
-  m += "שמות: "+(n||"-")+"\n";
-  m += "תאריך: "+(d||"-");
-  if(x) m += "\nשורה נוספת: "+x;
-  if(notes) m += "\nהערות: "+notes;
+  m += "סוג האירוע: " + s.c.l + "\n";
+  m += "מסגרת מס' " + s.f[1] + (s.c.k === "wedding" ? "" : " (קובץ: " + s.f[2] + ")") + "\n";
+  m += "שמות: " + (n || "-") + "\n";
+  m += "תאריך: " + (d || "-");
+  if (x) m += "\nשורה נוספת: " + x;
+  if (notes) m += "\nהערות: " + notes;
   return m;
 }
 function update(){
-  const f = FRAMES.find(x=>x.id===selected) || FRAMES[0];
-  $("preview").innerHTML = magnet(f, text());
-  $("chosen").innerHTML = selected ? 'נבחרה מסגרת <b>'+f.id+' · '+f.name+'</b>' : 'תצוגה לדוגמה. בחרו מסגרת למעלה';
-  const send = $("send");
-  if(selected){
-    const url = "https://wa.me/"+PHONE+"?text="+encodeURIComponent(message());
-    send.href = url; send.setAttribute("aria-disabled","false");
-    $("summary").innerHTML = 'מסגרת <b>'+f.id+'</b> · '+esc($("names").value.trim()||"בלי שמות עדיין");
+  const s = selFrame(), send = $("send");
+  if (s){
+    $("big").innerHTML = '<img alt="'+esc(s.c.l)+' מסגרת '+esc(s.f[1])+'" src="'+img(s.f[0],900)+'" data-fb="'+fallback(s.f[0],900)+'">';
+    $("chosen").innerHTML = 'נבחרה: <b>' + esc(s.c.l) + ' · מסגרת ' + esc(s.f[1]) + '</b>';
+    send.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(message());
+    send.setAttribute("aria-disabled", "false");
+    $("summary").innerHTML = esc(s.c.l) + ' · מסגרת <b>' + esc(s.f[1]) + '</b>' + ($("names").value.trim() ? ' · ' + esc($("names").value.trim()) : '');
   } else {
-    send.href="#"; send.setAttribute("aria-disabled","true");
+    $("big").innerHTML = '<div class="empty">עדיין לא נבחרה מסגרת</div>';
+    $("chosen").textContent = "";
+    send.href = "#"; send.setAttribute("aria-disabled", "true");
     $("summary").textContent = "עדיין לא נבחרה מסגרת";
   }
 }
-function toast(s){const t=$("toast");t.textContent=s;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1800)}
+function toast(s){ const t=$("toast"); t.textContent=s; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1800); }
 
-$("grid").addEventListener("click", e=>{
-  const b = e.target.closest(".opt"); if(!b) return;
-  selected = +b.dataset.id;
-  document.querySelectorAll(".opt").forEach(o=>o.setAttribute("aria-checked", +o.dataset.id===selected));
+document.addEventListener("error", e => {
+  const el = e.target;
+  if (el.tagName === "IMG" && el.dataset.fb && el.src !== el.dataset.fb) el.src = el.dataset.fb;
+}, true);
+$("tabs").addEventListener("click", e => {
+  const b = e.target.closest(".tab"); if (!b) return;
+  cat = b.dataset.k; renderTabs(); renderGrid();
+  history.replaceState(null, "", "?type=" + cat);
+});
+$("grid").addEventListener("click", e => {
+  const b = e.target.closest(".opt"); if (!b) return;
+  sel = {k: cat, i: +b.dataset.i};
+  document.querySelectorAll(".opt").forEach(o => o.setAttribute("aria-checked", +o.dataset.i === sel.i));
   update();
-  if(window.innerWidth<700) document.querySelector(".editor").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth", block:"start"});
+  document.querySelector(".editor").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
 });
-let tmr;
-["names","date","extra","notes"].forEach(id=>$(id).addEventListener("input",()=>{update();clearTimeout(tmr);tmr=setTimeout(renderGrid,250)}));
-$("copy").addEventListener("click", async()=>{
-  if(!selected){toast("קודם בחרו מסגרת");return}
-  try{await navigator.clipboard.writeText(message());toast("ההודעה הועתקה")}catch(e){toast("לא הצלחתי להעתיק, נסו את כפתור הוואטסאפ")}
+["names","date","extra","notes"].forEach(id => $(id).addEventListener("input", update));
+$("copy").addEventListener("click", async () => {
+  if (!sel){ toast("קודם בחרו מסגרת"); return; }
+  try { await navigator.clipboard.writeText(message()); toast("ההודעה הועתקה"); }
+  catch(e){ toast("לא הצלחתי להעתיק, נסו את כפתור הוואטסאפ"); }
 });
-$("send").addEventListener("click", e=>{ if(!selected){e.preventDefault();toast("קודם בחרו מסגרת")} });
+$("send").addEventListener("click", e => { if (!sel){ e.preventDefault(); toast("קודם בחרו מסגרת"); } });
 
-renderGrid(); update();
+renderTabs(); renderGrid(); update();
 </script>
 </body>
 </html>
