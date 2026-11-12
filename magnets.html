@@ -68,6 +68,21 @@ textarea{resize:vertical;min-height:70px}
 .ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
 .toast.on{opacity:1}
+
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,10,14,.94);display:grid;grid-template-rows:auto 1fr auto;color:#fff}
+.lb[hidden]{display:none}
+.lb-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-size:15px}
+.lb-close{all:unset;cursor:pointer;width:44px;height:44px;display:grid;place-items:center;font-size:26px;border-radius:50%}
+.lb-stage{position:relative;display:grid;place-items:center;min-height:0;padding:0 56px;touch-action:pan-y}
+.lb-stage img{max-width:100%;max-height:calc(100dvh - 170px);object-fit:contain;background:#fff;border-radius:6px;user-select:none;-webkit-user-drag:none}
+.lb-nav{all:unset;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:24px}
+.lb-nav:hover{background:rgba(255,255,255,.26)}
+.lb-prev{right:6px}.lb-next{left:6px}
+.lb-bottom{display:flex;justify-content:center;gap:10px;padding:12px 16px calc(14px + env(safe-area-inset-bottom))}
+.lb-pick{background:var(--accent);color:#fff}
+.lb-pick[aria-pressed="true"]{background:#2f8f55}
+.lb-close:focus-visible,.lb-nav:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media (max-width:560px){.lb-stage{padding:0 8px}.lb-nav{top:auto;bottom:-56px;transform:none}.lb-prev{right:16px}.lb-next{left:16px}}
 footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -85,7 +100,7 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
     </ol>
   </header>
 
-  <h2>המסגרות <small>הקישו על מסגרת לבחירה</small></h2>
+  <h2>המסגרות <small>הקישו על מסגרת כדי להגדיל ולדפדף</small></h2>
   <div class="tabs" id="tabs" role="tablist" aria-label="סוג האירוע"></div>
   <p class="note">השמות והתאריכים שמופיעים במסגרות הם דוגמה מאירועים קודמים. על המגנטים שלכם יופיעו הפרטים שתכתבו כאן.</p>
   <div class="grid" id="grid" role="radiogroup" aria-label="מסגרות"></div>
@@ -124,6 +139,15 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
       שליחה בוואטסאפ
     </a>
   </div>
+</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="תצוגת מסגרת">
+  <div class="lb-top"><span id="lbCount"></span><button class="lb-close" id="lbClose" type="button" aria-label="סגירה">✕</button></div>
+  <div class="lb-stage" id="lbStage">
+    <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="המסגרת הקודמת">›</button>
+    <img id="lbImg" alt="">
+    <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="המסגרת הבאה">‹</button>
+  </div>
+  <div class="lb-bottom"><button class="btn lb-pick" id="lbPick" type="button">בחירת המסגרת הזו</button></div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -194,13 +218,53 @@ $("tabs").addEventListener("click", e => {
   cat = b.dataset.k; renderTabs(); renderGrid();
   history.replaceState(null, "", "?type=" + cat);
 });
-$("grid").addEventListener("click", e => {
-  const b = e.target.closest(".opt"); if (!b) return;
-  sel = {k: cat, i: +b.dataset.i};
+function choose(i){
+  sel = {k: cat, i};
   document.querySelectorAll(".opt").forEach(o => o.setAttribute("aria-checked", +o.dataset.i === sel.i));
   update();
-  document.querySelector(".editor").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+}
+let lbI = 0, lastFocus = null;
+function lbShow(i){
+  const c = current(), n = c.f.length;
+  lbI = (i + n) % n;
+  const f = c.f[lbI], im = $("lbImg");
+  im.dataset.fb = fallback(f[0],1200); im.src = img(f[0],1200);
+  im.alt = c.l + " מסגרת " + f[1];
+  $("lbCount").textContent = c.l + " · מסגרת " + f[1] + " · " + (lbI+1) + " מתוך " + n;
+  const picked = !!sel && sel.k === c.k && sel.i === lbI;
+  $("lbPick").textContent = picked ? "✓ המסגרת נבחרה" : "בחירת המסגרת הזו";
+  $("lbPick").setAttribute("aria-pressed", picked);
+  [lbI+1, lbI-1].forEach(j => { const g = c.f[(j+n)%n]; (new Image()).src = img(g[0],1200); });
+}
+function lbOpen(i){ lastFocus = document.activeElement; $("lb").hidden = false; document.body.style.overflow = "hidden"; lbShow(i); $("lbClose").focus(); }
+function lbCloseFn(){ $("lb").hidden = true; document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+$("grid").addEventListener("click", e => {
+  const b = e.target.closest(".opt"); if (!b) return;
+  lbOpen(+b.dataset.i);
 });
+$("lbClose").addEventListener("click", lbCloseFn);
+$("lbPrev").addEventListener("click", () => lbShow(lbI-1));
+$("lbNext").addEventListener("click", () => lbShow(lbI+1));
+$("lbPick").addEventListener("click", () => {
+  choose(lbI); lbCloseFn();
+  document.querySelector(".editor").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+  toast("המסגרת נבחרה");
+});
+$("lbStage").addEventListener("click", e => { if (e.target === $("lbStage")) lbCloseFn(); });
+document.addEventListener("keydown", e => {
+  if ($("lb").hidden) return;
+  if (e.key === "Escape") lbCloseFn();
+  else if (e.key === "ArrowLeft") lbShow(lbI+1);
+  else if (e.key === "ArrowRight") lbShow(lbI-1);
+  else if (e.key === "Tab"){ const f=[$("lbClose"),$("lbPrev"),$("lbNext"),$("lbPick")]; const k=f.indexOf(document.activeElement); e.preventDefault(); f[(k+(e.shiftKey?-1:1)+f.length)%f.length].focus(); }
+});
+let tx = null, ty = null;
+$("lbStage").addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+$("lbStage").addEventListener("touchend", e => {
+  if (tx === null) return;
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) lbShow(dx < 0 ? lbI+1 : lbI-1);
+}, {passive:true});
 ["names","date","extra","notes"].forEach(id => $(id).addEventListener("input", update));
 $("copy").addEventListener("click", async () => {
   if (!sel){ toast("קודם בחרו מסגרת"); return; }
