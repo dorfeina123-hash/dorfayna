@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://dorfayna.co.il/magnets.html">
 <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preload" href="magnet-frames/meta.json" as="fetch" crossorigin>
+<link rel="preload" href="meta.json" as="fetch" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&family=Inter:wght@300&family=Suez+One&display=swap" rel="stylesheet">
 <style>
@@ -256,7 +256,7 @@ function update(){
 let META = null, orient = "land", inv = null, pvTimer = null, pvSeq = 0, busy = false;
 const live = id => !!(META && META[id]);
 const frames = new Map();
-const frameImg = id => { if (!frames.has(id)) frames.set(id, MG.loadImg("magnet-frames/" + id + ".png")); return frames.get(id); };
+const frameImg = id => { if (!frames.has(id)) frames.set(id, MG.loadImg(id + ".png")); return frames.get(id); };
 const ORDER = Math.random().toString(36).slice(2, 7).toUpperCase();
 function fieldData(preview){
   const n = $("names").value.trim(), d = $("date").value.trim();
@@ -411,7 +411,7 @@ $("inv").addEventListener("change", async e => {
   update();
 });
 $("useInv").addEventListener("change", update);
-fetch("magnet-frames/meta.json").then(r => r.json()).then(j => { META = j; renderGrid(); update(); }).catch(() => {});
+fetch("meta.json").then(r => r.json()).then(j => { META = j; renderGrid(); update(); }).catch(() => {});
 $("copy").addEventListener("click", async () => {
   if (!sel){ toast("קודם בחרו מסגרת"); return; }
   try { await navigator.clipboard.writeText(message(false)); toast("ההודעה הועתקה"); }
