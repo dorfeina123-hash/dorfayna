@@ -8,9 +8,8 @@
 <link rel="canonical" href="https://dorfayna.co.il/magnets.html">
 <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preload" href="meta.json" as="fetch" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&family=Inter:wght@300&family=Suez+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f4f6;--surface:#fff;--ink:#1d1f2b;--muted:#6b6e7c;--line:#e2e2e8;--accent:#9c3d54;--accent-soft:#f5e7eb;--wa:#1fa855;--display:"Frank Ruhl Libre","David",serif;--body:"Heebo","Arial Hebrew",Arial,sans-serif;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15161d;--surface:#1f2029;--ink:#efeff4;--muted:#a2a4b3;--line:#30323e;--accent:#e0849a;--accent-soft:#3a2229;--wa:#25c063;color-scheme:dark}}
@@ -46,7 +45,7 @@ h2 small{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:4
 .opt .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
 .opt .tick{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:12px;color:#fff}
 .opt[aria-checked="true"] .tick{background:var(--accent);border-color:var(--accent)}
-.editor{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+.editor{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
 @media (max-width:680px){.editor{grid-template-columns:1fr}}
 .big{background:#fff;border-radius:10px;border:1px solid var(--line);min-height:200px;display:grid;place-items:center;overflow:hidden}
 .big img{max-width:100%;display:block}
@@ -84,29 +83,6 @@ textarea{resize:vertical;min-height:70px}
 .lb-pick[aria-pressed="true"]{background:#2f8f55}
 .lb-close:focus-visible,.lb-nav:focus-visible{outline:3px solid #fff;outline-offset:2px}
 @media (max-width:560px){.lb-stage{padding:0 8px}.lb-nav{top:auto;bottom:-56px;transform:none}.lb-prev{right:16px}.lb-next{left:16px}}
-.live{position:absolute;inset:6px auto auto 6px;background:var(--accent);color:#fff;font-size:11px;line-height:1;padding:4px 7px;border-radius:999px}
-.thumb{position:relative}
-.pvwrap{display:grid;gap:10px;width:100%;padding:10px}
-.pv{width:100%;height:auto;max-height:68vh;object-fit:contain;display:block;margin:0 auto;border-radius:4px;box-shadow:0 1px 8px rgba(0,0,0,.12)}
-.orient{display:flex;justify-content:center;gap:6px}
-.orient button{all:unset;cursor:pointer;font-size:13px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);color:#1d1f2b;background:#fff}
-.orient button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-.orient button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.pvnote{font-size:12px;color:#6b6e7c;text-align:center;margin:0}
-.file{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.file input{padding:8px;font-size:14px}
-.swatch{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400}
-.swatch i{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:inline-block}
-.swatch input{width:auto}
-.swatch[hidden]{display:none}
-.upl{position:relative;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.upl input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
-.upl .btn{pointer-events:none}
-.upl .fn{font-size:13px;color:var(--muted);font-weight:400}
-.upl:focus-within .btn{outline:3px solid var(--accent);outline-offset:2px}
-.busy{position:fixed;inset:0;z-index:60;background:rgba(10,10,14,.6);display:grid;place-items:center;color:#fff;font-size:16px;text-align:center;padding:20px}
-.busy[hidden]{display:none}
-.busy div{background:var(--ink);color:var(--bg);padding:18px 22px;border-radius:14px;max-width:320px}
 footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -116,7 +92,7 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
   <header>
     <div class="brand">Dor Fayna Photography</div>
     <h1>בוחרים מסגרת למגנטים של האירוע</h1>
-    <p class="lead">המגנטים מודפסים באירוע עצמו, והאורחים לוקחים אותם הביתה. בחרו את סוג האירוע ומסגרת, כתבו את השמות והתאריך ותראו מיד איך המגנט ייראה. בסוף שולחים לי בוואטסאפ, והקבצים מגיעים אליי אוטומטית.</p>
+    <p class="lead">המגנטים מודפסים באירוע עצמו, והאורחים לוקחים אותם הביתה. בחרו את סוג האירוע ומסגרת, כתבו מה יופיע עליה ושלחו לי בוואטסאפ.</p>
     <ol class="steps">
       <li><b>1</b>בחירת מסגרת</li>
       <li><b>2</b>כתיבת הטקסט</li>
@@ -145,10 +121,6 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
       <label for="extra">שורה נוספת <span>לא חובה: משפט קצר, שם האולם, האשטג</span>
         <input id="extra" maxlength="50" placeholder="תודה שחגגתם איתנו" autocomplete="off">
       </label>
-      <div class="fields" style="gap:5px"><span style="font-size:14px;font-weight:500">הזמנה או לוגו <span style="font-weight:400;color:var(--muted);font-size:13px">לא חובה: מעלים תמונה של ההזמנה, והטקסט במגנט יקבל את הצבע שלה</span></span>
-        <div class="upl"><input id="inv" type="file" accept="image/*" aria-label="העלאת תמונה של ההזמנה או הלוגו"><span class="btn ghost">העלאת תמונה</span><span class="fn" id="invName">לא נבחר קובץ</span></div>
-      </div>
-      <div class="swatch" id="swatch" hidden><label class="swatch"><input type="checkbox" id="useInv" checked> צבע הטקסט לפי ההזמנה <i id="swatchDot"></i></label></div>
       <label for="notes">הערות <span>לא חובה: צבע, גופן או כל בקשה אחרת</span>
         <textarea id="notes" maxlength="300"></textarea>
       </label>
@@ -177,15 +149,11 @@ footer{margin:34px 0 0;font-size:12px;color:var(--muted);text-align:center}
   </div>
   <div class="lb-bottom"><button class="btn lb-pick" id="lbPick" type="button">בחירת המסגרת הזו</button></div>
 </div>
-<div class="busy" id="busy" hidden role="status" aria-live="polite"><div>מכין את קובצי המגנט ושולח לדור…<br><small>זה לוקח כמה שניות</small></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="magnet-gen.js"></script>
 <script>
 /* מספר הוואטסאפ שאליו נשלחת הבחירה */
 const PHONE = "972502858162";
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbwvHmTWfveW4FqJ2oQdfhgnNUy45eyOE1nIUCUVGenmQBKlsKCCY9tRNlLnB7SEe6kF/exec"; /* Apps Script בחשבון העסק: Drive + מייל */
-const TOKEN = "dfm-2026";
 /* המסגרות מהתיקייה "מסגרות לבחירה" בגוגל דרייב: [מזהה בדרייב, מספר מוצג, שם הקובץ] */
 const CATS = [{"k":"wedding","l":"חתונה","f":[["1QHq-CbZDsROnAaIc7M6i5fX-RS4cbbuR","1","1"],["1U9tNSo0Zc4uKBOkGqjHwd42ldZASeJwT","2","2"],["1x5lfAsOmqHS8oyymqjxaS6wVjaa0GaGw","3","3"],["1jU6ToWEi-32TYOVW01G_Q10YWiB3kGCW","4","4"],["1TntLHxcmPLohdAPkM9_VdxBFfFzJyItp","5","5"],["1N0cmh9qMNU4YU-eLBj2IYUOp5Ea4a60C","6","6"],["1po02aAvTl4GxQDMs0LfmH5aaPnRSwMw5","7","7"],["19FJKS37dEXNEH4Hf4UuEa9XjliSlXF6Q","8","8"],["1eccFLExajVvmxLRnEOLajRPyzmPyBrVN","9","9"],["1KlCbjV4DyQvjtTqGmMm_Z7YOyboWsDQx","10","10"],["1MqfEB35Ls-0apNmeXf0NBjfKn77PyKga","11","11"],["1U-jEpw--kObfA4yeSsTETAZ5-VTt5jDe","12","12"],["1MmbD1GjRR82KjWbt_H3zbhwAr8ZsiBnV","13","13"],["1DvvC257Ui2uBcxzDwK3_wuIMsaxsFhh7","14","14"],["1BgC29FtUl5GO9BwbJ8mG6lUgK6rFS-Zi","15","15"],["1RWnBVorcjrrMjiyqjDZoGbDjWUL064gy","16","16"],["1v1kpNK1jMjnZyWCCNX9BiQD9rBnoAOwC","17","17"],["1pwVeCjKYqwuKrw59yGvIToaDTBKMO4tB","18","18"],["1Izz8MCDAhuRb7OjHLukdh81t7EdwGFZx","19","19"],["1ptlzWQXvQtNlzbAukL5VjT_lvixN1G-K","20","20"],["1544FSt6Y79XwErtdWAEaw3kSaSowkkmS","21","21"],["1Fb6vah6yFE4qSqZ9vhuWCApzuhZ1kznh","22","22"],["1jFtZaOkSYtkAVIW-oqiQ_GjrZFFugLej","23","23"],["1WO90OagHaaaspnWcM22535GYKPCsBEdu","24","24"],["1RDxhZsiu9Tkv1vyTWPJxHysz16IGVEDw","25","25"],["11Uemz579zjUU-M3rSVRMdUEnIagXfrja","26","26"],["1K3fZNIIQpNbzWr9qlfBusF95Khw_70Om","27","27"],["1bST5Rz4Tre264-azD-yd14pGsZYB6Elo","28","28"],["1z-OzB6OZhVZJzOZfTqWXFuFeXqUbV_Pe","29","29"],["1WwtIl2fHSEtg-v9lHk8_TH99WH7lOHjH","30","30"],["1gfnfNHOrdLDe4CHOAXRi2jD-N7hz6MaK","31","31"],["1d4QcOt84_BdGjLchF3_Qw_g_gkRdR65t","32","32"],["1VFzsc5fxB6OiH-lw3M7Zl_BjBgPLqiFp","33","33"],["1OWVB7Z5WW2nfpcqee1Ujz9200Rn7gLmw","34","34"],["1xl2qWrT6ejEsNY05oRKsuu9vpcvGjS8D","35","35"],["1E_YxvuZnnuQoDLOGY6fs6UM6dFKr7C0a","36","36"],["1fF2MN_9uwVVE6c3reJyhlqkIDB7f-pGc","37","37"],["1xYZjsCSuGyMlnHEhwTgVoEVi5kWCUM-4","38","38"],["1oQzV3tbkhq72LWapa7lELIC6_6IIYHCA","39","39"],["1ry0SyJqEfvpxhK4TkLAS9j6y4AKYI1oe","40","40"],["11daw23Z6BIMHhpPrsOR4Zfgi9gjDfu1V","41","41"],["1ZCbvcKUKwCUeB-r7TLrp17x1dETWEgOi","42","42"],["1XbuYJ8XgvHd3DeVFymxroohkQi5XtFTP","43","43"],["1aDsuwt_QIF6xirRdOduHqD8V8NH_slsX","44","44"],["1wT20ffFa3K7XjwAxn5Cn3Kt2c742TqAn","45","45"],["1NylcJml9FXpVUf8nCPaTR7b88-fz_efV","46","46"],["1WLs0LNXNkCuHEYPYi0mj-9YBof7FACC3","47","47"],["1sYLcOdv6M-OYIjtn1bitbT5UY4Oia_6x","48","48"],["1K26FOia2EnWY9nTC1aLWuK3xVkxDAkDT","49","49"],["1yyX93JPOtdHrRwS3iTYkIjPRpOa1s7S6","51","51"],["1Y58CF8GiIrHBzncpqi40qgfVufabd6Kf","52","52"],["1U69SUcpnLPFNJKsvK71mokKLKiUUkVcN","53","53"],["1GCyqu_c8_hyYKhYFQSbRqZgn5zTuFO0l","54","54"],["1HcaOhgyhSUvhfBjBzjXlQha4nC9_haLc","55","55"],["1w7zlQpwzmOPaet6azcCkrD3bOIjqEKUp","56","56"],["1buO4zZ-Oi8C3dUH_6gDIx-K3dX3MgwwT","57","57"],["10JkVu4xgBE0pBCs9N_k810uh2l-UBK5t","58","58"],["1qHbbZE1SvRzJ-JjA_C6AjNYKldjD2e-0","59","59"],["1lvGBpnxivJi8mftF6OUWPQpf9ts0C0yl","60","60"],["16Uev38v6WlMVq7pQwKIh4pX42nJVxyoY","61","61"],["13dOaEOqpERtRsBcRla99xTY1irvUYrSv","62","62"],["1u0VfEfAuQQ68zflqLkCoBXiGB5Q2tYq8","63","63"],["1DoUL6wN8NMaQTzsFycWb4dXJ3DHHVjJb","64","64"],["1M3D5ZiluEO0ZPDe4eyHEkVEAuRkXrZ1C","65","65"],["1zCC-GgcyFIrsn3KNqREd9WEXNE4dGL_b","66","66"],["1mpQmnwxavRKR1mrcY8pDDGn6HMa_9reM","67","67"],["1NV7Qgsv8bEE8e-g4bjHFnGgN5MGISFlY","68","68"],["1XDCYWycgRq7qlqsl8gLJgmPl04RwWwRT","69","69"],["1-M1Z2Wg6XD6WGqFwynW4pDQ966ULohhh","70","70"],["11BdBdP9FsOAVNBHQLoKpdj2sJRwxMCOR","71","71"],["199g1dRJO542KDuc9aJQCGr4kihmc0j5H","72","72"],["1cRPlU_dsczhsOItpaxo_-AhYiAIQPGuV","74","74"],["1Q8IxbywqCafUChCVUjJnf9H_E5zukC6q","75","75"],["1V0XkKrQQvF2Fyxy26OfBGaHg_LjI-_Jw","76","76"],["1SkgSpwNaBTx5ixvMia8YqXTNXP4bAHNm","77","77"],["1qc7hzQT0PQZio8wkewAys61d9cWbm7ca","78","78"],["1hNTDVxI5Av9UWQhKOZ-TYU6CF8uSl-7f","79","79"],["1JickjGCT83da5e-FbaKaf3uT8cR1Bgvo","80","80"],["1wvxiV2Fja7y7IM8P1w_Gr5CkzFf7XjnK","81","81"],["1p22vU4NTKcliPqqJK5L4y7JGF9FFSN0i","82","82"],["1O2E1M_fciDdwv0dAo6DXQ_6LEsYMVNAu","83","83"],["1EYB9MWCyHyXps-oa0QFXwcQWbkz2KW6t","84","84"],["1M3GZlI7kAGDqRJ1FBpL1OwkQXsvuN5f5","85","85"],["1o_BHT9qYkiA23ZywWA7nWKQUydarFqkE","86","86"],["1dS9W-foEUFQGcNLgf0LQ69jelm1yRx46","87","87"],["1rVH5FuJCbskD0gdvYiURTuwq0LFt34lf","88","88"],["1R_O-0qFW7QmFuHi-9LbYdVdO5tArqgCX","89","89"],["1nayfvdnF4U3dtMd_2KtMkNL50OUbCfbx","90","90"],["14Y08YVL4xoifLiwNIBYhCjLWTCS95v5w","91","91"],["1BKi76EgAcx6RwDNsdcXA0hFHMo1xu-Kj","92","92"],["109UzOfvqyA8pJT21ncfoZPN65ceE3x2H","93","93"],["1rFEc-Ia8n8xFsXIi5NuzLVys1as1dyCz","94","94"],["1iZ9jWpWD81yQKFZXbbH4GbxV1p6LuiHo","95","95"],["1uHjyA-4r1S1OBugSMi6_S_2UW9co6s0E","96","96"],["1BsbT2h9a1OEFT3ZJpWfUmLNHbJiE_EbM","97","97"],["1u3NK1EXtS9qw0JIk69MXd_0X4gvRfVZr","98","98"],["1SDtayFJRLK-j-mXjI6emOo5U5y6mIVQl","99","99"],["1-FrFCoSTYWYvhhAAgrBtVFOuT4kDe6bz","100","100"],["1HQkTNv6ZoGaVSnWD7RRSKwTx1jnBLqZh","101","101"],["1xdujxhJDImChEFWn2YH-RePyAjIyHxVJ","102","102"],["1LRPQ7r7hQ0feQc8lg5j0i9L4dUzUT9sS","103","103"],["11VsUUGmoNZk41qKqqf9lG3dILw0RPuO0","104","104"],["1np62_nvO7tWKBvzIYgyY3rzUUUYhySgA","105","105"],["1PbhrH_GXNy4OVw7IuX1IOeGHIuwFIqko","106","106"],["1d5EoRcUBzVyjgwIL4B6eiq1nJN93qs8c","107","107"],["1DoCdl4kPQy5tdZ1-OQs27V3V7s_gBbw1","108","108"],["11uP0sUJ1N_Nbp2p0k6BW20VsA3Vh1-9m","109","109"],["1HQyxVC4K9G5KvH7jKozrurdoRtAzDhTN","110","110"],["1bzFwog8k9HEXzzUuhjb9PII9ExS37YgA","111","111"],["1Q08W3va3-z991yU2KbZPH30KgaJvIv2b","112","112"],["169chaIv9zKGV9GW0w3WNdcJnQpLWULiH","113","113"],["10C4NdR0dNxAE4T_aFeQ_9_E_Y7sKDbTh","114","114"],["1Jb0vTKumTNK8vZcAND4f623K2JD6ZP7k","115","115"],["1EbwmdSiyavjlxQlnT2rfARiWYrxx66Fj","116","116"],["1Lzr8CQQ3IdKWhGRLXPRgU3KWLgADBhN2","117","117"],["19XDorHU4l9MozRomWk3d9A-oWht0iaUU","118","118"],["1CWCmbVlfV00upq8Dh-GbXpt89U-bKfPz","119","119"],["1sFhwS1BkcQKaeTjw5larAVbC2HomuRMn","120","120"],["1-2OsSdABqNgaYw8OfEsVOWbvt6zrQXAJ","121","121"]]},{"k":"henna","l":"חינה","f":[["1n9Dze-JHzFw34OImL0b0E9VoXyjOfr9L","1","33c184e3-21ab-46ba-bc64-9fb8f70120d5"],["1PdEcf3p7cABwVfVQMi2VO_ctpee-O6T8","2","הילה חינה"],["1jCw7Yb4drZRDlZAwyu94xDkQn39JnicG","3","חינ"],["12DIu9ipTi9Tz3QAjOAS8vilZFRmpPb5-","4","חינה איריס ואורן"],["1B2q2JUt4h1_BC3unyDGJzlSArOvvvGgQ","5","חינה3"],["1QRUWteNee1QpAcf-Rabfda0XuHg4GLUY","6","חינה4"],["1HUp5_AX0BZ5Yywn5G_qRjlw7dDszylNz","7","חינהה"],["1dRJPxkYW74xyO2iEc27ljdmALJnOh0ok","8","חינהה2"],["1qSlvccQb5GS1JLRk8PNBsPKHpreLLv0b","9","חינההה"],["1gq4QpykuBpcfm7Cu7gVJdfNbnel6bGZj","10","חינננהההנה"],["15c3436R6i4DOXf2QR3dZ63Dg71NYbACa","11","חמסה444"],["1gVoTSyAaewmSGcuVKqaV3IXIlxfVhfA9","12","מר"],["1p3DK1ZS41Q8Pl1uHVdBLqHaypO-OlW3-","13","פרח ויהודה חינה"],["1N81-siA4Ng_9SIOvIfxu9qPbq1HhGdZF","14","ררררר"],["1saDKyTEzrRfqnBCBWNXdWcnZwc38ncCs","15","bez dav"],["17WAQ6ZB9xdHtEKqJ_0BgH8tl79EzRADv","16","df"],["1-OkHStG008mjAf3vJbAuDeA06fwq7Q5X","17","hh-2"],["13QeLSgoxmX4SEXUFjPoBJqxoRX60prxX","18","hhhh-11"],["1CE_eX-aIaB81ddN_up9xxMVpBPDCoyQY","19","hhhhi"],["1yBLKoklZGB5cEX-oR3HjuGP-qoS15muq","20","hhiinnaa"],["1PECgB_TtPntOAGJtLpHl_WKtmDkmS_FT","21","hhinna-6"],["1u9dTNfdC6OAlbaoHM4TdEcFBoh3FINCm","22","hhujjuu"],["1d1J7h7JEt2mfk1UYtX7IVNjCagQw3Bho","23","pero"],["14nBZ7F1FMVaB3v1rWrTw5qWh3I9Tw6IW","24","WhatsApp Image 2018-05-08 at 20.57.23"],["15XMr8vHUAzCUmUH4xND2Nzu7nsSG1i3m","25","zvccc"]]},{"k":"bar","l":"בר מצווה","f":[["16NRdQgxGoGuv625WnwA8TrdorhDzG-_y","1","0ee019b0-a2c4-4257-8827-d6356bc87db3"],["1Y1_o1Du1NO0CpaN4YMDgoU8e0Gvwemo1","2","1 (2)"],["1JeehvB4lpnJiV_6DaKBXNQ0KS3KeJvcp","3","2 (2)"],["1A8AQaxUzue2DcIi9v77Dwj5OqPS95ODK","4","5b307a99-cda5-4094-b0ac-66356dc8dd45"],["1fkrGOUlsKuOb39M1m642-WBqpG5tP8fa","5","6e7fe1c9-1944-4bce-8f15-abf13424d000"],["1aQb05dxJmnVkCODnfi338XoQ1igUZ80-","6","38 (3)"],["1lb35IHgCR8rk2PNSoIF83xyGqfBJUEjL","7","56"],["12Q0Gs2yY4RuRDIeNgQFWO8NWu5ijbXZW","8","77f27c6a-1004-4a90-a3ef-de6a20edc1fc"],["1h_CxHW5GQQR89mdez0MQhF0Pr2Z-mtaO","9","82b01826-76b0-4967-ace4-06cf279ce9d5"],["1a8HWVaeABpmuK1kKcxqyVMWQl2KvA97k","10","אורי_1"],["1pfB6HFtUD4NOBPxKW47g4CzNpANp-aGi","11","איתי 2_1"],["13CRQVZ_lwB5bxPOZuz3CXEDG-P5fFiGm","12","איתי_2"],["1JBuxT9_8kdfDIGfFr6yqhxDT65NkZCJr","13","בר מצווה"],["1GVJwSEGRzeZBFamA1Yb7CMrFnX3ZkW3F","14","בר מצווהההה"],["1VAtLi6A3G-iu20TvgOdr4UeR0JtMD7gz","15","בר-מצווה"],["14HPHYZrEaEQBC2LAni8Wpv8Kfakz7lup","16","מגן דוד"],["1i0AygoJcPPtL-ai7ptffCRDk6tkU9zHz","17","מסגרת_לבנה_מגן_דוד"],["1VWqN9MxpDoE31wanNCYrWyvbdzX1_UIr","18","מסגרת_לכותל"],["1QtyFbf_qBZAbxDFobl0O27kmP1bAPcMj","19","נאור"],["1HWghO4EG3RInK9qdQXtnttHOq4mzyhfp","20","תפילין"],["1RAS0AzpgZnWL_YVRLYT1JMn5sAsJMov_","21","BAARR-1"],["1k5Vas1wqQDf3CUELJ8E2UCmj9M0HhzTB","22","BAARR-2"],["1BPHMLMX59UgDjY3Hvh6-FhWbCcAqUEd3","23","bam---55"],["1eYVEIaV0-SsB41xKKTulh67X6jcwm4J6","24","bar-1"],["1vY8tzpqecWgJ5BCC7B4bm7zrnXoo1rU-","25","d1447933-5aba-4f68-9407-058c951cb6ea"],["1w-ielyzRoI8vUTxGSo6Ke_3WPHs9SRa_","26","ddssv3v"],["1NlIBVC3dVgp8nIVJvXi5Fp1Vi7-U1UAJ","27","ddssvv"],["1nUNUplt4cb9ovNlesX8XoJ8FIQx8HGj6","28","FUTBOL-2"],["1aF89re8XRCyfMSBq1OyImM55mlviuNXG","29","tennis-1"],["1g21BGptvzC0hKhgUCcyz1IjDzdrE7g1D","30","tennis-2"],["1-DtoGs2R1TMNu0c1QHAzg-MbI2hP-FPV","31","unnamed"],["1at-N1EFYHVFtjPfw2NxTmgeyoCF8yKl6","32","XA"]]},{"k":"bat","l":"בת מצווה","f":[["1Eqyg48a0XawtNp88sw3yHFJBmByhFgfo","1","04tt"],["1P8m0eY24zAq6cDu27aes-Q1eqVkLAfAx","2","6"],["1FzZRSWlSC9kKy1DoLi05icAvsy5vLeJ5","3","24.05.11 זיכרונות 0505819906 - עותק"],["1esAMcbOdyun_lOVgWt8DcJj8ojBZ7rha","4","97"],["1aba-HTIrKIibYIh2EL-lqpSRDrmDPvyX","5","432315_231613046935680_100002609580320_463339_884713ווו412_n"],["1c_4O_DCT9ROB2yAaiRgws__D_0kS_yX7","6","1212121212"],["1d2OY8LddySPgzDbWOb0xQb9P-tSmLzDm","7","אגםםם"],["1QEQTzwTw1Vy7HiXdeusK51E2b_UjSHzN","8","אגםםםם_1"],["1w3mlfxSwdCb0bdZxon6W0PUcLz3fGwuy","9","אורי 2"],["1jZIUQESeF7cTCfgPbEuTuN8RcehERiUN","10","אורי_1"],["1F0HSzci12Uq5tXqNI2Zidi3O5wuS0dIw","11","דק"],["1xGjAqoa1YF-2YdzszzuO8Z8SqDl9HLdx","12","לבבות וורוד"],["17nzaB1QNe0tOe-oNy_V9hvePEYASh32M","13","לבבות לבן"],["1V47mD6BjEa8k4WxLUjKl-a8xpj9ky3FC","14","לבת"],["1kBt5TfpQvUmZK6S9OdDTJ-68lCJSpyPA","15","ליהי_3"],["15y-ZvTzUT5tsejWnGmBPGaGV-xTj9X8k","16","מסגרת 444"],["1O16PnYtsxkt-kfgp5VGkRJEQ6JPkU30-","17","סססמצ"],["12iOPq0cxw6fKKbeAYD2DsabR27je9A4i","18","פרפר"],["1TOX9l8dFLpve8aVGwAt61Wwu60XBWYWu","19","cali06 העתק"],["18Ue3lYGn0oLvrodYeDujqgAsgq8XwLwg","20","tdoooo"]]},{"k":"brit","l":"ברית ובריתה","f":[["1BtD09JTZ81otN2XyQ4ncDs4_2Njm0ncS","1","00-1142"],["1D4EfBs1MOf6oepzM0rBFSPgY1Xm2qNqn","2","00-1144"],["1508A-PmCX0aM0gmyb-36iWL9OBH_e86N","3","00-1154"],["1MYGX7th9rlY3lxZKXdHKJyKCChKY8pCB","4","1_(140)"],["1HzYVFkhjlUJqtf4qyaxZwVqsRhZss_dQ","5","6"],["19MMovTAsBe_HV_4-vuqVAZfst47KhlJ1","6","18 blue"],["1zhDeZMnRPPbiMKBbpgUMPqy5lNDhBSwd","7","24.05.11 זיכרונות 0505819906"],["1NfB25oANDQ_ZuY9PrWo_vWeySEGLVvfY","8","0029"],["1zXkpjh_FH_vNg4RsIrowtcOurbHQ81FB","9","0031"],["1EBX51eixJYJS_ZaytpKMBbkjisXlAhdq","10","97"],["1YMvXzlFOQi1xZ03XOh7MdEIFZ3kleOB1","11","140"],["1eK5YqKKuG1HwmRQiNl5yKStLKneiK-7d","12","0183"],["1KY6c0RXdZZTVpUYfvfO1njk4Pkz7TK1U","13","0193"],["19wm6Hr91GhP8fPKAsq4DPwKG-bhdG7Va","14","0203"],["1faexdP0RxUGcRoh-5CqLK31Yd0yjBsSj","15","777"],["1PZzVx_47pN0zxV_RmGKt1ibuMVBxtppC","16","2234"],["1TKNC0r_Mpvo73KehyxT-IdBYdeZx1M95","17","9938"],["1LQGtm4OlGEAPhCS6Bi2ZwNnUwGz0xdOw","18","9945"],["1DQWfE8YhuzI1-DIDlqh7f9Z-vXCFYhzC","19","88777"],["1H3asuYEZPuWRP4VyogMqkuPg3zKe2Qs-","20","אאא_2"],["1W7IaRjeQ2e2AfjVERfr9rNr4OV4DDb-I","21","ברית צבעוני"],["1IrZvwRkfzoCNca6-IOzQ6r79nsU4EmtE","22","ברית"],["1jiGZul3R3TP21QOQw9nT9YrPL98lrINW","23","בריתההההההה"],["1Wozb4tGfVLTs-EWppEP2W27ez5r_G9r7","24","בריתת"],["18NGjnuPfE2y6bZub4OMpy7K0P6EE_GwR","25","בריתתת"],["1WPcHhoVFP_u-K84RVLrfwJQ7cUP44Cll","26","ורוד"],["1re3a6xtc7xAjfSrXU6UjdufAzWWkKc8L","27","חחל"],["18QA9Z_nX6k9_JARkALCpqJLfj6cF3A95","28","ככככ"],["1PD2gRkp0SPng4NYMqSGr2xoRrdf2oZoy","29","לבן עם לב"],["1Cb5jPgRIaZ-Gr6Eg3iIG1FMCyJ55Ts2D","30","מאוס"],["1RxAzRGZiTYmrzMzC_srzyRKzdPLcToDG","31","מאיההה"],["1MTJeJPDfECUU9fGspd-MzeV-cTPPQ8bT","32","מיני"],["1S8yQzfygljvWmr3UWRRxHa3mRuanS4iq","33","מסגרת 444"],["1YzbPtkRcaPX-HiUjT0xf7rULgL3nM6X0","34","מסגרת מס 5"],["1zpIWd32xh7REsMk1W0sbZoAJbuGoltLX","35","עגלה כחולהה"],["1ktVxkuKJ3XNWW3vkh_1MyEjOZ4OVgI4l","36","עגלה"],["1kHY9r0ReZrg8YgTLq8XzR91zCmyLDbWm","37","עדי 3"],["1bnpcM_Ty94op5BFavWjpc9uazI-vpnaB","38","עדי_3"],["1Qc-AYR7zCfBL0m9S39T3Ctn5RcSscAv3","39","עעיינתת"],["1J4wgJ0mINk9gtkd_bEq7oxWGkiMKjt1Y","40","פו"],["1y8H83bf8qIgWrF5jfkuC6VecVPhccO5W","41","פפפ_1"],["1xWYPxPbFtaGH1HD9EtHwmOSgZX3OAsMe","42","פרפר"],["16i0FiH357utxEO7gNjixOJ3UhhKocm2o","43","שמש"],["1AHFEgezJCum98jhKAjY7qWF7dLd6nkG2","44","תפור 2"],["1AY_XSUAocp33HR0MfeP0KXeShzX63Z81","45","תפור"],["1Ivdl_8rOQilhEY9SMD4b71z07R-lPFcY","46","aeac859b-33c9-47a4-b5e4-111d620c1696"],["1q56DlIIzawDp5KZqDA_UVK3rdNXPFYW7","47","b-20"],["12whxg9r5E1Pz8Kx0lhYE4PJCnUnBqj5d","48","babybb"],["1J27hDD1dapRpt1ruYGlt4NurOnOZgyIb","49","bbbbrrrrr"],["15Qp5gpmoinjUajwsQ6CFAz4GLG45KEYN","50","bbbrit-4"],["1CKdl_6AYv5nFKkGrbyCmI8y7Kfedzp79","51","ddddnew"],["1RHjGXWXzfivZOOk1uWQUlTc8TqptITyp","52","frame16-1"],["1wSjJobhjsV4GF9qlYadb4fAUbU0iUI-W","53","IMG-20160419-WA0042"],["1I0auxLiqji2Xkz1UxmjVY-rTcp8oyjCP","54","Screenshot_20180106-211859"]]}];
 
@@ -209,10 +177,10 @@ function renderGrid(){
   const c = current();
   $("grid").innerHTML = c.f.map((f, i) =>
     '<button class="opt" type="button" role="radio" data-i="'+i+'" aria-checked="'+(!!sel && sel.k===c.k && sel.i===i)+'" aria-label="'+esc(c.l)+' מסגרת '+esc(f[1])+'">'+
-    '<div class="thumb">'+(live(f[0])?'<span class="live">תצוגה חיה</span>':'')+'<img loading="lazy" decoding="async" alt="" src="'+img(f[0],400)+'" data-fb="'+fallback(f[0],400)+'"></div>'+
+    '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'+img(f[0],400)+'" data-fb="'+fallback(f[0],400)+'"></div>'+
     '<div class="meta"><span>מסגרת <span class="num">'+esc(f[1])+'</span></span><span class="tick">✓</span></div></button>').join("");
 }
-function message(sent){
+function message(){
   const s = selFrame();
   const n=$("names").value.trim(), d=$("date").value.trim(), x=$("extra").value.trim(), notes=$("notes").value.trim();
   let m = "היי דור! בחרנו מסגרת למגנטים 🎉\n";
@@ -222,27 +190,15 @@ function message(sent){
   m += "תאריך: " + (d || "-");
   if (x) m += "\nשורה נוספת: " + x;
   if (notes) m += "\nהערות: " + notes;
-  m += "\nמספר הזמנה: " + ORDER;
-  if (inv) m += sent ? "\nההזמנה צורפה לקבצים" + (inv.color && $("useInv").checked ? " (צבע הטקסט לפי ההזמנה)" : "") : "\nיש לנו תמונה של ההזמנה, נשלח אותה כאן בצ'אט";
-  if (sent) m += "\n\n✅ קובצי המגנט (לרוחב ולאורך) נשלחו אליך אוטומטית";
   m += "\n\nהמסגרת שבחרנו:\n" + img(s.f[0], 1200);
   return m;
 }
 function update(){
   const s = selFrame(), send = $("send");
   if (s){
-    if (live(s.f[0])){
-      if (!$("pv")){
-        $("big").innerHTML = '<div class="pvwrap"><div id="pv" aria-live="polite"></div>'+
-          '<div class="orient" role="group" aria-label="כיוון המגנט"><button type="button" data-o="land" aria-pressed="'+(orient==="land")+'">לרוחב</button><button type="button" data-o="port" aria-pressed="'+(orient==="port")+'">לאורך</button></div>'+
-          '<p class="pvnote">כך ייראה המגנט עם הפרטים שלכם. האזור האפור הוא המקום של התמונה מהאירוע.</p></div>';
-      }
-      schedulePreview();
-    } else {
-      $("big").innerHTML = '<img alt="'+esc(s.c.l)+' מסגרת '+esc(s.f[1])+'" src="'+img(s.f[0],900)+'" data-fb="'+fallback(s.f[0],900)+'"><p class="pvnote" style="padding:8px">את העיצוב הסופי למסגרת הזו אכין ידנית לפי הפרטים שתכתבו.</p>';
-    }
+    $("big").innerHTML = '<img alt="'+esc(s.c.l)+' מסגרת '+esc(s.f[1])+'" src="'+img(s.f[0],900)+'" data-fb="'+fallback(s.f[0],900)+'">';
     $("chosen").innerHTML = 'נבחרה: <b>' + esc(s.c.l) + ' · מסגרת ' + esc(s.f[1]) + '</b>';
-    send.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(message(false));
+    send.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(message());
     send.setAttribute("aria-disabled", "false");
     $("summary").innerHTML = esc(s.c.l) + ' · מסגרת <b>' + esc(s.f[1]) + '</b>' + ($("names").value.trim() ? ' · ' + esc($("names").value.trim()) : '');
   } else {
@@ -251,68 +207,6 @@ function update(){
     send.href = "#"; send.setAttribute("aria-disabled", "true");
     $("summary").textContent = "עדיין לא נבחרה מסגרת";
   }
-}
-/* ---- תצוגה חיה והפקת קבצים ---- */
-let META = null, orient = "land", inv = null, pvTimer = null, pvSeq = 0, busy = false;
-const live = id => !!(META && META[id]);
-const frames = new Map();
-const frameImg = id => { if (!frames.has(id)) frames.set(id, MG.loadImg(id + ".png")); return frames.get(id); };
-const ORDER = Math.random().toString(36).slice(2, 7).toUpperCase();
-function fieldData(preview){
-  const n = $("names").value.trim(), d = $("date").value.trim();
-  return {
-    names: n || (preview ? $("names").placeholder : ""),
-    date: d || (preview ? $("date").placeholder : ""),
-    extra: $("extra").value.trim(),
-    color: inv && inv.color && $("useInv").checked ? inv.color : "",
-    preview
-  };
-}
-function schedulePreview(){ clearTimeout(pvTimer); pvTimer = setTimeout(renderPreview, 120); }
-async function renderPreview(){
-  const s = selFrame(); if (!s || !live(s.f[0]) || !$("pv")) return;
-  const seq = ++pvSeq;
-  try {
-    await MG.fontsReady();
-    const fr = await frameImg(s.f[0]);
-    if (seq !== pvSeq) return;
-    const W = orient === "land" ? 1800 : 1200, H = orient === "land" ? 1200 : 1800;
-    const cv = MG.render(fr, META[s.f[0]], W, H, fieldData(true));
-    cv.className = "pv"; cv.setAttribute("role", "img");
-    cv.setAttribute("aria-label", "תצוגה מקדימה של המגנט " + (orient === "land" ? "לרוחב" : "לאורך"));
-    $("pv").replaceChildren(cv);
-  } catch (e) {
-    $("pv").innerHTML = '<img alt="" src="'+img(s.f[0],900)+'">';
-  }
-}
-const blobToB64 = b => new Promise(ok => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1]); r.readAsDataURL(b); });
-async function submitOrder(){
-  const s = selFrame(), id = s.f[0], d = fieldData(false);
-  await MG.fontsReady();
-  const fr = await frameImg(id);
-  const land = await MG.toPNG600(MG.render(fr, META[id], 1800, 1200, d));
-  const port = await MG.toPNG600(MG.render(fr, META[id], 1200, 1800, d));
-  const base = (s.c.l + " " + s.f[1] + " " + (d.names || "")).replace(/[\\/:*?"<>|&]/g, "").replace(/\s+/g, "_").slice(0, 50);
-  const files = [
-    {name: base + "_1800x1200.png", type: "image/png", data: await blobToB64(land)},
-    {name: base + "_1200x1800.png", type: "image/png", data: await blobToB64(port)}
-  ];
-  if (inv) files.push({name: "הזמנה_" + inv.name, type: inv.type, data: inv.data});
-  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 60000);
-  try {
-    const r = await fetch(ENDPOINT, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, signal: ctl.signal,
-      body: JSON.stringify({token: TOKEN, order: ORDER, cat: s.c.l, frame: s.f[1], names: d.names, date: d.date, summary: message(false), files})});
-    const j = await r.json();
-    return !!j.ok;
-  } finally { clearTimeout(t); }
-}
-async function readInvitation(file){
-  const im = await new Promise((ok, no) => { const u = URL.createObjectURL(file), i = new Image(); i.onload = () => { URL.revokeObjectURL(u); ok(i); }; i.onerror = no; i.src = u; });
-  const k = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight));
-  const c = document.createElement("canvas"); c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k);
-  c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
-  const blob = await new Promise(r => c.toBlob(r, "image/jpeg", .88));
-  return {name: file.name.replace(/\.[^.]+$/, "") + ".jpg", type: "image/jpeg", data: await blobToB64(blob), color: MG.inkColor(im)};
 }
 function toast(s){ const t=$("toast"); t.textContent=s; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1800); }
 
@@ -391,47 +285,12 @@ $("date").addEventListener("input", e => {
   el.value = v;
 });
 ["names","date","extra","notes"].forEach(id => $(id).addEventListener("input", update));
-$("big").addEventListener("click", e => {
-  const b = e.target.closest(".orient button"); if (!b) return;
-  orient = b.dataset.o;
-  document.querySelectorAll(".orient button").forEach(x => x.setAttribute("aria-pressed", x === b));
-  schedulePreview();
-});
-$("inv").addEventListener("change", async e => {
-  const f = e.target.files && e.target.files[0];
-  if (!f){ inv = null; $("swatch").hidden = true; $("invName").textContent = "לא נבחר קובץ"; update(); return; }
-  $("invName").textContent = f.name;
-  if (f.size > 25e6){ toast("הקובץ גדול מדי"); e.target.value = ""; return; }
-  try {
-    inv = await readInvitation(f);
-    $("swatch").hidden = !inv.color;
-    if (inv.color) $("swatchDot").style.background = inv.color;
-    toast("ההזמנה צורפה");
-  } catch (_) { inv = null; toast("לא הצלחתי לקרוא את הקובץ"); }
-  update();
-});
-$("useInv").addEventListener("change", update);
-fetch("meta.json").then(r => r.json()).then(j => { META = j; renderGrid(); update(); }).catch(() => {});
 $("copy").addEventListener("click", async () => {
   if (!sel){ toast("קודם בחרו מסגרת"); return; }
-  try { await navigator.clipboard.writeText(message(false)); toast("ההודעה הועתקה"); }
+  try { await navigator.clipboard.writeText(message()); toast("ההודעה הועתקה"); }
   catch(e){ toast("לא הצלחתי להעתיק, נסו את כפתור הוואטסאפ"); }
 });
-$("send").addEventListener("click", async e => {
-  if (!sel){ e.preventDefault(); toast("קודם בחרו מסגרת"); return; }
-  const s = selFrame();
-  if (!ENDPOINT || !live(s.f[0]) || !$("names").value.trim()) return;  /* וואטסאפ רגיל */
-  e.preventDefault();
-  if (busy) return;
-  busy = true;
-  const w = window.open("", "_blank");
-  $("busy").hidden = false;
-  let sent = false;
-  try { sent = await submitOrder(); } catch (_) {}
-  $("busy").hidden = true; busy = false;
-  const url = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(message(sent));
-  if (w && !w.closed) w.location.href = url; else location.href = url;
-});
+$("send").addEventListener("click", e => { if (!sel){ e.preventDefault(); toast("קודם בחרו מסגרת"); } });
 
 renderTabs(); renderGrid(); update();
 </script>
