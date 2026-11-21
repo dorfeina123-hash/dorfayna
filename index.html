@@ -2,289 +2,552 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="לקוחות">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>מעקב לקוחות</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<meta property="og:site_name" content="דור פיינה צילום | Dor Fayna Photography">
+
+<script>
+// Change to true to restore all prices in their original locations.
+const SHOW_PRICES = true;
+document.documentElement.classList.toggle('prices-hidden', !SHOW_PRICES);
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דור פיינה | צלם חתונות ואירועים — מבאר שבע ועד חיפה</title>
+<meta name="description" content="דור פיינה — צילום חתונות ואירועים מבאר שבע ועד חיפה. סטילס, וידאו ואלבומים לבחירה, גלריות מאירועים אמיתיים והצעת צילום אישית. פנו לבדיקת זמינות.">
+<meta property="og:title" content="דור פיינה | צילום חתונות ואירועים">
+<meta property="og:description" content="צילום חתונות ואירועים עם דור פיינה. גלריות אמיתיות, חבילות סטילס ווידאו והמלצות לקוחות. פנו לבדיקת זמינות.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dorfayna.co.il/">
+<meta property="og:image" content="https://dorfayna.co.il/assets/og-share-2026.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
+
+
+<link rel="stylesheet" href="./fonts.css">
 <style>
-/* layout: single column, summary tiles first, then filter chips, then client cards in original list order */
 :root{
-  --paper:#f3f5f7; --card:#ffffff; --ink:#13202b; --muted:#5a6a78; --line:#dde3e8; --accent:#0e6b72;
-  --ok:#1d7a4c; --ok-bg:#e3f4ea; --wait:#a8540a; --wait-bg:#fdeedd; --pay:#b3261e; --pay-bg:#fde7e5;
-  --edit:#8a6400; --edit-bg:#fbf0c9; --flag:#6a3fbf; --flag-bg:#ece6fa; --none:#5a6a78; --none-bg:#e8ecef;
-  --font:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --bg:#f6f1ea;
+  --card:#fffaf4;
+  --ink:#2c2926;
+  --muted:#7a726a;
+  --line:#e7ddd0;
+  --gold:#b08d57;
+  --gold-soft:#c9ab7e;
+  --wa:#25D366;
+  --shadow:0 14px 40px rgba(60,45,30,.10);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0f171d; --card:#18232b; --ink:#e8eef3; --muted:#93a4b2; --line:#2a3945; --accent:#5cc4cc;
-    --ok:#6fd49b; --ok-bg:#16382a; --wait:#f0a869; --wait-bg:#3d2a16; --pay:#ff9189; --pay-bg:#442220;
-    --edit:#e8c35c; --edit-bg:#3b3112; --flag:#b99cf5; --flag-bg:#2d2548; --none:#93a4b2; --none-bg:#232f39;
-    color-scheme:dark;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Assistant',system-ui,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.72;letter-spacing:.1px;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-:root[data-theme="dark"]{
-  --paper:#0f171d; --card:#18232b; --ink:#e8eef3; --muted:#93a4b2; --line:#2a3945; --accent:#5cc4cc;
-  --ok:#6fd49b; --ok-bg:#16382a; --wait:#f0a869; --wait-bg:#3d2a16; --pay:#ff9189; --pay-bg:#442220;
-  --edit:#e8c35c; --edit-bg:#3b3112; --flag:#b99cf5; --flag-bg:#2d2548; --none:#93a4b2; --none-bg:#232f39;
-  color-scheme:dark;
+h1,h2,h3{font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;line-height:1.2}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#fff}
+.hero::before{content:"";position:absolute;inset:0;background-image:url('./assets/site/dor05083-2400.webp');background-size:cover;background-position:center 22%;}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.30) 0%,rgba(20,16,12,.15) 45%,rgba(20,16,12,.82) 100%)}
+.hero-inner{position:relative;z-index:2;padding:0 22px 54px;max-width:560px}
+.logo{height:58px;width:auto;margin:0 auto 16px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.45))}
+.hero h1{font-size:2.7rem;letter-spacing:1.5px;font-weight:500;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hero .sub{font-size:.95rem;font-weight:300;margin-top:10px;letter-spacing:5px;text-transform:uppercase;opacity:.9}
+.hero .tag{font-size:1.12rem;font-weight:300;margin-top:16px;opacity:.95;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.hero-cta{display:flex;gap:12px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.scroll-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;color:#fff;opacity:.7;font-size:1.4rem;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;
+  font-family:'Assistant',sans-serif;font-weight:600;font-size:1rem;
+  padding:13px 22px;border-radius:50px;text-decoration:none;transition:transform .15s,box-shadow .2s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 8px 22px rgba(37,211,102,.4)}
+.btn-gold{background:var(--gold);color:#fff;box-shadow:0 8px 22px rgba(176,141,87,.4)}
+.btn-ghost{background:rgba(255,255,255,.16);color:#fff;border:1.5px solid rgba(255,255,255,.7);backdrop-filter:blur(4px)}
+.btn-outline{background:transparent;color:var(--gold);border:1.6px solid var(--gold)}
+
+/* SECTIONS */
+section{padding:82px 0}
+.eyebrow{color:var(--gold);font-weight:600;letter-spacing:5px;text-transform:uppercase;font-size:.75rem;text-align:center;margin-bottom:12px}
+.sec-title{text-align:center;font-size:2.15rem;font-weight:700;letter-spacing:.3px;margin-bottom:14px}
+.sec-lead{text-align:center;color:var(--muted);max-width:540px;margin:0 auto 8px;font-size:1.05rem}
+.divider{width:54px;height:3px;background:var(--gold);border-radius:3px;margin:18px auto 0}
+
+/* ABOUT */
+.about{background:var(--card)}
+.about p{margin-top:16px;font-size:1.08rem;color:#4a443e}
+.sign{font-family:'Frank Ruhl Libre',serif;font-size:1.3rem;color:var(--gold);margin-top:22px;text-align:center}
+
+/* PACKAGES */
+.pkg{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:26px;box-shadow:var(--shadow)}
+.pkg-photo{position:relative;line-height:0}
+.pkg-photo img{width:100%;display:block}
+.pkg-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 58%,rgba(0,0,0,.5));pointer-events:none}
+.pkg-badge{position:absolute;top:14px;inset-inline-end:14px;z-index:2;background:rgba(255,255,255,.92);color:var(--ink);font-weight:700;font-size:.72rem;letter-spacing:2px;padding:6px 13px;border-radius:50px}
+.pkg-name{position:absolute;bottom:12px;inset-inline-start:18px;z-index:2;color:#fff;font-family:'Frank Ruhl Libre',serif;font-size:1.55rem;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.pkg.featured{border-color:var(--gold);box-shadow:0 18px 46px rgba(176,141,87,.26)}
+.ribbon{background:var(--gold);color:#fff;text-align:center;font-weight:700;font-size:.82rem;letter-spacing:2px;padding:7px}
+.pkg-body{padding:20px 22px 24px}
+.pkg ul{list-style:none;margin:6px 0 0}
+.pkg li{position:relative;padding:7px 26px 7px 0;color:#4a443e;font-size:1.02rem;border-bottom:1px dashed var(--line)}
+.pkg li:last-child{border-bottom:none}
+.pkg li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--gold);font-weight:700}
+.price{display:flex;align-items:baseline;gap:8px;justify-content:center;margin:18px 0 6px}
+.price .num{font-family:'Frank Ruhl Libre',serif;font-size:2.1rem;font-weight:900;color:var(--ink)}
+.price .cur{font-size:1.3rem;color:var(--gold);font-weight:700}
+.price .vat{font-size:.85rem;color:var(--muted)}
+.addon{background:#f3ead d;background:#f4ece1;border:1px dashed var(--gold-soft);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.97rem;color:#5a524a}
+.addon b{color:var(--gold)}
+.pkg .btn{width:100%;justify-content:center;margin-top:16px}
+
+/* LINK CARDS */
+.examples{background:var(--card)}
+.links{display:grid;gap:14px;margin-top:26px}
+.lcard{display:flex;align-items:center;gap:16px;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-decoration:none;transition:transform .15s,box-shadow .2s,border-color .2s}
+.lcard:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--gold-soft)}
+.lcard .ic{width:50px;height:50px;flex:0 0 50px;border-radius:13px;display:grid;place-items:center;background:var(--gold);color:#fff;font-size:1.5rem}
+.lcard .ic.ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.lcard .ic.star{background:#f0a500}
+.lcard .ic.vid{background:#5b6cff}
+.lcard .txt b{display:block;font-size:1.1rem;font-family:'Frank Ruhl Libre',serif}
+.lcard .txt span{color:var(--muted);font-size:.92rem}
+.lcard .arr{margin-inline-start:auto;color:var(--gold);font-size:1.3rem}
+
+.events{background:var(--bg)}
+.events-cta{display:flex;flex-direction:column;gap:12px;max-width:360px;margin:28px auto 0}
+.events-cta .btn{width:100%;justify-content:center}
+
+/* CTA */
+.cta{background:linear-gradient(160deg,#2c2926,#41382f);color:#fff;text-align:center}
+.cta h2{color:#fff;font-size:2rem}
+.cta p{color:#e3d8c8;max-width:480px;margin:14px auto 0}
+.cta-buttons{display:flex;flex-direction:column;gap:13px;max-width:340px;margin:30px auto 0}
+.cta-buttons .btn{width:100%;justify-content:center;font-size:1.05rem;padding:15px}
+.phone{margin-top:24px;font-size:1.15rem;letter-spacing:1px}
+.phone a{color:var(--gold-soft);text-decoration:none;font-weight:700}
+
+/* FOOTER */
+footer{background:#241f1b;color:#9a9088;text-align:center;padding:30px 20px;font-size:.9rem}
+footer .fl{height:40px;width:auto;margin:0 auto 12px;opacity:.92}
+
+/* FLOATING WA */
+.fab{position:fixed;bottom:18px;inset-inline-end:18px;z-index:50;width:60px;height:60px;border-radius:50%;background:var(--wa);
+  display:grid;place-items:center;box-shadow:0 8px 24px rgba(37,211,102,.5);color:#fff;text-decoration:none;animation:pulse 2.4s infinite}
+.fab svg{width:32px;height:32px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+
+@media(min-width:600px){
+  .hero h1{font-size:3.6rem}
+  .sec-title{font-size:2.5rem}
+  section{padding:100px 0}
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);-webkit-text-size-adjust:100%}
-body{padding:16px 16px 48px;max-width:640px;margin:0 auto}
-h1{font-size:22px;font-weight:800;margin:4px 0 14px;text-wrap:balance}
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.tile b{display:block;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
-.tile span{font-size:13px;color:var(--muted)}
-.tile.hot b{color:var(--flag)}
-.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-:root[data-theme="dark"] .chip[aria-pressed="true"]{color:#08161a}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:#08161a}}
-.chip.add{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-:root[data-theme="dark"] .chip.add{color:#08161a}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.add{color:#08161a}}
-.tools{display:flex;gap:8px;margin-bottom:12px}
-input[type=search],input[type=text],input[type=number],select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.sort{flex:none}
-.list{display:flex;flex-direction:column;gap:8px}
-.row{display:grid;grid-template-columns:36px 1fr;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;text-align:right;font:inherit;color:inherit;width:100%}
-.row:focus-visible,.chip:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.row.open{border-inline-start:5px solid var(--flag)}
-.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
-.name{font-weight:600;font-size:17px}
-.meta{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:2px}
-.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.b{font-size:12.5px;border-radius:999px;padding:3px 10px;font-weight:600}
-.s-ok{background:var(--ok-bg);color:var(--ok)}.s-wait{background:var(--wait-bg);color:var(--wait)}
-.s-pay{background:var(--pay-bg);color:var(--pay)}.s-edit{background:var(--edit-bg);color:var(--edit)}
-.s-flag{background:var(--flag-bg);color:var(--flag)}.s-none{background:var(--none-bg);color:var(--none)}
-.note{font-size:13.5px;margin-top:8px;color:var(--ink)}
-.empty{padding:28px;text-align:center;color:var(--muted)}
-.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center;z-index:10}
-.sheet{background:var(--card);width:100%;max-width:640px;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px;max-height:92%;overflow:auto}
-.sheet h2{margin:0;font-size:19px}
-.f{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--muted)}
-.acts{display:flex;gap:10px}
-.btn{flex:1;font:inherit;font-size:16px;font-weight:600;border-radius:10px;padding:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
-.btn.p{background:var(--accent);border-color:var(--accent);color:#fff}
-:root[data-theme="dark"] .btn.p{color:#08161a}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.p{color:#08161a}}
-.msg{font-size:13px;color:var(--muted);margin-top:14px}
-@media (prefers-reduced-motion: no-preference){.row{transition:border-color .15s}}
+.swatches{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--card)}
+.sw .chip{height:120px;overflow:hidden;background:#eee}
+.sw .chip img{width:100%;height:100%;object-fit:cover;display:block}.sw .tone{display:block;width:100%;height:100%}.sw .tone.leather{background-image:radial-gradient(circle at 30% 25%,#ffffff2e,transparent 55%),radial-gradient(circle at 75% 80%,#0000002e,transparent 60%)}.sw .tone.fabric{background-image:repeating-linear-gradient(45deg,#ffffff14 0 2px,transparent 2px 5px),repeating-linear-gradient(-45deg,#0000001a 0 2px,transparent 2px 5px)}.swatch-note{margin-top:10px;font-size:.9rem;color:var(--muted);text-align:center}
+.sw .nm{padding:11px 8px;text-align:center;font-weight:700;font-family:'Frank Ruhl Libre',serif;font-size:.98rem;line-height:1.3}
+.sw .nm small{display:block;color:var(--muted);font-weight:400;font-family:'Assistant',sans-serif;font-size:.78rem;letter-spacing:1px}
+.albums-note{background:#f4ece1;border:1px dashed var(--gold-soft);border-radius:14px;padding:15px 18px;margin-top:20px;color:#5a524a;text-align:center;font-size:1rem}
+.albums .btn{display:flex;max-width:320px;margin:22px auto 0;justify-content:center}
+/* GALLERY */
+.gallery{background:var(--card)}
+.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.tile{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:3/4;display:block;box-shadow:var(--shadow)}
+.tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.tile:hover img{transform:scale(1.06)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.55))}
+.tile span{position:absolute;bottom:10px;inset-inline-start:12px;z-index:2;color:#fff;font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.7);direction:ltr}
+.video-card{position:relative;display:block;margin-top:16px;border-radius:18px;overflow:hidden;aspect-ratio:16/9;box-shadow:var(--shadow)}
+.video-card img{width:100%;height:100%;object-fit:cover;display:block}
+.video-card::after{content:"";position:absolute;inset:0;background:rgba(20,16,12,.4)}
+.video-card .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--gold);font-size:1.7rem;padding-inline-start:6px;box-shadow:0 8px 26px rgba(0,0,0,.4)}
+.video-card .vlabel{position:absolute;bottom:16px;inset-inline-start:18px;z-index:2;color:#fff;font-family:'Frank Ruhl Libre',serif;font-size:1.2rem;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.gallery .btn{display:flex;max-width:320px;margin:22px auto 0;justify-content:center}
+/* EVENT CHIPS */
+.ev-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:24px auto 0;max-width:560px}
+.ev-chip{background:var(--card);border:1px solid var(--line);border-radius:50px;padding:9px 16px;font-weight:600;font-size:.98rem;box-shadow:0 4px 14px rgba(60,45,30,.06)}
+/* TESTIMONIALS */
+.tst{background:var(--card);text-align:center}
+.tst .stars{color:#f0a500;font-size:1.5rem;letter-spacing:3px;margin-top:8px}
+.tst-cards{display:grid;gap:14px;margin-top:24px;max-width:420px;margin-inline:auto}
+.tst-cards .btn{width:100%;justify-content:center}
+/* MAGNETS FEATURE */
+.magnet{margin-top:18px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);position:relative}
+.magnet img{width:100%;display:block}
+.magnet .cap{position:absolute;inset-inline-start:0;inset-inline-end:0;bottom:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.6));color:#fff;padding:16px;font-family:'Frank Ruhl Libre',serif;font-size:1.05rem;text-align:start}
+/* STICKY CTA BAR */
+body{padding-bottom:62px}
+.sticky-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 14px;font-weight:700;font-size:1.06rem;text-decoration:none;box-shadow:0 -6px 22px rgba(0,0,0,.2)}
+.sticky-bar svg{width:22px;height:22px}
+.cta .urgency{display:inline-block;margin:18px auto 0;background:rgba(176,141,87,.18);border:1px solid var(--gold-soft);color:#f3e6d2;border-radius:50px;padding:8px 18px;font-size:.95rem}
+.magnets-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.magnets-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;box-shadow:var(--shadow)}
+@media(min-width:600px){.magnets-grid{grid-template-columns:1fr 1fr 1fr}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* Price visibility is controlled centrally by SHOW_PRICES above.
+   Hidden prices remain in the source and never flash before JavaScript runs. */
+.prices-hidden .price,.prices-hidden .price-detail{display:none!important}
+.sticky-bar{text-align:center}
+.sticky-bar svg{flex-shrink:0}
+.sticky-bar:focus-visible{outline:3px solid var(--ink);outline-offset:-4px}
+.lcard,.lcard .txt{min-width:0}
+.lcard .txt{overflow-wrap:anywhere}
 </style>
-</head>
-<body>
-<div id="app"></div>
+<link rel="canonical" href="https://dorfayna.co.il/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://dorfayna.co.il/#business", "name": "Dor Fayna Photography", "alternateName": "דור פיינה צילום", "description": "צלם חתונות ואירועים מראשון לציון, מבאר שבע ועד חיפה. צילום סטילס, וידאו ואלבומים, מההכנות ועד הריקוד האחרון.", "url": "https://dorfayna.co.il/", "telephone": "+972502858162", "image": "https://dorfayna.co.il/assets/og-share-2026.jpg", "address": {"@type": "PostalAddress", "streetAddress": "הרשב\"א", "addressLocality": "ראשון לציון", "addressCountry": "IL"}, "areaServed": [{"@type": "City", "name": "ראשון לציון"}, {"@type": "City", "name": "רחובות"}, {"@type": "City", "name": "נס ציונה"}, {"@type": "City", "name": "חולון"}, {"@type": "City", "name": "בת ים"}, {"@type": "City", "name": "תל אביב"}, {"@type": "City", "name": "פתח תקווה"}, {"@type": "City", "name": "מודיעין"}, {"@type": "City", "name": "אשדוד"}, {"@type": "City", "name": "ירושלים"}, {"@type": "City", "name": "באר שבע"}, {"@type": "City", "name": "חיפה"}], "sameAs": ["https://www.instagram.com/dor_fayna_photography/", "https://www.facebook.com/profile.php?id=100086738259150", "https://www.mit4mit.co.il/biz/92756", "https://dorfayna.pixieset.com/"]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "@id": "https://dorfayna.co.il/#website", "name": "Dor Fayna Photography", "alternateName": ["דור פיינה צילום", "דור פיינה"], "url": "https://dorfayna.co.il/", "inLanguage": "he", "publisher": {"@id": "https://dorfayna.co.il/#business"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "אנחנו לא רגילים להצטלם — איך זה עובד?", "acceptedAnswer": {"@type": "Answer", "text": "לא צריך להגיע עם ניסיון מול מצלמה. במהלך הצילומים אני מכוון בפשטות, משאיר מקום לתנועה ולרגעים טבעיים ועוזר לכם להרגיש בנוח. לפני האירוע נדבר גם על מה שאתם אוהבים ועל מה שפחות מתאים לכם."}}, {"@type": "Question", "name": "איך בודקים זמינות לתאריך?", "acceptedAnswer": {"@type": "Answer", "text": "שלחו לי בוואטסאפ את סוג האירוע, התאריך כולל השנה והמקום. בדיקת הזמינות נעשית אישית; פתיחת קישור או שליחת בקשה באתר אינה שומרת תאריך."}}, {"@type": "Question", "name": "מה כוללת חבילת Standard לחתונה?", "acceptedAnswer": {"@type": "Answer", "text": "צלם סטילס מההכנות וצלם נוסף מצילומי המשפחות באולם, עריכה וגלריה דיגיטלית. וידאו ואלבומים אינם כלולים ב־Standard הבסיסית. אפשר לבחור חבילה רחבה יותר או לקבל הצעה מותאמת."}}, {"@type": "Question", "name": "איפה אפשר לראות חבילות ומחירים?", "acceptedAnswer": {"@type": "Answer", "text": "בעמוד המחירון מפורטים המחירים כולל מע״מ ותכולת כל חבילה. לפני סגירה תקבלו הצעה אישית עם השירותים שבחרתם. אפשר לעבור למחירון דרך התפריט באתר."}}, {"@type": "Question", "name": "אפשר לשנות את החבילה?", "acceptedAnswer": {"@type": "Answer", "text": "כן. אפשר להתאים את השירותים לפי מה שחשוב לכם: סטילס, וידאו, אלבומים ומגנטים. שינוי בתכולה ובמחיר יופיע בהצעה האישית, ולא יאושר אוטומטית באתר."}}, {"@type": "Question", "name": "מה כולל סט האלבומים?", "acceptedAnswer": {"@type": "Answer", "text": "בסט הבסיסי: אלבום זוגי בגודל 30×60 ס״מ ושני אלבומי הורים בגודל 20×40 ס״מ. הוא כלול בחבילות Premium ומעלה, וב־Standard וב־STANDART PLUS ניתן להוסיף אותו. שדרוגי גודל וכריכה מתואמים בנפרד."}}, {"@type": "Question", "name": "איך מקבלים את התמונות ומתי?", "acceptedAnswer": {"@type": "Answer", "text": "התמונות הערוכות נמסרות בגלריה דיגיטלית פרטית לצפייה, הורדה ושיתוף. התמונות נמסרות בתוך 21 ימי עסקים מהאירוע, הווידאו בתוך 45 ימי עסקים מבחירת השירים, והאלבומים בתוך 30 ימי עסקים מאישור העיצוב."}}, {"@type": "Question", "name": "אפשר להזמין רק מגנטים או צילום לאירוע קטן?", "acceptedAnswer": {"@type": "Answer", "text": "כן, אפשר לפנות להצעה נפרדת לפי סוג האירוע, המקום והשעות. מחיר מגנטים כתוספת לחבילת חתונה אינו המחיר של שירות מגנטים עצמאי. בחינה ובאירועים קטנים אפשר לסכם את הפרטים בהתכתבות בוואטסאפ."}}, {"@type": "Question", "name": "לכמה שעות מגיעים לאירוע?", "acceptedAnswer": {"@type": "Answer", "text": "בחבילות החתונה מופיע ליווי ביום מלא בהתאם להצעה. באירועים קטנים אני בדרך כלל מציע 4–5 שעות צילום בערב. שעת ההתחלה והסיום והרחבות נקבעות בהצעה ובהסכם של האירוע שלכם."}}, {"@type": "Question", "name": "צריך לעדכן אם מגיע צלם או צלמת סושיאל?", "acceptedAnswer": {"@type": "Answer", "text": "כן, אשמח שתעדכנו אותי לפני האירוע אם מגיע צלם או צלמת סושיאל, כדי שנוכל לתאם מראש ולעבוד יחד בנעימות, בלי להפריע לתיעוד הרגעים החשובים."}}, {"@type": "Question", "name": "איך מתקיימת פגישת היכרות?", "acceptedAnswer": {"@type": "Answer", "text": "אפשר לתאם שיחה בטלפון או אונליין, או להיפגש במקום שמתאמים מראש. אין קבלת קהל קבועה במקום. לאירועים קטנים אפשר להתקדם גם בוואטסאפ, בלי צורך בשיחה טלפונית."}}]}</script>
+<meta name="google-site-verification" content="ELwHzDuxqh1eTYp4Z75_erooB1injT1IWAAUNmce_wU" />
+<link rel="stylesheet" href="./site-ui.css?v=legal-2"><script defer src="./site-ui.js?v=20261015"></script><link rel="stylesheet" href="./editorial.css?v=4"><script defer src="./reviews.js"></script><link rel="stylesheet" href="./studio.css?v=18"><style>.hero{position:relative;overflow:hidden}.hero .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}.hero::after{z-index:1}.hero .hero-inner{position:relative;z-index:2}@media (prefers-reduced-motion:reduce){.hero .hero-video{display:none}}</style><script defer src="./studio-nav.js"></script><link rel="preload" as="image" href="./assets/site/4aa6c4f129bbb09c-960.webp" media="(max-width:760px)" fetchpriority="high"><link rel="preload" as="image" href="./assets/site/dor05083-2400.webp" media="(min-width:761px) and (max-width:1600px)" fetchpriority="high"><link rel="preload" as="image" href="./assets/site/dor05083-3200.webp" media="(min-width:1601px)" fetchpriority="high"><script defer src="./meta-pixel.js?v=20261101"></script>
+<script defer src="./promo-popup.js?v=5"></script><script defer src="./price-reveal.js?v=1"></script><script defer src="./wedding-leads.js?v=20261103"></script></head>
+<body class="unified-site editorial"><nav class="unified-nav" aria-label="ניווט באתר"><a class="unified-brand" href="./index.html" aria-label="דור פיינה — דף הבית"><img src="./assets/site/2176fd77ae6fe6ea.png" alt="Dor Fayna Photography" width="941" height="162" decoding="async"></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="studio-menu" aria-label="פתיחה וסגירה של תפריט"><span></span><span></span><span></span></button><div id="studio-menu"><a href="./index.html#weddings">חתונות</a><a href="./index.html#events">אירועים</a><a href="./index.html#portfolio">גלריות</a><a href="./index.html#packages">חבילות</a><a href="./index.html#testimonials">המלצות</a><a href="./weddings-prices.html#packages">מחירון</a><a href="./index.html#faq">שאלות נפוצות</a><a href="./index.html#contact">יצירת קשר</a></div><a class="nav-phone" href="tel:+972502858162" aria-label="התקשרו לדור פיינה">050-285-8162</a><a class="nav-instagram" href="https://www.instagram.com/dor_fayna_photography/" target="_blank" rel="noopener noreferrer" aria-label="האינסטגרם של דור פיינה — נפתח בלשונית חדשה" title="Instagram"><svg aria-hidden="true" focusable="false" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></nav><main id="main-content">
+
+<!-- HERO -->
+<header class="hero"><video class="hero-video" autoplay muted loop playsinline preload="metadata" data-start-mobile="11" data-start-desktop="10.5" aria-hidden="true"><source media="(max-width: 760px)" src="./assets/video/hero-mobile.mp4#t=11" type="video/mp4"><source src="./assets/video/hero-1280.mp4#t=10.5" type="video/mp4"></video>
+  <div class="hero-inner">
+    <img class="logo" src="./assets/site/2176fd77ae6fe6ea.png" alt="Dor Fayna Photography" width="941" height="162" decoding="async">
+    <h1>צילום חתונות ואירועים</h1>
+    <div class="sub">דור פיינה · צילום אישי וטבעי</div>
+    <p class="tag">מההכנות ועד הרחבה. ליווי אישי, סטילס ווידאו,<br>ותמונות שיחזירו אתכם לרגע.</p>
+    <p class="hero-trust">מעל עשור של ניסיון · <a href="#testimonials">★★★★★ המלצות של זוגות</a></p>
+    <div class="hero-cta"><a class="btn btn-gold" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA%20%D7%9C%D7%A6%D7%99%D7%9C%D7%95%D7%9D.%20%D7%A1%D7%95%D7%92%20%D7%94%D7%90%D7%99%D7%A8%D7%95%D7%A2%3A%20__%2C%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__">בדיקת תאריך פנוי בוואטסאפ</a><p class="contact-disclosure hero-privacy">מסירת פרטים מרצון לצורך מענה והצעה. <a href="./privacy.html">פרטיות וזכויות במידע</a></p><a class="hero-work-link" href="#portfolio">צפייה בעבודות ↓</a></div>
+  </div>
+  <div class="scroll-hint">⌄</div>
+</header>
+
+<!-- GALLERY -->
+<section class="gallery" id="portfolio">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">פורטפוליו</div>
+      <h2 class="sec-title">חתונות דרך העדשה שלי</h2>
+      <p class="sec-lead">מבחר גלריות מחתונות שצילמתי — רגעים טבעיים, צילומי זוג וזיכרונות מהיום שלכם.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="mosaic reveal">
+      <a class="tile" href="./wedding-liad-kobi.html"><picture><source type="image/webp" srcset="./assets/optimized/64e9160a66f1-480.webp 480w, ./assets/optimized/64e9160a66f1-960.webp 960w, ./assets/optimized/64e9160a66f1-1600.webp 1080w" sizes="(max-width:760px) 50vw, 400px"><img loading="lazy" src="https://images.pixieset.com/241259201/a56ba8c5de2e493c95cff0f73bffc2b1-cover.JPG" alt="Liad & Kobi" width="1080" height="1616" decoding="async"></picture><span>Liad &amp; Kobi</span></a>
+      <a class="tile" href="./wedding-chen-ido.html"><picture><source type="image/webp" srcset="./assets/optimized/3b272e6441c1-480.webp 480w, ./assets/optimized/3b272e6441c1-960.webp 960w, ./assets/optimized/3b272e6441c1-1600.webp 1600w" sizes="(max-width:760px) 50vw, 400px"><img loading="lazy" src="https://images.pixieset.com/06838509/52ea8e26ac322b9d7505f1226a6ea6ac-cover.jpg" alt="Chen & Ido" width="1600" height="1067" decoding="async"></picture><span>Chen &amp; Ido</span></a>
+      <a class="tile" href="https://dorfayna.pixieset.com/danaanddvora-1/" target="_blank" rel="noopener"><picture><source type="image/webp" srcset="./assets/optimized/79376cc2919d-480.webp 480w, ./assets/optimized/79376cc2919d-960.webp 960w, ./assets/optimized/79376cc2919d-1600.webp 1600w" sizes="(max-width:760px) 50vw, 400px"><img loading="lazy" src="https://images.pixieset.com/98522409/eac1840ddb8ac63036ca5dd7b513d6ac-cover.jpg" alt="Dana & Dvora" width="1600" height="2400" decoding="async"></picture><span>Dana &amp; Dvora</span></a>
+      <a class="tile" href="https://dorfayna.pixieset.com/reutandavinoam-1/" target="_blank" rel="noopener"><picture><source type="image/webp" srcset="./assets/optimized/5f7c6d0c5404-480.webp 480w, ./assets/optimized/5f7c6d0c5404-960.webp 960w, ./assets/optimized/5f7c6d0c5404-1600.webp 1600w" sizes="(max-width:760px) 50vw, 400px"><img loading="lazy" src="https://images.pixieset.com/00637298/454b63cfe2ce40b29c913fd25bca3798-cover.jpg" alt="Reut & Avinoam" width="1600" height="1067" decoding="async"></picture><span>Reut &amp; Avinoam</span></a>
+      <a class="tile" href="https://dorfayna.pixieset.com/noamandaviho/" target="_blank" rel="noopener"><picture><source type="image/webp" srcset="./assets/optimized/274e4691e890-480.webp 480w, ./assets/optimized/274e4691e890-960.webp 960w, ./assets/optimized/274e4691e890-1600.webp 1600w" sizes="(max-width:760px) 50vw, 400px"><img loading="lazy" src="https://images.pixieset.com/97448809/c92cd6a4aeeeb97c26d1eb3bd803c719-cover.jpg" alt="Noam & Aviho" width="1600" height="2400" decoding="async"></picture><span>Noam &amp; Aviho</span></a>
+      <a class="tile" href="https://dorfayna.pixieset.com/anaisandasaf-1/" target="_blank" rel="noopener"><picture><source type="image/webp" srcset="./assets/optimized/f8ae8a45ddca-480.webp 480w, ./assets/optimized/f8ae8a45ddca-960.webp 960w, ./assets/optimized/f8ae8a45ddca-1600.webp 1600w" sizes="(max-width:760px) 50vw, 400px"><img loading="lazy" src="https://images.pixieset.com/68537298/6c90b788fa62d2c526df408224b99871-cover.jpg" alt="Anais & Asaf" width="1600" height="1067" decoding="async"></picture><span>Anais &amp; Asaf</span></a>
+    </div>
+    <a class="btn btn-outline reveal" href="https://dorfayna.pixieset.com" target="_blank" rel="noopener">לכל הגלריות</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="tst" id="testimonials"><div class="wrap"><div class="eyebrow">החוויה שלהם, במילים שלהם</div><h2 class="sec-title">מה הלקוחות מספרים</h2><p class="sec-lead">קטעים מתוך המלצות ששיתפו לקוחות, כפי שמופיעות בהיילייט ההמלצות שלי.</p><div class="reviews-carousel" data-reviews role="region" aria-roledescription="קרוסלה" aria-label="המלצות לקוחות"><div class="reviews-track" tabindex="0" aria-label="אפשר להחליק או להשתמש בחיצים למעבר בין המלצות"><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>אין ספק שדור נותן שירות מושלם- מענה מיידי לכל נושא, השרה רוגע וביטחון במהלך הצילומים, הכל מתקתק כמו שצריך, מפרגן, והכי חשוב מתאים את עצמו לראש של הזוג!</p></blockquote><p class="review-author">הדר</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>דור והצוות איכפתיים וזמינים רגישים לצרכים של החתן והכלה ומנסים לתקתק הכל שיהיה מוצלח. התמונות הגיעו בזמן קצר ביותר וגם הסרטים והאלבומים. הכל באיכות גבוהה ובאדיבות.</p></blockquote><p class="review-author">Ofir</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>דור קודם כל היה חבר! אדם מדהים, סבלני, רגוע ומקצוען!</p></blockquote><p class="review-author">מאור</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>אהבנו אהבנו הכל מהכל!!! את האווירה הכי כיפית שיכולה להיות עם הצלמים</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>הייתה חוויה מדהימה החיוך הגדול הרוגע ושלווה שכבר מהשיחה הראשונה</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>דור היה מקצוען ממש, התמונות מעולות והוא דאג לא לפספס הזדמנות צילום.</p></blockquote><p class="review-author">יונתן</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>דור והצוות שלו היו מקצוענים מאוד</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>כל הליווי והדאגה ממש עשיתם לנו את היום!! מקצועיות 100%</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>קודם כל לפני הכל הוא בן אדם מדהים וסבלני ומכיל מבין כל סיטואציה ומתנהל בהתאם באמת איש מדהים!</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>מאוד אהבנו את הסבלנות, היחס ותשומת הלב לכל דבר או שינוי הכי קטן שביקשנו לתקן, זמינות תמידית ועבודה מהירה ממש.</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>פשוט זכינו ברמות עשיתם אווירה רגועה ושמחה</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>גם הצלם וידאו פשוט קלע לעין. והתמונות וואו וואו וואו!! שווה כל שקל.</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>דור והצוות שלו היו סבלניים, ותיקתקו את העבודה בלי להלחיץ אותנו שזה הכי חשוב</p></blockquote><p class="review-author">אורטל</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>היחס, הקלילות, המקצועיות והאיכות כמובן! והמהירות ששלחו לי את כל התמונות.</p></blockquote><p class="review-author">Dana</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>תודה רבה על יום מושלם על אנרגיות טובות על צילומים מושלמים עם המון נתינה וחום</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>כבר בשיחה הראשונה שלנו שהתקיימה בטלפון ידענו שדור והצוות שלו הולכים לצלם אותנו.</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>גם הוידאו וגם הסטילס הנציחו את הרגעים המרגשים וגם את הרגעים המצחיקים שנוכל לראות שוב ושוב בסרט ובתמונות.</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>על היחס האישי הנעים והמרגיע, מההתחלה ובתוך היום המשמח עצמו על צילומים מושלמים וזה רק מטעימה קטנה</p></blockquote><p class="review-author">שירה</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>האווירה הייתה קלילה הייתם קשובים והכל הלך מעולה תודה רבה!</p></blockquote><p class="review-author">Tulii</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>דור ארקדי ואורן כאלה מדהימים עשו לנו את היום הכי טוב שאפשר קלילים נעימים זורמים איתכם מלא</p></blockquote><p class="review-author">אופיר</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>בין כל החששות שיש לקראת חתונה, היינו רגועים איתך וסמכנו עליך כי ידענו שבחרנו נכון.</p></blockquote><p class="review-author">ענבל ואילן</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>היה מצחיק ברמות, קליל, אווירה מדהימה בלי לחץ</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article><article class="review-card"><span class="review-stars" aria-hidden="true">★★★★★</span><blockquote><p>תודה רבה על יחס חם, אדיב ונותן הכל מהנשמה! התמונות והקליפ הגיעו מושלם</p></blockquote><p class="review-author">מתוך היילייט ההמלצות</p><a href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">קטע מהמלצה · למקור באינסטגרם ↗</a></article></div><div class="review-controls"><button type="button" data-prev aria-label="ההמלצה הקודמת">→</button><span data-status aria-live="polite" aria-atomic="true" dir="ltr"></span><button type="button" data-next aria-label="ההמלצה הבאה">←</button></div></div><a class="btn btn-outline" href="https://www.instagram.com/stories/highlights/18329141668056940/" target="_blank" rel="noopener">לכל ההמלצות באינסטגרם</a></div></section>
+
+
+
+
+
+<!-- PACKAGES -->
+
+<section id="packages">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">חבילות צילום</div>
+      <h2 class="sec-title">בחרו את החבילה שמתאימה לכם</h2>
+      <p class="sec-lead">כל החבילות כוללות ליווי אישי. היקף הצוות ושעות הצילום מפורטים בכל חבילה ובהצעה האישית.</p>
+      <div class="divider"></div>
+    </div>
+
+    <!-- STANDARD -->
+    <div class="pkg reveal">
+      <div class="pkg-photo">
+        <picture><source type="image/webp" srcset="./assets/site/ff55338485664e90-480.webp 480w, ./assets/site/ff55338485664e90-960.webp 960w, ./assets/site/ff55338485664e90-1600.webp 1400w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1200px) 39vw, 470px"><img src="./assets/site/ff55338485664e90.jpg" alt="זוג מתחתן הולך יד ביד בדרך בין עצים, צילום חתונה של דור פיינה" width="1400" height="933" decoding="async" loading="lazy"></picture>
+        <span class="pkg-badge">STANDARD</span>
+        <span class="pkg-name">Standard</span>
+      </div>
+      <div class="pkg-body"><h3 class="package-title">צילום סטילס ביום החתונה</h3><p class="package-for">לזוגות שרוצים להתמקד בתמונות ובתיעוד יום החתונה.</p><p class="package-difference"><strong>שני צלמי סטילס בשלבי היום</strong> · תמונות וגלריה פרטית; וידאו אינו כלול</p>
+        <details class="pkg-more" open><summary>מה כלול בחבילה</summary><ul role="list">
+          <li>צלם סטילס מההכנות וצלם סטילס נוסף מצילומי המשפחות באולם</li>
+          <li>ליווי מההכנות ועד סיום הצילום בשעות שסוכמו בהצעה</li>
+          <li>כל התמונות בעריכה מקצועית — בגלריה דיגיטלית פרטית לצפייה, הורדה ושיתוף עם האורחים והחברים, כולל ברשתות</li>
+        </ul></details>
+        <div class="price" style="flex-wrap:wrap"><s style="display:block;flex-basis:100%;width:100%;font-size:.95rem;opacity:.6;text-decoration-thickness:1px;margin-bottom:2px">מחיר רגיל: 7,500 ₪</s><span class="num">5,500</span><span class="cur">₪</span><span class="vat">כולל מע״מ</span><span style="display:block;flex-basis:100%;width:100%;font-size:.85rem;font-weight:700;color:#98763d;margin-top:4px">מחיר לאחר הנחה של 2,000 ₪</span></div>
+        <div class="addon">תוספת אפשרית: <b>סט אלבומים בהדפסה איכותית</b> — אלבום זוגי 30×60 ס״מ + 2 אלבומי הורים 20×40 ס״מ. <span class="price-detail"><b>1,000 ₪</b> כולל מע״מ.</span></div>
+
+      <a class="package-inquiry" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%97%D7%91%D7%99%D7%9C%D7%AA%20Standard.%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__">פרטים ובדיקת זמינות ←</a>
+</div>
+    </div>
+
+<div class="pkg compact-package reveal"><div class="pkg-photo"><picture><source type="image/webp" srcset="./assets/site/standart-plus-detail-640.webp 640w, ./assets/site/standart-plus-detail-1280.webp 1280w, ./assets/site/standart-plus-detail-1616.webp 1616w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1200px) 39vw, 470px"><img src="./assets/site/standart-plus-detail-1280.webp" alt="יד הכלה עם טבעת אוחזת בזרוע החתן" width="1280" height="853" loading="lazy" decoding="async"></picture><span class="pkg-name">STANDART PLUS</span></div><div class="pkg-body"><div class="eyebrow">חתונות קטנות</div><h3 class="package-title">STANDART PLUS — סטילס ווידאו לחתונות קטנות</h3><p class="package-for">לחתונות קטנות ולזוגות שרוצים גם תמונות וגם סרטים, עם צוות של שני אנשי מקצוע.</p><p class="package-difference"><strong>סטילס אחד + וידאו וכל העריכות + רחפן</strong> · אלבומים בתוספת</p><p>צוות של שני אנשי מקצוע, עם תמונות וסרטים מהיום שלכם.</p><details class="pkg-more" open><summary>מה כלול בחבילה</summary><ul role="list"><li>צלם סטילס אחד וצלם וידאו מההכנות, בשעות שסוכמו בהצעה</li><li>עריכת תמונות וגלריה דיגיטלית פרטית לצפייה, הורדה ושיתוף</li><li role="listitem"><strong>כל עריכות הווידאו:</strong> סרט מלא, סרט מקוצר, קליפ היילייטס ו־REELS</li><li>צילומי רחפן בכפוף לתנאי ההטסה</li></ul></details><div class="price" style="flex-wrap:wrap"><s style="display:block;flex-basis:100%;width:100%;font-size:.95rem;opacity:.6;text-decoration-thickness:1px;margin-bottom:2px">מחיר רגיל: 8,000 ₪</s><span class="num">6,500</span><span class="cur">₪</span><span class="vat">כולל מע״מ</span><span style="display:block;flex-basis:100%;width:100%;font-size:.85rem;font-weight:700;color:#98763d;margin-top:4px">מחיר לאחר הנחה של 1,500 ₪</span></div><div class="addon">אלבומים אינם כלולים. תוספת סט אלבומים כמו ב־Standard: אלבום זוגי 30×60 ס״מ ושני אלבומי הורים 20×40 ס״מ. המחיר מפורט במחירון. מגנטים אינם כלולים.</div><a class="package-inquiry" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA%20%D7%9C%D7%97%D7%91%D7%99%D7%9C%D7%AA%20STANDART%20PLUS%20%D7%9C%D7%97%D7%AA%D7%95%D7%A0%D7%94%20%D7%A7%D7%98%D7%A0%D7%94.%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__">בדיקת זמינות ל־STANDART PLUS ←</a></div></div>
+    <!-- PREMIUM -->
+    <div class="pkg featured reveal">
+      <div class="ribbon">סטילס, וידאו ואלבומים</div>
+      <div class="pkg-photo">
+        <picture><source type="image/webp" srcset="./assets/site/4dfb930b461788c8-480.webp 480w, ./assets/site/4dfb930b461788c8-960.webp 960w, ./assets/site/4dfb930b461788c8-1600.webp 1400w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1200px) 39vw, 470px"><img src="./assets/site/4dfb930b461788c8.jpg" alt="חתן וכלה בצילומי זוגיות בחורשה, צילום חתונה של דור פיינה" width="1400" height="933" decoding="async" loading="lazy"></picture>
+        <span class="pkg-badge">PREMIUM</span>
+        <span class="pkg-name">Premium</span>
+      </div>
+      <div class="pkg-body"><h3 class="package-title">סטילס, וידאו ואלבומים</h3><p class="package-for">לזוגות שרוצים תיעוד בתמונות ובסרטים, וגם אלבומים לזוג ולהורים.</p><p class="package-difference"><strong>סטילס, וידאו וכל העריכות + סט 3 אלבומים</strong> · כולל רחפן בתנאי הטסה</p>
+        <details class="pkg-more" open><summary>מה כלול בחבילה</summary><ul role="list">
+          <li>צלם סטילס מההכנות וצלם סטילס נוסף מצילומי המשפחות באולם</li>
+          <li>צלם וידאו מההכנות, בצילום בשתי מצלמות</li>
+          <li>צילומי רחפן, בכפוף לאפשרות הטסה חוקית ובטוחה ולתנאי המקום ומזג האוויר</li>
+          <li>ליווי מההכנות ועד סיום הצילום בשעות שסוכמו בהצעה</li>
+          <li>כל התמונות בעריכה מקצועית, בגלריה דיגיטלית פרטית — לצפייה, הורדה ושיתוף עם האורחים והחברים, כולל ברשתות</li>
+          <li>הפקת וידאו מלאה: סרט ארוך, סרט מקוצר, קליפ היילייטס ו‑REELS לרשתות</li>
+          <li role="listitem"><strong>אלבום זוגי ושני אלבומי הורים כלולים</strong> — אלבום זוגי 30×60 ס״מ + 2 אלבומי הורים 20×40 ס״מ</li>
+        </ul></details>
+        <div class="price" style="flex-wrap:wrap"><s style="display:block;flex-basis:100%;width:100%;font-size:.95rem;opacity:.6;text-decoration-thickness:1px;margin-bottom:2px">מחיר רגיל: 11,500 ₪</s><span class="num">9,500</span><span class="cur">₪</span><span class="vat">כולל מע״מ</span><span style="display:block;flex-basis:100%;width:100%;font-size:.85rem;font-weight:700;color:#98763d;margin-top:4px">מחיר לאחר הנחה של 2,000 ₪</span></div>
+
+      <a class="package-inquiry" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%97%D7%91%D7%99%D7%9C%D7%AA%20Premium.%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__">פרטים ובדיקת זמינות ←</a>
+</div>
+    </div>
+
+    <!-- PREMIUM PLUS -->
+    <div class="pkg reveal">
+      <div class="pkg-photo">
+        <picture><source type="image/webp" srcset="./assets/site/8b30edfa3aee9d10-480.webp 480w, ./assets/site/8b30edfa3aee9d10-960.webp 960w, ./assets/site/8b30edfa3aee9d10-1600.webp 1148w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1200px) 39vw, 470px"><img src="./assets/site/8b30edfa3aee9d10.jpg" alt="חתן וכלה מתחבקים וצוחקים, צילום זוגיות לפני החתונה" width="1148" height="933" decoding="async" loading="lazy"></picture>
+        <span class="pkg-badge">PREMIUM PLUS</span>
+        <span class="pkg-name">Premium Plus</span>
+      </div>
+      <div class="pkg-body"><h3 class="package-title">צילום מלא ומגנטים לאורחים</h3><p class="package-for">לזוגות שרוצים את חבילת הצילום והאלבומים יחד עם מזכרת לאורחים.</p><p class="package-difference"><strong>כל תכולת Premium + מגנטים</strong> · 10 הגדלות מגנט ו־2–4 פוטובלוק לפי ההצעה</p>
+        <details class="pkg-more" open><summary>מה כלול בחבילה</summary><ul role="list">
+          <li>צלם סטילס מההכנות וצלם סטילס נוסף מצילומי המשפחות באולם</li>
+          <li>צלם וידאו מההכנות, בצילום בשתי מצלמות</li>
+          <li>צילומי רחפן, בכפוף לאפשרות הטסה חוקית ובטוחה ולתנאי המקום ומזג האוויר</li>
+          <li>ליווי מההכנות ועד סיום הצילום בשעות שסוכמו בהצעה</li>
+          <li>כל התמונות בעריכה מקצועית, בגלריה דיגיטלית פרטית — לצפייה, הורדה ושיתוף עם האורחים והחברים, כולל ברשתות</li>
+          <li role="listitem"><strong>סרט חתונה מלא, סרט מקוצר, קליפ היילייטס ו־REELS לרשתות</strong></li>
+          <li role="listitem"><strong>אלבום זוגי ושני אלבומי הורים כלולים</strong> — אלבום זוגי 30×60 ס״מ + 2 אלבומי הורים 20×40 ס״מ</li>
+          <li>צילום והדפסת מגנטים ללא הגבלת כמות בשעות השירות שסוכמו, 10 הגדלות מגנט ו־2–4 הגדלות פוטובלוק — הכמות המדויקת והמידות בהצעה</li>
+        </ul></details>
+        <div class="price" style="flex-wrap:wrap"><s style="display:block;flex-basis:100%;width:100%;font-size:.95rem;opacity:.6;text-decoration-thickness:1px;margin-bottom:2px">מחיר רגיל: 13,000 ₪</s><span class="num">11,000</span><span class="cur">₪</span><span class="vat">כולל מע״מ</span><span style="display:block;flex-basis:100%;width:100%;font-size:.85rem;font-weight:700;color:#98763d;margin-top:4px">מחיר לאחר הנחה של 2,000 ₪</span></div>
+
+      <a class="package-inquiry" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%97%D7%91%D7%99%D7%9C%D7%AA%20Premium%20Plus.%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__">פרטים ובדיקת זמינות ←</a>
+</div>
+    </div>
+
+    <!-- DIAMOND -->
+    <div class="pkg reveal">
+      <div class="pkg-photo">
+        <picture><source type="image/webp" srcset="./assets/site/ecab54473acc884f-480.webp 480w, ./assets/site/ecab54473acc884f-960.webp 960w, ./assets/site/ecab54473acc884f-1600.webp 1400w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1200px) 39vw, 470px"><img src="./assets/site/ecab54473acc884f.jpg" alt="חתן וכלה ליד רכב החתונה באור שקיעה" width="1400" height="812" decoding="async" loading="lazy"></picture>
+        <span class="pkg-badge">DIAMOND</span>
+        <span class="pkg-name">Diamond</span>
+      </div>
+      <div class="pkg-body"><h3 class="package-title">צילום מלא, זוגיות והדפסים</h3><p class="package-for">לזוגות שרוצים גם צילומי זוגיות לפני החתונה ותמונות לתצוגה בבית.</p><p class="package-difference"><strong>כל תכולת Premium Plus + צילומי זוגיות והדפסים</strong> · קנבס / זכוכית לפי הבחירה</p>
+        <details class="pkg-more" open><summary>מה כלול בחבילה</summary><ul role="list">
+          <li>צלם סטילס מההכנות וצלם סטילס נוסף מצילומי המשפחות באולם</li>
+          <li>צלם וידאו מההכנות, בצילום בשתי מצלמות</li>
+          <li>צילומי רחפן, בכפוף לאפשרות הטסה חוקית ובטוחה ולתנאי המקום ומזג האוויר</li>
+          <li>ליווי מההכנות ועד סיום הצילום בשעות שסוכמו בהצעה</li>
+          <li>כל התמונות בעריכה מקצועית, בגלריה דיגיטלית פרטית — לצפייה, הורדה ושיתוף עם האורחים והחברים, כולל ברשתות</li>
+          <li role="listitem"><strong>סרט חתונה מלא, סרט מקוצר, קליפ היילייטס ו־REELS לרשתות</strong></li>
+          <li role="listitem"><strong>אלבום זוגי ושני אלבומי הורים כלולים</strong> — אלבום זוגי 30×60 ס״מ + 2 אלבומי הורים 20×40 ס״מ</li>
+          <li>קנבס גדול לזוג ושני קנבסים להורים, או הגדלת זכוכית — ניתן לבחור ולשלב לפי ההצעה</li>
+          <li>צילום והדפסת מגנטים ללא הגבלת כמות בשעות השירות שסוכמו, 10 הגדלות מגנט ו־2–4 הגדלות פוטובלוק — הכמות המדויקת והמידות בהצעה</li>
+          <li>צילומי זוגיות (Save the Date) לפני האירוע</li>
+        </ul></details>
+        <div class="price" style="flex-wrap:wrap"><s style="display:block;flex-basis:100%;width:100%;font-size:.95rem;opacity:.6;text-decoration-thickness:1px;margin-bottom:2px">מחיר רגיל: 15,000 ₪</s><span class="num">13,000</span><span class="cur">₪</span><span class="vat">כולל מע״מ</span><span style="display:block;flex-basis:100%;width:100%;font-size:.85rem;font-weight:700;color:#98763d;margin-top:4px">מחיר לאחר הנחה של 2,000 ₪</span></div>
+
+      <a class="package-inquiry" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%97%D7%91%D7%99%D7%9C%D7%AA%20Diamond.%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__">פרטים ובדיקת זמינות ←</a></div>
+</div>
+
+    <p class="sec-lead" style="margin-top:6px">ניתן כמובן להתאים את הצעת המחיר בהתאם לבקשות, לצרכים ולחזון שלכם.</p><p style="text-align:center;margin-top:24px"><a class="btn btn-gold" href="./weddings-prices.html#packages">לחבילות עם מחירים</a></p>
+  <div class="package-comparison"><h3>איזו חבילה מתאימה לכם?</h3><div class="comparison-scroll" tabindex="0" role="region" aria-label="טבלת השוואת חבילות, ניתן לגלול לרוחב"><table><caption>השוואת תכולת חבילות צילום החתונה</caption><thead><tr><th scope="col">מה כלול</th><th scope="col">Standard</th><th scope="col">STANDART PLUS</th><th scope="col">Premium</th><th scope="col">Premium Plus</th><th scope="col">Diamond</th></tr></thead><tbody><tr><th scope="row">צוות סטילס</th><td>2</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><tr><th scope="row">וידאו וכל העריכות</th><td>לא כלול</td><td>כלול</td><td>כלול</td><td>כלול</td><td>כלול</td></tr><tr><th scope="row">רחפן בתנאי הטסה</th><td>לא כלול</td><td>כלול</td><td>כלול</td><td>כלול</td><td>כלול</td></tr><tr><th scope="row">אלבום זוגי ו־2 אלבומי הורים</th><td>בתוספת</td><td>בתוספת</td><td>כלול</td><td>כלול</td><td>כלול</td></tr><tr><th scope="row">מגנטים, הגדלות ופוטובלוק</th><td>לא כלול</td><td>לא כלול</td><td>לא כלול</td><td>כלול</td><td>כלול</td></tr><tr><th scope="row">צילומי זוגיות וקנבס / זכוכית</th><td>לא כלול</td><td>לא כלול</td><td>לא כלול</td><td>לא כלול</td><td>כלול</td></tr></tbody></table></div><p>צלם הסטילס הראשי וצלם הווידאו, בחבילות הכוללות וידאו, מגיעים מההכנות. צלם הסטילס הנוסף מצטרף לצילומי המשפחות באולם. שעות מדויקות, מידות הדפסים והבחירות יפורטו בהצעה.</p><p>מסירה: תמונות בתוך 21 ימי עסקים מהאירוע; וידאו בתוך 45 ימי עסקים מבחירת השירים; אלבומים בתוך 30 ימי עסקים מאישור העיצוב.</p><p>אם לא ניתן להטיס רחפן, נצלם ביצירתיות בזוויות ובפריימים מגוונים מהקרקע.</p></div></div>
+</section>
+
+<!-- PROCESS -->
+<section class="booking-process" id="process"><div class="wrap"><div class="eyebrow">מהפנייה ועד הזיכרונות</div><h2 class="sec-title">איך מתקדמים יחד?</h2><ol><li><h3>תאריך, מקום ומה חשוב לכם</h3><p>שלחו את תאריך החתונה כולל השנה והמקום, ונבדוק זמינות ונכיר את הצרכים שלכם.</p></li><li><h3>חבילה והצעה אישית</h3><p>נעבור על הצוות, שעות הצילום והתוצרים. תקבלו הצעה ברורה עם המחיר והשירותים שבחרתם.</p></li><li><h3>אישור ההזמנה ותיאום הצילום</h3><p>שמירת התאריך נעשית לפי ההסכם. לפני החתונה נתאם את הצילום והפרטים החשובים לכם.</p></li><li><h3>יום החתונה וקבלת החומרים</h3><p>נצלם את היום שלכם ונספק את התמונות, הסרטים והאלבומים שבחרתם במועדים שסוכמו.</p></li></ol></div></section>
+
+<!-- FILMS -->
+<section class="selected-films" id="films"><div class="wrap"><div class="eyebrow">היום שלכם, בתנועה</div><h2 class="sec-title">סרטי חתונה נבחרים</h2><p class="sec-lead">טעימה מצילומי הזוג, ההתרגשות והאווירה — מתוך סרטים שצילמנו. הצפייה נפתחת ב־Pixieset לאחר לחיצה.</p><div class="film-grid"><a class="film-card" href="https://pixies.et/Bzch1DVl" target="_blank" rel="noopener noreferrer" aria-label="צפייה בסרט חתונה נבחר — נפתח ב־Pixieset"><div class="film-photo"><img src="./assets/site/video-couple.webp" width="960" height="639" loading="lazy" decoding="async" alt="תמונה מקדימה מתוך סרט חתונה בגלריית דור פיינה"><span aria-hidden="true">▶</span></div><h3>עדן ונתנאל — היילייטס</h3><p>לצפייה בסרט ב־Pixieset ↗</p></a><a class="film-card" href="https://pixies.et/qB47qsoT" target="_blank" rel="noopener noreferrer" aria-label="צפייה בסרט חתונה נוסף — נפתח ב־Pixieset"><div class="film-photo"><img src="./assets/site/video-preparation.webp" width="960" height="640" loading="lazy" decoding="async" alt="תמונה מקדימה של כלה מתוך סרט חתונה בגלריית דור פיינה"><span aria-hidden="true">▶</span></div><h3>Rom &amp; Liran — היילייטס</h3><p>לצפייה בסרט ב־Pixieset ↗</p></a></div><a class="btn btn-outline" href="https://dorfayna.pixieset.com/highlights/" target="_blank" rel="noopener noreferrer">לכל סרטי החתונה</a></div></section>
+
+<!-- ABOUT -->
+<section class="about" id="weddings">
+  <div class="wrap reveal">
+    <div class="eyebrow">קצת עליי</div>
+    <h2 class="sec-title">נעים להכיר, דור פיינה</h2><figure class="dor-portrait"><img src="./assets/site/dor-fayna-portrait-800.webp" srcset="./assets/site/dor-fayna-portrait-400.webp 400w, ./assets/site/dor-fayna-portrait-800.webp 800w" sizes="(max-width:760px) 280px, 340px" alt="דור פיינה, צלם חתונות ואירועים, עם מצלמה" width="800" height="1200" loading="lazy" decoding="async"><figcaption>דור פיינה — הצלם שמלווה אתכם</figcaption></figure>
+    <div class="divider"></div>
+    <p>אני דור פיינה, צלם חתונות ואירועים עם ניסיון של מעל עשור. אני מלווה זוגות ומשפחות ביום האירוע, מצילומי ההכנות והמשפחה ועד החופה והרחבה.</p>
+    <p>לפני האירוע נתאם את הצילום ונבחר יחד את החבילה שמתאימה לכם. באתר תוכלו לראות חתונות שצילמתי, סרטי היילייטס, אלבומים והמלצות של לקוחות.</p>
+    <div class="sign">— Dor Fayna</div>
+  </div>
+</section>
+
+
+<!-- ALBUMS -->
+<section class="albums about" id="albums">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">אלבומים וחומרי כריכה</div>
+      <h2 class="sec-title">כריכה חלקה, מראה קלאסי ונקי</h2>
+      <p class="sec-lead">האלבומים הכלולים ב־Premium ומעלה, או כתוספת ל־Standard ול־STANDART PLUS, מגיעים בכריכת בסיס איכותית — בחרו את הגימור שאתם הכי מתחברים אליו, וניתן לשדרג למגוון סדרות וחומרים מיוחדים.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="swatches reveal">
+      <div class="sw"><div class="chip"><span class="tone leather" role="img" aria-label="דמוי עור שמנת (המחשת גוון)" style="background-color:#e8dcc6"></span></div><div class="nm">דמוי עור שמנת<small>Cream</small></div></div>
+      <div class="sw"><div class="chip"><span class="tone leather" role="img" aria-label="דמוי עור קאמל (המחשת גוון)" style="background-color:#b0824f"></span></div><div class="nm">דמוי עור קאמל<small>Camel</small></div></div>
+      <div class="sw"><div class="chip"><span class="tone leather" role="img" aria-label="דמוי עור חום (המחשת גוון)" style="background-color:#6b4a33"></span></div><div class="nm">דמוי עור חום<small>Brown</small></div></div>
+      <div class="sw"><div class="chip"><span class="tone leather" role="img" aria-label="דמוי עור אפור (המחשת גוון)" style="background-color:#8b8a86"></span></div><div class="nm">דמוי עור אפור<small>Gray</small></div></div>
+      <div class="sw"><div class="chip"><span class="tone leather" role="img" aria-label="דמוי עור שחור (המחשת גוון)" style="background-color:#1f1d1b"></span></div><div class="nm">דמוי עור שחור<small>Black</small></div></div>
+      <div class="sw"><div class="chip"><span class="tone fabric" role="img" aria-label="בד קלאסי כחול (המחשת גוון)" style="background-color:#26385c"></span></div><div class="nm">בד קלאסי כחול<small>Classic Blue</small></div></div>
+      <div class="sw"><div class="chip"><span class="tone fabric" role="img" aria-label="בד קלאסי בורדו (המחשת גוון)" style="background-color:#6b1f2d"></span></div><div class="nm">בד קלאסי בורדו<small>Burgundy</small></div></div>
+      <div class="sw"><div class="chip"><span class="tone fabric" role="img" aria-label="בד קלאסי ירוק (המחשת גוון)" style="background-color:#2f4a38"></span></div><div class="nm">בד קלאסי ירוק<small>Classic Green</small></div></div>
+    </div>
+    <p class="swatch-note">הגוונים להמחשה בלבד. את דוגמאות החומרים עצמן אפשר לראות ולמשש בפגישה.</p>
+    <p class="sec-lead reveal" style="margin-top:20px;font-size:1rem"><b>מה שכלול בחבילות:</b> כריכת בסיס איכותית (מבחר החומרים שלמעלה). 🔝<br>וזו רק ההתחלה — ניתן לשדרג לסדרות וחומרים מיוחדים:</p>
+    <ul class="cover-upgrades reveal" aria-label="אפשרויות לשדרוג כריכת האלבום"><li>כריכת זכוכית</li><li>כריכת אקריל</li><li>עץ ליבנה</li><li>תמונה מלאה — פול פריים</li><li>הדפס פשתן וצמר</li><li>כריכת ספר מודפסת</li></ul>
+    <p class="sec-lead reveal" style="margin-top:16px;font-size:.93rem">ועוד: הטבעת שמות בלייזר, סדרת חלונות, הגדלות קנבס ותמונות לתלייה. נתאים לכם בדיוק את מה שאתם מחפשים 💛</p>
+    <div class="albums-note reveal">בכל החבילות: אלבום זוגי 30×60 ס״מ + 2 אלבומי הורים 20×40 ס״מ, בהדפסה איכותית מאוד (נכללים מ-<b>PREMIUM</b> ומעלה, ובתוספת ל-<b>STANDARD ו־STANDART PLUS</b>). ניתן לשדרג גדלים, להוסיף או להוריד מהחבילה ולהתאים בדיוק לצרכים שלכם.</div>
+    <div class="reveal" style="margin-top:30px">
+      <div class="eyebrow">מגנטים ומוצרים</div>
+      <h2 class="sec-title">מגנטים ופוטובלוק</h2>
+      <p class="sec-lead">להשלים את החוויה גם על המקרר ועל הקיר — ומתנה מושלמת לאורחים שלכם.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="magnets-grid reveal">
+      <picture><source type="image/webp" srcset="./assets/site/5b21fe4b75f57d74-480.webp 480w, ./assets/site/5b21fe4b75f57d74-960.webp 750w" sizes="(max-width: 760px) 100vw, 600px"><img loading="lazy" src="./assets/site/5b21fe4b75f57d74.jpg" alt="מגנטים ופוטובלוק" width="750" height="1000" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="./assets/site/03cbed73ce9a1dc8-480.webp 480w, ./assets/site/03cbed73ce9a1dc8-960.webp 960w, ./assets/site/03cbed73ce9a1dc8-1600.webp 1000w" sizes="(max-width: 760px) 100vw, 600px"><img loading="lazy" src="./assets/site/03cbed73ce9a1dc8.jpg" alt="סטנד מגנטים לאירוע" width="1000" height="750" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="./assets/site/b6d60a7fed68de13-480.webp 480w, ./assets/site/b6d60a7fed68de13-960.webp 960w, ./assets/site/b6d60a7fed68de13-1600.webp 1000w" sizes="(max-width: 760px) 100vw, 600px"><img loading="lazy" src="./assets/site/b6d60a7fed68de13.jpg" alt="מגנטים מודפסים" width="1000" height="667" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="./assets/site/a010e131fc8ee9c3-480.webp 480w, ./assets/site/a010e131fc8ee9c3-960.webp 960w" sizes="(max-width: 760px) 100vw, 600px"><img loading="lazy" src="./assets/site/a010e131fc8ee9c3.jpg" alt="חבילת מגנטים" width="960" height="835" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="./assets/site/cf1fd9fabe4caaf0-480.webp 480w, ./assets/site/cf1fd9fabe4caaf0-960.webp 960w, ./assets/site/cf1fd9fabe4caaf0-1600.webp 1000w" sizes="(max-width: 760px) 100vw, 600px"><img loading="lazy" src="./assets/site/cf1fd9fabe4caaf0.jpg" alt="תצוגת מגנטים" width="1000" height="750" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="./assets/site/1c584eb84bccf892-480.webp 480w, ./assets/site/1c584eb84bccf892-960.webp 750w" sizes="(max-width: 760px) 100vw, 600px"><img loading="lazy" src="./assets/site/1c584eb84bccf892.jpg" alt="מגנט מעוצב לזוג" width="750" height="1000" decoding="async"></picture>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section class="examples">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">דוגמאות והמלצות</div>
+      <h2 class="sec-title">קצת מהעבודות שלי</h2>
+      <p class="sec-lead">הציצו בגלריות, בסרטונים, ברשתות ובהמלצות של זוגות שכבר צילמתי.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="links reveal">
+      <a class="lcard" href="https://DorFayna.pixieset.com/folder/VXrQmtH7Wfmd/" target="_blank" rel="noopener">
+        <span class="ic">📸</span>
+        <span class="txt"><b>גלריות תמונות</b><span>אוספי תמונות מאירועים אמיתיים</span></span>
+        <span class="arr">‹</span>
+      </a>
+      <a class="lcard" href="https://DorFayna.pixieset.com/highlights/" target="_blank" rel="noopener">
+        <span class="ic vid">🎬</span>
+        <span class="txt"><b>גלריות וידאו</b><span>קליפים וסרטי היילייטס</span></span>
+        <span class="arr">‹</span>
+      </a>
+      <a class="lcard" href="https://www.instagram.com/dor_fayna_photography" target="_blank" rel="noopener">
+        <span class="ic ig">📷</span>
+        <span class="txt"><b>אינסטגרם</b><span>@dor_fayna_photography</span></span>
+        <span class="arr">‹</span>
+      </a>
+      <a class="lcard" href="https://www.mit4mit.co.il/biz/92756" target="_blank" rel="noopener">
+        <span class="ic star">★</span>
+        <span class="txt"><b>המלצות עליי</b><span>חוות דעת של זוגות ב-mit4mit</span></span>
+        <span class="arr">‹</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER EVENTS -->
+<section class="events" id="events">
+  <div class="wrap reveal">
+    <div class="eyebrow">לא רק חתונות</div>
+    <h2 class="sec-title">מצלם גם אירועים נוספים</h2>
+    <p class="sec-lead">מעבר לחתונות — אני מצלם גם אירועי חברה, חינה, אירוסין, בר/בת מצווה, ברית/ה ואירועים פרטיים. לכל אירוע אפשר לקבל הצעת מחיר אישית, מותאמת בדיוק לאופי ולצרכים שלו.</p>
+    <div class="divider"></div>
+    <div class="ev-chips reveal">
+      <span class="ev-chip">💍 חתונות</span>
+      <span class="ev-chip">🏢 אירועי חברה</span>
+      <span class="ev-chip">✨ חינה</span>
+      <span class="ev-chip">💎 אירוסין</span>
+      <span class="ev-chip">🎉 בר/בת מצווה</span>
+      <span class="ev-chip">🕊️ ברית/ה</span>
+      <span class="ev-chip">📸 אירועים פרטיים</span>
+    </div>
+    <div class="unified-events-gallery"><h2>לכל אירוע, הסיפור שלו</h2><p>צילומים מקוריים מתוך גלריות ה־Pixieset שלי — רגעים משפחתיים, עלייה לתורה ומזכרות מהאירוע.</p><div class="grid"><figure class="photo"><a href="https://dorfayna.pixieset.com/collection-3/" target="_blank" rel="noopener" aria-label="לגלריית העלייה לתורה של בן"><picture><source type="image/webp" srcset="./assets/optimized/395b97225cd5-480.webp 480w, ./assets/optimized/395b97225cd5-960.webp 640w" sizes="(max-width:760px) 50vw, 400px"><img src="https://images.pixieset.com/73681888/0a099806b56603bead990ab78d5ce118-large.jpg" loading="lazy" decoding="async" alt="בן ומשפחתו בבית הכנסת" width="640" height="427"></picture></a><figcaption><a href="https://dorfayna.pixieset.com/collection-3/" target="_blank" rel="noopener">העלייה לתורה של בן ↗</a></figcaption></figure><figure class="photo"><a href="https://dorfayna.pixieset.com/collection-13/" target="_blank" rel="noopener" aria-label="לגלריית הברית של ניל"><picture><source type="image/webp" srcset="./assets/optimized/2302764b7084-480.webp 480w, ./assets/optimized/2302764b7084-960.webp 960w, ./assets/optimized/2302764b7084-1600.webp 1600w" sizes="(max-width:760px) 50vw, 400px"><img src="https://images.pixieset.com/52100209/b8575faf260caf2affca64c1871136de-cover.jpg" loading="lazy" decoding="async" alt="ידי התינוק ניל ומשפחתו" width="1600" height="1067"></picture></a><figcaption><a href="https://dorfayna.pixieset.com/collection-13/" target="_blank" rel="noopener">הברית של ניל ↗</a></figcaption></figure><figure class="photo"><a href="https://dorfayna.pixieset.com/collection-11/" target="_blank" rel="noopener" aria-label="לגלריית צילום מגנטים"><picture><source type="image/webp" srcset="./assets/optimized/2c825e0b725a-480.webp 480w, ./assets/optimized/2c825e0b725a-960.webp 960w, ./assets/optimized/2c825e0b725a-1600.webp 1280w" sizes="(max-width:760px) 50vw, 400px"><img src="https://images.pixieset.com/37723998/46d67a8f4760ac6701b65278924182d6-cover.jpg" loading="lazy" decoding="async" alt="מגנטים מודפסים מאירוע" width="1280" height="854"></picture></a><figcaption><a href="https://dorfayna.pixieset.com/collection-11/" target="_blank" rel="noopener">צילום מגנטים ↗</a></figcaption></figure></div><div class="actions"><a class="button outline" href="https://dorfayna.pixieset.com/" target="_blank" rel="noopener">לכל הגלריות ב־Pixieset ←</a></div></div><div class="events-cta"><a class="btn btn-gold" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%94%D7%9E%D7%90%D7%95%D7%97%D7%93.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%94%D7%A6%D7%A2%D7%94%20%D7%9C%D7%90%D7%99%D7%A8%D7%95%D7%A2.%20%D7%A1%D7%95%D7%92%20%D7%94%D7%90%D7%99%D7%A8%D7%95%D7%A2%3A%20__%2C%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__%2C%20%D7%9E%D7%95%D7%96%D7%9E%D7%A0%D7%99%D7%9D%3A%20__%2C%20%D7%A9%D7%A2%D7%95%D7%AA%20%D7%A6%D7%99%D7%9C%D7%95%D7%9D%3A%20__">קבלת הצעה לאירוע</a>
+
+      <a class="btn btn-outline" href="https://DorFayna.pixieset.com" target="_blank" rel="noopener">לגלריות מאירועים נוספים</a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- CTA -->
+<section class="site-faq" id="faq"><div class="wrap"><div class="eyebrow">לפני שמתחילים</div><h2 class="sec-title">שאלות נפוצות על הצילום</h2><p class="sec-lead">החבילות, התיאום ומה שקורה אחרי האירוע.</p><div class="faq-list"><details><summary>אנחנו לא רגילים להצטלם — איך זה עובד?</summary><p>לא צריך להגיע עם ניסיון מול מצלמה. במהלך הצילומים אני מכוון בפשטות, משאיר מקום לתנועה ולרגעים טבעיים ועוזר לכם להרגיש בנוח. לפני האירוע נדבר גם על מה שאתם אוהבים ועל מה שפחות מתאים לכם.</p></details><details><summary>איך בודקים זמינות לתאריך?</summary><p>שלחו לי בוואטסאפ את סוג האירוע, התאריך כולל השנה והמקום. בדיקת הזמינות נעשית אישית; פתיחת קישור או שליחת בקשה באתר אינה שומרת תאריך.</p></details><details><summary>מה כוללת חבילת Standard לחתונה?</summary><p>צלם סטילס מההכנות וצלם נוסף מצילומי המשפחות באולם, עריכה וגלריה דיגיטלית. וידאו ואלבומים אינם כלולים ב־Standard הבסיסית. אפשר לבחור חבילה רחבה יותר או לקבל הצעה מותאמת.</p></details><details><summary>איפה אפשר לראות חבילות ומחירים?</summary><p>בעמוד המחירון מפורטים המחירים כולל מע״מ ותכולת כל חבילה. לפני סגירה תקבלו הצעה אישית עם השירותים שבחרתם. אפשר לעבור למחירון דרך התפריט באתר.</p></details><details><summary>אפשר לשנות את החבילה?</summary><p>כן. אפשר להתאים את השירותים לפי מה שחשוב לכם: סטילס, וידאו, אלבומים ומגנטים. שינוי בתכולה ובמחיר יופיע בהצעה האישית, ולא יאושר אוטומטית באתר.</p></details><details><summary>מה כולל סט האלבומים?</summary><p>בסט הבסיסי: אלבום זוגי בגודל 30×60 ס״מ ושני אלבומי הורים בגודל 20×40 ס״מ. הוא כלול בחבילות Premium ומעלה, וב־Standard וב־STANDART PLUS ניתן להוסיף אותו. שדרוגי גודל וכריכה מתואמים בנפרד.</p></details><details><summary>איך מקבלים את התמונות ומתי?</summary><p>התמונות הערוכות נמסרות בגלריה דיגיטלית פרטית לצפייה, הורדה ושיתוף. התמונות נמסרות בתוך 21 ימי עסקים מהאירוע, הווידאו בתוך 45 ימי עסקים מבחירת השירים, והאלבומים בתוך 30 ימי עסקים מאישור העיצוב.</p></details><details><summary>אפשר להזמין רק מגנטים או צילום לאירוע קטן?</summary><p>כן, אפשר לפנות להצעה נפרדת לפי סוג האירוע, המקום והשעות. מחיר מגנטים כתוספת לחבילת חתונה אינו המחיר של שירות מגנטים עצמאי. בחינה ובאירועים קטנים אפשר לסכם את הפרטים בהתכתבות בוואטסאפ.</p></details><details><summary>לכמה שעות מגיעים לאירוע?</summary><p>בחבילות החתונה מופיע ליווי ביום מלא בהתאם להצעה. באירועים קטנים אני בדרך כלל מציע 4–5 שעות צילום בערב. שעת ההתחלה והסיום והרחבות נקבעות בהצעה ובהסכם של האירוע שלכם.</p></details><details><summary>צריך לעדכן אם מגיע צלם או צלמת סושיאל?</summary><p>כן, אשמח שתעדכנו אותי לפני האירוע אם מגיע צלם או צלמת סושיאל, כדי שנוכל לתאם מראש ולעבוד יחד בנעימות, בלי להפריע לתיעוד הרגעים החשובים.</p></details><details><summary>איך מתקיימת פגישת היכרות?</summary><p>אפשר לתאם שיחה בטלפון או אונליין, או להיפגש במקום שמתאמים מראש. אין קבלת קהל קבועה במקום. לאירועים קטנים אפשר להתקדם גם בוואטסאפ, בלי צורך בשיחה טלפונית.</p></details></div><a class="btn btn-outline" href="./weddings-prices.html#packages">למחירון ולפירוט החבילות</a></div></section><section class="wrap" style="padding:8px 16px 28px"><p><strong>צלם חתונות לפי אזור:</strong> <a href="./wedding-photographer-rishon-lezion.html">ראשון לציון והשפלה</a> · <a href="./wedding-photographer-rehovot.html">רחובות</a> · <a href="./wedding-photographer-ness-ziona.html">נס ציונה</a> · <a href="./wedding-photographer-holon-bat-yam.html">חולון ובת ים</a> · <a href="./wedding-photographer-tel-aviv.html">תל אביב</a> · <a href="./wedding-photographer-ashdod.html">אשדוד</a> · <a href="./wedding-photographer-modiin.html">מודיעין</a> · <a href="./wedding-photographer-petah-tikva.html">פתח תקווה</a> · <a href="./wedding-photographer-jerusalem.html">ירושלים</a> · <a href="./wedding-photographer-beer-sheva.html">באר שבע והדרום</a> · <a href="./wedding-photographer-haifa.html">חיפה והצפון</a> · <a href="./religious-wedding-photography.html">חתונה דתית</a> · <a href="./wedding-photographer-price.html">כמה עולה צלם לחתונה</a></p></section>
+<section class="cta" id="contact">
+  <div class="wrap reveal">
+    <h2>מתכננים אירוע? בואו נדבר</h2><p class="contact-disclosure">הפנייה ומסירת הפרטים לבחירתכם. המידע ישמש למענה ולהכנת הצעה על ידי דור פיינה צילום; בלי תאריך ומקום ייתכן שלא ניתן יהיה לבדוק זמינות. <a href="./privacy.html">פרטיות וזכויות במידע</a></p>
+    <p>שלחו לי את סוג האירוע, התאריך והמקום — ואחזור אליכם עם פרטים והצעה מתאימה.</p>
+    <div class="cta-buttons"><a class="btn btn-gold" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%94%D7%9E%D7%90%D7%95%D7%97%D7%93.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA.%20%D7%A1%D7%95%D7%92%20%D7%94%D7%90%D7%99%D7%A8%D7%95%D7%A2%3A%20__%2C%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__">בדיקת זמינות בוואטסאפ</a><a class="btn btn-outline" href="tel:+972502858162">050-285-8162</a>
+
+
+
+    </div>
+    <div class="urgency">📅 מספר התאריכים בכל עונה מוגבל — שווה לבדוק זמינות מוקדם</div>
+  </div>
+</section>
+
+</main><footer><nav class="legal-links" aria-label="מידע ושירות"><a href="./accessibility.html">הצהרת נגישות</a><a href="./privacy.html">פרטיות ועוגיות</a><a href="./terms.html">מידע ותנאי שימוש</a><a href="./cancellation.html">בקשת ביטול עסקה</a><a href="tel:+972502858162">050-285-8162</a></nav>
+  <img class="fl" src="./assets/site/2176fd77ae6fe6ea.png" alt="Dor Fayna Photography" width="941" height="162" decoding="async" loading="lazy">
+  <div>Dor Fayna — צילום חתונות ואירועים</div>
+  <div style="margin-top:6px;opacity:.7">© Dor Fayna · כל הזכויות שמורות</div>
+  <div style="margin-top:14px;font-size:.76rem;opacity:.6;max-width:580px;margin-inline:auto;line-height:1.7">מחירי החבילות כוללים מע״מ. תוספות ושינויים בתכולה יפורטו בהצעה האישית. שמירת תאריך בכפוף לזמינות ולהסכם, בלי לגרוע מזכויות הצרכן על פי דין. <a href="./terms.html">ט.ל.ח — כמפורט בתנאי השימוש</a>.</div>
+</footer>
+
+<a class="sticky-bar" href="https://wa.me/972502858162?text=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%94%D7%9E%D7%90%D7%95%D7%97%D7%93.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%94%D7%A6%D7%A2%D7%AA%20%D7%A6%D7%99%D7%9C%D7%95%D7%9D.%20%D7%A1%D7%95%D7%92%20%D7%94%D7%90%D7%99%D7%A8%D7%95%D7%A2%3A%20__%2C%20%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20%D7%9B%D7%95%D7%9C%D7%9C%20%D7%A9%D7%A0%D7%94%3A%20__%2C%20%D7%9E%D7%A7%D7%95%D7%9D%3A%20__"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.516 5.26l-.999 3.648 3.972-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg><span>בדיקת תאריך פנוי בוואטסאפ</span></a>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<style id="cro-2026-11">
+.hero-trust{margin:10px auto 0;font-size:.95rem;color:#f3e7d3;letter-spacing:.02em}
+.hero-trust a{color:inherit;text-decoration:none;border-bottom:1px solid #d7bd9599}
+.hero-privacy{font-size:11px!important;opacity:.75}
+.pkg-more{margin:4px 0 14px}
+.pkg-more summary{cursor:pointer;font-weight:700;color:#7a5a2e;padding:10px 0;list-style:none;display:flex;align-items:center;gap:8px;min-height:44px}
+.pkg-more summary::-webkit-details-marker{display:none}
+.pkg-more summary::after{content:"+";font-size:1.3em;line-height:1}
+.pkg-more[open] summary::after{content:"–"}
+.sticky-bar{transition:transform .3s ease,opacity .3s ease}
+.sticky-bar.is-hidden{transform:translateY(140%);opacity:0;pointer-events:none}
+@media(max-width:760px){
+ .hero-inner .logo{display:none}
+ .hero h1{font-size:clamp(2rem,9vw,2.6rem)}
+ .hero .tag{font-size:1.02rem}
+ .hero-trust{font-size:.9rem}
+ html body .a11y-launch{top:auto!important;bottom:86px!important}
+}
+@media(prefers-reduced-motion:reduce){.sticky-bar{transition:none}}
+</style>
 <script>
 (function(){
-  var KEY='fayna-clients-v1';
-  var STATE={rows:[]};
-  try{ var raw=localStorage.getItem(KEY); if(raw){ var p=JSON.parse(raw); if(p&&Array.isArray(p.rows)) STATE=p; } }catch(e){}
-  var ALBUM = ["נמסר","תמונות בלבד","ממתין לבחירת לקוח","בעריכה/תיקונים","ממתין לתשלום","דורש טיפול","אין"];
-  var VIDEO = ["נמסר","בעריכה","אין"];
-  var OPENALB = {"ממתין לבחירת לקוח":1,"בעריכה/תיקונים":1,"ממתין לתשלום":1,"דורש טיפול":1};
-  var CLS = {"נמסר":"s-ok","תמונות בלבד":"s-ok","ממתין לבחירת לקוח":"s-wait","בעריכה/תיקונים":"s-edit","ממתין לתשלום":"s-pay","דורש טיפול":"s-flag","בעריכה":"s-edit","אין":"s-none"};
-  var ui = {filter:'all', q:'', desc:false, notice:''};
-  var app = document.getElementById('app');
-
-  function isOpen(r){ return !!OPENALB[r.album] || r.video==='בעריכה' || (r.bal||0)>0; }
-  function fmtDate(s){ var p=s.split('-'); return (+p[2])+'.'+(+p[1])+'.'+p[0]; }
-  function fmtMoney(n){ return n.toLocaleString('he-IL')+' ₪'; }
-  function h(tag, attrs, kids){
-    var e=document.createElement(tag);
-    if(attrs) for(var k in attrs){ if(k==='text') e.textContent=attrs[k]; else if(k==='class') e.className=attrs[k]; else e.setAttribute(k,attrs[k]); }
-    (kids||[]).forEach(function(c){ if(c) e.appendChild(c); });
-    return e;
+  var v=document.querySelector('.hero-video');
+  if(v){
+    var start=parseFloat(window.matchMedia('(max-width: 760px)').matches?v.dataset.startMobile:v.dataset.startDesktop)||0;
+    var seek=function(){try{if(v.currentTime<start-0.5&&v.duration>start)v.currentTime=start;}catch(e){}};
+    v.addEventListener('loadedmetadata',seek,{once:true});
+    if(v.readyState>=1)seek();
   }
-  function badge(label, prefix){ return h('span',{class:'b '+(CLS[label]||'s-none'),text:(prefix?prefix+' ':'')+label}); }
-
-  function render(){
-    var rows = STATE.rows.slice();
-    var openCount = rows.filter(isOpen).length;
-    var owed = rows.reduce(function(a,r){return a+(r.bal||0);},0);
-    var withBal = rows.filter(function(r){return (r.bal||0)>0;}).length;
-    var list = rows.filter(function(r){
-      if(ui.filter==='open' && !isOpen(r)) return false;
-      if(ui.filter==='bal' && !((r.bal||0)>0)) return false;
-      if(ui.q && (r.name+' '+(r.note||'')).indexOf(ui.q)<0) return false;
-      return true;
-    });
-    list.sort(function(a,b){ return ui.desc ? b.n-a.n : a.n-b.n; });
-
-    app.innerHTML='';
-    app.appendChild(h('h1',{text:'מעקב לקוחות – דור פיינה צילום'}));
-    app.appendChild(h('div',{class:'tiles'},[
-      h('div',{class:'tile hot'},[h('b',{text:String(openCount)}),h('span',{text:'דורשים טיפול'})]),
-      h('div',{class:'tile'},[h('b',{text:fmtMoney(owed)}),h('span',{text:'יתרה לגבייה ('+withBal+' לקוחות)'})])
-    ]));
-    var bar=h('div',{class:'bar'});
-    [['all','הכל ('+rows.length+')'],['open','דורש טיפול ('+openCount+')'],['bal','יתרה לתשלום ('+withBal+')']].forEach(function(f){
-      var c=h('button',{class:'chip',type:'button','aria-pressed':String(ui.filter===f[0]),text:f[1]});
-      c.onclick=function(){ui.filter=f[0];render();};
-      bar.appendChild(c);
-    });
-    var add=h('button',{class:'chip add',type:'button',text:'+ לקוח חדש'});
-    add.onclick=function(){openSheet(null);};
-    bar.appendChild(add);
-    app.appendChild(bar);
-    var tools=h('div',{class:'tools'});
-    var q=h('input',{type:'search',id:'q',placeholder:'חיפוש לפי שם או הערה','aria-label':'חיפוש'});
-    q.value=ui.q;
-    q.oninput=function(){ var pos=q.selectionStart; ui.q=q.value; render(); var n=document.getElementById('q'); n.focus(); try{n.setSelectionRange(pos,pos);}catch(e){} };
-    var s=h('button',{class:'chip sort',type:'button',text:ui.desc?'מהחדש לישן':'לפי סדר הרשימה'});
-    s.onclick=function(){ui.desc=!ui.desc;render();};
-    tools.appendChild(q); tools.appendChild(s);
-    app.appendChild(tools);
-
-    var box=h('div',{class:'list'});
-    if(!rows.length) box.appendChild(h('div',{class:'empty',text:'אין עדיין נתונים במכשיר הזה. לחץ על "ייבוא מגיבוי" ובחר את קובץ הלקוחות, או הוסף לקוח חדש.'}));
-    else if(!list.length) box.appendChild(h('div',{class:'empty',text:'אין לקוחות שמתאימים לסינון'}));
-    list.forEach(function(r){
-      var b=h('button',{class:'row'+(isOpen(r)?' open':''),type:'button'},[
-        h('div',{class:'num',text:String(r.n)}),
-        h('div',null,[
-          h('div',{class:'name',text:r.name}),
-          h('div',{class:'meta',text:fmtDate(r.date)+(r.type&&r.type!=='חתונה'?' · '+r.type:'')}),
-          h('div',{class:'badges'},[
-            badge(r.album, r.album==='נמסר'||r.album==='אין'||r.album==='תמונות בלבד'?'אלבום':'אלבום:'),
-            badge(r.video,'וידאו'),
-            (r.bal>0)?h('span',{class:'b s-pay',text:'יתרה '+fmtMoney(r.bal)}):null
-          ]),
-          r.note?h('div',{class:'note',text:r.note}):null
-        ])
-      ]);
-      b.onclick=function(){ openSheet(r.n); };
-      box.appendChild(b);
-    });
-    app.appendChild(box);
-    var foot=h('div',{class:'bar',style:'margin-top:18px'});
-    var bk=h('button',{class:'chip',type:'button',text:'גיבוי'}); bk.onclick=doBackup;
-    var cp=h('button',{class:'chip',type:'button',text:'העתקת גיבוי'}); cp.onclick=doCopy;
-    var im=h('button',{class:'chip',type:'button',text:'ייבוא מגיבוי'}); im.onclick=openImport;
-    foot.appendChild(bk); foot.appendChild(cp); foot.appendChild(im);
-    app.appendChild(foot);
-    if(ui.notice) app.appendChild(h('div',{class:'msg',text:ui.notice}));
+  var bar=document.querySelector('.sticky-bar'),cta=document.querySelector('.hero-cta');
+  if(bar&&cta&&'IntersectionObserver' in window){
+    bar.classList.add('is-hidden');
+    new IntersectionObserver(function(es){es.forEach(function(e){bar.classList.toggle('is-hidden',e.isIntersecting||e.boundingClientRect.top>0);});}).observe(cta);
   }
-
-  function field(label, ctrl){ return h('label',{class:'f'},[h('span',{text:label}),ctrl]); }
-  function select(opts, val){ var s=h('select'); opts.forEach(function(o){var op=h('option',{value:o,text:o}); if(o===val) op.selected=true; s.appendChild(op);}); return s; }
-
-  var TYPES = ["חתונה","בר מצווה","עליה לתורה","אחר"];
-  function todayISO(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-
-  function openSheet(n){
-    var isNew = (n===null);
-    var r;
-    if(isNew){
-      var mx=STATE.rows.reduce(function(a,x){return Math.max(a,x.n);},0);
-      r={n:mx+1,name:'',date:todayISO(),album:'אין',video:'אין',bal:null,note:null,type:'חתונה'};
-    } else {
-      r=STATE.rows.filter(function(x){return x.n===n;})[0];
-      if(!r) return;
-    }
-    var nm=h('input',{type:'text',id:'f-name',autocomplete:'off'}); nm.value=r.name;
-    var dt=h('input',{type:'date',id:'f-date'}); dt.value=r.date;
-    var ty=select(TYPES,r.type||'חתונה');
-    var alb=select(ALBUM,r.album), vid=select(VIDEO,r.video);
-    var bal=h('input',{type:'number',inputmode:'numeric',min:'0'}); bal.value=r.bal||'';
-    var note=h('textarea',{rows:'3'}); note.value=r.note||'';
-    var err=h('div',{class:'msg',role:'alert'});
-    var scrim=h('div',{class:'scrim',role:'dialog','aria-modal':'true','aria-label':isNew?'לקוח חדש':r.name});
-    var close=function(){ if(scrim.parentNode) scrim.parentNode.removeChild(scrim); };
-    var save=h('button',{class:'btn p',type:'button',text:isNew?'הוספה':'שמירה'});
-    var cancel=h('button',{class:'btn',type:'button',text:'ביטול'});
-    cancel.onclick=close;
-    scrim.onclick=function(e){ if(e.target===scrim) close(); };
-    save.onclick=function(){
-      var name=nm.value.trim();
-      if(!name){ err.textContent='יש להזין שם לקוחות.'; return; }
-      if(!dt.value){ err.textContent='יש לבחור תאריך אירוע.'; return; }
-      r.name=name; r.date=dt.value; r.type=ty.value;
-      r.album=alb.value; r.video=vid.value;
-      var v=parseInt(bal.value,10); r.bal=(isFinite(v)&&v>0)?v:null;
-      r.note=note.value.trim()||null;
-      if(isNew) STATE.rows.push(r);
-      close(); persist();
-    };
-    scrim.appendChild(h('div',{class:'sheet'},[
-      h('h2',{text:isNew?'לקוח חדש':'עריכת לקוח'}),
-      field('שם לקוחות',nm), field('תאריך אירוע',dt), field('סוג אירוע',ty),
-      field('אלבום / תמונות',alb), field('וידאו',vid),
-      field('יתרה לתשלום (₪)',bal), field('הערה',note),
-      err,
-      h('div',{class:'acts'},[save,cancel])
-    ]));
-    app.appendChild(scrim);
-  }
-
-  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(STATE)); return true; }catch(e){ return false; } }
-  function persist(){
-    ui.notice = save() ? 'נשמר במכשיר.' : 'לא ניתן לשמור בדפדפן הזה (אולי גלישה פרטית). עשה גיבוי כדי לא לאבד שינויים.';
-    render();
-  }
-  function stamp(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-  function backupText(){ return JSON.stringify({version:1,exported:stamp(),rows:STATE.rows},null,1); }
-  function doBackup(){
-    var text=backupText(), name='clients-backup-'+stamp()+'.json';
-    try{
-      var f=new File([text],name,{type:'application/json'});
-      if(navigator.canShare && navigator.canShare({files:[f]})){
-        navigator.share({files:[f],title:'גיבוי מעקב לקוחות'}).catch(function(){});
-        return;
-      }
-    }catch(e){}
-    try{
-      var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'application/json'})); a.download=name;
-      document.body.appendChild(a); a.click(); a.remove();
-      ui.notice='הקובץ ירד למכשיר. שמור אותו ב-iCloud או שלח אותו למייל.'; render();
-    }catch(e){ ui.notice='הגיבוי נכשל. נסה "העתקת גיבוי".'; render(); }
-  }
-  function doCopy(){
-    try{
-      navigator.clipboard.writeText(backupText()).then(function(){ ui.notice='הגיבוי הועתק. הדבק אותו בפתק או במייל.'; render(); },
-        function(){ ui.notice='ההעתקה נחסמה בדפדפן. השתמש בכפתור "גיבוי".'; render(); });
-    }catch(e){ ui.notice='ההעתקה לא נתמכת כאן. השתמש בכפתור "גיבוי".'; render(); }
-  }
-  function applyImport(text){
-    var p; try{ p=JSON.parse(text); }catch(e){ return 'הקובץ אינו תקין.'; }
-    var rows=Array.isArray(p)?p:(p&&p.rows);
-    if(!Array.isArray(rows)||!rows.length) return 'לא נמצאו לקוחות בקובץ.';
-    for(var i=0;i<rows.length;i++){
-      var r=rows[i];
-      if(!r||typeof r.n!=='number'||!r.name||!/^\d{4}-\d{2}-\d{2}$/.test(r.date||'')) return 'שורה '+(i+1)+' בקובץ אינה תקינה.';
-    }
-    STATE={rows:rows}; persist(); return '';
-  }
-  function openImport(){
-    var file=h('input',{type:'file',id:'imp-file',accept:'.json,application/json,text/plain'});
-    var ta=h('textarea',{rows:'4',id:'imp-text',placeholder:'או הדבק כאן את תוכן הגיבוי'});
-    var err=h('div',{class:'msg',role:'alert'});
-    var scrim=h('div',{class:'scrim',role:'dialog','aria-modal':'true','aria-label':'ייבוא מגיבוי'});
-    var close=function(){ if(scrim.parentNode) scrim.parentNode.removeChild(scrim); };
-    var go=h('button',{class:'btn p',type:'button',text:'ייבוא'});
-    var cancel=h('button',{class:'btn',type:'button',text:'ביטול'});
-    cancel.onclick=close; scrim.onclick=function(e){ if(e.target===scrim) close(); };
-    function finish(text){ var m=applyImport(text); if(m){ err.textContent=m; } else { close(); } }
-    go.onclick=function(){
-      var f=file.files&&file.files[0];
-      if(f){ var rd=new FileReader(); rd.onload=function(){ finish(String(rd.result)); }; rd.onerror=function(){ err.textContent='קריאת הקובץ נכשלה.'; }; rd.readAsText(f); }
-      else if(ta.value.trim()){ finish(ta.value); }
-      else { err.textContent='בחר קובץ או הדבק את תוכן הגיבוי.'; }
-    };
-    var kids=[h('h2',{text:'ייבוא מגיבוי'})];
-    if(STATE.rows.length) kids.push(h('div',{class:'msg',text:'הייבוא מחליף את כל הלקוחות השמורים במכשיר הזה.'}));
-    kids.push(field('קובץ גיבוי',file), field('הדבקה',ta), err, h('div',{class:'acts'},[go,cancel]));
-    scrim.appendChild(h('div',{class:'sheet'},kids));
-    app.appendChild(scrim);
-  }
-
-  render();
 })();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
