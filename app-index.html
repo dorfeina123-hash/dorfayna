@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Dor Fayna">
+<meta name="theme-color" content="#141414">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="icon" href="/icon.png">
+<title>Dor Fayna – ניהול</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Italiana&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141414;--card:#1f1f1f;--line:#2e2e2e;--ink:#f4f1ec;--muted:#9b958d}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Heebo',system-ui,-apple-system,Arial,sans-serif;min-height:100%}
+body{padding:calc(28px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+.logo{direction:ltr;display:flex;align-items:center;justify-content:center;gap:16px;margin:10px 0 6px}
+.logo svg{width:64px;height:50px;stroke:var(--ink);fill:none}
+.logo .bar{width:1px;height:56px;background:var(--ink);opacity:.8}
+.logo .t1{font-family:'Italiana',serif;font-size:30px;letter-spacing:6px;line-height:1}
+.logo .t2{font-family:'Montserrat',sans-serif;font-weight:300;font-size:9px;letter-spacing:3px;margin-top:8px;opacity:.85;direction:ltr}
+.hi{text-align:center;color:var(--muted);font-size:14px;margin:14px 0 22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+a.tile{display:flex;flex-direction:column;justify-content:space-between;min-height:132px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;color:var(--ink);text-decoration:none;transition:transform .12s,border-color .12s}
+a.tile:active{transform:scale(.97)}
+a.tile:hover{border-color:#555}
+a.tile .ic{font-size:26px}
+a.tile b{font-size:17px;font-weight:600;display:block}
+a.tile span{font-size:12.5px;color:var(--muted)}
+a.tile.wide{grid-column:1/-1;min-height:auto;flex-direction:row;align-items:center;gap:14px}
+a.tile.soon{opacity:.45;pointer-events:none}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:26px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="logo">
+  <svg viewBox="0 0 330 260" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M30 70 H95 L120 30 H210 L235 70 H300 a15 15 0 0 1 15 15 V220 a15 15 0 0 1 -15 15 H30 a15 15 0 0 1 -15 -15 V85 a15 15 0 0 1 15 -15 Z"/><circle cx="165" cy="150" r="62"/><circle cx="165" cy="150" r="40" stroke-width="5"/></svg>
+  <div class="bar"></div>
+  <div><div class="t1">DOR FAYNA</div><div class="t2">WEDDING &amp; EVENT PHOTOGRAPHY</div></div>
+</div>
+<div class="hi" id="hi">שלום דור</div>
+<div class="grid">
+  <a class="tile wide" href="https://clients.dorfayna.co.il/hatzaa"><div class="ic">💬</div><div><b>הצעת מחיר</b><span>עמוד אישי ללקוח וקישור לוואטסאפ</span></div></a>
+  <a class="tile" href="https://clients.dorfayna.co.il/"><div class="ic">📋</div><div><b>מעקב לקוחות</b><span>אלבומים, וידאו, יתרות</span></div></a>
+  <a class="tile" href="https://clients.dorfayna.co.il/heskem"><div class="ic">✍️</div><div><b>הסכם חדש</b><span>יצירת קישור לחתימה</span></div></a>
+  <a class="tile" href="https://dorfayna.co.il/magnets"><div class="ic">🧲</div><div><b>מסגרות מגנטים</b><span>בחירת מסגרת לאירוע</span></div></a>
+  <a class="tile" href="https://dorfayna.co.il/"><div class="ic">🌐</div><div><b>האתר</b><span>dorfayna.co.il</span></div></a>
+  <a class="tile wide" href="https://drive.google.com/drive/search?authuser=mmdorldor%40gmail.com&q=%D7%94%D7%A1%D7%9B%D7%9E%D7%99%D7%9D%20%D7%97%D7%AA%D7%95%D7%9E%D7%99%D7%9D" target="_blank" rel="noopener"><div class="ic">📁</div><div><b>הסכמים חתומים</b><span>התיקייה ב-Google Drive</span></div></a>
+  <a class="tile wide soon" href="#"><div class="ic">🖼️</div><div><b>גלריות ללקוחות</b><span>בקרוב</span></div></a>
+</div>
+<div class="foot">מוסיפים למסך הבית: שיתוף ← "הוסף למסך הבית"<br>050-2858162 · mmdorldor@gmail.com</div>
+<script>
+(function(){ var h=new Date().getHours(); var g=h<5?'לילה טוב':h<12?'בוקר טוב':h<17?'צהריים טובים':h<21?'ערב טוב':'לילה טוב'; document.getElementById('hi').textContent=g+', דור'; })();
+</script>
+</body>
+</html>

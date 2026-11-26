@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121110">
+<meta property="og:title" content="הצעה אישית – Dor Fayna Photography">
+<meta property="og:description" content="צילום חתונות ואירועים">
+<meta property="og:image" content="https://dorfayna.co.il/assets/weddings/wedding-4.jpg">
+<title>הצעת מחיר – Dor Fayna Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&family=Frank+Ruhl+Libre:wght@300;500&family=Italiana&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#121110;--card:#1c1a18;--line:#312d28;--ink:#f4efe6;--muted:#a89f92;--gold:#cbab6e;--err:#ff9b8f;--ok:#8fd3a8;
+--font:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;--serif:'Frank Ruhl Libre','David Libre',Georgia,serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-text-size-adjust:100%}
+.hidden{display:none!important}
+h1,h2,h3{margin:0}
+a{color:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.top h1{font-size:21px;font-weight:600}
+.top a{font-size:14px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.card h2{font-size:16px;font-weight:600;margin-bottom:12px}
+.hint{font-size:13px;color:var(--muted);line-height:1.6}
+.f{display:flex;flex-direction:column;gap:5px;font-size:13.5px;color:var(--muted);margin-bottom:10px;min-width:0}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+input,select,textarea{width:100%;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:#141311;border:1px solid var(--line);border-radius:11px;padding:11px 12px;color-scheme:dark}
+input[type=date]{-webkit-appearance:none;appearance:none;min-height:48px}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+textarea{resize:vertical;line-height:1.6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-size:16px;font-weight:600;border-radius:12px;padding:13px 18px;border:1px solid var(--gold);background:var(--gold);color:#17130b;cursor:pointer;text-decoration:none;text-align:center}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.small{font-size:13.5px;padding:8px 12px;border-radius:10px}
+.btn:disabled,.btn[aria-disabled=true]{opacity:.4;pointer-events:none}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>.btn{flex:1}
+.msg{font-size:14px;color:var(--muted);margin-top:10px;line-height:1.6;white-space:pre-line}
+.msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
+.addon{display:grid;grid-template-columns:auto minmax(0,1fr) 96px;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.5}
+.addon:first-child{border-top:0}
+.addon input[type=checkbox]{width:20px;height:20px;accent-color:var(--gold)}
+.addon input[type=number]{padding:8px;font-size:16px}
+.price input{font-size:26px;font-weight:800}
+.heroes{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.heroes button{flex:0 0 78px;height:104px;padding:0;border:2px solid transparent;border-radius:12px;overflow:hidden;background:none;cursor:pointer}
+.heroes button[aria-pressed=true]{border-color:var(--gold)}
+.heroes img{width:100%;height:100%;object-fit:cover;display:block}
+.link{direction:ltr;text-align:left;word-break:break-all;font-size:13px;border:1px dashed var(--line);border-radius:11px;padding:11px;margin-bottom:10px}
+.q{border-top:1px solid var(--line);padding:11px 0}
+.q:first-child{border-top:0}
+.q b{display:block;font-size:15px}
+.q .row{margin-top:8px;gap:6px}
+.q .row>.btn{flex:0 0 auto}
+
+/* ---------- the page the client sees ---------- */
+#client{position:relative;background:var(--bg)}
+#client.overlay{position:fixed;inset:0;overflow-y:auto;z-index:20}
+.close{position:fixed;top:calc(10px + env(safe-area-inset-top));inset-inline-start:10px;z-index:30;background:rgba(0,0,0,.7);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;font:inherit;font-size:14px;padding:9px 15px;cursor:pointer}
+#client.overlay .brand{top:calc(66px + env(safe-area-inset-top))}
+.page{max-width:560px;margin:0 auto;padding-bottom:120px}
+.hero{position:relative;min-height:calc(100vh - 150px);min-height:calc(100svh - 150px);display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 30px;overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,17,16,.55) 0,rgba(18,17,16,0) 28%,rgba(18,17,16,.35) 58%,var(--bg) 100%)}
+.hero>div{position:relative;z-index:1;text-align:center}
+.brand{position:absolute!important;top:calc(24px + env(safe-area-inset-top));inset-inline:0;direction:ltr;font-family:'Italiana',var(--serif);font-size:24px;letter-spacing:6px}
+.brand small{display:block;font-family:var(--font);font-weight:300;font-size:9px;letter-spacing:3px;margin-top:4px}
+.hero .hi{font-family:var(--serif);font-weight:500;font-size:clamp(34px,10vw,48px);line-height:1.15;text-wrap:balance;overflow-wrap:anywhere}
+.hero .for{color:var(--gold);font-size:17px;margin-top:8px}
+.strip{display:flex;justify-content:center;border-block:1px solid var(--line);margin:0 18px}
+.strip div{flex:1;text-align:center;padding:14px 6px;min-width:0;overflow-wrap:anywhere}
+.strip div+div{border-inline-start:1px solid var(--line)}
+.strip small{display:block;color:var(--muted);font-size:12px;margin-bottom:3px}
+.strip b{font-weight:600;font-size:15px}
+.sec{padding:44px 22px 0}
+.sec>.n{color:var(--gold);font-size:13px;letter-spacing:2px}
+.sec>h2{font-family:var(--serif);font-weight:500;font-size:27px;margin:4px 0 16px}
+.letter{white-space:pre-line;line-height:1.85;font-size:16.5px;font-weight:300;overflow-wrap:anywhere}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gal img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block}
+.gal img.wide{grid-column:1/-1;aspect-ratio:3/2}
+.pk{display:inline-block;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:5px 14px;font-size:14px;margin-bottom:6px}
+.sec h3{font-size:15px;font-weight:600;color:var(--gold);margin:20px 0 4px}
+.sec ul{list-style:none;margin:0;padding:0}
+.sec li{position:relative;padding:7px 0;padding-inline-start:18px;line-height:1.65;font-weight:300;font-size:15.5px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.sec li:before{content:"";position:absolute;inset-inline-start:0;top:17px;width:6px;height:6px;border:1px solid var(--gold);transform:rotate(45deg)}
+.inv{background:var(--card);border:1px solid var(--gold);border-radius:20px;padding:26px 18px;text-align:center}
+.inv .sum{font-family:var(--serif);font-size:52px;font-weight:500;line-height:1.1;font-variant-numeric:tabular-nums}
+.inv .vat{color:var(--muted);font-size:13px;margin-top:4px}
+.inv .dep{border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:15px}
+.inv .row{margin-top:18px;flex-direction:column}
+.inv .note{color:var(--muted);font-size:12.5px;margin-top:12px;line-height:1.7}
+.about{text-align:center}
+.about img{width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:50% 22%;border:1px solid var(--gold)}
+.about p{font-weight:300;line-height:1.85}
+.meta{font-size:12px;color:var(--muted);margin-top:14px;letter-spacing:.5px}
+table.kv{width:100%;border-collapse:collapse}
+.kv td{padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top;font-size:15.5px;font-weight:300;line-height:1.55;overflow-wrap:anywhere}
+.kv td:first-child{color:var(--muted);padding-inline-end:12px;width:38%}
+.kv td:last-child{text-align:end}
+.kv.money td:first-child{width:auto}
+.kv.money td:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.kv tr.tot td{font-weight:600;font-size:18px;color:var(--ink);border-bottom:0}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.chips div:last-child:nth-child(odd){grid-column:1/-1}
+.chips div{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px 8px;text-align:center;font-size:14.5px;line-height:1.5}
+.inv h3{margin-top:22px;text-align:start}
+.inv table{text-align:start}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.sec .steps li{counter-increment:s;padding-inline-start:44px;min-height:56px}
+.sec .steps li:before{content:counter(s);width:28px;height:28px;transform:none;border-radius:50%;top:10px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:13px}
+.steps b{display:block;font-weight:600}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;padding:14px 0;font-size:15.5px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--gold);font-size:20px;line-height:1}
+details[open] summary:after{content:"–"}
+details p,details ul{margin:0 0 14px}
+details p{font-weight:300;font-size:14.5px;line-height:1.7}
+blockquote{margin:0 0 10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;font-weight:300;line-height:1.75;font-size:15px}
+blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px;margin-top:8px}
+.more{display:block;text-align:center;color:var(--gold);font-size:14.5px;margin-top:12px}
+.bar .btn{padding:12px 14px;font-size:15px}
+.bar .acts{display:flex;gap:8px}
+.chkline{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.6;margin:4px 0 10px;color:var(--ink)}
+.chkline input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--gold);margin-top:2px}
+.legal{text-align:center;color:var(--muted);font-size:12px;line-height:1.8;padding:40px 22px 0}
+.bar{position:fixed;bottom:0;inset-inline:0;z-index:25;background:rgba(18,17,16,.96);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.bar>div{max-width:528px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bar b{font-size:22px;font-variant-numeric:tabular-nums}
+.bar small{display:block;color:var(--muted);font-size:11.5px}
+.state{max-width:420px;margin:30vh auto 0;text-align:center;padding:0 24px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<div id="admin" class="hidden">
+  <div class="wrap">
+    <div class="top"><h1>הצעת מחיר חדשה</h1><a href="https://app.dorfayna.co.il/" id="home-link">למערכת</a></div>
+
+    <div class="card">
+      <h2>מילוי מהיר</h2>
+      <div class="f"><span>הדביקו הודעה מוואטסאפ או מהצ'אט באתר, או כתבו בשורה אחת</span>
+        <textarea id="paste" rows="4" placeholder="הצעה לנועה ואיתי, חתונה 10.6.27 בקיסריה, 350 איש, פרימיום, מקדמה 1000"></textarea></div>
+      <button class="btn ghost" id="fill" type="button" style="width:100%">מילוי אוטומטי</button>
+      <div id="fill-msg" class="msg" role="status"></div>
+    </div>
+
+    <div class="card">
+      <h2>האירוע</h2>
+      <div class="f"><span>שמות הזוג / המזמינים</span><input id="names" type="text" maxlength="60"></div>
+      <div class="grid2">
+        <div class="f"><span>סוג אירוע</span><select id="type"></select></div>
+        <div class="f"><span>תאריך</span><input id="date" type="date"></div>
+      </div>
+      <div class="grid2">
+        <div class="f"><span>מקום</span><input id="venue" type="text" maxlength="60"></div>
+        <div class="f"><span>מוזמנים</span><input id="guests" type="text" maxlength="20" inputmode="numeric"></div>
+      </div>
+      <div class="grid2">
+        <div class="f"><span>שעת התחלה</span><input id="start" type="time"></div>
+        <div class="f"><span>שעת סיום</span><input id="end" type="time"></div>
+      </div>
+      <div class="f"><span>טלפון של הלקוח (לא חובה, לפתיחת הוואטסאפ שלו)</span><input id="phone" type="tel" inputmode="tel" maxlength="20"></div>
+    </div>
+
+    <div class="card">
+      <h2>מה כלול</h2>
+      <div class="f"><span>חבילה</span><select id="pkg"></select></div>
+      <div id="addons"></div>
+      <div class="f" style="margin-top:10px"><span>עוד דברים שכלולים (כל שורה בנפרד, לא חובה)</span><textarea id="extra" rows="3" maxlength="600"></textarea></div>
+    </div>
+
+    <div class="card">
+      <h2>מחיר</h2>
+      <div class="f price"><span>מחיר כולל מע״מ (₪)</span><input id="price" type="number" inputmode="numeric" min="0"></div>
+      <div class="hint" id="calc" style="margin:-4px 0 12px"></div>
+      <div class="grid2">
+        <div class="f"><span>מקדמה (ריק = בלי)</span><input id="dep" type="number" inputmode="numeric" min="0"></div>
+        <div class="f"><span>ההצעה בתוקף עד (לא חובה)</span><input id="valid" type="date"></div>
+        <div class="f"><span>ביום האירוע</span><input id="day" type="number" inputmode="numeric" min="0"></div>
+        <div class="f"><span>צ'ק דחוי, יומיים מהאירוע</span><input id="chk" type="number" inputmode="numeric" min="0"></div>
+        <div class="f"><span>אמצעי תשלום למקדמה</span><input id="depm" type="text" maxlength="40" value="בפייבוקס / בהעברה"></div>
+        <div class="f"><span>אמצעי תשלום ביום האירוע</span><input id="daym" type="text" maxlength="40" value="במזומן"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>העמוד שהלקוח יראה</h2>
+      <div class="f"><span>מילה אישית</span><textarea id="letter" rows="7" maxlength="900"></textarea></div>
+      <div class="f" style="margin-bottom:0"><span>תמונה ראשית</span><div class="heroes" id="heroes"></div></div>
+    </div>
+
+    <div class="card">
+      <label class="chkline"><input type="checkbox" id="sign" checked><span>הלקוח יכול לעבור ישר מההצעה להסכם ולחתום</span></label>
+      <label class="chkline" style="margin-bottom:0"><input type="checkbox" id="opts" checked><span>להציג ללקוח תוספות אפשריות ומחיריהן</span></label>
+    </div>
+
+    <div class="row">
+      <button class="btn ghost" id="prev" type="button">תצוגה מקדימה</button>
+      <button class="btn" id="make" type="button">יצירת קישור</button>
+    </div>
+    <div id="msg" class="msg" role="alert"></div>
+
+    <div class="card hidden" id="out" style="margin-top:12px">
+      <div class="link" id="link"></div>
+      <div class="row">
+        <a class="btn" id="wa" target="_blank" rel="noopener">פתיחה בוואטסאפ</a>
+        <button class="btn ghost" id="copy" type="button">העתקה</button>
+      </div>
+      <div class="row" style="margin-top:10px"><button class="btn ghost" id="agree" type="button">הסכם מההצעה הזו</button></div>
+      <div id="out-msg" class="msg" role="status"></div>
+    </div>
+
+    <div class="card hidden" id="saved" style="margin-top:12px"><h2>ההצעות שלי</h2><div id="saved-list"></div><div class="hint">הרשימה נשמרת רק במכשיר הזה.</div></div>
+  </div>
+</div>
+
+<div id="client" class="hidden"></div>
+
+<script>
+(function(){
+  var MAIL_URL = 'https://script.google.com/macros/s/AKfycbxDSTAs6Qp75kppwxrVXbtdjVBjujRQhEMheaFkBv-5Uq_SFd4bmwT4DlJqOFLgC2ozmw/exec';
+  var WA = '972502858162';
+  var LIVE = /(^|\.)dorfayna\.co\.il$/.test(location.hostname);
+  var IMG = LIVE ? 'https://dorfayna.co.il/assets/' : './img/';
+
+  /* package contents: same wording as the agreement page */
+  var GALLERY = 'כל התמונות בעריכה מקצועית, בגלריה דיגיטלית פרטית – לצפייה, הורדה ושיתוף עם בני משפחה וחברים, וכן לבחירת התמונות לאלבום בצורה נוחה ופשוטה.';
+  var STILLS2 = ['צלם סטילס מההכנות לאורך כל היום.','צלם סטילס נוסף מצילומי המשפחות באולם.'];
+  var VIDEO = ['צלם וידאו מקצועי לאורך כל היום – מההכנות ועד סיום האירוע.','מצלמת וידאו נוספת בחופה, מוצבת על חצובה.','צילום רחפן בצילומי חוץ או באולם (בכפוף לאפשרות הטסה חוקית ובטוחה, לתנאי המקום ומזג האוויר, ועל פי שיקול דעת הצלם).'];
+  var EDIT = ['עריכת סרט מלא (מהחומרים הגולמיים).','סרט קצר באורך של 45–60 דקות.','קליפ Highlight משולב – מהכנות, צילומי חוץ, חופה וריקודים.','טיזר קצר באורך 40–50 שניות (Reels) מותאם לאינסטגרם.','לינק להורדה בענן עם כל הסרטים לאחר עריכה – באיכות גבוהה.'];
+  var ALBUMS = ['אלבום לזוג בגודל 30/60.','שני אלבומים להורים בגודל 20/40.','בחירת כריכה ממגוון רחב של כריכות (הגרפיקה זהה בכל האלבומים).'];
+  var MAGNETS = ['צילום והדפסת מגנטים באירוע ללא הגבלת כמות, בשעות השירות שסוכמו.','10 הגדלות מגנט ו־2–4 הגדלות פוטובלוק לזוג (הכמות והמידות לפי ההצעה).'];
+  /* base prices: as published on the site's price page */
+  var PKGS = {
+    'Standard': {title:'Standard – צילום סטילס', price:5500, has:[], sec:[['צילום סטילס',STILLS2.concat([GALLERY])]]},
+    'STANDART PLUS': {title:'STANDART PLUS – סטילס ווידאו', price:6500, has:['video'], sec:[['צילום סטילס',['צלם סטילס אחד מההכנות לאורך כל היום.',GALLERY]],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT]]},
+    'Premium': {title:'Premium – סטילס, וידאו ואלבומים', price:9500, has:['video','albums'], sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT]]},
+    'Premium Plus': {title:'Premium Plus – צילום מלא ומגנטים', price:11000, has:['video','albums','magnets'], sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT],['מגנטים',MAGNETS]]},
+    'Diamond': {title:'Diamond – צילום מלא, זוגיות והדפסים', price:13000, has:['video','albums','magnets','couple'], sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT],['מגנטים',MAGNETS],['זוגיות והדפסים',['צילומי זוגיות (Save the Date) לפני האירוע.','קנבס גדול לזוג ושני קנבסים להורים, או הגדלת זכוכית – לפי הבחירה בהצעה.']]]},
+    'custom': {title:'הצעה מותאמת אישית', price:0, has:[], sec:[]}
+  };
+  var ADDONS = [
+    ['glass','תמונת זכוכית בגודל 40/60',700],
+    ['albums','סט אלבומים: אלבום זוגי 30/60 + 2 אלבומי הורים 20/40',1000],
+    ['magnets','חבילת מגנטים ללא הגבלה עד 5 שעות עד השעה 00:00, כולל חבילה אישית לחתן ולכלה: 25–40 מגנטים קטנים לזוג + 10 הגדלות בגודל A5',1600],
+    ['couple','צילומי זוגיות / טראש במרכז עד 2–3 שעות (ים המלח בתוספת 1,000 ₪)',1500],
+    ['video2','צלם וידאו נוסף לאירוע (מומלץ מעל 500 מוזמנים או באירוע מופרד)',1800]
+  ];
+  var DELIVERY = {stills:'תמונות סטילס: עד 21 ימי עסקים לאחר האירוע.', video:'חומרי וידאו: עד 45 ימי עסקים מבחירת השירים על ידי המזמין.', albums:'אלבומים מעוצבים: עד 30 ימי עסקים מרגע אישור העיצוב.'};
+
+  /* from the agreement page, word for word */
+  var CANCEL = ['ביטול בין 0 ל-14 ימים לפני האירוע: המזמין יחויב ב-90% מהסכום הכולל, בנוסף למקדמה.','ביטול בין 15 ל-120 ימים: המזמין יחויב ב-50% מהסכום הכולל, בנוסף למקדמה.','ביטול מעל 120 ימים ולאחר 14 יום מרגע חתימה על הסכם זה: המזמין יחויב ב-30% מהסכום הכולל, בנוסף למקדמה.'];
+  var FORCE = 'בהתאם לזמינות, במקרה של "כוח עליון" – נגיף הקורונה / מלחמה, אשר בעקבותיו האירוע מבוטל / נדחה (ע"פ הנחיות פיקוד העורף), יימצא בשיתוף יחד עם הזוג מועד חדש, על בסיס תאריך פנוי. לא תוחזר המקדמה.';
+  var GOOD = ['הצלם ישמור את חומרי הגלם למשך 14 ימי עסקים ממסירת החומרים, ולא יהיה אחראי לחומרים מעבר לתקופה זו.','בחירת התמונות לאלבומים תתבצע עד חודשיים ממועד האירוע. עיכוב בבחירה עלול להוביל לעלויות נוספות אם וכאשר תהיה עליית מחירים, ויחויב בהתאם לשוק החדש.','למזמין העבודה יהיו 14 ימי עסקים לשלוח תיקונים ו/או כל שינויים לאחר גרפיקת האלבומים.','הלקוח מצהיר כי הובהר לו במפורש שלתאורה במקום האירוע יש השפעה על תמונות הסטילס וסרטי הווידאו.'];
+  var EXTRA_HOUR = 'כל שעה נוספת או חלק ממנה מעבר לשעות שסוכמו תחויב ב-500 ₪ לכל צלם שתרצו להשאיר באירוע.';
+  /* quotes from the recommendations published on the site */
+  var SAID = [
+    ['דור והצוות איכפתיים וזמינים רגישים לצרכים של החתן והכלה ומנסים לתקתק הכל שיהיה מוצלח. התמונות הגיעו בזמן קצר ביותר וגם הסרטים והאלבומים. הכל באיכות גבוהה ובאדיבות.','Ofir'],
+    ['אין ספק שדור נותן שירות מושלם- מענה מיידי לכל נושא, השרה רוגע וביטחון במהלך הצילומים, הכל מתקתק כמו שצריך, מפרגן, והכי חשוב מתאים את עצמו לראש של הזוג!','הדר'],
+    ['בין כל החששות שיש לקראת חתונה, היינו רגועים איתך וסמכנו עליך כי ידענו שבחרנו נכון.','ענבל ואילן']
+  ];
+  var CHIPS = {
+    'Standard':['שני צלמי סטילס','גלריה דיגיטלית פרטית'],
+    'STANDART PLUS':['צלם סטילס','צלם וידאו','רחפן*','סרט, קליפ וטיזר'],
+    'Premium':['שני צלמי סטילס','צלם וידאו ורחפן*','שלושה אלבומים','סרט, קליפ וטיזר'],
+    'Premium Plus':['שני צלמי סטילס','צלם וידאו ורחפן*','שלושה אלבומים','סרט, קליפ וטיזר','מגנטים ללא הגבלה','הגדלות ופוטובלוק'],
+    'Diamond':['שני צלמי סטילס','צלם וידאו ורחפן*','שלושה אלבומים','מגנטים ללא הגבלה','צילומי זוגיות','קנבס או זכוכית']
+  };
+  var TYPES = ['חתונה','חינה','עלייה לתורה','בר מצווה','בת מצווה','ברית / בריתה','אירוסין','אירוע חברה','אירוע אחר'];
+  var FOR = {'עלייה לתורה':'לעלייה לתורה','חתונה':'לחתונה שלכם','חינה':'לחינה שלכם','בר מצווה':'לבר המצווה','בת מצווה':'לבת המצווה','ברית / בריתה':'לברית / בריתה','אירוסין':'לאירוסין שלכם','אירוע חברה':'לאירוע שלכם','אירוע אחר':'לאירוע שלכם'};
+
+  /* photos already published on the site */
+  var PHOTOS = {
+    p1:'optimized/64e9160a66f1-960.webp', p2:'site/8b30edfa3aee9d10-960.webp', p3:'site/liad-kobi-package-1280.webp',
+    p4:'site/ff55338485664e90-960.webp', p5:'optimized/5f7c6d0c5404-960.webp', p6:'optimized/f8ae8a45ddca-960.webp',
+    p7:'optimized/3b272e6441c1-960.webp', p8:'stories/liad-kobi-preparation-1280.webp', p9:'site/standart-plus-detail-1280.webp',
+    p10:'site/4dfb930b461788c8-960.webp',
+    m1:'optimized/dc67a8fd627d-960.webp', m2:'optimized/395b97225cd5-960.webp', b1:'optimized/2302764b7084-960.webp',
+    e1:'optimized/05568f8f55c7-960.webp', g1:'site/cf1fd9fabe4caaf0-960.webp', g2:'site/03cbed73ce9a1dc8-960.webp', g3:'site/1c584eb84bccf892-960.webp',
+    me:'site/dor-fayna-portrait-800.webp'
+  };
+  var SETS = {
+    wedding:{heroes:['p1','p2','p3','p4','p5','p6'], gal:['p4','p2','p8','p10','p7']},
+    mitzvah:{heroes:['m1','m2','e1'], gal:['m2','m1','g1','e1']},
+    bat:{heroes:['e1','g1','g3'], gal:['e1','g1','g3','g2']},
+    brit:{heroes:['b1','g1'], gal:['b1','g1','g2','g3']},
+    other:{heroes:['e1','g1','g3'], gal:['e1','g1','g2','g3']}
+  };
+  function hhmm(v){ return /^([01]\d|2[0-3]):[0-5]\d$/.test(v||'')?v:''; }
+  /* the object the agreement page understands */
+  function agreementOf(o){
+    return {v:1,id:o.id,names:o.n,type:o.ty,date:o.d,venue:o.pl,guests:o.g,start:o.st,end:o.en,pkg:o.pk,
+      addons:(o.ad||[]).map(function(a){ var def=ADDONS.filter(function(x){return x[0]===a.k;})[0]; return {k:a.k,t:def?def[1]:a.k,p:+a.p||0}; }),
+      extra:(o.ex||[]).join('\n'),price:o.pr,dep:o.dp,day:o.dy,chk:o.ck,depm:o.dm,daym:o.ym};
+  }
+  function setFor(t){ return SETS[{'חתונה':'wedding','חינה':'wedding','אירוסין':'wedding','בר מצווה':'mitzvah','עלייה לתורה':'mitzvah','בת מצווה':'bat','ברית / בריתה':'brit'}[t]||'other']; }
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function money(n){ return (+n||0).toLocaleString('he-IL')+' ₪'; }
+  function fmtDate(s){ var m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(s||''); return m?(+m[3])+'.'+(+m[2])+'.'+m[1]:''; }
+  function today(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  function enc(o){ var b=new TextEncoder().encode(JSON.stringify(o)), s=''; b.forEach(function(x){s+=String.fromCharCode(x);}); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+  function dec(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='='; var bin=atob(s), u=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return JSON.parse(new TextDecoder().decode(u)); }
+  function store(k,v){ try{ if(v===undefined) return JSON.parse(localStorage.getItem(k)||'null'); localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return null; } }
+  function waUrl(num,text){ return 'https://wa.me/'+num+'?text='+encodeURIComponent(text); }
+
+  /* ---------- the page the client sees ---------- */
+  function quoteHtml(o){
+    var p=PKGS.hasOwnProperty(o.pk)?PKGS[o.pk]:PKGS.custom;
+    var type=TYPES.indexOf(o.ty)>-1?o.ty:'אירוע אחר', set=setFor(type);
+    var hero=PHOTOS.hasOwnProperty(o.h)?o.h:set.heroes[0];
+    var date=fmtDate(o.d), who=String(o.n||'');
+    var ads=(Array.isArray(o.ad)?o.ad:[]).map(function(a){ var def=ADDONS.filter(function(x){return x[0]===(a&&a.k);})[0]; return def?{k:def[0],t:def[1],p:+a.p||0}:null; }).filter(Boolean);
+    var extra=(Array.isArray(o.ex)?o.ex:[]).filter(Boolean);
+    var ref=who+(date?', '+date:'')+(o.id?' (הצעה '+o.id+')':'');
+    var yes=waUrl(WA,'היי דור, ראינו את ההצעה '+ref+' ונשמח להתקדם.');
+    var ask=waUrl(WA,'היי דור, יש לנו שאלה לגבי ההצעה '+ref+'.');
+    var expired=fmtDate(o.vu) && o.vu<today();
+    var custom=!p.sec.length, st=hhmm(o.st), en=hhmm(o.en);
+    var key=/^[A-Z0-9]{8}$/.test(o.ak||'')?o.ak:'';
+    var canSign=!expired && !!o.sg && (key || !LIVE);
+    function go(label){
+      if(expired) return '';
+      if(canSign) return key&&LIVE?'<a class="btn" href="/heskem?k='+key+'">'+label+'</a>':'<button type="button" class="btn" data-sign>'+label+'</button>';
+      return '<a class="btn" href="'+esc(yes)+'" target="_blank" rel="noopener">נשמח להתקדם</a>';
+    }
+    function img(k,cls){ return '<img src="'+IMG+PHOTOS[k]+'" alt="" loading="lazy"'+(cls?' class="'+cls+'"':'')+'>'; }
+    function ul(a){ return '<ul>'+a.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>'; }
+    function table(rows,cls){ return '<table class="kv'+(cls?' '+cls:'')+'">'+rows.map(function(r){ return '<tr'+(r[2]?' class="'+r[2]+'"':'')+'><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>'; }).join('')+'</table>'; }
+    var n=0; function sec(t,body,cls){ n++; return '<section class="sec'+(cls?' '+cls:'')+'"><div class="n">'+('0'+n).slice(-2)+'</div><h2>'+t+'</h2>'+body+'</section>'; }
+    var weekday=date?new Date(o.d+'T12:00:00').toLocaleDateString('he-IL',{weekday:'long'}):'';
+
+    var h='<div class="page"><header class="hero"><img src="'+IMG+PHOTOS[hero]+'" alt="">'
+      +'<div class="brand">DOR FAYNA<small>WEDDING &amp; EVENT PHOTOGRAPHY</small></div>'
+      +'<div><h1 class="hi">היי '+esc(who)+'</h1><div class="for">הצעה אישית '+FOR[type]+'</div>'
+      +(o.id?'<div class="meta">הצעה מס׳ '+esc(o.id)+(fmtDate(o.at)?' · '+fmtDate(o.at):'')+'</div>':'')+'</div></header>';
+    var cells=[['תאריך',date],['מקום',o.pl],['מוזמנים',o.g]].filter(function(c){return c[1];});
+    if(cells.length) h+='<div class="strip">'+cells.map(function(c){return '<div><small>'+c[0]+'</small><b>'+esc(c[1])+'</b></div>';}).join('')+'</div>';
+    if(o.msg) h+=sec('מילה אישית','<div class="letter">'+esc(o.msg)+'</div>');
+
+    var info=[['סוג האירוע',type]];
+    if(date) info.push(['תאריך',weekday+', '+date]);
+    if(st&&en) info.push(['שעות הצילום',st+' עד '+en]);
+    if(o.pl) info.push(['מקום',o.pl]);
+    if(o.g) info.push(['מוזמנים',o.g]);
+    if(!custom) info.push(['חבילה',p.title]);
+    if(fmtDate(o.vu)) info.push(['ההצעה בתוקף עד',fmtDate(o.vu)]);
+    h+=sec('פרטי האירוע',table(info));
+
+    var inc='';
+    if(!custom){
+      var chips=(CHIPS[o.pk]||[]).concat(ads.map(function(a){ return {glass:'תמונת זכוכית',albums:'סט אלבומים',magnets:'מגנטים באירוע',couple:'צילומי זוגיות',video2:'צלם וידאו נוסף'}[a.k]; }));
+      inc+='<div class="chips">'+chips.map(function(c){return '<div>'+esc(c)+'</div>';}).join('')+'</div>';
+      if(chips.join().indexOf('*')>-1) inc+='<div class="meta">* צילום רחפן בכפוף לתנאי ההטסה.</div>';
+    }
+    p.sec.forEach(function(s){ inc+='<h3>'+esc(s[0])+'</h3>'+ul(s[1]); });
+    if(ads.length||extra.length) inc+='<h3>'+(custom?'בהצעה שלכם':'בנוסף בהצעה שלכם')+'</h3>'+ul(ads.map(function(a){return a.t;}).concat(extra));
+    if(inc) h+=sec('מה אתם מקבלים',inc);
+
+    var gal=set.gal.filter(function(k){return k!==hero;}).slice(0,5);
+    h+=sec('רגעים מהעבודה שלנו','<div class="gal">'+gal.map(function(k,i){ return img(k,(gal.length%2===1&&i===0)?'wide':''); }).join('')+'</div><a class="more" href="https://dorfayna.co.il/" target="_blank" rel="noopener">לעוד חתונות, סרטים ואלבומים באתר</a>');
+
+    var addSum=ads.reduce(function(t,a){return t+a.p;},0), rows=[];
+    if(!custom && ads.length && +o.pr>addSum){ rows.push([p.title,money(o.pr-addSum)]); ads.forEach(function(a){ rows.push([{glass:'תמונת זכוכית',albums:'סט אלבומים',magnets:'חבילת מגנטים',couple:'צילומי זוגיות',video2:'צלם וידאו נוסף'}[a.k],money(a.p)]); }); }
+    var pay=[];
+    if(+o.dp) pay.push(['מקדמה לשריון התאריך'+(o.dm?' · '+o.dm:''),money(o.dp)]);
+    if(+o.dy) pay.push(['ביום האירוע'+(o.ym?' · '+o.ym:''),money(o.dy)]);
+    if(+o.ck) pay.push(['צ׳ק דחוי, יומיים מהאירוע',money(o.ck)]);
+    var inv='<div class="inv"><div class="sum">'+money(o.pr)+'</div><div class="vat">כולל מע״מ</div>';
+    if(rows.length) inv+='<h3>פירוט המחיר</h3>'+table(rows.concat([['סה״כ',money(o.pr),'tot']]),'money');
+    if(pay.length) inv+='<h3>תשלומים</h3>'+table(pay,'money');
+    if(expired) inv+='<div class="dep">תוקף ההצעה הסתיים. כתבו לנו ונעדכן.</div>';
+    inv+='<div class="row">'+go('מתקדמים להסכם וחתימה')+'<a class="btn ghost" href="'+esc(ask)+'" target="_blank" rel="noopener">יש לנו שאלה בוואטסאפ</a></div>'
+      +'<div class="note">שמירת תאריך בכפוף לזמינות ולהסכם.</div></div>';
+    h+=sec('ההשקעה',inv);
+
+    if(o.os && !custom){
+      var more=ADDONS.filter(function(a){ return p.has.indexOf(a[0])<0 && !(a[0]==='video2'&&o.pk==='Standard') && !(a[0]==='glass'&&o.pk==='Diamond') && !ads.some(function(x){return x.k===a[0];}); });
+      if(more.length) h+=sec('אפשר להוסיף',table(more.map(function(a){return [a[1],money(a[2])];}),'money')+'<a class="more" href="'+esc(waUrl(WA,'היי דור, נשמח לשמוע על תוספות להצעה '+ref+'.'))+'" target="_blank" rel="noopener">מעניין אתכם? כתבו לנו</a>');
+    }
+
+    var steps=[ canSign?['חתימה על ההסכם','קוראים, ממלאים פרטים וחותמים ישירות מהטלפון. עותק חתום נשלח אליכם במייל.']:['אישור ההצעה','כותבים לנו בוואטסאפ ונשלח הסכם לחתימה.'],
+      ['שריון התאריך',+o.dp?'מקדמה בסך '+money(o.dp)+(o.dm?' '+o.dm:'')+'.':'התאריך נשמר בהתאם לזמינות ולהסכם.'],
+      ['תיאום לפני האירוע','מתאמים את הצילום ועוברים על כל הפרטים.'],
+      ['יום האירוע','אתם חוגגים, ואנחנו מצלמים.'] ];
+    if(!custom) steps.push(['קבלת החומרים','לפי זמני האספקה שבהמשך.']);
+    h+=sec('איך מתקדמים','<ul class="steps">'+steps.map(function(x){ return '<li><b>'+x[0]+'</b>'+esc(x[1])+'</li>'; }).join('')+'</ul>');
+
+    var info2='';
+    if(!custom){
+      var has=p.has.concat(ads.map(function(a){return a.k;}));
+      var d=[DELIVERY.stills]; if(has.indexOf('video')>-1) d.push(DELIVERY.video); if(has.indexOf('albums')>-1) d.push(DELIVERY.albums);
+      info2+='<details open><summary>זמני אספקה</summary>'+ul(d)+'</details>';
+    }
+    var good=[EXTRA_HOUR,GOOD[0]]; if(!custom && (p.has.indexOf('albums')>-1||ads.some(function(a){return a.k==='albums';}))) good.push(GOOD[1],GOOD[2]); good.push(GOOD[3]);
+    info2+='<details><summary>תנאים שכדאי להכיר</summary>'+ul(good)+'</details>'
+      +'<details><summary>ביטול</summary>'+ul(CANCEL)+'</details><details><summary>כוח עליון</summary><p>'+esc(FORCE)+'</p></details>'
+      +'<div class="meta">התנאים המלאים והמחייבים מופיעים בהסכם.</div>';
+    h+=sec('חשוב לדעת',info2);
+
+    if(type==='חתונה') h+=sec('זוגות מספרים',SAID.map(function(q){ return '<blockquote>'+esc(q[0])+'<cite>'+esc(q[1])+' · קטע מהמלצה</cite></blockquote>'; }).join(''));
+    h+=sec('נעים להכיר',img('me')+'<p>אני דור פיינה, צלם חתונות ואירועים עם ניסיון של מעל עשור. אני מלווה זוגות ומשפחות ביום האירוע, מצילומי ההכנות והמשפחה ועד החופה והרחבה.</p>','about');
+    if(!expired) h+='<section class="sec"><div class="inv"><h2 style="font-family:var(--serif);font-weight:500">נשמח לצלם אתכם</h2><div class="row">'+go('מתקדמים להסכם וחתימה')+'</div></div></section>';
+    h+='<div class="legal">Dor Fayna Photography · 050-2858162<br><a href="https://dorfayna.co.il/" target="_blank" rel="noopener">dorfayna.co.il</a></div></div>';
+    h+='<div class="bar"><div><div><b>'+money(o.pr)+'</b><small>כולל מע״מ</small></div><div class="acts"><a class="btn ghost" href="'+esc(ask)+'" target="_blank" rel="noopener">שאלה</a>'+go('להסכם')+'</div></div></div>';
+    return h;
+  }
+  function showClient(o, overlay){
+    var c=$('client'); c.className=overlay?'overlay':''; c.innerHTML=quoteHtml(o);
+    [].forEach.call(c.querySelectorAll('[data-sign]'),function(b){ b.onclick=function(){ if(window.dfDemoAgreement) window.dfDemoAgreement(agreementOf(o)); }; });
+    if(overlay){
+      var b=document.createElement('button'); b.type='button'; b.className='close'; b.textContent='✕ חזרה לעריכה';
+      b.onclick=function(){ c.className='hidden'; c.innerHTML=''; document.body.style.overflow=''; };
+      c.appendChild(b); c.scrollTop=0; document.body.style.overflow='hidden';
+    } else document.title='הצעה אישית – '+o.n;
+  }
+
+  /* ---------- quick fill from pasted text (no AI) ---------- */
+  var CITIES = ['תל אביב יפו','תל אביב','ירושלים','חיפה','ראשון לציון','ראשל"צ','פתח תקווה','פתח תקוה','אשדוד','נתניה','באר שבע','בני ברק','חולון','רמת גן','אשקלון','רחובות','בת ים','בית שמש','כפר סבא','הרצליה','חדרה','מודיעין','נס ציונה','רעננה','רמלה','לוד','קריית גת','קרית גת','אילת','טבריה','צפת','עפולה','נהריה','עכו','כרמיאל','גבעתיים','הוד השרון','קיסריה','יבנה','גדרה','ראש העין','אור יהודה','יהוד','שוהם','זכרון יעקב','זיכרון יעקב','בנימינה','פרדס חנה','מבשרת ציון','אריאל','מעלה אדומים','קריית אונו','קרית אונו','גבעת שמואל','רמת השרון','אבן יהודה','שדרות','נתיבות','אופקים','דימונה','ערד','ים המלח','קריית ביאליק','קריית מוצקין','קריית ים','קריית אתא','נוף הגליל','נצרת','יקנעם','מזכרת בתיה','גן יבנה','קריית מלאכי','קרית מלאכי','אלעד','ביתר עילית','אפרת','תל מונד','כוכב יאיר','באר יעקב','גני תקווה','סביון','קריית עקרון','מגדל העמק','בית שאן','קצרין','ראש פינה'];
+  var MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+  /* words that are never a name or a place */
+  var STOP = 'תודה רבה בבקשה בקשה אשמח בוקר בבוקר ערב בערב צהריים בצהריים לילה בלילה בערך בשעה שעה שעות שעתיים וחצי חצי ביום יום בתאריך תאריך רק אני אנחנו כמה רוצה רוצים מעוניין מעוניינת מעוניינים צריך צריכה צריכים עם כולל יש בלי גם או של את על זה אם כן לא טוב מחיר עולה יעלה לי לנו לכם שלי שלנו אפשר מוזמנים איש אורחים וידאו וידיאו סטילס צילום צלם תמונות מגנטים אלבום אלבומים רחפן בלבד בברכה דור שלום היי הי אהלן שבוע חודש שנה הבא הקרוב ראשון שני שלישי רביעי חמישי שישי שבת אירוע ארוע חתונה חינה ברית בריתה מצווה מצוה תורה לתורה אולם גן יפו העיר מרכז צפון דרום אחר פרטים הצעה אשמחה בהקדם דחוף'.split(' ');
+  var H = '\u05d0-\u05ea';
+  function isStop(w){ return STOP.indexOf(w)>-1 || MONTHS.indexOf(w.replace(/^[בל]/,''))>-1; }
+  function isName(x){ var w=x.split(' '); return w.length<=3 && w.every(function(y){ return new RegExp('^['+H+'][\''+'׳'+H+'\\-]{1,14}$').test(y) && !isStop(y) && !isStop(y.replace(/^ו/,'')); }) && (w.length===1 || (w.length===2&&w[1].charAt(0)==='ו') || (w.length===3&&w[2].charAt(0)==='ו')); }
+  function findCity(t){
+    var best=null;
+    CITIES.forEach(function(c){
+      var re=new RegExp('(^|[^'+H+'])(?:וב|ב|מ|ל)?[-־]?('+c.replace(/ /g,'[ \\-־]')+')(?!['+H+'])'), m=re.exec(t);
+      if(m){ var end=m.index+m[0].length; if(!best || end-m[2].length<best.start || (end-m[2].length===best.start && m[2].length>best.name.length)) best={name:m[2],start:end-m[2].length,end:end}; }
+    });
+    return best;
+  }
+  function findVenue(t){
+    var m=new RegExp('(?:^|[^'+H+'])(?:וב|ב|ל|מ)?[-־]?((?:אולמי|אולם|גן אירועים|גני האירועים|בית ה?כנסת|ביהכ"נ|מלון|חוות|אחוזת|מסעדת|היכל|ה?כותל|קיבוץ|מושב)(?![א-ת])(?:[ \\-־]+['+H+'"\'׳״]+){0,5})').exec(t);
+    if(!m) return '';
+    var words=m[1].split(/\s+/), out=[];
+    for(var i=0;i<words.length;i++){ if(i && STOP.indexOf(words[i])>-1 && ['יום','אולם','גן','יפו','ראשון','מרכז','צפון','דרום'].indexOf(words[i])<0) break; out.push(words[i]); }
+    var v=out.join(' '), c=findCity(v);
+    return c?v.slice(0,c.end):v;
+  }
+  function iso(y,mo,da){ var c=new Date(y,mo-1,da); return (c.getFullYear()===y&&c.getMonth()===mo-1&&c.getDate()===da)?y+'-'+('0'+mo).slice(-2)+'-'+('0'+da).slice(-2):''; }
+  function findDate(t){
+    var list=[], m, re=/(^|[^\d.\/:])(\d{1,2})[.\/](\d{1,2})(?:[.\/](\d{4}|\d{2}))?(?!\d|[.\/:]\d|\s*(?:שעות|שעה|אלף|ק"מ|מטר|%))/g;
+    while((m=re.exec(t))) list.push({at:m.index,d:+m[2],mo:+m[3],y:m[4]});
+    re=new RegExp('(^|[^\\d])(\\d{1,2})\\s*(?:ב|ל)?[-־]?\\s*('+MONTHS.join('|')+'|מרס)(?:\\s*,?\\s*(20\\d\\d))?','g');
+    while((m=re.exec(t))) list.push({at:m.index,d:+m[2],mo:m[3]==='מרס'?3:MONTHS.indexOf(m[3])+1,y:m[4]});
+    list.sort(function(a,b){return a.at-b.at;});
+    for(var i=0;i<list.length;i++){
+      var x=list[i];
+      if(x.y){ var full=iso(x.y.length===2?2000+(+x.y):+x.y,x.mo,x.d); if(full) return {date:full}; }
+      else { var now=new Date().getFullYear(); for(var k=0;k<2;k++){ var g=iso(now+k,x.mo,x.d); if(g&&g>=today()) return {date:g,guessed:true}; } }
+    }
+    return {};
+  }
+  function parse(text){
+    var r={}, t=String(text||'').replace(/\u200f|\u200e/g,'').trim(), m;
+    function label(k){ var x=new RegExp('(?:^|\\n)\\s*'+k+'\\s*:\\s*([^\\n]+)').exec(t); return x?x[1].trim():''; }
+    var low=t.toLowerCase();
+    var L={type:label('אירוע'),place:label('מקום'),guests:label('מוזמנים'),services:label('שירותים'),style:label('סגנון'),names:label('(?:שמות|שם)')};
+    var structured=!!(L.type||L.place||L.guests||L.services||label('תאריך'));
+
+    var typeSrc=L.type||t;
+    if(/בר\s*\/\s*בת/.test(typeSrc)){ r.type='בר מצווה'; r.checkType=true; }
+    else [['עלי{1,2}ה\\s+לתורה','עלייה לתורה'],['בת[ -]מצו','בת מצווה'],['בר[ -]מצו','בר מצווה'],['(^|[^א-ת])[בלוה]?(ברית|בריתה)(?![א-ת])','ברית / בריתה'],['חינה','חינה'],['אירוסין|אירוסים','אירוסין'],['אירוע חברה|ארוע חברה','אירוע חברה'],['חתונה|חתונת|מתחתנ|נתחתן','חתונה'],['אירוע|ארוע','אירוע אחר']]
+      .some(function(x){ if(new RegExp(x[0]).test(typeSrc)){ r.type=x[1]; return true; } return false; });
+
+    var d=findDate(t); if(d.date){ r.date=d.date; if(d.guessed) r.guessedYear=true; }
+
+    var pk=[[/premium\s*plus|פרימיום\s*פלוס/,'Premium Plus'],[/stand[a]?r[dt]\s*plus|סטנד?רט\s*פלוס/,'STANDART PLUS'],[/diamond|דיאמונד/,'Diamond'],[/premium|פרימיום/,'Premium'],[/standar[dt]|סטנדרט/,'Standard']];
+    pk.some(function(x){ if(x[0].test(low)){ r.pkg=x[1]; return true; } return false; });
+
+    m=/(?:^|[^\u0590-\u05ff])ו?מקדמה\s*(?:של|:|-|בסך)?\s*([\d,]{2,7})/.exec(t); if(m) r.dep=+m[1].replace(/,/g,'');
+    var noDep=t.replace(/מקדמה\s*(?:של|:|-|בסך)?\s*[\d,]{2,7}\s*(?:₪|ש"ח|ש״ח|שח|שקלים|שקל)?/g,' ');
+    m=/(?:מחיר|במחיר|סה"כ|סה״כ)\s*(?:של|:|-)?\s*([\d,]{3,7})/.exec(noDep)||/([\d,]{3,7})\s*(?:₪|ש"ח|ש״ח|שח|שקלים|שקל)/.exec(noDep);
+    if(m) r.price=+m[1].replace(/,/g,'');
+
+    m=/(?:^|[^\d])((?:\+?972[- ]?|0)\d{1,2}[- ]?\d{3}[- ]?\d{4})(?!\d)/.exec(t); if(m) r.phone=m[1].replace(/ /g,'-');
+
+    if(L.guests){ if(!/עוד לא/.test(L.guests)) r.guests=L.guests; }
+    else { m=/(\d{2,4})\s*(?:איש|מוזמנים|אורחים)/.exec(t); if(m) r.guests=m[1]; }
+
+    var city=findCity(t);
+    if(L.place){ if(!/עוד לא/.test(L.place)) r.venue=L.place; }
+    else if(!structured){
+      r.venue=findVenue(t) || (city?city.name:'');
+      if(!r.venue) t.replace(/\d{1,2}[.\/]\d{1,2}(?:[.\/]\d{2,4})?/g,' | ').split(/[,\n?!.]/).some(function(seg){
+        var x=/(?:\|\s*|^\s*|(?:חתונה|חינה|אירוסין|ברית|בריתה|מצווה|מצוה|לתורה)\s+)ב(?!ר[ -]מצ|ת[ -]מצ)[-־]?([\u05d0-\u05ea"'׳״][\u05d0-\u05ea"'׳״ \-]{1,40})/.exec(seg);
+        if(!x) return false;
+        var words=x[1].trim().split(/\s+/), out=[];
+        for(var i=0;i<words.length;i++){ if(words[i]!=='על' && (isStop(words[i])||isStop('ב'+words[i]))) break; out.push(words[i]); }
+        if(out.length){ r.venue=out.join(' '); return true; } return false;
+      });
+      if(!r.venue) delete r.venue;
+    }
+
+    if(L.names) r.names=L.names;
+    else if(!structured){
+      m=/(?:^|\n)\s*(?:תכין\s+|להכין\s+)?(?:הצעת מחיר|הצעה)\s+(?:ל|עבור\s+)[-־ ]?([^,\n\d?!.]{2,50})/.exec(t);
+      if(m) r.names=m[1].replace(/^\s*(?:חתונה|חינה|בר מצווה|בת מצווה|ברית|בריתה|אירוסין|עלייה לתורה|עליה לתורה)(?:\s+של)?(?:\s+|$)/,'').replace(/\s*(?:חתונה|חינה|בר מצווה|בת מצווה|ברית|בריתה|אירוסין|עלייה לתורה|עליה לתורה)(?:\s.*)?$/,'').trim();
+      if(!r.names){
+        var guess='';
+        m=new RegExp('(?:שמי|קוראים לי|השם שלי|שם שלי)\\s+(?:הוא\\s+)?(['+H+'\'׳\\-]{2,15}(?:\\s+ו['+H+']{2,15})?)').exec(t);
+        if(m) guess=m[1];
+        /* a signature: after "thanks", alone on the last line, or right after the city that ends the message */
+        if(!guess){ m=/(?:תודה(?:\s+רבה)?|בברכה)\s*[,!.\-–]?\s*([^,\n\d?!.]{2,30})[.!\s🙏🤍❤️]*$/.exec(t); if(m&&isName(m[1].trim())) guess=m[1].trim(); }
+        if(!guess){ var lines=t.split('\n').map(function(x){return x.replace(/[.!?,\-–]+$/,'').replace(/^[\-–]+/,'').trim();}).filter(Boolean); if(lines.length>1&&isName(lines[lines.length-1])&&!findCity(lines[lines.length-1])) guess=lines[lines.length-1]; }
+        if(!guess&&city){ var tail=t.slice(city.end).replace(/^[\s,.?!\-–]+|[\s.!?🙏🤍❤️]+$/g,''); if(tail&&isName(tail)) guess=tail; }
+        if(guess){ r.names=guess; r.checkName=true; }
+      }
+      if(!r.names) delete r.names;
+    }
+
+    var tm=/([01]?\d|2[0-3]):([0-5]\d)(?:\s*(?:-|–|עד)\s*([01]?\d|2[0-3]):([0-5]\d))?/.exec(t);
+    if(tm){ r.start=('0'+tm[1]).slice(-2)+':'+tm[2]; if(tm[3]) r.end=('0'+tm[3]).slice(-2)+':'+tm[4]; }
+
+    /* what they asked for */
+    var svc=L.services||t, want=[];
+    [['stills',/סטילס|תמונות|צלם סטילס/],['video',/וידאו|וידיאו|ווידאו|וידו|סרטון|סרט/],['magnets',/מגנט/],['albums',/אלבום|אלבומים/],['drone',/רחפן/]].forEach(function(x){ if(x[1].test(svc)) want.push(x[0]); });
+    if(/הכול|הכל:/.test(L.services||'')) want=['stills','video','magnets','albums'];
+    m=new RegExp('(?:^|[^'+H+'])(?:ל|ו|של\\s)?(שעתיים וחצי|שעה וחצי|שעתיים|חצי שעה|(?:שלוש|ארבע|חמש|שש)(?: וחצי)? שעות|\\d{1,2}(?:\\.5)?\\s*שעות)').exec(t);
+    var hours=m?m[1]:'', when=(/(?:^|[^א-ת])(בבוקר|בצהריים|בערב|בלילה)(?![א-ת])/.exec(t)||[])[1]||'';
+    var main=[]; if(want.indexOf('stills')>-1) main.push('סטילס'); if(want.indexOf('video')>-1) main.push('וידאו');
+    var lines2=[];
+    if(main.length||hours){ var base=main.length?'צילום '+(main.length===2?'סטילס ווידאו':main[0]):'צילום'; var tm=[hours?(/^\d/.test(hours)?'כ־':'כ')+hours:'',when].filter(Boolean).join(', '); lines2.push(base+(tm?' – '+tm:'')); }
+    if(want.indexOf('magnets')>-1) lines2.push('מגנטים באירוע');
+    if(want.indexOf('albums')>-1) lines2.push('אלבום');
+    if(want.indexOf('drone')>-1) lines2.push('צילום רחפן (בכפוף לתנאי ההטסה)');
+    r.lines=lines2;
+
+    var notes=[]; if(L.services) notes.push('שירותים: '+L.services); if(L.style) notes.push('סגנון: '+L.style);
+    if(!L.services && lines2.length) notes.push(lines2.join(', '));
+    r.notes=notes.join(' · ');
+    return r;
+  }
+
+  /* ---------- Dor's side ---------- */
+  function admin(){
+    $('admin').classList.remove('hidden');
+    var manual=false, dayManual=false, hoursTouched=false, hero='', letterTouched=false, current=null, auto=[], qid='';
+    TYPES.forEach(function(t){ $('type').add(new Option(t,t)); });
+    Object.keys(PKGS).forEach(function(k){ $('pkg').add(new Option(PKGS[k].title,k)); });
+    $('pkg').value='Premium';
+    $('addons').innerHTML=ADDONS.map(function(a){ return '<div class="addon" data-k="'+a[0]+'"><input type="checkbox" id="ad-'+a[0]+'"><label for="ad-'+a[0]+'">'+esc(a[1])+'</label><input type="number" inputmode="numeric" min="0" id="adp-'+a[0]+'" value="'+a[2]+'" aria-label="מחיר התוספת"></div>'; }).join('');
+    var lastDep=store('df_quote_dep'); if(lastDep) $('dep').value=lastDep;
+
+    function addonVisible(k,pk){ var p=PKGS[pk]; if(p.has.indexOf(k)>-1) return false; if(k==='video2' && pk==='Standard') return false; return true; }
+    function picked(){ return ADDONS.filter(function(a){ return $('ad-'+a[0]).checked; }).map(function(a){ return {k:a[0],p:+$('adp-'+a[0]).value||0}; }); }
+    function computed(){ var p=PKGS[$('pkg').value]; if(!p.price) return 0; return picked().reduce(function(s,a){return s+a.p;},p.price); }
+    function calcNote(){
+      var c=computed(), el=$('calc');
+      if(!c){ el.textContent='בהצעה מותאמת אישית כותבים את המחיר ידנית.'; return; }
+      el.innerHTML=(+$('price').value===c)?'לפי מחירון האתר והתוספות שסימנת. אפשר לשנות.':'לפי המחירון והתוספות: '+money(c)+' · <button type="button" class="btn ghost small" id="recalc">להחזיר</button>';
+      var b=$('recalc'); if(b) b.onclick=function(){ manual=false; reprice(); };
+    }
+    function split(){ if(dayManual) return; var pr=+$('price').value||0, d=+$('dep').value||0, c=+$('chk').value||0; $('day').value=(d||c)&&pr-d-c>0?pr-d-c:''; }
+    function reprice(){ if(!manual){ var c=computed(); $('price').value=c||''; } calcNote(); split(); }
+    function hours(){ if(hoursTouched) return; var wed=$('type').value==='חתונה'; $('start').value=wed?'14:30':''; $('end').value=wed?'01:00':''; }
+    function pkgChanged(){
+      var pk=$('pkg').value;
+      ADDONS.forEach(function(a){ var show=addonVisible(a[0],pk); $('addons').querySelector('[data-k="'+a[0]+'"]').classList.toggle('hidden',!show); if(!show) $('ad-'+a[0]).checked=false; });
+      reprice();
+    }
+    function letter(){
+      if(letterTouched) return;
+      var t=$('type').value, date=fmtDate($('date').value), v=$('venue').value.trim();
+      var happy=t!=='אירוע חברה'&&t!=='אירוע אחר';
+      $('letter').value='תודה שפניתם אליי'+(happy?', ומזל טוב!':'.')+'\nהכנתי לכם הצעה אישית '+FOR[t]+(date?' ב־'+date:'')+(v?' ('+v+')':'')+'.\nריכזתי כאן את כל מה שכלול. אם משהו לא ברור או שתרצו לשנות, פשוט כתבו לי.\n\nדור';
+    }
+    function heroes(){
+      var set=setFor($('type').value); if(set.heroes.indexOf(hero)<0) hero=set.heroes[0];
+      $('heroes').innerHTML=set.heroes.map(function(k,i){ return '<button type="button" data-h="'+k+'" aria-label="תמונה '+(i+1)+'" aria-pressed="'+(k===hero)+'"><img src="'+IMG+PHOTOS[k]+'" alt=""></button>'; }).join('');
+    }
+    $('heroes').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; hero=b.dataset.h; [].forEach.call(this.children,function(x){ x.setAttribute('aria-pressed',String(x===b)); }); };
+    function typeChanged(){
+      var t=$('type').value, wed=t==='חתונה';
+      if(!wed && $('pkg').value!=='custom'){ $('pkg').value='custom'; manual=false; }
+      if(wed && $('pkg').value==='custom'){ $('pkg').value='Premium'; manual=false; }
+      pkgChanged(); heroes(); letter(); hours();
+    }
+    $('type').onchange=typeChanged;
+    ['start','end'].forEach(function(id){ $(id).addEventListener('input',function(){ hoursTouched=true; }); });
+    ['dep','chk'].forEach(function(id){ $(id).addEventListener('input',split); });
+    $('day').oninput=function(){ dayManual=this.value!==''; };
+    $('pkg').onchange=function(){ manual=false; pkgChanged(); };
+    $('addons').oninput=function(){ manual=false; reprice(); };
+    $('price').oninput=function(){ manual=this.value!==''; calcNote(); split(); };
+    ['date','venue'].forEach(function(id){ $(id).addEventListener('input',letter); });
+    $('letter').oninput=function(){ letterTouched=this.value!==''; };
+
+    $('fill').onclick=function(){
+      var r=parse($('paste').value), got=[], m=$('fill-msg');
+      if(!$('paste').value.trim()){ m.className='msg err'; m.textContent='אין טקסט למילוי.'; return; }
+      /* clear what an earlier auto fill wrote, so details of one client never stay in the next quote */
+      auto.forEach(function(x){ if($(x[0]).value===x[1]){ $(x[0]).value=''; if(x[0]==='price') manual=false; } }); auto=[];
+      function put(id,val,name){ if(val!==undefined&&val!==''){ $(id).value=val; if(id!=='type') auto.push([id,$(id).value]); if(name) got.push(name); } }
+      put('names',r.names,'שמות'); put('type',r.type,'סוג אירוע'); put('date',r.date,'תאריך'); put('venue',r.venue,'מקום'); put('guests',r.guests,'מוזמנים'); put('phone',r.phone,'טלפון');
+      if(r.type) typeChanged();
+      if(r.pkg){ $('pkg').value=r.pkg; got.push('חבילה'); manual=false; pkgChanged(); }
+      if($('pkg').value==='custom' && r.lines.length && !$('extra').value.trim()) put('extra',r.lines.join('\n'),'מה כלול');
+      put('dep',r.dep,'מקדמה');
+      if(r.price){ put('price',r.price,'מחיר'); manual=true; }
+      if(r.start){ $('start').value=r.start; $('end').value=r.end||''; hoursTouched=true; got.push('שעות'); }
+      else if(auto.length) { hoursTouched=false; hours(); }
+      dayManual=false; qid='';
+      reprice(); letter();
+      var miss=[]; if(!$('names').value.trim()) miss.push('שמות'); if(!$('date').value) miss.push('תאריך'); if(!$('venue').value.trim()) miss.push('מקום'); if(!+$('price').value) miss.push('מחיר');
+      var lines=[got.length?'מולא: '+got.join(', '):'לא זיהיתי פרטים. אפשר למלא ידנית.'];
+      if(miss.length) lines.push('חסר: '+miss.join(', '));
+      var check=[]; if(r.checkName) check.push('השם ('+r.names+')'); if(r.guessedYear) check.push('שנת התאריך ('+fmtDate(r.date)+')'); if(r.checkType) check.push('בר מצווה או בת מצווה'); if(got.length && !r.pkg && $('pkg').value!=='custom') check.push('החבילה שנבחרה'); if(got.indexOf('מה כלול')>-1) check.push('"מה כלול"');
+      if(check.length) lines.push('לבדוק: '+check.join(', '));
+      if(r.notes) lines.push('הלקוח ציין: '+r.notes);
+      m.className='msg'+(got.length?' ok':' err'); m.textContent=lines.join('\n');
+    };
+
+    function collect(){
+      if(!qid) qid='DF'+Date.now().toString(36).toUpperCase();
+      return {id:qid,at:today(),st:$('start').value,en:$('end').value,dy:+$('day').value||0,ck:+$('chk').value||0,dm:$('depm').value.trim(),ym:$('daym').value.trim(),sg:$('sign').checked?1:0,os:$('opts').checked?1:0,v:1,t:'q',n:$('names').value.trim(),ty:$('type').value,d:$('date').value,pl:$('venue').value.trim(),g:$('guests').value.trim(),pk:$('pkg').value,ad:picked(),
+        ex:$('extra').value.split('\n').map(function(x){return x.trim();}).filter(Boolean),pr:+$('price').value||0,dp:+$('dep').value||0,vu:$('valid').value,msg:$('letter').value.trim(),h:hero};
+    }
+    function problem(o){
+      if(!o.n) return ['names','חסרים שמות.'];
+      if(o.pr<=0) return ['price','חסר מחיר.'];
+      if(o.dp<0||o.dp>o.pr) return ['dep','המקדמה גדולה מהמחיר.'];
+      if(o.pk==='custom'&&!o.ex.length&&!o.ad.length) return ['extra','בהצעה מותאמת אישית צריך לכתוב מה כלול.'];
+      if(o.vu&&o.vu<today()) return ['valid','תאריך התוקף כבר עבר.'];
+      var sum=o.dp+o.dy+o.ck; if(o.dy<0||o.ck<0||(sum&&sum!==o.pr)) return ['day','סכום התשלומים ('+money(sum)+') שונה מהמחיר ('+money(o.pr)+').'];
+      return null;
+    }
+    function unsignable(o){
+      if(!o.sg) return null;
+      var miss=[['date',o.d,'תאריך'],['venue',o.pl,'מקום'],['start',o.st,'שעת התחלה'],['end',o.en,'שעת סיום']].filter(function(x){return !x[1];});
+      return miss.length?[miss[0][0],'כדי שהלקוח יוכל לחתום חסר: '+miss.map(function(x){return x[2];}).join(', ')+'.']:null;
+    }
+    /* a preview works without the agreement details; creating the link does not */
+    function ready(preview){
+      var o=collect(), p=problem(o), u=p?null:unsignable(o), m=$('msg');
+      if(u&&!preview) p=[u[0],u[1]+' אפשר גם לבטל את הסימון של החתימה.'];
+      m.className='msg err'; m.textContent=p?p[1]:'';
+      if(p){ $(p[0]).focus(); return null; }
+      if(u){ o.sg=0; m.textContent='בתצוגה אין כפתור חתימה. '+u[1]; }
+      return o;
+    }
+    $('prev').onclick=function(){ var o=ready(true); if(o) showClient(o,true); };
+
+    function phoneIntl(v){ var d=String(v||'').replace(/\D/g,''); if(/^0\d{8,9}$/.test(d)) return '972'+d.slice(1); if(/^972\d{8,9}$/.test(d)) return d; return ''; }
+    function shareText(o,url){ return 'היי '+o.n+' 🤍\nהכנתי לכם הצעה אישית '+FOR[o.ty]+'. הכל מרוכז כאן:\n'+url+'\nדור פיינה'; }
+    function showOut(item){
+      current=item; $('out').classList.remove('hidden'); $('out-msg').textContent=''; $('out-msg').className='msg';
+      var ok=!!item.url;
+      $('link').textContent=ok?item.url:'https://clients.dorfayna.co.il/hatzaa?k=…';
+      if(ok){ $('wa').href=waUrl(phoneIntl(item.phone),shareText(item.data,item.url)); $('wa').removeAttribute('aria-disabled'); }
+      else { $('wa').removeAttribute('href'); $('wa').setAttribute('aria-disabled','true'); $('out-msg').textContent='זו דוגמה: קישור אמיתי ושליחה בוואטסאפ יעבדו אחרי ההעלאה למערכת.'; }
+      $('copy').disabled=!ok;
+      $('out').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function copy(url,msgEl){
+      var done=function(){ msgEl.className='msg ok'; msgEl.textContent='הקישור הועתק.'; }, fail=function(){ msgEl.className='msg err'; msgEl.textContent='לא הצלחתי להעתיק. לחצו לחיצה ארוכה על הקישור.'; };
+      try{ navigator.clipboard.writeText(url).then(done,fail); }catch(e){ fail(); }
+    }
+    $('copy').onclick=function(){ if(current&&current.url) copy(current.url,$('out-msg')); };
+    function toAgreement(item){
+      var o=item.data;
+      if(!LIVE){ showOut(item); $('out-msg').textContent='אחרי ההעלאה: הכפתור יפתח את עמוד ההסכם כשהשמות, התאריך, החבילה, התוספות, המחיר והמקדמה כבר מלאים.'; return; }
+      store('df_agreement_prefill',o); location.href='/heskem?from=quote';
+    }
+    $('agree').onclick=function(){ if(current) toAgreement(current); };
+
+    function saved(){ var a=store('df_quotes_v1'); return Array.isArray(a)?a:[]; }
+    var memory=saved();
+    function renderSaved(){
+      $('saved').classList.toggle('hidden',!memory.length);
+      $('saved-list').innerHTML=memory.slice(0,30).map(function(q,i){ var o=q.data; return '<div class="q" data-i="'+i+'"><b>'+esc(o.n)+' · '+money(o.pr)+'</b><span class="hint">'+esc(o.ty)+(o.d?' · '+fmtDate(o.d):'')+(o.pl?' · '+esc(o.pl):'')+'</span><div class="row">'
+        +'<button type="button" class="btn ghost small" data-a="edit">עריכה</button><button type="button" class="btn ghost small" data-a="share">קישור</button><button type="button" class="btn ghost small" data-a="agree">הסכם</button><button type="button" class="btn ghost small" data-a="del">הסרה</button></div></div>'; }).join('');
+    }
+    function load(item){
+      var o=item.data; $('names').value=o.n; $('type').value=o.ty; $('date').value=o.d; $('venue').value=o.pl; $('guests').value=o.g; $('phone').value=item.phone||'';
+      $('pkg').value=o.pk; ADDONS.forEach(function(a){ var x=o.ad.filter(function(y){return y.k===a[0];})[0]; $('ad-'+a[0]).checked=!!x; $('adp-'+a[0]).value=x?x.p:a[2]; });
+      $('start').value=o.st||''; $('end').value=o.en||''; hoursTouched=true; $('day').value=o.dy||''; dayManual=!!o.dy&&o.dy!==o.pr-o.dp-(o.ck||0); $('chk').value=o.ck||''; if(o.dm!==undefined){ $('depm').value=o.dm; $('daym').value=o.ym; } $('sign').checked=o.sg!==0; $('opts').checked=o.os!==0; qid='';
+      $('extra').value=o.ex.join('\n'); $('price').value=o.pr; $('dep').value=o.dp||''; $('valid').value=o.vu; $('letter').value=o.msg; letterTouched=!!o.msg; hero=o.h; manual=true;
+      pkgChanged(); heroes(); $('out').classList.add('hidden'); window.scrollTo({top:0,behavior:'smooth'});
+    }
+    $('saved-list').onclick=function(e){
+      var b=e.target.closest('button'); if(!b) return; var i=+b.closest('.q').dataset.i, item=memory[i], a=b.dataset.a;
+      if(a==='edit') load(item);
+      else if(a==='share') showOut(item);
+      else if(a==='agree') toAgreement(item);
+      else if(b.dataset.sure){ memory.splice(i,1); store('df_quotes_v1',memory); renderSaved(); }
+      else { b.dataset.sure='1'; b.textContent='בטוח? לחצו שוב'; setTimeout(function(){ delete b.dataset.sure; b.textContent='הסרה'; },3000); }
+    };
+    function keep(item){ memory.unshift(item); memory=memory.slice(0,100); store('df_quotes_v1',memory); renderSaved(); }
+
+    $('make').onclick=function(){
+      var o=ready(false); if(!o) return;
+      var item={at:Date.now(),phone:$('phone').value.trim(),data:o,url:''};
+      store('df_quote_dep',o.dp||'');
+      if(!LIVE){ keep(item); showOut(item); return; }
+      var btn=this, m=$('msg'); btn.disabled=true; m.className='msg'; m.textContent='יוצר קישור…';
+      function create(data){ return fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'create',data:data})})
+        .then(function(r){return r.json();}).then(function(j){ if(!j||!j.ok||!j.k) throw new Error('x'); return j.k; }); }
+      (o.sg?create(agreementOf(o)).then(function(k){ o.ak=k; }):Promise.resolve())
+        .then(function(){ return create(o); }).then(function(k){
+          item.url=location.origin+'/hatzaa?k='+k; m.textContent=''; btn.disabled=false; qid=''; keep(item); showOut(item);
+        }).catch(function(){ btn.disabled=false; m.className='msg err'; m.textContent='יצירת הקישור נכשלה. בדקו את החיבור לאינטרנט ונסו שוב.'; });
+    };
+
+    pkgChanged(); heroes(); letter(); hours(); renderSaved();
+  }
+
+  function fail(text){ document.body.innerHTML='<div class="state">'+text+'</div>'; }
+  function openQuote(o){ if(!o||o.t!=='q'||!o.n) throw new Error('bad'); showClient(o,false); }
+  var K=new URLSearchParams(location.search).get('k'), hash=location.hash.slice(1);
+  if(K){
+    fail('טוען את ההצעה…');
+    fetch(MAIL_URL+'?k='+encodeURIComponent(K)).then(function(r){return r.json();}).then(function(j){
+      if(!j||!j.ok) throw new Error('x'); document.body.innerHTML='<div id="client"></div>'; openQuote(j.data);
+    }).catch(function(){ fail('לא הצלחנו לטעון את ההצעה.<br>בדקו את החיבור לאינטרנט או בקשו מדור קישור חדש.'); });
+  }
+  else if(hash.indexOf('q=')===0){ try{ openQuote(dec(hash.slice(2))); }catch(e){ fail('הקישור להצעה אינו תקין. בקשו מדור קישור חדש.'); } }
+  else admin();
+  window.dfQuote={parse:parse,enc:enc};
+})();
+</script>
+</body>
+</html>

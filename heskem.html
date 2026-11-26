@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הסכם צילום – Dor Fayna Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f2ee;--card:#fff;--ink:#1a1a1a;--muted:#6b6560;--line:#e2ddd5;--accent:#1a1a1a;--ok:#1d7a4c;--err:#b3261e;--font:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);-webkit-text-size-adjust:100%}
+body{padding:16px 16px 60px;max-width:760px;margin:0 auto}
+h1{font-size:22px;margin:6px 0 4px}
+h2{font-size:17px;margin:22px 0 8px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.f{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--muted);margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+input[type=checkbox]{width:auto}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink);margin:8px 0}
+.chk input{margin-top:4px}
+.btn{display:inline-block;font:inherit;font-size:16px;font-weight:600;border-radius:10px;padding:12px 18px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;text-decoration:none;text-align:center}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.msg{font-size:14px;color:var(--muted);margin-top:10px}
+.msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
+.link{word-break:break-all;font-size:13px;background:#faf9f6;border:1px dashed var(--line);border-radius:10px;padding:10px;margin-top:10px}
+#doc{background:#fff;color:#111;padding:28px 26px;border:1px solid var(--line);border-radius:6px;line-height:1.65;font-size:15px}
+#doc h3{font-size:16px;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:3px}
+#doc ul{margin:4px 0;padding-inline-start:20px}
+#doc .hd{text-align:center;margin-bottom:12px}
+#doc .hd b{font-size:20px;letter-spacing:1px}
+#doc table{width:100%;border-collapse:collapse;margin-top:6px}
+#doc td{border-bottom:1px solid #eee;padding:5px 2px;vertical-align:top}
+#doc td:first-child{color:#555;width:40%}
+#doc .sig img{height:90px}
+.pad{border:2px dashed var(--line);border-radius:12px;background:#fff;touch-action:none;width:100%;height:180px;display:block}
+.hidden{display:none}
+.addon{display:grid;grid-template-columns:auto 1fr 110px;gap:8px;align-items:center;margin-bottom:6px;font-size:14px}
+.addon input[type=number]{padding:6px 8px;font-size:14px}
+</style>
+</head>
+<body>
+<div id="admin" class="hidden">
+  <h1>יצירת הסכם חדש</h1>
+  <div class="sub">ממלאים את פרטי האירוע, לוחצים "יצירת קישור" ושולחים לזוג בוואטסאפ.</div>
+  <div class="card">
+    <div class="f"><span>שמות הזוג / המזמינים</span><input id="a-names" type="text"></div>
+    <div class="grid2">
+      <div class="f"><span>סוג אירוע</span><select id="a-type"><option>חתונה</option><option>חינה</option><option>בר מצווה</option><option>בת מצווה</option><option>ברית / בריתה</option><option>אירוע אחר</option></select></div>
+      <div class="f"><span>תאריך האירוע</span><input id="a-date" type="date"></div>
+    </div>
+    <div class="f"><span>מקום האירוע</span><input id="a-venue" type="text"></div>
+    <div class="grid2">
+      <div class="f"><span>שעת התחלת צילום</span><input id="a-start" type="time" value="14:30"></div>
+      <div class="f"><span>שעת סיום</span><input id="a-end" type="time" value="01:00"></div>
+    </div>
+    <div class="f"><span>חבילה</span><select id="a-pkg"></select></div>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">תוספות בתשלום (מסמנים מה נכלל בהזמנה)</h2>
+    <div id="a-addons"></div>
+    <div class="f"><span>תוספת / הערה חופשית להסכם (לא חובה)</span><textarea id="a-extra" rows="2"></textarea></div>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">מחיר ותשלום</h2>
+    <div class="grid2">
+      <div class="f"><span>מחיר כולל (₪)</span><input id="a-price" type="number" inputmode="numeric"></div>
+      <div class="f"><span>מקדמה (₪)</span><input id="a-dep" type="number" inputmode="numeric"></div>
+      <div class="f"><span>תשלום ביום האירוע (₪)</span><input id="a-day" type="number" inputmode="numeric"></div>
+      <div class="f"><span>צ'ק דחוי – 2 ימים מהאירוע (₪)</span><input id="a-chk" type="number" inputmode="numeric"></div>
+    </div>
+    <div class="f"><span>אמצעי תשלום למקדמה</span><input id="a-depm" type="text" value="בפייבוקס / בהעברה"></div>
+    <div class="f"><span>אמצעי תשלום ביום האירוע</span><input id="a-daym" type="text" value="במזומן"></div>
+  </div>
+  <div class="row">
+    <button class="btn" id="a-make" type="button">יצירת קישור</button>
+    <button class="btn ghost" id="a-prev" type="button">תצוגה מקדימה</button>
+  </div>
+  <div id="a-msg" class="msg"></div>
+  <div id="a-out" class="hidden">
+    <div class="link" id="a-link"></div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn" id="a-copy" type="button">העתקת קישור</button>
+      <a class="btn ghost" id="a-wa" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
+    </div>
+  </div>
+</div>
+
+<div id="client" class="hidden">
+  <div id="doc"></div>
+  <div id="fill" class="card" style="margin-top:14px">
+    <h2 style="margin-top:0">פרטי המזמינים</h2>
+    <div class="f"><span>שמות מלאים</span><input id="c-names" type="text" autocomplete="name"></div>
+    <div class="grid2">
+      <div class="f"><span>טלפון</span><input id="c-phone" type="tel" inputmode="tel" autocomplete="tel"></div>
+      <div class="f"><span>מייל (לקבלת עותק חתום)</span><input id="c-email" type="email" autocomplete="email"></div>
+    </div>
+    <div class="f"><span>מקום התארגנות</span><input id="c-prep" type="text"></div>
+    <div class="grid2">
+      <div class="f"><span>מספר מוזמנים</span><input id="c-guests" type="number" inputmode="numeric"></div>
+      <div class="f"><span>איש קשר ביום האירוע (שם + טלפון)</span><input id="c-contact" type="text"></div>
+    </div>
+    <h2>חתימה</h2>
+    <canvas id="pad" class="pad"></canvas>
+    <div class="row" style="margin-top:8px"><button class="btn ghost" id="c-clear" type="button">ניקוי חתימה</button></div>
+    <label class="chk"><input type="checkbox" id="c-agree"><span>אנו המזמינים מצהירים כי קראנו והבנו את ההסכם, ואנו מאשרים את כל התנאים המפורטים בו.</span></label>
+    <button class="btn" id="c-send" type="button" style="width:100%;margin-top:8px">חתימה ושליחה</button>
+    <div id="c-msg" class="msg" role="alert"></div>
+  </div>
+  <div id="done" class="card hidden">
+    <h2 style="margin-top:0">תודה! ההסכם נחתם 🤍</h2>
+    <div id="d-msg" class="msg"></div>
+    <div class="row" style="margin-top:10px"><button class="btn" id="d-dl" type="button">הורדת ההסכם החתום (PDF)</button></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+  // כתובת הסקריפט ששולח את המיילים (Google Apps Script). מתמלא אחרי ההתקנה.
+  var MAIL_URL = 'https://script.google.com/macros/s/AKfycbxDSTAs6Qp75kppwxrVXbtdjVBjujRQhEMheaFkBv-5Uq_SFd4bmwT4DlJqOFLgC2ozmw/exec';
+  var OWNER = {name:'Dor Fayna Photography – דור פיינה', phone:'050-2858162', email:'mmdorldor@gmail.com'};
+
+  var GALLERY = 'כל התמונות בעריכה מקצועית, בגלריה דיגיטלית פרטית – לצפייה, הורדה ושיתוף עם בני משפחה וחברים, וכן לבחירת התמונות לאלבום בצורה נוחה ופשוטה.';
+  var STILLS2 = ['צלם סטילס מההכנות לאורך כל היום.','צלם סטילס נוסף מצילומי המשפחות באולם.'];
+  var VIDEO = ['צלם וידאו מקצועי לאורך כל היום – מההכנות ועד סיום האירוע.','מצלמת וידאו נוספת בחופה, מוצבת על חצובה.','צילום רחפן בצילומי חוץ או באולם (בכפוף לאפשרות הטסה חוקית ובטוחה, לתנאי המקום ומזג האוויר, ועל פי שיקול דעת הצלם).'];
+  var EDIT = ['עריכת סרט מלא (מהחומרים הגולמיים).','סרט קצר באורך של 45–60 דקות.','קליפ Highlight משולב – מהכנות, צילומי חוץ, חופה וריקודים.','טיזר קצר באורך 40–50 שניות (Reels) מותאם לאינסטגרם.','לינק להורדה בענן עם כל הסרטים לאחר עריכה – באיכות גבוהה.'];
+  var ALBUMS = ['אלבום לזוג בגודל 30/60.','שני אלבומים להורים בגודל 20/40.','בחירת כריכה ממגוון רחב של כריכות (הגרפיקה זהה בכל האלבומים).'];
+  var MAGNETS = ['צילום והדפסת מגנטים באירוע ללא הגבלת כמות, בשעות השירות שסוכמו.','10 הגדלות מגנט ו־2–4 הגדלות פוטובלוק לזוג (הכמות והמידות לפי ההצעה).'];
+  var PKGS = {
+    'Standard': {title:'Standard – צילום סטילס', sec:[['צילום סטילס',STILLS2.concat([GALLERY])]], note:'וידאו אינו כלול. אלבומים ניתנים בתוספת.'},
+    'STANDART PLUS': {title:'STANDART PLUS – סטילס ווידאו', sec:[['צילום סטילס',['צלם סטילס אחד מההכנות לאורך כל היום.',GALLERY]],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT]], note:'אלבומים ומגנטים אינם כלולים (ניתן להוסיף בתוספת).'},
+    'Premium': {title:'Premium – סטילס, וידאו ואלבומים', sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT]]},
+    'Premium Plus': {title:'Premium Plus – צילום מלא ומגנטים', sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT],['מגנטים',MAGNETS]]},
+    'Diamond': {title:'Diamond – צילום מלא, זוגיות והדפסים', sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT],['מגנטים',MAGNETS],['זוגיות והדפסים',['צילומי זוגיות (Save the Date) לפני האירוע.','קנבס גדול לזוג ושני קנבסים להורים, או הגדלת זכוכית – לפי הבחירה בהצעה.']]]},
+    'custom': {title:'הצעה מותאמת אישית', sec:[]}
+  };
+  var ADDONS = [
+    ['glass','תמונת זכוכית בגודל 40/60',700],
+    ['albums','סט אלבומים: אלבום זוגי 30/60 + 2 אלבומי הורים 20/40',0],
+    ['magnets','חבילת מגנטים ללא הגבלה עד 5 שעות עד השעה 00:00, כולל חבילה אישית לחתן ולכלה: 25–40 מגנטים קטנים לזוג + 10 הגדלות בגודל A5',1600],
+    ['couple','צילומי זוגיות / טראש במרכז עד 2–3 שעות (ים המלח בתוספת 1,000 ₪)',1500],
+    ['video2','צלם וידאו נוסף לאירוע (מומלץ מעל 500 מוזמנים או באירוע מופרד)',1800]
+  ];
+  var DELIVERY = ['תמונות סטילס: עד 21 ימי עסקים לאחר האירוע.','חומרי וידאו: עד 45 ימי עסקים מבחירת השירים על ידי המזמין.','אלבומים מעוצבים: עד 30 ימי עסקים מרגע אישור העיצוב.'];
+  var CANCEL = ['ביטול בין 0 ל-14 ימים לפני האירוע: המזמין יחויב ב-90% מהסכום הכולל, בנוסף למקדמה.','ביטול בין 15 ל-120 ימים: המזמין יחויב ב-50% מהסכום הכולל, בנוסף למקדמה.','ביטול מעל 120 ימים ולאחר 14 יום מרגע חתימה על הסכם זה: המזמין יחויב ב-30% מהסכום הכולל, בנוסף למקדמה.'];
+  var FORCE = 'בהתאם לזמינות, במקרה של "כוח עליון" – נגיף הקורונה / מלחמה, אשר בעקבותיו האירוע מבוטל / נדחה (ע"פ הנחיות פיקוד העורף), יימצא בשיתוף יחד עם הזוג מועד חדש, על בסיס תאריך פנוי. לא תוחזר המקדמה.';
+  var TERMS = [
+    'הצלם מתחייב לבצע את העבודה לשביעות רצון הלקוח בהתאם לשיקול דעתו המקצועי.',
+    'הצילום יתבצע עם פלאשים חיצוניים על חצובות במידת הצורך.',
+    'הצלם לא יישא באחריות לנזק שנגרם לציוד כתוצאה מנפילה, תקלה טכנית או גורמים חיצוניים אחרים.',
+    'בחירת התמונות לאלבומים תתבצע עד חודשיים ממועד האירוע. עיכוב בבחירה עלול להוביל לעלויות נוספות אם וכאשר תהיה עליית מחירים, ויחויב בהתאם לשוק החדש.',
+    'הצלם ישמור את חומרי הגלם למשך 14 ימי עסקים ממסירת החומרים, ולא יהיה אחראי לחומרים מעבר לתקופה זו.',
+    'הספק מתחייב לבצע את העבודה לשביעות רצון הלקוח, אך לו תהיה הרשות להחליט לפי שיקול דעתו האומנותית והבלעדית בכל הנוגע לצילום ועריכת האירוע.',
+    'למזמין העבודה יהיו 14 ימי עסקים לשלוח תיקונים ו/או כל שינויים לאחר גרפיקת האלבומים.',
+    'בחירת לוקיישנים לצילומי החוץ תיעשה ע"י צוות הצילום / או לפי בחירת הזוג ממקום ההתארגנות לכיוון האולם, במרחק בגדר הסביר.',
+    'בכל מקרה של "כוח עליון" מצד הצלם, יישלח צוות ברמה גבוהה לצילום האירוע.',
+    'על אף האמור בסעיף הקודם, יהיה רשאי המזמין במקרה זה לבטל את החוזה הנ"ל ולמצוא צלם חלופי בצורה עצמאית.',
+    'במידה וייגרם נזק לקבצי התמונות או הסרט מכוח עליון או מסיבות אשר נכפו עליו, גובה הפיצוי לא יעלה על גובה ההזמנה.',
+    'הסדרת התשלום במועד המצוין לעיל וחתימת שני הצדדים על החוזה מהווים תנאי הכרחי לקיום חוזה זה.',
+    'הלקוח מצהיר כי הובהר לו במפורש שלתאורה במקום האירוע יש השפעה על תמונות הסטילס וסרטי הווידאו.',
+    'לצלם אין כל יכולת לשלוט ו/או להשפיע על התאורה, והתאורה הינה באחריות הבלעדית של מנהל מקום האירוע ו/או מי מטעמו.',
+    'הלקוח מצהיר בזאת כי אין ולא תהיינה לו כל דרישות ו/או טענות ו/או תביעות כנגד הצלם בקשר עם השפעת התאורה על סרטי הווידאו.',
+    'לא יופעלו לייזרים כלל, מאחר והם מסוכנים מאוד לעיניים ולחיישן המצלמה, ומסכנים גם את החומרים המצולמים במקרה של כשל במצלמה בעקבות קרן הלייזר. במידה ויופעלו לייזרים, צוות הצילום יהיה רשאי להפסיק את הצילום מיידית וללקוח לא תהיה כל טענה על כך.',
+    'פיתוח המגנטים (כאשר נכללים בהזמנה) ייעשה ע"י עורך מוסמך באירוע; תמונות המגנטים יפותחו מתוך תמונות הסטילס של הצלמים.'
+  ];
+  var IP = 'המזמין מאשר ל-"Dor Fayna Photography" לפרסם תמונות מהאירוע לצורכי שיווק. זכויות היוצרים על התמונות שמורות לצלם.';
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function money(n){ n=+n||0; return n.toLocaleString('he-IL')+' ₪'; }
+  function fmtDate(s){ if(!s) return ''; var p=s.split('-'); return (+p[2])+'.'+(+p[1])+'.'+p[0]; }
+  function enc(o){ var b=new TextEncoder().encode(JSON.stringify(o)); var s=''; b.forEach(function(x){s+=String.fromCharCode(x);}); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+  function dec(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='='; var bin=atob(s); var u=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return JSON.parse(new TextDecoder().decode(u)); }
+  function ul(arr){ return '<ul>'+arr.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>'; }
+
+  function docHtml(o, c, sig){
+    var p=PKGS[o.pkg]||PKGS['Premium'];
+    var h='<div class="hd"><b>Dor Fayna Photography</b><div>הצעת מחיר / חוזה עבודה עבור שירותי צילום אירועים</div><div style="font-size:12px;color:#777">מס\' הסכם '+esc(o.id)+'</div></div>';
+    h+='<h3>פרטי ההזמנה</h3><table>';
+    h+='<tr><td>המזמינים</td><td>'+esc((c&&c.names)||o.names)+'</td></tr>';
+    h+='<tr><td>סוג האירוע</td><td>'+esc(o.type)+'</td></tr>';
+    h+='<tr><td>תאריך האירוע</td><td>'+esc(fmtDate(o.date))+'</td></tr>';
+    h+='<tr><td>מקום האירוע</td><td>'+esc(o.venue)+'</td></tr>';
+    h+='<tr><td>חבילה</td><td>'+esc(p.title)+'</td></tr></table>';
+    h+='<h3>שעות העבודה</h3><p>הצלם והצוות יתחילו בצילום בשעה '+esc(o.start)+' ויסיימו בשעה '+esc(o.end)+'. כל שעה נוספת או חלק ממנה מעבר לזמן זה תחויב ב-500 ₪ לכל צלם שתרצו להשאיר באירוע.</p>';
+    var custom=!p.sec.length, lines=o.extra?String(o.extra).split('\n').filter(Boolean):[];
+    if(!custom) h+='<h3>פרטי החבילה והשירותים הכלולים</h3>';
+    p.sec.forEach(function(s){ h+='<p style="margin:8px 0 2px"><b>'+esc(s[0])+':</b></p>'+ul(s[1]); });
+    if(p.note) h+='<p style="color:#555">'+esc(p.note)+'</p>';
+    var ad=(o.addons||[]);
+    if(ad.length||lines.length){ h+='<h3>'+(custom?'השירותים הכלולים בהזמנה':'תוספות שנכללו בהזמנה')+'</h3>'+ul(ad.map(function(a){ return a.t+(a.p?' – '+money(a.p):''); }).concat(lines)); }
+    h+='<h3>עלות ותנאי תשלום</h3><table>';
+    h+='<tr><td>מחיר כולל</td><td><b>'+money(o.price)+'</b></td></tr>';
+    if(+o.dep) h+='<tr><td>מקדמה</td><td>'+money(o.dep)+' '+esc(o.depm||'')+'</td></tr>';
+    if(+o.day) h+='<tr><td>תשלום ביום האירוע</td><td>'+money(o.day)+' '+esc(o.daym||'')+'</td></tr>';
+    if(+o.chk) h+='<tr><td>צ\'ק דחוי – 2 ימים מהאירוע</td><td>'+money(o.chk)+'</td></tr>';
+    h+='</table>';
+    var others=ADDONS.filter(function(a){ return !ad.some(function(x){return x.k===a[0];}); }).filter(function(a){return a[2];});
+    if(!custom && others.length) h+='<p style="margin:10px 0 2px"><b>תוספות אפשריות בתשלום נוסף</b> (קיימת האפשרות להורדה והוספת פריטים לחבילה):</p>'+ul(others.map(function(a){return a[1]+' – תוספת של '+money(a[2]);}));
+    h+='<h3>זמני אספקת החומרים</h3>'+ul(DELIVERY);
+    h+='<h3>תנאי ביטול</h3>'+ul(CANCEL);
+    h+='<h3>כוח עליון</h3><p>'+esc(FORCE)+'</p>';
+    h+='<h3>תנאים נוספים</h3>'+ul(TERMS);
+    h+='<h3>קניין רוחני</h3><p>'+esc(IP)+'</p>';
+    h+='<p>אנו המזמינים מצהירים כי קראנו והבנו את החוזה, ואנו מאשרים את כל התנאים המפורטים בו. אישור באמצעות חתימה, מייל או וואטסאפ ייחשב כהסכמה מחייבת.</p>';
+    h+='<h3>פרטי המזמינים וחתימה</h3><table>';
+    function r(l,v){ return '<tr><td>'+l+'</td><td>'+(v?esc(v):'______________')+'</td></tr>'; }
+    h+=r('שמות מלאים',c&&c.names)+r('טלפון',c&&c.phone)+r('מייל',c&&c.email)+r('מקום התארגנות',c&&c.prep)+r('מוזמנים',c&&c.guests)+r('איש קשר ביום האירוע',c&&c.contact)+r('תאריך החתימה',c&&c.signedAt);
+    h+='<tr><td>חתימה</td><td class="sig">'+(sig?'<img src="'+sig+'" alt="חתימה">':'______________')+'</td></tr></table>';
+    h+='<p style="margin-top:18px">בברכת מזל טוב,<br>'+esc(OWNER.name)+'<br>'+esc(OWNER.phone)+'<br>'+esc(OWNER.email)+'</p>';
+    return h;
+  }
+
+  // ---------- ADMIN ----------
+  function admin(){
+    $('admin').classList.remove('hidden');
+    var ps=$('a-pkg'); Object.keys(PKGS).forEach(function(k){ var o=document.createElement('option'); o.value=k; o.textContent=PKGS[k].title; ps.appendChild(o); }); ps.value='Premium';
+    var box=$('a-addons');
+    ADDONS.forEach(function(a){
+      var d=document.createElement('div'); d.className='addon';
+      d.innerHTML='<input type="checkbox" id="ad-'+a[0]+'"><label for="ad-'+a[0]+'">'+esc(a[1])+'</label><input type="number" id="adp-'+a[0]+'" value="'+(a[2]||'')+'" placeholder="₪">';
+      box.appendChild(d);
+    });
+    function collect(){
+      var addons=ADDONS.filter(function(a){return $('ad-'+a[0]).checked;}).map(function(a){ return {k:a[0],t:a[1],p:+$('adp-'+a[0]).value||0}; });
+      return {v:1,id:'DF'+Date.now().toString(36).toUpperCase(),names:$('a-names').value.trim(),type:$('a-type').value,date:$('a-date').value,venue:$('a-venue').value.trim(),start:$('a-start').value,end:$('a-end').value,pkg:ps.value,addons:addons,extra:$('a-extra').value.trim(),price:+$('a-price').value||0,dep:+$('a-dep').value||0,day:+$('a-day').value||0,chk:+$('a-chk').value||0,depm:$('a-depm').value.trim(),daym:$('a-daym').value.trim()};
+    }
+    function check(o){
+      if(!o.names) return 'חסרים שמות המזמינים.';
+      if(!o.date) return 'חסר תאריך אירוע.';
+      if(!o.price) return 'חסר מחיר כולל.';
+      var sum=o.dep+o.day+o.chk; if(sum && sum!==o.price) return 'שימו לב: סכום התשלומים ('+money(sum)+') שונה מהמחיר הכולל ('+money(o.price)+').';
+      return '';
+    }
+    $('a-prev').onclick=function(){ var o=collect(); window.open(location.pathname+'#'+enc(o),'_blank'); };
+    $('a-make').onclick=function(){
+      var o=collect(), m=check(o); var msg=$('a-msg'); msg.className='msg'+(m&&m.indexOf('שימו לב')<0?' err':'');
+      msg.textContent=m; if(m&&m.indexOf('שימו לב')<0) return;
+      var btn=$('a-make'); btn.disabled=true; msg.className='msg'; msg.textContent='יוצר קישור…';
+      fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'create',data:o})}).then(function(r){return r.json();}).then(function(j){
+      btn.disabled=false; if(!j||!j.ok||!j.k) throw new Error('x'); msg.textContent='';
+      var url=location.origin+'/heskem?k='+j.k;
+      $('a-link').textContent=url; $('a-out').classList.remove('hidden');
+      var txt='היי '+o.names+' 🤍\nמצרף את הסכם הצילום לאירוע ב-'+fmtDate(o.date)+'. אפשר לקרוא, למלא פרטים ולחתום ישירות מהטלפון:\n'+url+'\nדור פיינה';
+      $('a-wa').href='https://wa.me/?text='+encodeURIComponent(txt);
+      $('a-copy').onclick=function(){ navigator.clipboard.writeText(url).then(function(){ msg.className='msg ok'; msg.textContent='הקישור הועתק.'; }); };
+      }).catch(function(){ btn.disabled=false; msg.className='msg err'; msg.textContent='יצירת הקישור נכשלה. בדוק חיבור לאינטרנט ונסה שוב.'; });
+    };
+    /* prefill from a price quote */
+    try{
+      var pf=JSON.parse(localStorage.getItem('df_agreement_prefill')||'null');
+      if(pf && new URLSearchParams(location.search).get('from')==='quote'){
+        localStorage.removeItem('df_agreement_prefill');
+        $('a-names').value=pf.n||''; $('a-date').value=pf.d||''; $('a-venue').value=pf.pl||'';
+        var types=[].map.call($('a-type').options,function(x){return x.value;});
+        $('a-type').value=types.indexOf(pf.ty)>-1?pf.ty:'אירוע אחר';
+        if(PKGS[pf.pk]) ps.value=pf.pk;
+        (pf.ad||[]).forEach(function(a){ if($('ad-'+a.k)){ $('ad-'+a.k).checked=true; $('adp-'+a.k).value=a.p||''; } });
+        $('a-extra').value=(pf.ex||[]).join('\n'); $('a-price').value=pf.pr||''; $('a-dep').value=pf.dp||'';
+        [['a-start','st'],['a-end','en'],['a-day','dy'],['a-chk','ck'],['a-depm','dm'],['a-daym','ym']].forEach(function(f){ if($(f[0]) && pf[f[1]]!==undefined) $(f[0]).value=pf[f[1]]||''; });
+        $('a-msg').textContent='הפרטים מולאו מהצעת המחיר. בדוק שעות ותשלומים לפני יצירת הקישור.';
+      }
+    }catch(e){}
+  }
+
+  // ---------- CLIENT ----------
+  function client(o){
+    $('client').classList.remove('hidden');
+    document.title='הסכם צילום – '+o.names;
+    $('doc').innerHTML=docHtml(o,null,null);
+    $('c-names').value=o.names||'';
+    if(/^\d+$/.test(o.guests||'')) $('c-guests').value=o.guests;
+    var cv=$('pad'), ctx, drawing=false, has=false;
+    function size(){ var r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1; cv.width=r.width*d; cv.height=r.height*d; ctx=cv.getContext('2d'); ctx.scale(d,d); ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#111'; has=false; }
+    size(); window.addEventListener('resize',function(){ if(!has) size(); });
+    function pt(e){ var r=cv.getBoundingClientRect(); return {x:e.clientX-r.left,y:e.clientY-r.top}; }
+    cv.addEventListener('pointerdown',function(e){ drawing=true; cv.setPointerCapture(e.pointerId); var p=pt(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
+    cv.addEventListener('pointermove',function(e){ if(!drawing) return; var p=pt(e); ctx.lineTo(p.x,p.y); ctx.stroke(); has=true; });
+    cv.addEventListener('pointerup',function(){ drawing=false; });
+    $('c-clear').onclick=function(){ ctx.clearRect(0,0,cv.width,cv.height); has=false; };
+    var pdfBlob=null, pdfName='';
+    $('d-dl').onclick=function(){ if(!pdfBlob) return; var a=document.createElement('a'); a.href=URL.createObjectURL(pdfBlob); a.download=pdfName; document.body.appendChild(a); a.click(); a.remove(); };
+    $('c-send').onclick=function(){
+      var m=$('c-msg'); m.className='msg err';
+      var c={names:$('c-names').value.trim(),phone:$('c-phone').value.trim(),email:$('c-email').value.trim(),prep:$('c-prep').value.trim(),guests:$('c-guests').value.trim(),contact:$('c-contact').value.trim()};
+      if(!c.names){ m.textContent='נא למלא שמות מלאים.'; return; }
+      if(!c.phone){ m.textContent='נא למלא טלפון.'; return; }
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.email)){ m.textContent='נא למלא כתובת מייל תקינה לקבלת העותק.'; return; }
+      if(!has){ m.textContent='נא לחתום במסגרת החתימה.'; return; }
+      if(!$('c-agree').checked){ m.textContent='נא לאשר שקראתם את ההסכם.'; return; }
+      var d=new Date(); c.signedAt=d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+      var sig=cv.toDataURL('image/png');
+      var btn=$('c-send'); btn.disabled=true; m.className='msg'; m.textContent='מכין את ההסכם החתום…';
+      var docEl=$('doc'); docEl.innerHTML=docHtml(o,c,sig);
+      setTimeout(function(){
+        makePdf(docEl).then(function(blob){
+          pdfBlob=blob; pdfName='הסכם צילום – '+c.names+' – '+fmtDate(o.date)+'.pdf';
+          $('fill').classList.add('hidden'); $('done').classList.remove('hidden');
+          var dm=$('d-msg');
+          if(!MAIL_URL){ dm.textContent='ההסכם נחתם. הורידו את הקובץ ושלחו אותו לדור בוואטסאפ.'; return; }
+          dm.textContent='שולח את ההסכם במייל…';
+          return blobToB64(blob).then(function(b64){
+            return fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({id:o.id,names:c.names,date:fmtDate(o.date),venue:o.venue,clientEmail:c.email,clientPhone:c.phone,pkg:o.pkg,price:o.price,fileName:pdfName,pdf:b64})});
+          }).then(function(r){ return r.json(); }).then(function(j){
+            if(j&&j.ok){ dm.className='msg ok'; dm.textContent='נשלח עותק חתום למייל '+c.email+' ולדור. אפשר גם להוריד אותו כאן.'; }
+            else throw new Error((j&&j.error)||'שגיאה');
+          }).catch(function(e){ dm.className='msg err'; dm.textContent='ההסכם נחתם, אבל המייל לא נשלח. הורידו את הקובץ ושלחו אותו לדור בוואטסאפ. ('+(e&&e.message||e)+')'; });
+        }).catch(function(e){ btn.disabled=false; m.className='msg err'; m.textContent='יצירת הקובץ נכשלה. נסו שוב. ('+(e&&e.message||e)+')'; });
+      },50);
+    };
+  }
+  function blobToB64(b){ return new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(){ res(String(r.result).split(',')[1]); }; r.onerror=rej; r.readAsDataURL(b); }); }
+  function makePdf(el){
+    var sc0=Math.max(0.8,Math.min(2,Math.sqrt(12000000/(el.offsetWidth*el.scrollHeight))));
+    return html2canvas(el,{scale:sc0,backgroundColor:'#ffffff',useCORS:true}).then(function(canvas){
+      var jsPDF=window.jspdf.jsPDF; var pdf=new jsPDF({unit:'mm',format:'a4',compress:true});
+      var pw=210, ph=297, m=10, iw=pw-2*m, ih=ph-2*m;
+      var pxPerMm=canvas.width/iw, pagePx=Math.floor(ih*pxPerMm), y=0, first=true;
+      var sc=canvas.width/el.offsetWidth, top0=el.getBoundingClientRect().top;
+      var cuts=[].map.call(el.querySelectorAll('li,p,tr,h3,.hd'),function(n){ return Math.round((n.getBoundingClientRect().bottom-top0)*sc); }).sort(function(a,b){return a-b;});
+      while(y<canvas.height){
+        var h=Math.min(pagePx,canvas.height-y);
+        if(y+h<canvas.height){ var best=0; cuts.forEach(function(c){ if(c>y+pagePx*0.5 && c<=y+pagePx) best=c; }); if(best) h=best-y+4; }
+        var part=document.createElement('canvas'); part.width=canvas.width; part.height=h;
+        part.getContext('2d').drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
+        if(!first) pdf.addPage(); first=false;
+        pdf.addImage(part.toDataURL('image/jpeg',0.85),'JPEG',m,m,iw,h/pxPerMm);
+        y+=h;
+      }
+      return pdf.output('blob');
+    });
+  }
+
+  var hash=location.hash.slice(1), K=new URLSearchParams(location.search).get('k');
+  if(K){
+    document.body.insertAdjacentHTML('afterbegin','<div id="ld" class="msg">טוען את ההסכם…</div>');
+    fetch(MAIL_URL+'?k='+encodeURIComponent(K)).then(function(r){return r.json();}).then(function(j){
+      var ld=$('ld'); if(ld) ld.remove(); if(!j||!j.ok) throw new Error('x'); client(j.data);
+    }).catch(function(){ document.body.innerHTML='<div class="card">לא הצלחנו לטעון את ההסכם. בדקו את החיבור לאינטרנט או בקשו מדור קישור חדש.</div>'; });
+  }
+  else if(hash){ try{ client(dec(hash)); }catch(e){ document.body.innerHTML='<div class="card">הקישור להסכם אינו תקין. בקשו מדור קישור חדש.</div>'; } }
+  else admin();
+})();
+</script>
+</body>
+</html>
