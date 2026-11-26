@@ -51,7 +51,7 @@ input[type=checkbox]{width:auto}
   <div class="card">
     <div class="f"><span>שמות הזוג / המזמינים</span><input id="a-names" type="text"></div>
     <div class="grid2">
-      <div class="f"><span>סוג אירוע</span><select id="a-type"><option>חתונה</option><option>חינה</option><option>בר מצווה</option><option>בת מצווה</option><option>ברית / בריתה</option><option>אירוע אחר</option></select></div>
+      <div class="f"><span>סוג אירוע</span><select id="a-type"><option>חתונה</option><option>חינה</option><option>עלייה לתורה</option><option>בר מצווה</option><option>בת מצווה</option><option>ברית / בריתה</option><option>אירוסין</option><option>אירוע חברה</option><option>אירוע אחר</option></select></div>
       <div class="f"><span>תאריך האירוע</span><input id="a-date" type="date"></div>
     </div>
     <div class="f"><span>מקום האירוע</span><input id="a-venue" type="text"></div>
@@ -143,6 +143,8 @@ input[type=checkbox]{width:auto}
     'ev_stills': {title:'צילום סטילס לאירוע', event:true, sec:[['צילום סטילס',['צילום סטילס באירוע, 3–4 שעות.']]]},
     'ev_magnets': {title:'סטילס + מגנטים לאירוע', event:true, sec:[['צילום סטילס',['צילום סטילס באירוע, בשעות שסוכמו.']],['מגנטים',['צילום והדפסת מגנטים באירוע ללא הגבלת כמות, בשעות השירות שסוכמו.','8–10 הגדלות.','2–4 תמונות על בלוק עץ.']]]},
     'ev_booth': {title:'עמדת צילום לאירוע', event:true, booth:true, sec:[['עמדת צילום',['עד 4 שעות פעילות בסך הכל, בדרך כלל בקבלת הפנים ובמהלך האירוע (משתנה בהתאם לאירוע).','הדפסת סטריפים במקום ללא הגבלה.','תאורה.','מסגרת לסטריפ עם פפיון (אפשר גם ללא).','עיצוב אישי עם שמות ולוגו.']]]},
+    'wed_stills': {title:'צילום סטילס לחתונה', sec:[]},
+    'pk_couple': {title:'צילומי זוגיות', event:true, couple:true, hrs:'2–3 שעות', sec:[]},
     'custom': {title:'הצעה מותאמת אישית', sec:[]}
   };
   var ADDONS = [
@@ -187,6 +189,8 @@ input[type=checkbox]{width:auto}
   var D_MAGNETS = ['ציוד צילום והדפסה מקצועי.','חלוקת המגנטים לאורחים כמזכרת מהאירוע.','מענה לאורחים שרוצים להצטלם ולקבל מזכרת.'];
   var V2 = {
     'ev_stills': [['צילום סטילס',['צילום מקצועי באירוע, 3–4 שעות, על ידי דור פיינה, הצלם הראשי.'].concat(D_STILLS,D_GALLERY)]],
+    'wed_stills': [['צילום סטילס',['צילום מקצועי באירוע, בשעות שסוכמו, על ידי דור פיינה, הצלם הראשי.'].concat(D_STILLS,D_GALLERY)]],
+    'pk_couple': [['צילומי זוגיות',['צילומי זוגיות / טראש במרכז, עד 2–3 שעות, על ידי דור פיינה.','ים המלח בתוספת 1,000 ₪.','בחירה וסינון של התמונות הטובות ביותר.','עריכה מקצועית של התמונות.'].concat(D_GALLERY)]],
     'ev_magnets': [['צילום סטילס',['צילום מקצועי לאורך האירוע על ידי דור פיינה, הצלם הראשי, בשעות שסוכמו.'].concat(D_STILLS,D_GALLERY)],
       ['מגנטים',['צילום האורחים במהלך האירוע, בשעות שסוכמו.','הפקה ופיתוח של מגנטים איכותיים במקום, ללא הגבלת כמות.'].concat(D_MAGNETS)],
       ['הגדלות והדפסות',['8–10 הגדלות.','2–4 תמונות על בלוק עץ.']]],
@@ -245,15 +249,16 @@ input[type=checkbox]{width:auto}
     var p=PKGS[o.pkg]||PKGS['Premium'];
     /* an agreement carries the exact contents that were quoted */
     var snap=cleanSec(o.sec), fl=o.fl||{};
-    if(snap) p={title:String(o.title||(PKGS[o.pkg]||{}).title||'חבילת צילום'),sec:snap,event:!!fl.ev,booth:!!fl.bt,hrs:fl.hr?String(fl.hr):''};
+    if(snap) p={title:String(o.title||(PKGS[o.pkg]||{}).title||'חבילת צילום'),sec:snap,event:!!fl.ev,booth:!!fl.bt,couple:!!fl.cp,hrs:fl.hr?String(fl.hr):''};
     var h='<div class="hd"><b>Dor Fayna Photography</b><div>הצעת מחיר / חוזה עבודה עבור שירותי צילום אירועים</div><div style="font-size:12px;color:#777">מס\' הסכם '+esc(o.id)+'</div></div>';
     h+='<h3>פרטי ההזמנה</h3><table>';
     h+='<tr><td>המזמינים</td><td>'+esc((c&&c.names)||o.names)+'</td></tr>';
-    h+='<tr><td>סוג האירוע</td><td>'+esc(o.type)+'</td></tr>';
-    h+='<tr><td>תאריך האירוע</td><td>'+esc(fmtDate(o.date))+'</td></tr>';
-    h+='<tr><td>מקום האירוע</td><td>'+esc(o.venue)+'</td></tr>';
+    h+='<tr><td>סוג האירוע</td><td>'+(p.couple?'צילומי זוגיות':esc(o.type))+'</td></tr>';
+    h+='<tr><td>'+(p.couple?'תאריך הצילום':'תאריך האירוע')+'</td><td>'+esc(fmtDate(o.date))+'</td></tr>';
+    h+='<tr><td>'+(p.couple?'מקום הצילום':'מקום האירוע')+'</td><td>'+esc(o.venue)+'</td></tr>';
     h+='<tr><td>חבילה</td><td>'+esc(p.title)+'</td></tr></table>';
     if(p.booth) h+='<h3>שעות העבודה</h3><p>עמדת הצילום תפעל משעה '+esc(o.start)+' עד שעה '+esc(o.end)+'.</p>';
+    else if(p.couple) h+='<h3>שעות העבודה</h3><p>צילומי הזוגיות '+(o.start&&o.end?'יתקיימו משעה '+esc(o.start)+' עד שעה '+esc(o.end):'יימשכו '+esc(p.hrs)+(o.start?', החל משעה '+esc(o.start):''))+'.</p>';
     else if(p.hrs && !(o.start&&o.end)) h+='<h3>שעות העבודה</h3><p>הצילום באירוע יהיה '+p.hrs+(o.start?', החל משעה '+esc(o.start):'')+'. כל שעה נוספת או חלק ממנה מעבר לזמן זה תחויב ב-500 ₪ לכל צלם שתרצו להשאיר באירוע.</p>';
     else h+='<h3>שעות העבודה</h3><p>הצלם והצוות יתחילו בצילום בשעה '+esc(o.start)+' ויסיימו בשעה '+esc(o.end)+'. כל שעה נוספת או חלק ממנה מעבר לזמן זה תחויב ב-500 ₪ לכל צלם שתרצו להשאיר באירוע.</p>';
     var custom=!p.sec.length, lines=o.extra?String(o.extra).split('\n').filter(Boolean):[];
@@ -305,7 +310,7 @@ input[type=checkbox]{width:auto}
       var sec=from?cleanSec(pre.sec).filter(function(s){ return !s[2]||on[s[2]]; }):copySec(p.sec);
       var had={}; if(from) (pre.ad||[]).forEach(function(a){ had[a.k]=1; });
       addons.forEach(function(a){ var v=V2A[a.k]; if(v&&!had[a.k]) sec.push([v.sec[0],v.sec[1].slice(),a.k]); });
-      return {title:from&&pre.tt?pre.tt:p.title,sec:sec,fl:from&&pre.fl?pre.fl:{ev:p.event?1:0,bt:p.booth?1:0,hr:p.hrs||''}};
+      return {title:from&&pre.tt?pre.tt:p.title,sec:sec,fl:from&&pre.fl?pre.fl:{ev:p.event?1:0,bt:p.booth?1:0,cp:p.couple?1:0,hr:p.hrs||''}};
     }
     /* an "up to N hours" package starts with empty hours instead of the wedding defaults */
     ps.addEventListener('change',function(){
