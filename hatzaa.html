@@ -161,6 +161,39 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
 .bar>div{max-width:528px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .bar b{font-size:22px;font-variant-numeric:tabular-nums}
 .bar small{display:block;color:var(--muted);font-size:11.5px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px}
+.tabs button{font:inherit;font-size:15px;font-weight:600;color:var(--muted);background:transparent;border:0;border-radius:10px;padding:11px 8px;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--gold);color:#16130d}
+#editing{border:1px solid var(--gold);border-radius:13px;padding:11px 13px;margin:0 0 12px;color:var(--ink)}
+#editing .btn{margin-top:8px}
+#h-connect .btn{width:100%;margin-top:12px}
+#h-connect .h-paste{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;margin-top:12px;align-items:center}
+#h-connect .h-paste .btn{width:auto;margin:0}
+.h-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+#h-filter{display:flex;gap:6px;overflow-x:auto;padding:10px 0 4px}
+#h-filter button{flex:0 0 auto;font:inherit;font-size:13.5px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
+#h-filter button[aria-pressed=true]{border-color:var(--gold);color:var(--ink)}
+.h-th{display:none}
+.h-row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n st" "ty pr" "d d" "up up" "act act";gap:6px 10px;border-top:1px solid var(--line);padding:14px 0;font-size:14px}
+.h-row>div{min-width:0;overflow-wrap:anywhere}
+.h-row .hint{display:block;line-height:1.5}
+.c-n{grid-area:n;font-size:16px}.c-ty{grid-area:ty}.c-d{grid-area:d}.c-up{grid-area:up}
+.c-st{grid-area:st;text-align:left}.c-pr{grid-area:pr;text-align:left;font-weight:800;font-size:16px}
+.c-act{grid-area:act;display:flex;flex-wrap:wrap;gap:6px}
+.c-act .btn{font-weight:400;text-decoration:none}
+.c-act .btn[data-sure]{color:var(--err);border-color:var(--err)}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:7px;padding:3px 10px;font-size:13px;white-space:nowrap}
+.st-sent{color:var(--ink)}.st-seen{color:var(--gold);border-color:var(--gold)}.st-signed{color:var(--ok);border-color:var(--ok)}
+.st-exp{color:var(--muted)}.st-off{color:var(--err);border-color:var(--err)}
+#h-more,#h-out{margin-top:10px}
+@media (min-width:900px){
+ .wrap.wide{max-width:1120px}
+ .h-th,.h-row{display:grid;grid-template-columns:1.3fr 1fr 1.1fr 1.1fr .7fr .9fr 1.7fr;grid-template-areas:"n ty d st pr up act";gap:10px;align-items:center}
+ .h-th{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding:10px 0;margin-top:8px}
+ .c-st,.c-pr{text-align:right}
+ .h-th>div{font-size:13px;font-weight:400}
+ .c-up .lbl{display:none}
+}
 .state{max-width:420px;margin:30vh auto 0;text-align:center;padding:0 24px;line-height:1.8}
 </style>
 </head>
@@ -168,7 +201,9 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
 
 <div id="admin" class="hidden">
   <div class="wrap">
-    <div class="top"><h1>הצעת מחיר חדשה</h1><a href="https://app.dorfayna.co.il/" id="home-link">למערכת</a></div>
+    <div class="top"><h1>הצעות מחיר</h1><a href="https://app.dorfayna.co.il/" id="home-link">למערכת</a></div>
+    <div class="tabs"><button type="button" id="tab-new" aria-pressed="true">הצעה חדשה</button><button type="button" id="tab-hist" aria-pressed="false">היסטוריה וסטטוס</button></div>
+    <div id="form-view">
 
     <div class="card">
       <h2>מילוי מהיר</h2>
@@ -246,6 +281,8 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       <label class="chkline" style="margin-bottom:0"><input type="checkbox" id="opts" checked><span>להציג ללקוח תוספות אפשריות ומחיריהן</span></label>
     </div>
 
+    <div id="editing" class="msg hidden"><div id="editing-text"></div><button type="button" class="btn ghost small" id="editing-new">במקום זאת: הצעה חדשה</button></div>
+
     <div class="row">
       <button class="btn ghost" id="prev" type="button">תצוגה מקדימה</button>
       <button class="btn" id="make" type="button">יצירת קישור</button>
@@ -262,7 +299,25 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       <div id="out-msg" class="msg" role="status"></div>
     </div>
 
-    <div class="card hidden" id="saved" style="margin-top:12px"><h2>ההצעות שלי</h2><div id="saved-list"></div><div class="hint">הרשימה נשמרת רק במכשיר הזה.</div></div>
+    </div>
+
+    <div id="hist-view" class="hidden">
+    <div class="card hidden" id="h-connect"><h2>חיבור להיסטוריה המלאה</h2>
+      <div class="hint">מחברים כל מכשיר פעם אחת, ואז רואים בו את כל ההצעות עם סטטוס: נשלחה, נצפתה, נחתמה. הקישור נשלח רק למייל העסקי שלך.</div>
+      <button class="btn" id="h-login" type="button">שליחת קישור כניסה למייל</button>
+      <div class="h-paste"><input id="h-code" type="text" dir="ltr" autocomplete="off" placeholder="או הדבקת הקוד מהמייל" aria-label="קוד מהמייל"><button type="button" class="btn ghost small" id="h-use">חיבור</button></div>
+      <div id="h-msg" class="msg" role="status"></div>
+    </div>
+    <div class="card hidden" id="h-box">
+      <div class="h-head"><input id="h-q" type="search" placeholder="חיפוש: שם, מקום, טלפון" aria-label="חיפוש בהצעות"><button type="button" class="btn ghost small" id="h-refresh">רענון</button></div>
+      <div id="h-filter"></div>
+      <div id="h-status" class="msg" role="status"></div>
+      <div id="h-list"></div>
+      <button type="button" class="btn ghost small hidden" id="h-more">להציג עוד</button>
+      <div><button type="button" class="btn ghost small" id="h-out">ניתוק המכשיר הזה</button></div>
+    </div>
+    <div class="card hidden" id="saved"><h2>ההצעות שנוצרו במכשיר הזה</h2><div id="saved-list"></div><div class="hint">הרשימה הזו נשמרת רק כאן ובלי סטטוס.</div></div>
+    </div>
   </div>
 </div>
 
@@ -1056,6 +1111,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       /* clear what an earlier auto fill wrote, so details of one client never stay in the next quote */
       auto.forEach(function(x){ if($(x[0]).value===x[1]){ $(x[0]).value=''; if(x[0]==='price') manual=false; if(x[0]==='dep') depAuto=true; } }); auto=[];
       if(r.names && $('names').value.trim() && r.names!==$('names').value.trim()) depAuto=true;
+      if(editing && r.names && r.names!==editing.n) stopEdit();
       /* a new client starts from the clean package, not from the last client's changes */
       if(r.names && r.names!==$('names').value.trim()){ ed.pk=null; picks={}; shown=''; chose=false; }
       function put(id,val,name){ if(val!==undefined&&val!==''){ $(id).value=val; if(id!=='type') auto.push([id,$(id).value]); if(name) got.push(name); } }
@@ -1103,7 +1159,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       if(r.price){ put('price',r.price,'מחיר'); manual=true; }
       if(r.start){ $('start').value=r.start; $('end').value=r.end||''; hoursTouched=true; got.push('שעות'); }
       else if(auto.length) { hoursTouched=false; hours(); }
-      dayManual=false; qid='';
+      dayManual=false; qid=editing?editing.id:'';
       reprice(); letter();
       var miss=[]; autoAds.forEach(function(k){ if(!+$('adp-'+k).value) miss.push('מחיר ל'+(k==='video'?'צילום וידאו':k==='couple'?'צילומי זוגיות':'עמדת צילום')); }); if(!$('names').value.trim()) miss.push('שמות'); if(!$('date').value) miss.push('תאריך'); if(!$('venue').value.trim()) miss.push('מקום'); if(!+$('price').value) miss.push('מחיר');
       var lines=[got.length?'מולא: '+got.join(', '):'לא זיהיתי פרטים. אפשר למלא ידנית.'];
@@ -1187,12 +1243,12 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     function saved(){ var a=store('df_quotes_v1'); return Array.isArray(a)?a:[]; }
     var memory=saved();
     function renderSaved(){
-      $('saved').classList.toggle('hidden',!memory.length);
+      $('saved').classList.toggle('hidden',!memory.length||!!token());
       $('saved-list').innerHTML=memory.slice(0,30).map(function(q,i){ var o=q.data; return '<div class="q" data-i="'+i+'"><b>'+esc(o.n)+' · '+money(o.pr)+'</b><span class="hint">'+esc(o.ty)+(o.d?' · '+fmtDate(o.d):'')+(o.pl?' · '+esc(o.pl):'')+'</span><div class="row">'
         +'<button type="button" class="btn ghost small" data-a="edit">עריכה</button><button type="button" class="btn ghost small" data-a="share">קישור</button><button type="button" class="btn ghost small" data-a="agree">הסכם</button><button type="button" class="btn ghost small" data-a="del">הסרה</button></div></div>'; }).join('');
     }
     function load(item){
-      var o=item.data; depAuto=false; $('names').value=o.n; $('type').value=o.ty; $('date').value=o.d; $('venue').value=o.pl; $('guests').value=o.g; $('phone').value=item.phone||'';
+      var o=item.data; stopEdit(); depAuto=false; $('names').value=o.n; $('type').value=o.ty; $('date').value=o.d; $('venue').value=o.pl; $('guests').value=o.g; $('phone').value=item.phone||'';
       C=catalog(); pkgOptions();
       if(![].some.call($('pkg').options,function(x){return x.value===o.pk;})){ C.pkgs[o.pk]=assign(PKGS[o.pk]||PKGS.custom,{title:o.tt||'חבילה',price:o.bp||0,sec:o.sec||[],event:!!(o.fl&&o.fl.ev),booth:!!(o.fl&&o.fl.bt),couple:!!(o.fl&&o.fl.cp),hrs:o.fl&&o.fl.hr||'',has:o.fl&&o.fl.hs||[]}); $('pkg').add(new Option(C.pkgs[o.pk].title,o.pk)); }
       $('pkg').value=o.pk; $('addons').innerHTML=''; renderAddons(o.ad.map(function(a){ return [a.k,a.t||a.k,a.p]; }));
@@ -1204,29 +1260,149 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     }
     $('saved-list').onclick=function(e){
       var b=e.target.closest('button'); if(!b) return; var i=+b.closest('.q').dataset.i, item=memory[i], a=b.dataset.a;
+      if(a!=='del') tab('new'); /* these open in the form */
       if(a==='edit') load(item);
       else if(a==='share') showOut(item);
       else if(a==='agree') toAgreement(item);
       else if(b.dataset.sure){ memory.splice(i,1); store('df_quotes_v1',memory); renderSaved(); }
       else { b.dataset.sure='1'; b.textContent='בטוח? לחצו שוב'; setTimeout(function(){ delete b.dataset.sure; b.textContent='הסרה'; },3000); }
     };
-    function keep(item){ memory.unshift(item); memory=memory.slice(0,100); store('df_quotes_v1',memory); renderSaved(); }
+    function keep(item){ if(item.url) memory=memory.filter(function(x){ return x.url!==item.url; }); memory.unshift(item); memory=memory.slice(0,100); store('df_quotes_v1',memory); renderSaved(); }
 
     $('make').onclick=function(){
       var o=ready(false); if(!o) return;
-      var item={at:Date.now(),phone:$('phone').value.trim(),data:o,url:''};
+      var m=$('msg');
+      if(editing && o.n!==editing.n && !editing.warned){ editing.warned=true; m.className='msg err'; m.textContent='השם שונה מההצעה שעורכים ('+editing.n+'). לחיצה נוספת תעדכן את אותו קישור. ללקוח אחר לחצו "במקום זאת: הצעה חדשה".'; return; }
+      var upd=editing&&token()?editing:null, item={at:Date.now(),phone:$('phone').value.trim(),data:o,url:''}, meta={phone:item.phone};
       if(o.dp||!depAuto){ lastDep=o.dp||''; store('df_quote_dep',lastDep); }
       if(!LIVE){ keep(item); showOut(item); return; }
-      var btn=this, m=$('msg'); btn.disabled=true; m.className='msg'; m.textContent='יוצר קישור…';
-      function create(data){ return fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'create',data:data})})
-        .then(function(r){return r.json();}).then(function(j){ if(!j||!j.ok||!j.k) throw new Error('x'); return j.k; }); }
-      (o.sg?create(agreementOf(o)).then(function(k){ o.ak=k; }):Promise.resolve())
-        .then(function(){ return create(o); }).then(function(k){
-          item.url=location.origin+'/hatzaa?k='+k; m.textContent=''; btn.disabled=false; qid=''; keep(item); showOut(item);
-        }).catch(function(){ btn.disabled=false; m.className='msg err'; m.textContent='יצירת הקישור נכשלה. בדקו את החיבור לאינטרנט ונסו שוב.'; });
+      var btn=this; btn.disabled=true; m.className='msg'; m.textContent=upd?'מעדכן…':'יוצר קישור…';
+      function send(body){ return api(body).then(function(j){ if(!j||!j.ok||!j.k) throw new Error(j&&j.error||'x'); return j.k; }); }
+      (o.sg?send({action:'create',data:agreementOf(o)}).then(function(k){ o.ak=k; }):Promise.resolve())
+        .then(function(){ return send(upd?{action:'update',token:token(),k:upd.k,data:o,meta:meta}:{action:'create',data:o,meta:meta}); })
+        .then(function(k){
+          item.url=location.origin+'/hatzaa?k='+k; btn.disabled=false; stopEdit(); qid=''; keep(item); showOut(item);
+          m.className='msg ok'; m.textContent=upd?'ההצעה עודכנה. הקישור ללקוח לא השתנה.':'';
+        }).catch(function(e){
+          btn.disabled=false; m.className='msg err';
+          m.textContent=e.message==='signed'?'ההצעה כבר נחתמה ואי אפשר לעדכן אותה. לחצו "במקום זאת: הצעה חדשה".':e.message==='auth'?'החיבור להיסטוריה פג. התחברו שוב בלשונית ההיסטוריה.':(upd?'העדכון':'יצירת הקישור')+' נכשל. בדקו את החיבור לאינטרנט ונסו שוב.';
+        });
     };
 
-    pkgChanged(); heroes(); letter(); hours(); video(); renderSaved();
+    /* ---------- history of all quotes, with status ---------- */
+    var KEY='df_owner_key', quotes=null, filter='all', limit=50, editing=null;
+    var STATES={sent:'נשלחה',seen:'נצפתה',signed:'נחתמה',exp:'פג תוקף',off:'לא פעילה'};
+    function token(){ var t=store(KEY); return typeof t==='string'?t:''; }
+    function forget(){ try{ localStorage.removeItem(KEY); }catch(e){} quotes=null; }
+    function api(body){ return fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json();}); }
+    function getData(k){ return fetch(MAIL_URL+'?k='+encodeURIComponent(k)).then(function(r){return r.json();}).then(function(j){ if(!j||!j.ok) throw new Error('x'); return j.data; }); }
+    function quoteUrl(k){ return (LIVE?location.origin:'https://clients.dorfayna.co.il')+'/hatzaa?k='+k; }
+    function note(id,text,kind){ var el=$(id); el.className='msg'+(kind?' '+kind:''); el.textContent=text; }
+    function when(t){ if(!t) return ''; var d=new Date(t), z=function(n){ return ('0'+n).slice(-2); }; return d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear()+' '+z(d.getHours())+':'+z(d.getMinutes()); }
+    function stateOf(q){ return q.off?'off':q.signed?'signed':q.vu&&q.vu<today()?'exp':q.seen?'seen':'sent'; }
+    function tab(name){
+      var h=name==='hist';
+      $('form-view').classList.toggle('hidden',h); $('hist-view').classList.toggle('hidden',!h);
+      $('tab-new').setAttribute('aria-pressed',String(!h)); $('tab-hist').setAttribute('aria-pressed',String(h));
+      $('admin').querySelector('.wrap').classList.toggle('wide',h);
+      if(h){ histView(); refreshHist(); }
+    }
+    function histView(){ var on=!!token(); $('h-connect').classList.toggle('hidden',on); $('h-box').classList.toggle('hidden',!on); renderSaved(); }
+    function refreshHist(){
+      var t=token(); if(!t) return;
+      if(quotes) draw(); note('h-status','טוען…');
+      api({action:'list',token:t}).then(function(j){
+        if(j&&j.ok){ quotes=j.list; note('h-status',''); draw(); }
+        else if(j&&j.error==='auth'){ forget(); histView(); note('h-msg','החיבור פג. שלחו קישור כניסה חדש.','err'); }
+        else throw new Error('x');
+      }).catch(function(){ note('h-status','לא הצלחתי לטעון את ההצעות. בדקו אינטרנט ולחצו רענון.','err'); });
+    }
+    function connect(code){
+      var t=(/[a-f0-9]{64}/.exec(String(code||''))||[''])[0];
+      if(!t){ note('h-msg','זה לא נראה כמו הקוד מהמייל.','err'); return; }
+      note('h-msg','מתחבר…'); note('h-status','מתחבר…');
+      api({action:'list',token:t}).then(function(j){
+        if(!j||!j.ok){ note('h-status',''); note('h-msg',j&&j.error==='auth'?'הקוד לא תקף. שלחו קישור כניסה חדש.':'החיבור נכשל, נסו שוב.','err'); return; }
+        store(KEY,t); quotes=j.list; $('h-code').value=''; note('h-msg',''); histView(); note('h-status','המכשיר חובר.','ok'); draw();
+      }).catch(function(){ note('h-status',''); note('h-msg','החיבור נכשל. בדקו אינטרנט ונסו שוב.','err'); });
+    }
+    function draw(){
+      if(!quotes) return;
+      var find=$('h-q').value.trim(), count={all:quotes.length};
+      quotes.forEach(function(q){ var k=stateOf(q); count[k]=(count[k]||0)+1; });
+      $('h-filter').innerHTML=['all','sent','seen','signed','exp','off'].filter(function(k){ return k==='all'||count[k]||filter===k; })
+        .map(function(k){ return '<button type="button" data-f="'+k+'" aria-pressed="'+(filter===k)+'">'+(k==='all'?'הכל':STATES[k])+' '+(count[k]||0)+'</button>'; }).join('');
+      var rows=quotes.filter(function(q){ return (filter==='all'||stateOf(q)===filter) && (!find||[q.n,q.pl,q.ph,q.ty,q.tt,fmtDate(q.d)].join(' ').indexOf(find)>-1); })
+        .sort(function(a,b){ return b.up-a.up; });
+      var btn=function(a,t){ return '<button type="button" class="btn ghost small" data-a="'+a+'">'+t+'</button>'; };
+      $('h-list').innerHTML=!rows.length?'<div class="hint" style="padding:14px 0">'+(quotes.length?'אין הצעות שמתאימות לחיפוש.':'עדיין אין הצעות. כל קישור שתיצרו יופיע כאן.')+'</div>':
+        '<div class="h-th"><div class="c-n">לקוח</div><div class="c-ty">אירוע</div><div class="c-d">תאריך</div><div class="c-st">סטטוס</div><div class="c-pr">מחיר</div><div class="c-up">עודכן</div><div class="c-act">פעולות</div></div>'
+        +rows.slice(0,limit).map(function(q){
+          var st=stateOf(q), tel=phoneIntl(q.ph), url=quoteUrl(q.k);
+          var info=st==='signed'?when(q.signed):q.views?(q.views===1?'צפייה אחת':q.views+' צפיות')+' · '+when(q.seen):st==='sent'?'עוד לא נפתחה':'';
+          var wa='<a class="btn ghost small" target="_blank" rel="noopener" href="'+esc(waUrl(tel,shareText({n:q.n,ty:q.ty,fl:{cp:q.tt==='צילומי זוגיות'}},url)))+'">וואטסאפ</a>';
+          return '<div class="h-row" data-k="'+esc(q.k)+'"><div class="c-n"><b>'+esc(q.n)+'</b>'+(q.ph?'<span class="hint">'+esc(q.ph)+'</span>':'')+'</div>'
+            +'<div class="c-ty">'+esc(q.ty)+(q.tt?'<span class="hint">'+esc(q.tt)+'</span>':'')+'</div>'
+            +'<div class="c-d">'+(fmtDate(q.d)||'בלי תאריך')+(q.pl?'<span class="hint">'+esc(q.pl)+'</span>':'')+'</div>'
+            +'<div class="c-st"><span class="badge st-'+st+'">'+STATES[st]+'</span>'+(info?'<span class="hint">'+info+'</span>':'')+'</div>'
+            +'<div class="c-pr">'+money(q.pr)+'</div>'
+            +'<div class="c-up hint"><span class="lbl">עודכן </span>'+when(q.up)+'</div>'
+            +'<div class="c-act">'+(q.off?btn('on','הפעלה מחדש'):btn('edit','✏️ עריכה')+btn('view','👁 צפייה')+btn('copy','⧉ העתקה')+wa+btn('agree','הסכם')+btn('off','⏻ כיבוי'))+'</div></div>';
+        }).join('');
+      $('h-more').classList.toggle('hidden',rows.length<=limit);
+    }
+    function startEdit(q,data){
+      load({data:data,phone:q.ph});
+      if(q.signed){ $('editing-text').textContent='ההצעה של '+data.n+' כבר נחתמה ונשארת כמו שהיא. השינויים ייצרו הצעה חדשה.'; $('editing-new').classList.add('hidden'); }
+      else { editing={k:q.k,n:data.n,id:data.id}; qid=data.id; $('editing-text').textContent='עורכים את ההצעה של '+data.n+'. שמירה תעדכן את אותו קישור.'; $('editing-new').classList.remove('hidden'); $('make').textContent='עדכון ההצעה'; }
+      $('editing').classList.remove('hidden'); $('msg').textContent=''; tab('new'); window.scrollTo(0,0);
+    }
+    function stopEdit(){ editing=null; qid=''; $('editing').classList.add('hidden'); $('make').textContent='יצירת קישור'; }
+    $('editing-new').onclick=function(){ stopEdit(); $('msg').className='msg ok'; $('msg').textContent='עכשיו הכפתור ייצר קישור חדש.'; };
+    $('tab-new').onclick=function(){ tab('new'); };
+    $('tab-hist').onclick=function(){ tab('hist'); };
+    $('h-login').onclick=function(){
+      var b=this; b.disabled=true; note('h-msg','שולח…');
+      api({action:'login'}).then(function(j){
+        b.disabled=false;
+        if(j&&j.ok) note('h-msg','נשלח מייל. פתחו אותו ולחצו על הקישור. אם נפתח בדפדפן אחר, העתיקו את הקוד והדביקו כאן.','ok');
+        else note('h-msg',j&&j.error==='wait'?'מייל נשלח לפני רגע. אפשר לנסות שוב בעוד דקה.':j&&j.error==='limit'?'נשלחו היום הרבה מיילים. חפשו את האחרון שהגיע, או נסו מחר.':'השליחה נכשלה, נסו שוב.','err');
+      }).catch(function(){ b.disabled=false; note('h-msg','השליחה נכשלה. בדקו אינטרנט ונסו שוב.','err'); });
+    };
+    $('h-use').onclick=function(){ connect($('h-code').value); };
+    $('h-refresh').onclick=refreshHist;
+    $('h-q').oninput=function(){ limit=50; draw(); };
+    $('h-more').onclick=function(){ limit+=50; draw(); };
+    $('h-filter').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; filter=b.dataset.f; limit=50; draw(); };
+    $('h-out').onclick=function(){
+      var b=this; if(!b.dataset.sure){ b.dataset.sure='1'; b.textContent='בטוח? לחצו שוב'; setTimeout(function(){ delete b.dataset.sure; b.textContent='ניתוק המכשיר הזה'; },3000); return; }
+      delete b.dataset.sure; b.textContent='ניתוק המכשיר הזה'; forget(); $('h-list').innerHTML=''; histView();
+    };
+    $('h-list').onclick=function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      var k=b.closest('.h-row').dataset.k, q=quotes.filter(function(x){ return x.k===k; })[0], a=b.dataset.a; if(!q) return;
+      if(a==='copy'){ copy(quoteUrl(k),$('h-status')); return; }
+      if(a==='off'&&!b.dataset.sure){ b.dataset.sure='1'; b.textContent='הלקוח לא יוכל לפתוח. לחצו שוב'; setTimeout(function(){ delete b.dataset.sure; b.textContent='⏻ כיבוי'; },4000); return; }
+      b.disabled=true; note('h-status','רגע…');
+      var done=function(){ b.disabled=false; };
+      if(a==='off'||a==='on') api({action:'set',token:token(),k:k,off:a==='off'}).then(function(j){
+          if(!j||!j.ok) throw new Error('x'); quotes[quotes.indexOf(q)]=j.item; note('h-status',a==='off'?'ההצעה כבויה.':'ההצעה פעילה שוב.','ok'); draw();
+        }).catch(function(){ done(); note('h-status','הפעולה נכשלה, נסו שוב.','err'); });
+      else getData(k).then(function(data){
+          done(); note('h-status','');
+          if(a==='edit') startEdit(q,data);
+          else if(a==='view') showClient(data,true);
+          else toAgreement({data:data,phone:q.ph,url:quoteUrl(k)});
+        }).catch(function(){ done(); note('h-status','לא הצלחתי לפתוח את ההצעה, נסו שוב.','err'); });
+    };
+    function fromHash(){
+      var h=location.hash.slice(1);
+      if(h.indexOf('login=')===0){ window.history.replaceState(null,'',location.pathname+location.search); tab('hist'); connect(h.slice(6)); }
+      else if(h==='history') tab('hist');
+    }
+    window.addEventListener('hashchange',fromHash);
+
+    pkgChanged(); heroes(); letter(); hours(); video(); renderSaved(); fromHash();
   }
 
   function fail(text){ document.body.innerHTML='<div class="state">'+text+'</div>'; }
@@ -1234,7 +1410,10 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
   var K=new URLSearchParams(location.search).get('k'), hash=location.hash.slice(1);
   if(K){
     fail('טוען את ההצעה…');
-    fetch(MAIL_URL+'?k='+encodeURIComponent(K)).then(function(r){return r.json();}).then(function(j){
+    /* Dor looking at his own quote is not a client view */
+    var own=false; try{ own=!!localStorage.getItem('df_owner_key')||(localStorage.getItem('df_quotes_v1')||'').indexOf('k='+K+'"')>-1; }catch(e){}
+    fetch(MAIL_URL+'?k='+encodeURIComponent(K)+(own?'':'&v=1')).then(function(r){return r.json();}).then(function(j){
+      if(j&&j.error==='off'){ fail('ההצעה הזו כבר לא פעילה.<br>להצעה מעודכנת כתבו לדור: 050-2858162'); return; }
       if(!j||!j.ok) throw new Error('x'); document.body.innerHTML='<div id="client"></div>'; openQuote(j.data);
     }).catch(function(){ fail('לא הצלחנו לטעון את ההצעה.<br>בדקו את החיבור לאינטרנט או בקשו מדור קישור חדש.'); });
   }
