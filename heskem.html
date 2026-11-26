@@ -139,6 +139,7 @@ input[type=checkbox]{width:auto}
     'Premium': {title:'Premium – סטילס, וידאו ואלבומים', sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT]]},
     'Premium Plus': {title:'Premium Plus – צילום מלא ומגנטים', sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT],['מגנטים',MAGNETS]]},
     'Diamond': {title:'Diamond – צילום מלא, זוגיות והדפסים', sec:[['צילום סטילס',STILLS2.concat([GALLERY])],['אלבומים',ALBUMS],['צילום וידאו',VIDEO],['עריכת וידאו',EDIT],['מגנטים',MAGNETS],['זוגיות והדפסים',['צילומי זוגיות (Save the Date) לפני האירוע.','קנבס גדול לזוג ושני קנבסים להורים, או הגדלת זכוכית – לפי הבחירה בהצעה.']]]},
+    'wed_magnets': {title:'סטילס + מגנטים לחתונה', event:true, hrs:'עד 5 שעות', sec:[['צילום ומגנטים',['צילום והדפסת מגנטים באירוע ללא הגבלת כמות, עד 5 שעות.','כולל תמונות משפחה וצילומי זוג.','צלם ועורך באירוע.','הדפסה טרמית באיכות 600DPI.','מסגרת בעיצוב אישי.']],['הגדלות ואתר תמונות',['10 הגדלות בגודל A5.','6 בלוקי עץ.','תמונת זכוכית.','אתר תמונות עם זיהוי פנים לחצי שנה.']]]},
     'ev_stills': {title:'צילום סטילס לאירוע', event:true, sec:[['צילום סטילס',['צילום סטילס באירוע, 3–4 שעות.']]]},
     'ev_magnets': {title:'סטילס + מגנטים לאירוע', event:true, sec:[['צילום סטילס',['צילום סטילס באירוע, בשעות שסוכמו.']],['מגנטים',['צילום והדפסת מגנטים באירוע ללא הגבלת כמות, בשעות השירות שסוכמו.','8–10 הגדלות.','2–4 תמונות על בלוק עץ.']]]},
     'ev_booth': {title:'עמדת צילום לאירוע', event:true, booth:true, sec:[['עמדת צילום',['עד 4 שעות פעילות בסך הכל, בדרך כלל בקבלת הפנים ובמהלך האירוע (משתנה בהתאם לאירוע).','הדפסת סטריפים במקום ללא הגבלה.','תאורה.','מסגרת לסטריפ עם פפיון (אפשר גם ללא).','עיצוב אישי עם שמות ולוגו.']]]},
@@ -194,6 +195,7 @@ input[type=checkbox]{width:auto}
     h+='<tr><td>מקום האירוע</td><td>'+esc(o.venue)+'</td></tr>';
     h+='<tr><td>חבילה</td><td>'+esc(p.title)+'</td></tr></table>';
     if(p.booth) h+='<h3>שעות העבודה</h3><p>עמדת הצילום תפעל משעה '+esc(o.start)+' עד שעה '+esc(o.end)+'.</p>';
+    else if(p.hrs && !(o.start&&o.end)) h+='<h3>שעות העבודה</h3><p>הצילום באירוע יהיה '+p.hrs+(o.start?', החל משעה '+esc(o.start):'')+'. כל שעה נוספת או חלק ממנה מעבר לזמן זה תחויב ב-500 ₪ לכל צלם שתרצו להשאיר באירוע.</p>';
     else h+='<h3>שעות העבודה</h3><p>הצלם והצוות יתחילו בצילום בשעה '+esc(o.start)+' ויסיימו בשעה '+esc(o.end)+'. כל שעה נוספת או חלק ממנה מעבר לזמן זה תחויב ב-500 ₪ לכל צלם שתרצו להשאיר באירוע.</p>';
     var custom=!p.sec.length, lines=o.extra?String(o.extra).split('\n').filter(Boolean):[];
     if(!custom) h+='<h3>פרטי החבילה והשירותים הכלולים</h3>';
@@ -210,7 +212,7 @@ input[type=checkbox]{width:auto}
     var others=ADDONS.filter(function(a){ return !ad.some(function(x){return x.k===a[0];}); }).filter(function(a){return a[2];});
     if(!custom && !p.event && others.length) h+='<p style="margin:10px 0 2px"><b>תוספות אפשריות בתשלום נוסף</b> (קיימת האפשרות להורדה והוספת פריטים לחבילה):</p>'+ul(others.map(function(a){return a[1]+' – תוספת של '+money(a[2]);}));
     if(p.booth) h+='<h3>אספקת התמונות</h3><p>התמונות מודפסות במקום.</p>';
-    else h+='<h3>זמני אספקת החומרים</h3>'+ul(p.event?DELIVERY.slice(0,1):DELIVERY);
+    else h+='<h3>זמני אספקת החומרים</h3>'+ul(p.event?DELIVERY.slice(0,1).concat(ad.some(function(x){return x.k==='albums';})?[DELIVERY[2]]:[]):DELIVERY);
     h+='<h3>תנאי ביטול</h3>'+ul(CANCEL);
     h+='<h3>כוח עליון</h3><p>'+esc(FORCE)+'</p>';
     h+='<h3>תנאים נוספים</h3>'+ul(TERMS);
@@ -233,6 +235,12 @@ input[type=checkbox]{width:auto}
       var d=document.createElement('div'); d.className='addon';
       d.innerHTML='<input type="checkbox" id="ad-'+a[0]+'"><label for="ad-'+a[0]+'">'+esc(a[1])+'</label><input type="number" id="adp-'+a[0]+'" value="'+(a[2]||'')+'" placeholder="₪">';
       box.appendChild(d);
+    });
+    /* an "up to N hours" package starts with empty hours instead of the wedding defaults */
+    ps.addEventListener('change',function(){
+      var s=$('a-start'), e=$('a-end');
+      if(PKGS[ps.value].hrs){ if(s.value==='14:30'&&e.value==='01:00'){ s.value=''; e.value=''; } }
+      else if(!s.value&&!e.value){ s.value='14:30'; e.value='01:00'; }
     });
     function collect(){
       var addons=ADDONS.filter(function(a){return $('ad-'+a[0]).checked;}).map(function(a){ return {k:a[0],t:a[1],p:+$('adp-'+a[0]).value||0}; });
