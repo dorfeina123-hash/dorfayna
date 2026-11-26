@@ -151,6 +151,8 @@ input[type=checkbox]{width:auto}
     ['magnets','חבילת מגנטים ללא הגבלה עד 5 שעות עד השעה 00:00, כולל חבילה אישית לחתן ולכלה: 25–40 מגנטים קטנים לזוג + 10 הגדלות בגודל A5',1600],
     ['couple','צילומי זוגיות / טראש במרכז עד 2–3 שעות (ים המלח בתוספת 1,000 ₪)',1500],
     ['video2','צלם וידאו נוסף לאירוע (מומלץ מעל 500 מוזמנים או באירוע מופרד)',1800],
+    ['album1','פיתוח אלבום',0],
+    ['video','צילום וידאו',0],
     ['booth','עמדת צילום (Photo Booth): עד 4 שעות פעילות בקבלת הפנים ובמהלך האירוע, הדפסת סטריפים במקום ללא הגבלה, מסגרת לסטריפ עם פפיון (או בלי, לבחירתכם), עיצוב אישי עם שמות ולוגו ותאורה',1800]
   ];
   var DELIVERY = ['תמונות סטילס: עד 21 ימי עסקים לאחר האירוע.','חומרי וידאו: עד 45 ימי עסקים מבחירת השירים על ידי המזמין.','אלבומים מעוצבים: עד 30 ימי עסקים מרגע אישור העיצוב.'];
@@ -212,7 +214,7 @@ input[type=checkbox]{width:auto}
     var others=ADDONS.filter(function(a){ return !ad.some(function(x){return x.k===a[0];}); }).filter(function(a){return a[2];});
     if(!custom && !p.event && others.length) h+='<p style="margin:10px 0 2px"><b>תוספות אפשריות בתשלום נוסף</b> (קיימת האפשרות להורדה והוספת פריטים לחבילה):</p>'+ul(others.map(function(a){return a[1]+' – תוספת של '+money(a[2]);}));
     if(p.booth) h+='<h3>אספקת התמונות</h3><p>התמונות מודפסות במקום.</p>';
-    else h+='<h3>זמני אספקת החומרים</h3>'+ul(p.event?DELIVERY.slice(0,1).concat(ad.some(function(x){return x.k==='albums';})?[DELIVERY[2]]:[]):DELIVERY);
+    else h+='<h3>זמני אספקת החומרים</h3>'+ul(p.event?DELIVERY.filter(function(t,i){ return i===0 || ad.some(function(x){ return i===1?x.k==='video':x.k==='albums'||x.k==='album1'; }); }):DELIVERY);
     h+='<h3>תנאי ביטול</h3>'+ul(CANCEL);
     h+='<h3>כוח עליון</h3><p>'+esc(FORCE)+'</p>';
     h+='<h3>תנאים נוספים</h3>'+ul(TERMS);
