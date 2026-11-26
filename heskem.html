@@ -153,6 +153,7 @@ input[type=checkbox]{width:auto}
     ['video2','צלם וידאו נוסף לאירוע (מומלץ מעל 500 מוזמנים או באירוע מופרד)',1800],
     ['album1','פיתוח אלבום',0],
     ['video','צילום וידאו',0],
+    ['vseg','צילום קטע בווידאו, ללא עריכה',0],
     ['booth','עמדת צילום (Photo Booth): עד 4 שעות פעילות בקבלת הפנים ובמהלך האירוע, הדפסת סטריפים במקום ללא הגבלה, מסגרת לסטריפ עם פפיון (או בלי, לבחירתכם), עיצוב אישי עם שמות ולוגו ותאורה',1800]
   ];
   var DELIVERY = ['תמונות סטילס: עד 21 ימי עסקים לאחר האירוע.','חומרי וידאו: עד 45 ימי עסקים מבחירת השירים על ידי המזמין.','אלבומים מעוצבים: עד 30 ימי עסקים מרגע אישור העיצוב.'];
@@ -179,6 +180,59 @@ input[type=checkbox]{width:auto}
   ];
   var IP = 'המזמין מאשר ל-"Dor Fayna Photography" לפרסם תמונות מהאירוע לצורכי שיווק. זכויות היוצרים על התמונות שמורות לצלם.';
 
+  /*CAT-START*/
+  /* package contents as written in Dor's service sheet (26.11.2026), merged with what he gave before, without repeats */
+  var D_STILLS = ['תיעוד הרגעים החשובים והמרגשים באירוע.','צילומי משפחה, זוגות, ילדים ואורחים.','צילומי אווירה, עיצוב המקום, פרטים קטנים ורגעים ספונטניים.','צילום קבלת פנים, טקס, ריקודים והתרחשויות מרכזיות בהתאם לסוג האירוע.','בחירה וסינון של התמונות הטובות ביותר.','עריכה מקצועית של התמונות.'];
+  var D_GALLERY = ['גלריה דיגיטלית אישית לצפייה ולהורדה, עם אפשרות לשיתוף עם בני משפחה וחברים.','מסירת התמונות באיכות גבוהה.'];
+  var D_MAGNETS = ['ציוד צילום והדפסה מקצועי.','חלוקת המגנטים לאורחים כמזכרת מהאירוע.','מענה לאורחים שרוצים להצטלם ולקבל מזכרת.'];
+  var V2 = {
+    'ev_stills': [['צילום סטילס',['צילום מקצועי באירוע, 3–4 שעות, על ידי דור פיינה, הצלם הראשי.'].concat(D_STILLS,D_GALLERY)]],
+    'ev_magnets': [['צילום סטילס',['צילום מקצועי לאורך האירוע על ידי דור פיינה, הצלם הראשי, בשעות שסוכמו.'].concat(D_STILLS,D_GALLERY)],
+      ['מגנטים',['צילום האורחים במהלך האירוע, בשעות שסוכמו.','הפקה ופיתוח של מגנטים איכותיים במקום, ללא הגבלת כמות.'].concat(D_MAGNETS)],
+      ['הגדלות והדפסות',['8–10 הגדלות.','2–4 תמונות על בלוק עץ.']]],
+    'wed_magnets': [['צילום סטילס',['צילום מקצועי באירוע, עד 5 שעות, על ידי דור פיינה, הצלם הראשי.'].concat(D_STILLS,['אתר תמונות אישי עם זיהוי פנים לחצי שנה, לצפייה, להורדה ולשיתוף.','מסירת התמונות באיכות גבוהה.'])],
+      ['מגנטים',['צילום והדפסת מגנטים ללא הגבלת כמות, עד 5 שעות.','צלם ועורך באירוע.','הדפסה טרמית באיכות 600DPI.','מסגרת בעיצוב אישי.'].concat(D_MAGNETS)],
+      ['הגדלות והדפסות',['10 הגדלות בגודל A5.','6 בלוקי עץ.','תמונת זכוכית.']]]
+  };
+  /* add-ons that bring their own list of items into the quote and the agreement */
+  var V2A = {
+    video: {t:'צילום וידאו – חבילה מלאה', sec:['צילום וידאו',['צלם וידאו מקצועי נוסף, בנוסף לצלם הסטילס.','צילום ותיעוד האירוע לאורך שעות הכיסוי שסוכמו.','תיעוד הרגעים המרכזיים והחשובים באירוע.','צילום הטקס, קבלת הפנים, המשפחה, האורחים והאווירה.','עריכת סרט אירוע מלא.','הפקת קליפ קצר ומרגש עם הרגעים הבולטים מהאירוע.','מסירת תוצרי הווידאו באופן דיגיטלי.']]},
+    vseg: {t:'צילום קטע בווידאו, ללא עריכה', sec:['צילום קטע בווידאו',['צילום קטע ספציפי בלבד (לדוגמה קריאה בתורה).','מסירת חומר הגלם ללא עריכה.']]},
+    booth: {t:'עמדת צילום (Photo Booth)', sec:['עמדת צילום',['עד 4 שעות פעילות בקבלת הפנים ובמהלך האירוע.','הדפסת סטריפים במקום ללא הגבלה.','תאורה.','מסגרת לסטריפ עם פפיון (או בלי, לבחירתכם).','עיצוב אישי עם שמות ולוגו.']]}
+  };
+  var CAT_KEY = 'df_catalog_v1';
+  function catRead(){
+    var c; try{ c=JSON.parse(localStorage.getItem(CAT_KEY)||'{}'); }catch(e){ c={}; }
+    c=c&&typeof c==='object'?c:{};
+    c.pk=c.pk||{}; c.nu=c.nu||{}; c.hide=c.hide||{}; c.ap=c.ap||{}; c.ah=c.ah||{}; c.my=Array.isArray(c.my)?c.my:[];
+    return c;
+  }
+  function catWrite(c){ try{ localStorage.setItem(CAT_KEY,JSON.stringify(c)); return true; }catch(e){ return false; } }
+  function copySec(a){ return (a||[]).map(function(s){ return [s[0],s[1].slice()]; }); }
+  function assign(){ var o={}; [].forEach.call(arguments,function(x){ for(var k in x) o[k]=x[k]; }); return o; }
+  /* the package as it comes with the system, before Dor's own changes */
+  function builtin(k){ var p=PKGS[k]; if(!p) return null; return assign(p,{sec:copySec(V2[k]||p.sec)}); }
+  /* the packages and add-ons Dor works with: the built in ones plus what he saved on this device */
+  function catalog(){
+    var c=catRead(), P={};
+    Object.keys(PKGS).forEach(function(k){ if(k==='custom'||c.hide[k]) return; var p=builtin(k), m=c.pk[k]; P[k]=m?assign(p,{title:m.title,price:m.price,sec:copySec(m.sec)}):p; });
+    Object.keys(c.nu).forEach(function(k){ var n=c.nu[k], b=builtin(n.base); if(b) P[k]=assign(b,{title:n.title,price:n.price,sec:copySec(n.sec),from:n.base}); });
+    P.custom=builtin('custom')||{title:'הצעה מותאמת אישית',price:0,has:[],sec:[]};
+    var A=ADDONS.filter(function(a){ return !c.ah[a[0]]; }).map(function(a){ var v=V2A[a[0]]; return [a[0],v?v.t:a[1],c.ap.hasOwnProperty(a[0])?c.ap[a[0]]:a[2]]; });
+    c.my.forEach(function(x){ A.push([x.k,x.t,x.p]); });
+    return {pkgs:P,addons:A};
+  }
+  /* contents that arrive inside a link: keep only well formed text */
+  function cleanSec(x){
+    if(!Array.isArray(x)) return null;
+    return x.filter(function(s){ return Array.isArray(s)&&Array.isArray(s[1]); }).map(function(s){
+      var r=[String(s[0]||''),s[1].filter(function(t){ return typeof t==='string'&&t.trim(); })]; if(s[2]) r.push(String(s[2])); return r;
+    }).filter(function(s){ return s[1].length; });
+  }
+  function hasVideo(sec,ads){ return ads.some(function(a){ return a.k==='video'||a.k==='video2'; }) || sec.some(function(s){ return s[2]!=='vseg' && /וידאו|וידיאו|סרט|קליפ/.test(s[0]+' '+s[1].join(' ')); }); }
+  function hasAlbum(sec,ads){ return ads.some(function(a){ return a.k==='albums'||a.k==='album1'||/אלבום|אלבומים/.test(a.t||''); }) || sec.some(function(s){ return /אלבום|אלבומים/.test(s[0]+' '+s[1].join(' ')); }); }
+  /*CAT-END*/
+
   function $(id){ return document.getElementById(id); }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function money(n){ n=+n||0; return n.toLocaleString('he-IL')+' ₪'; }
@@ -189,6 +243,9 @@ input[type=checkbox]{width:auto}
 
   function docHtml(o, c, sig){
     var p=PKGS[o.pkg]||PKGS['Premium'];
+    /* an agreement carries the exact contents that were quoted */
+    var snap=cleanSec(o.sec), fl=o.fl||{};
+    if(snap) p={title:String(o.title||(PKGS[o.pkg]||{}).title||'חבילת צילום'),sec:snap,event:!!fl.ev,booth:!!fl.bt,hrs:fl.hr?String(fl.hr):''};
     var h='<div class="hd"><b>Dor Fayna Photography</b><div>הצעת מחיר / חוזה עבודה עבור שירותי צילום אירועים</div><div style="font-size:12px;color:#777">מס\' הסכם '+esc(o.id)+'</div></div>';
     h+='<h3>פרטי ההזמנה</h3><table>';
     h+='<tr><td>המזמינים</td><td>'+esc((c&&c.names)||o.names)+'</td></tr>';
@@ -201,7 +258,7 @@ input[type=checkbox]{width:auto}
     else h+='<h3>שעות העבודה</h3><p>הצלם והצוות יתחילו בצילום בשעה '+esc(o.start)+' ויסיימו בשעה '+esc(o.end)+'. כל שעה נוספת או חלק ממנה מעבר לזמן זה תחויב ב-500 ₪ לכל צלם שתרצו להשאיר באירוע.</p>';
     var custom=!p.sec.length, lines=o.extra?String(o.extra).split('\n').filter(Boolean):[];
     if(!custom) h+='<h3>פרטי החבילה והשירותים הכלולים</h3>';
-    p.sec.forEach(function(s){ h+='<p style="margin:8px 0 2px"><b>'+esc(s[0])+':</b></p>'+ul(s[1]); });
+    p.sec.forEach(function(s){ h+=(s[0]?'<p style="margin:8px 0 2px"><b>'+esc(s[0])+':</b></p>':'')+ul(s[1]); });
     if(p.note) h+='<p style="color:#555">'+esc(p.note)+'</p>';
     var ad=(o.addons||[]);
     if(ad.length||lines.length){ h+='<h3>'+(custom?'השירותים הכלולים בהזמנה':'תוספות שנכללו בהזמנה')+'</h3>'+ul(ad.map(function(a){ return a.t+(a.p?' – '+money(a.p):''); }).concat(lines)); }
@@ -212,8 +269,9 @@ input[type=checkbox]{width:auto}
     if(+o.chk) h+='<tr><td>צ\'ק דחוי – 2 ימים מהאירוע</td><td>'+money(o.chk)+'</td></tr>';
     h+='</table>';
     var others=ADDONS.filter(function(a){ return !ad.some(function(x){return x.k===a[0];}); }).filter(function(a){return a[2];});
-    if(!custom && !p.event && others.length) h+='<p style="margin:10px 0 2px"><b>תוספות אפשריות בתשלום נוסף</b> (קיימת האפשרות להורדה והוספת פריטים לחבילה):</p>'+ul(others.map(function(a){return a[1]+' – תוספת של '+money(a[2]);}));
+    if(!snap && !custom && !p.event && others.length) h+='<p style="margin:10px 0 2px"><b>תוספות אפשריות בתשלום נוסף</b> (קיימת האפשרות להורדה והוספת פריטים לחבילה):</p>'+ul(others.map(function(a){return a[1]+' – תוספת של '+money(a[2]);}));
     if(p.booth) h+='<h3>אספקת התמונות</h3><p>התמונות מודפסות במקום.</p>';
+    else if(snap) h+='<h3>זמני אספקת החומרים</h3>'+ul([DELIVERY[0]].concat(hasVideo(snap,ad)?[DELIVERY[1]]:[],hasAlbum(snap,ad)?[DELIVERY[2]]:[]));
     else h+='<h3>זמני אספקת החומרים</h3>'+ul(p.event?DELIVERY.filter(function(t,i){ return i===0 || ad.some(function(x){ return i===1?x.k==='video':x.k==='albums'||x.k==='album1'; }); }):DELIVERY);
     h+='<h3>תנאי ביטול</h3>'+ul(CANCEL);
     h+='<h3>כוח עליון</h3><p>'+esc(FORCE)+'</p>';
@@ -231,22 +289,34 @@ input[type=checkbox]{width:auto}
   // ---------- ADMIN ----------
   function admin(){
     $('admin').classList.remove('hidden');
-    var ps=$('a-pkg'); Object.keys(PKGS).forEach(function(k){ var o=document.createElement('option'); o.value=k; o.textContent=PKGS[k].title; ps.appendChild(o); }); ps.value='Premium';
+    var C=catalog(), pre=null;
+    var ps=$('a-pkg'); Object.keys(C.pkgs).forEach(function(k){ var o=document.createElement('option'); o.value=k; o.textContent=C.pkgs[k].title; ps.appendChild(o); }); if(C.pkgs.Premium) ps.value='Premium';
     var box=$('a-addons');
-    ADDONS.forEach(function(a){
+    function addRow(a){
       var d=document.createElement('div'); d.className='addon';
-      d.innerHTML='<input type="checkbox" id="ad-'+a[0]+'"><label for="ad-'+a[0]+'">'+esc(a[1])+'</label><input type="number" id="adp-'+a[0]+'" value="'+(a[2]||'')+'" placeholder="₪">';
+      d.innerHTML='<input type="checkbox" id="ad-'+esc(a[0])+'"><label for="ad-'+esc(a[0])+'">'+esc(a[1])+'</label><input type="number" id="adp-'+esc(a[0])+'" value="'+(+a[2]||'')+'" placeholder="₪">';
       box.appendChild(d);
-    });
+    }
+    C.addons.forEach(addRow);
+    /* contents of the agreement: those of the quote it came from, otherwise the package itself, plus ticked add-ons */
+    function contents(addons){
+      var from=pre&&pre.pk===ps.value, p=C.pkgs[ps.value]||C.pkgs.custom;
+      var on={}; addons.forEach(function(a){ on[a.k]=1; });
+      var sec=from?cleanSec(pre.sec).filter(function(s){ return !s[2]||on[s[2]]; }):copySec(p.sec);
+      var had={}; if(from) (pre.ad||[]).forEach(function(a){ had[a.k]=1; });
+      addons.forEach(function(a){ var v=V2A[a.k]; if(v&&!had[a.k]) sec.push([v.sec[0],v.sec[1].slice(),a.k]); });
+      return {title:from&&pre.tt?pre.tt:p.title,sec:sec,fl:from&&pre.fl?pre.fl:{ev:p.event?1:0,bt:p.booth?1:0,hr:p.hrs||''}};
+    }
     /* an "up to N hours" package starts with empty hours instead of the wedding defaults */
     ps.addEventListener('change',function(){
       var s=$('a-start'), e=$('a-end');
-      if(PKGS[ps.value].hrs){ if(s.value==='14:30'&&e.value==='01:00'){ s.value=''; e.value=''; } }
+      if((C.pkgs[ps.value]||{}).hrs){ if(s.value==='14:30'&&e.value==='01:00'){ s.value=''; e.value=''; } }
       else if(!s.value&&!e.value){ s.value='14:30'; e.value='01:00'; }
     });
     function collect(){
-      var addons=ADDONS.filter(function(a){return $('ad-'+a[0]).checked;}).map(function(a){ return {k:a[0],t:a[1],p:+$('adp-'+a[0]).value||0}; });
-      return {v:1,id:'DF'+Date.now().toString(36).toUpperCase(),names:$('a-names').value.trim(),type:$('a-type').value,date:$('a-date').value,venue:$('a-venue').value.trim(),start:$('a-start').value,end:$('a-end').value,pkg:ps.value,addons:addons,extra:$('a-extra').value.trim(),price:+$('a-price').value||0,dep:+$('a-dep').value||0,day:+$('a-day').value||0,chk:+$('a-chk').value||0,depm:$('a-depm').value.trim(),daym:$('a-daym').value.trim()};
+      var addons=C.addons.filter(function(a){return $('ad-'+a[0])&&$('ad-'+a[0]).checked;}).map(function(a){ return {k:a[0],t:a[1],p:+$('adp-'+a[0]).value||0}; });
+      var q=contents(addons);
+      return {title:q.title,sec:q.sec,fl:q.fl,v:1,id:'DF'+Date.now().toString(36).toUpperCase(),names:$('a-names').value.trim(),type:$('a-type').value,date:$('a-date').value,venue:$('a-venue').value.trim(),start:$('a-start').value,end:$('a-end').value,pkg:ps.value,addons:addons,extra:$('a-extra').value.trim(),price:+$('a-price').value||0,dep:+$('a-dep').value||0,day:+$('a-day').value||0,chk:+$('a-chk').value||0,depm:$('a-depm').value.trim(),daym:$('a-daym').value.trim()};
     }
     function check(o){
       if(!o.names) return 'חסרים שמות המזמינים.';
@@ -277,7 +347,14 @@ input[type=checkbox]{width:auto}
         $('a-names').value=pf.n||''; $('a-date').value=pf.d||''; $('a-venue').value=pf.pl||'';
         var types=[].map.call($('a-type').options,function(x){return x.value;});
         $('a-type').value=types.indexOf(pf.ty)>-1?pf.ty:'אירוע אחר';
-        if(PKGS[pf.pk]) ps.value=pf.pk;
+        if(cleanSec(pf.sec)){
+          pre=pf;
+          var op=[].filter.call(ps.options,function(x){return x.value===pf.pk;})[0];
+          if(!op){ op=document.createElement('option'); op.value=pf.pk; ps.appendChild(op); C.pkgs[pf.pk]={title:pf.tt,sec:cleanSec(pf.sec)}; }
+          op.textContent=pf.tt||op.textContent;
+          (pf.ad||[]).forEach(function(a){ if(!$('ad-'+a.k)){ var d=[a.k,a.t||a.k,a.p]; C.addons.push(d); addRow(d); } });
+        }
+        if(C.pkgs[pf.pk]) ps.value=pf.pk;
         (pf.ad||[]).forEach(function(a){ if($('ad-'+a.k)){ $('ad-'+a.k).checked=true; $('adp-'+a.k).value=a.p||''; } });
         $('a-extra').value=(pf.ex||[]).join('\n'); $('a-price').value=pf.pr||''; $('a-dep').value=pf.dp||'';
         [['a-start','st'],['a-end','en'],['a-day','dy'],['a-chk','ck'],['a-depm','dm'],['a-daym','ym']].forEach(function(f){ if($(f[0]) && pf[f[1]]!==undefined) $(f[0]).value=pf[f[1]]||''; });
@@ -323,7 +400,7 @@ input[type=checkbox]{width:auto}
           if(!MAIL_URL){ dm.textContent='ההסכם נחתם. הורידו את הקובץ ושלחו אותו לדור בוואטסאפ.'; return; }
           dm.textContent='שולח את ההסכם במייל…';
           return blobToB64(blob).then(function(b64){
-            return fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({id:o.id,names:c.names,date:fmtDate(o.date),venue:o.venue,clientEmail:c.email,clientPhone:c.phone,pkg:o.pkg,price:o.price,fileName:pdfName,pdf:b64})});
+            return fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({id:o.id,names:c.names,date:fmtDate(o.date),venue:o.venue,clientEmail:c.email,clientPhone:c.phone,pkg:/^u_/.test(o.pkg)?o.title:o.pkg,price:o.price,fileName:pdfName,pdf:b64})});
           }).then(function(r){ return r.json(); }).then(function(j){
             if(j&&j.ok){ dm.className='msg ok'; dm.textContent='נשלח עותק חתום למייל '+c.email+' ולדור. אפשר גם להוריד אותו כאן.'; }
             else throw new Error((j&&j.error)||'שגיאה');
