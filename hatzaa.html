@@ -63,7 +63,11 @@ textarea{resize:vertical;line-height:1.6}
 #client.overlay .brand{top:calc(66px + env(safe-area-inset-top))}
 .page{max-width:560px;margin:0 auto;padding-bottom:120px}
 .hero{position:relative;min-height:calc(100vh - 150px);min-height:calc(100svh - 150px);display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 30px;overflow:hidden}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero>img,.hero>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero>video{opacity:0;transition:opacity .8s}
+.hero>video.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.hero>video{display:none}}
+@media print{.hero>video{display:none}}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,17,16,.55) 0,rgba(18,17,16,0) 28%,rgba(18,17,16,.35) 58%,var(--bg) 100%)}
 .hero>div{position:relative;z-index:1;text-align:center}
 .brand{position:absolute!important;top:calc(24px + env(safe-area-inset-top));inset-inline:0;direction:ltr;font-family:'Italiana',var(--serif);font-size:24px;letter-spacing:6px}
@@ -191,7 +195,8 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     <div class="card">
       <h2>העמוד שהלקוח יראה</h2>
       <div class="f"><span>מילה אישית</span><textarea id="letter" rows="7" maxlength="900"></textarea></div>
-      <div class="f" style="margin-bottom:0"><span>תמונה ראשית</span><div class="heroes" id="heroes"></div></div>
+      <label class="chkline" id="vidline"><input type="checkbox" id="vid" checked><span>וידאו שזז ברקע בראש ההצעה (הסרטון מהאתר שלך)</span></label>
+      <div class="f" style="margin-bottom:0"><span>תמונה ראשית (מופיעה עד שהווידאו נטען)</span><div class="heroes" id="heroes"></div></div>
     </div>
 
     <div class="card">
@@ -291,6 +296,8 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     brit:{heroes:['b1','g1'], gal:['b1','g1','g2','g3']},
     other:{heroes:['e1','g1','g3'], gal:['e1','g1','g2','g3']}
   };
+  /* the clip from the top of the site: wedding footage, so only for wedding-type events */
+  var VIDEO = LIVE ? 'https://dorfayna.co.il/assets/video/hero-mobile-s.mp4#t=11' : './video.mp4#t=11';
   function hhmm(v){ return /^([01]\d|2[0-3]):[0-5]\d$/.test(v||'')?v:''; }
   /* the object the agreement page understands */
   function agreementOf(o){
@@ -336,7 +343,8 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     var n=0; function sec(t,body,cls){ n++; return '<section class="sec'+(cls?' '+cls:'')+'"><div class="n">'+('0'+n).slice(-2)+'</div><h2>'+t+'</h2>'+body+'</section>'; }
     var weekday=date?new Date(o.d+'T12:00:00').toLocaleDateString('he-IL',{weekday:'long'}):'';
 
-    var h='<div class="page"><header class="hero"><img src="'+IMG+PHOTOS[hero]+'" alt="">'
+    var moving=set===SETS.wedding && (o.vd===undefined?type==='חתונה':!!o.vd);
+    var h='<div class="page"><header class="hero"><img src="'+IMG+PHOTOS[hero]+'" alt="">'+(moving?'<video data-src="'+VIDEO+'" muted loop playsinline preload="metadata" aria-hidden="true" disablepictureinpicture></video>':'')
       +'<div class="brand">DOR FAYNA<small>WEDDING &amp; EVENT PHOTOGRAPHY</small></div>'
       +'<div><h1 class="hi">היי '+esc(who)+'</h1><div class="for">הצעה אישית '+FOR[type]+'</div>'
       +(o.id?'<div class="meta">הצעה מס׳ '+esc(o.id)+(fmtDate(o.at)?' · '+fmtDate(o.at):'')+'</div>':'')+'</div></header>';
@@ -378,7 +386,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     if(expired) inv+='<div class="dep">תוקף ההצעה הסתיים. כתבו לנו ונעדכן.</div>';
     inv+='<div class="row">'+go('מתקדמים להסכם וחתימה')+'<a class="btn ghost" href="'+esc(ask)+'" target="_blank" rel="noopener">יש לנו שאלה בוואטסאפ</a></div>'
       +'<div class="note">שמירת תאריך בכפוף לזמינות ולהסכם.</div></div>';
-    h+=sec('ההשקעה',inv);
+    h+=sec('העלות',inv);
 
     if(o.os && !custom){
       var more=ADDONS.filter(function(a){ return p.has.indexOf(a[0])<0 && !(a[0]==='video2'&&o.pk==='Standard') && !(a[0]==='glass'&&o.pk==='Diamond') && !ads.some(function(x){return x.k===a[0];}); });
@@ -413,6 +421,12 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
   }
   function showClient(o, overlay){
     var c=$('client'); c.className=overlay?'overlay':''; c.innerHTML=quoteHtml(o,overlay);
+    var v=c.querySelector('.hero>video');
+    if(v){
+      /* the photo stays underneath, so nothing is lost when the phone blocks autoplay or saves data */
+      if((navigator.connection&&navigator.connection.saveData) || (window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)) v.remove();
+      else { v.muted=true; v.autoplay=true; v.addEventListener('playing',function(){ v.classList.add('on'); }); v.src=v.getAttribute('data-src'); var pl=v.play(); if(pl&&pl.catch) pl.catch(function(){}); }
+    }
     [].forEach.call(c.querySelectorAll('[data-sign]'),function(b){ b.onclick=function(){ if(window.dfDemoAgreement) window.dfDemoAgreement(agreementOf(o)); else b.textContent='ייפתח בקישור שנשלח ללקוח'; }; });
     if(overlay){
       var b=document.createElement('button'); b.type='button'; b.className='close'; b.textContent='✕ חזרה לעריכה';
@@ -429,6 +443,67 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
   var H = '\u05d0-\u05ea';
   function isStop(w){ return STOP.indexOf(w)>-1 || MONTHS.indexOf(w.replace(/^[בל]/,''))>-1; }
   function isName(x){ var w=x.split(' '); return w.length<=3 && w.every(function(y){ return new RegExp('^['+H+'][\''+'׳'+H+'\\-]{1,14}$').test(y) && !isStop(y) && !isStop(y.replace(/^ו/,'')); }) && (w.length===1 || (w.length===2&&w[1].charAt(0)==='ו') || (w.length===3&&w[2].charAt(0)==='ו')); }
+  /* common first names. SOFT ones are also ordinary words, so they count only next to another name or after words like "my name is" */
+  var NAMES='אביאל אביגיל אבישג אבישי אביתר אביעד אברהם אבנר אדווה אדל אהרון אוראל אוריאל אוריה אורטל אורי אורית אורלי אורן אושרית אופיר אופירה איילה אילה אילנה אילנית איל אייל איילת איתי איתמר אלדד אלון אלונה אלינה אלינור אלירן אלעד אלעזר אלקנה אלרואי אליאב אליאור אליאל אליה אליהו אליאן אליאנה אלישבע אלישע אמיר אמירה אמית אמילי אנה אסנת אסף אסתר אפרת אפרים אריאל אריאלה אביטל בועז בנימין בצלאל בתאל בתיה גאיה גבריאל גדי גלית גלעד גיא גילי דביר דבורה דולב דודו דוד דויד דנה דניאל דניאלה דנית דני דפנה דקלה הגר הדס הדסה הודיה הילה הילי הלן ורד ורדית ורוניקה זהבה זכריה חגי חגית חוה חנה חנוך חנן טהר טוהר טליה טלי טוביה יאיר יגאל יגל ידידיה יהב יהודה יהודית יהונתן יהושע יהלי יואב יואל יובל יוגב יוחאי יוליה יונה יונתן יוני יוסי יוסף יעל יעלה יעקב יערה יפית יצחק איציק ירון ירין ישי ישראלה כפיר כרמית לאה לביאה ליאב ליאורה ליאל ליאם ליאן ליאת ליהי ליטל לימור לינוי לינור לירון לירז לירן לילך לידור ליעד מאור מאיה מאיר מוטי מורן מורית מירב מיטל מירי מירית מיכאל מיכאלה מיכל מנחם מנשה מעיין מרדכי מרים משה מתנאל נאור נאוה נגה נדב נדיה נוגה נויה נופר נועה נועם נטלי ניב ניסים נסים נינה ניצן ניצנה נעה נעמה נעמי נריה נתנאל סהר סיון סיוון סימה סוזי סופי עדו עדי עדיאל עידו עידן עידית עינב עינת עמיחי עמנואל עמרי עומרי עומר ענבל ענת עפרה עופרי עפרי צביקה צבי צופיה צחי קארין קרין קובי קורל רביד רבקה רוית רועי רועיי רוני רונן רונית רותם ריטה ריקי רינה רינת ראובן רחל רפאל רפי רעות רעיה שגיא שובל שושנה שחף שילת שירה שירז שירלי שיראל שלומי שלומית שלמה שמואל שמוליק שמעון שניר שרה שרית תאיר תהילה תהל תומר תמיר תמר אביבית אודליה אוהד איתיאל אמונה גפן יסמין יפעת לוטם ליה מיקה נטע נטעלי עלמה רומי שיילי שקמה ארז איתן אסי יניב עוזיאל דורון דורית רונה'.split(' ');
+  var SOFT='אביב אגם אדיר אדם אופל אופק אור אושר אילת אלי אלמוג אמיתי ארי אריה בני בר גולן גל דקל הדר הלל הראל זוהר זיו חן טופז טל יהלום ים יקיר ירדן ישראל כנרת כרמל לביא לוי לין מור מלכה מרינה מתן נווה נוי ניר נתן ספיר סתיו עדה עדן עוז עמוס עמית ענבר פאר פז קורן קרן רום רון רז שחר שי שילה שיר שלו שני שקד שרון תום'.split(' ');
+  var EVENT_RE='(?:חתונה|חתונת|חינה|אירוסין|ברית|בריתה|בר[ -]מצו{1,2}ה|בת[ -]מצו{1,2}ה|עלי{1,2}ה לתורה|אירוע|ארוע)';
+  function strong(w){ return NAMES.indexOf(w)>-1; }
+  function known(w){ return strong(w) || SOFT.indexOf(w)>-1; }
+  function second(w){ var x=w.replace(/^ול?/,''); return (w.charAt(0)==='ו' && known(x)) ? x : ''; }
+  /* "name" or "name and name" at the start of a piece of text, only from the list */
+  function lead(x){
+    var w=x.replace(/^\s+/,'').split(/[^א-ת'׳\-]+/), a=w[0]||'';
+    if(/^משפחת$/.test(a) && w[1] && !isStop(w[1])) return a+' '+w[1];
+    if(!known(a) || ((a==='בר'||a==='בת') && /^ו?מצו/.test(w[1]||''))) return '';
+    return second(w[1]||'') ? a+' '+w[1] : a;
+  }
+  function after(t,words){ var re=new RegExp('(?:^|[^\\u05d0-\\u05ea])(?:'+words+')[ \\t]*[:\\-–]?[ \\t]*','g'), m, n; while((m=re.exec(t))){ n=lead(t.slice(m.index+m[0].length)); if(n) return n; } return ''; }
+  function pair(t){
+    var re=/([א-ת'׳\-]+)[ \t]+(ו[א-ת'׳\-]+)/g, m;
+    while((m=re.exec(t))){
+      var a=m[1], b=second(m[2]);
+      if(b && !known(a) && /^[לש]/.test(a) && known(a.slice(1))) a=a.slice(1);
+      if(b && known(a) && !(a==='בר'&&b==='בת') && !(a==='שני'&&b==='שלישי')) return a+' ו'+b;
+      re.lastIndex=m.index+m[1].length;
+    }
+    return '';
+  }
+  function cleanName(x){ return String(x||'').replace(/[^א-תa-zA-Z0-9'"׳״&+ .\-]/g,' ').replace(/\s+/g,' ').replace(/^[ .\-]+|[ .\-]+$/g,'').slice(0,40).trim(); }
+  /* returns {n: the name, check: true when it is a guess} */
+  function findName(t,o){
+    var m, n;
+    function label(k){ var x=new RegExp('(?:^|[\\n,])[ \\t*]*(?:'+k+')[ \\t*]*(?::|[ \\t][\\-–][ \\t])[ \\t]*([^\\n,]+)').exec(t); return x?cleanName(x[1].replace(/\s+(?:טלפון|נייד|תאריך|מקום|אירוע|מוזמנים).*$/,'').replace(/[\d:].*$/,'')):''; }
+    n=label('שמות(?: הזוג| המזמינים)?|שם(?: מלא| הלקוח| הלקוחה| המזמין| המזמינה| הזוג| הילד| הילדה| החוגג| החוגגת| בעל השמחה)?'); if(n) return {n:n};
+    var bride=label('(?:שם )?ה?כלה'), groom=label('(?:שם )?ה?חתן'); if(bride||groom) return {n:bride&&groom?bride+' ו'+groom:bride||groom};
+    var flat=t.replace(/([א-ת])[ \t]*[&+][ \t]*([א-ת])/g,'$1 ו$2').replace(/([א-ת])[ \t]+ו[ \t]+([א-ת])/g,'$1 ו$2');
+    /* Dor typing the request himself: "quote for ..." */
+    m=/(?:^|\n)\s*(?:תכין\s+(?:לי\s+)?|להכין\s+)?(?:הצעת מחיר|הצעה)\s+(?:ל|עבור\s+|בשביל\s+)[-־ ]?([^,\n\d?!.:]{2,50})/.exec(flat);
+    if(m){
+      n=m[1].replace(new RegExp('^\\s*'+EVENT_RE+'(?:\\s+של)?(?:\\s+|$)'),'').replace(new RegExp('\\s*'+EVENT_RE+'(?:\\s.*)?$'),'').replace(/\s+[בל]-?$/,'').trim();
+      if(n && !isStop(n.split(/\s+/)[0])) return {n:n};
+    }
+    var rest=flat;
+    [o.venue,o.city].forEach(function(x){ if(x) rest=rest.split(x).join(' | '); });
+    rest=rest.replace(/(היי|הי|שלום|אהלן|בוקר טוב|ערב טוב)[ \t,]+דור(?![א-ת])/g,'$1 | ').replace(/(?:אולמי|אולם|אחוזת|חוות|מלון|גן|קיבוץ|מושב|רחוב|רחוב)[ \t]+[א-ת'"׳״]+/g,' | ');
+    m=new RegExp('(?:שמי|קוראים לי|השם שלי|שם שלי)\\s+(?:הוא\\s+)?(['+H+'\'׳\\-]{2,15}(?:\\s+ו['+H+']{2,15})?)').exec(rest);
+    if(m) return {n:m[1],check:true};
+    n=after(rest,'(?:הצעה|הצעת מחיר)[ \\t]+(?:ל|עבור[ \\t]|בשביל[ \\t])')
+      || after(rest,'(?:'+EVENT_RE+')[ \\t]+של|(?:הבן|הבת|לבן|לבת|בני|בתי)(?:[ \\t]+(?:שלי|שלנו))?')
+      || pair(rest)
+      || after(rest,'אני|זאת|זו|זה|מדבר|מדברת|כאן');
+    if(n) return {n:n,check:true};
+    /* a signature: after "thanks", alone on the last line, or right after the city that ends the message */
+    function sign(x){ x=x.replace(/[^א-ת'׳\- ]+/g,' ').replace(/\s+/g,' ').trim(); return x&&x!=='דור'&&isName(x)&&!findCity(x)?x:''; }
+    m=/(?:תודה(?:\s+רבה)?|בברכה)\s*[,!.\-–]?\s*([^,\n\d?!.]{2,30})[^א-ת\d]*$/.exec(t); if(m&&sign(m[1])) return {n:sign(m[1]),check:true};
+    var lines=t.split('\n').map(function(x){return x.replace(/[.!?,\-–]+$/,'').replace(/^[\-–]+/,'').trim();}).filter(Boolean);
+    if(lines.length>1){ var last=lines[lines.length-1]; if(!/[:\d]/.test(last)&&sign(last)) return {n:sign(last),check:true}; }
+    if(o.cityEnd){ var tail=t.slice(o.cityEnd).replace(/^[\s,.?!\-–]+|[\s.!?🙏🤍❤️]+$/g,''); if(tail&&sign(tail)) return {n:sign(tail),check:true}; }
+    /* any listed first name anywhere */
+    var words=rest.replace(/[^א-ת'׳|]+/g,' ').split(' ');
+    for(var i=0;i<words.length;i++) if(strong(words[i])) return {n:words[i],check:true};
+    if(o.sender) return {n:o.sender,check:true};
+    return null;
+  }
   function findCity(t){
     var best=null;
     CITIES.forEach(function(c){
@@ -460,10 +535,16 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     return {};
   }
   function parse(text){
-    var r={}, t=String(text||'').replace(/\u200f|\u200e/g,'').trim(), m;
+    var r={}, sender='', senderPhone='', t=String(text||'').replace(/[\u200e\u200f\u202a-\u202e\u2066-\u2069]/g,''), m;
+    var D='\\d{1,2}[./]\\d{1,2}[./]\\d{2,4}', T='\\d{1,2}:\\d{2}(?::\\d{2})?(?:[ \\t]*[AP]M)?';
+    t=t.replace(new RegExp('(^|\\n)[ \\t]*(?:\\[(?:'+T+',?[ \\t]*'+D+'|'+D+',?[ \\t]*'+T+')\\]|'+D+',?[ \\t]*'+T+'[ \\t]*-)[ \\t]*([^:\\n]{1,40}):[ \\t]*','g'),function(all,nl,from){
+      if(/^[+\d ()\-]+$/.test(from)) senderPhone=from.replace(/[^+\d]/g,'');
+      else if(!/דור|dor/i.test(from)) sender=cleanName(from);
+      return nl;
+    }).trim();
     function label(k){ var x=new RegExp('(?:^|\\n)\\s*'+k+'\\s*:\\s*([^\\n]+)').exec(t); return x?x[1].trim():''; }
     var low=t.toLowerCase();
-    var L={type:label('אירוע'),place:label('מקום'),guests:label('מוזמנים'),services:label('שירותים'),style:label('סגנון'),names:label('(?:שמות|שם)')};
+    var L={type:label('אירוע'),place:label('מקום'),guests:label('מוזמנים'),services:label('שירותים'),style:label('סגנון')};
     var structured=!!(L.type||L.place||L.guests||L.services||label('תאריך'));
 
     var typeSrc=L.type||t;
@@ -481,7 +562,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     m=/(?:מחיר|במחיר|סה"כ|סה״כ)\s*(?:של|:|-)?\s*([\d,]{3,7})/.exec(noDep)||/([\d,]{3,7})\s*(?:₪|ש"ח|ש״ח|שח|שקלים|שקל)/.exec(noDep);
     if(m) r.price=+m[1].replace(/,/g,'');
 
-    m=/(?:^|[^\d])((?:\+?972[- ]?|0)\d{1,2}[- ]?\d{3}[- ]?\d{4})(?!\d)/.exec(t); if(m) r.phone=m[1].replace(/ /g,'-');
+    m=/(?:^|[^\d])((?:\+?972[- ]?|0)\d{1,2}[- ]?\d{3}[- ]?\d{4})(?!\d)/.exec(t); if(m) r.phone=m[1].replace(/ /g,'-'); else if(senderPhone) r.phone=senderPhone;
 
     if(L.guests){ if(!/עוד לא/.test(L.guests)) r.guests=L.guests; }
     else { m=/(\d{2,4})\s*(?:איש|מוזמנים|אורחים)/.exec(t); if(m) r.guests=m[1]; }
@@ -500,22 +581,8 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       if(!r.venue) delete r.venue;
     }
 
-    if(L.names) r.names=L.names;
-    else if(!structured){
-      m=/(?:^|\n)\s*(?:תכין\s+|להכין\s+)?(?:הצעת מחיר|הצעה)\s+(?:ל|עבור\s+)[-־ ]?([^,\n\d?!.]{2,50})/.exec(t);
-      if(m) r.names=m[1].replace(/^\s*(?:חתונה|חינה|בר מצווה|בת מצווה|ברית|בריתה|אירוסין|עלייה לתורה|עליה לתורה)(?:\s+של)?(?:\s+|$)/,'').replace(/\s*(?:חתונה|חינה|בר מצווה|בת מצווה|ברית|בריתה|אירוסין|עלייה לתורה|עליה לתורה)(?:\s.*)?$/,'').trim();
-      if(!r.names){
-        var guess='';
-        m=new RegExp('(?:שמי|קוראים לי|השם שלי|שם שלי)\\s+(?:הוא\\s+)?(['+H+'\'׳\\-]{2,15}(?:\\s+ו['+H+']{2,15})?)').exec(t);
-        if(m) guess=m[1];
-        /* a signature: after "thanks", alone on the last line, or right after the city that ends the message */
-        if(!guess){ m=/(?:תודה(?:\s+רבה)?|בברכה)\s*[,!.\-–]?\s*([^,\n\d?!.]{2,30})[.!\s🙏🤍❤️]*$/.exec(t); if(m&&isName(m[1].trim())) guess=m[1].trim(); }
-        if(!guess){ var lines=t.split('\n').map(function(x){return x.replace(/[.!?,\-–]+$/,'').replace(/^[\-–]+/,'').trim();}).filter(Boolean); if(lines.length>1&&isName(lines[lines.length-1])&&!findCity(lines[lines.length-1])) guess=lines[lines.length-1]; }
-        if(!guess&&city){ var tail=t.slice(city.end).replace(/^[\s,.?!\-–]+|[\s.!?🙏🤍❤️]+$/g,''); if(tail&&isName(tail)) guess=tail; }
-        if(guess){ r.names=guess; r.checkName=true; }
-      }
-      if(!r.names) delete r.names;
-    }
+    var who=findName(t,{venue:r.venue||'',city:city?city.name:'',cityEnd:city?city.end:0,sender:sender});
+    if(who){ r.names=who.n; if(who.check) r.checkName=true; }
 
     var tm=/([01]?\d|2[0-3]):([0-5]\d)(?:\s*(?:-|–|עד)\s*([01]?\d|2[0-3]):([0-5]\d))?/.exec(t);
     if(tm){ r.start=('0'+tm[1]).slice(-2)+':'+tm[2]; if(tm[3]) r.end=('0'+tm[3]).slice(-2)+':'+tm[4]; }
@@ -582,8 +649,9 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       var t=$('type').value, wed=t==='חתונה';
       if(!wed && $('pkg').value!=='custom'){ $('pkg').value='custom'; manual=false; }
       if(wed && $('pkg').value==='custom'){ $('pkg').value='Premium'; manual=false; }
-      pkgChanged(); heroes(); letter(); hours();
+      pkgChanged(); heroes(); letter(); hours(); video();
     }
+    function video(){ var t=$('type').value; $('vidline').classList.toggle('hidden',setFor(t)!==SETS.wedding); $('vid').checked=t==='חתונה'; }
     $('type').onchange=typeChanged;
     ['start','end'].forEach(function(id){ $(id).addEventListener('input',function(){ hoursTouched=true; }); });
     ['dep','chk'].forEach(function(id){ $(id).addEventListener('input',split); });
@@ -613,6 +681,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       var miss=[]; if(!$('names').value.trim()) miss.push('שמות'); if(!$('date').value) miss.push('תאריך'); if(!$('venue').value.trim()) miss.push('מקום'); if(!+$('price').value) miss.push('מחיר');
       var lines=[got.length?'מולא: '+got.join(', '):'לא זיהיתי פרטים. אפשר למלא ידנית.'];
       if(miss.length) lines.push('חסר: '+miss.join(', '));
+      if(!r.names) lines.push('לא מצאתי שם בטקסט. אפשר להוסיף שורה "שם: ..." וללחוץ שוב, או לכתוב בשדה השמות.');
       var check=[]; if(r.checkName) check.push('השם ('+r.names+')'); if(r.guessedYear) check.push('שנת התאריך ('+fmtDate(r.date)+')'); if(r.checkType) check.push('בר מצווה או בת מצווה'); if(got.length && !r.pkg && $('pkg').value!=='custom') check.push('החבילה שנבחרה'); if(got.indexOf('מה כלול')>-1) check.push('"מה כלול"');
       if(check.length) lines.push('לבדוק: '+check.join(', '));
       if(r.notes) lines.push('הלקוח ציין: '+r.notes);
@@ -621,7 +690,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
 
     function collect(){
       if(!qid) qid='DF'+Date.now().toString(36).toUpperCase();
-      return {id:qid,at:today(),st:$('start').value,en:$('end').value,dy:+$('day').value||0,ck:+$('chk').value||0,dm:$('depm').value.trim(),ym:$('daym').value.trim(),sg:$('sign').checked?1:0,os:$('opts').checked?1:0,v:1,t:'q',n:$('names').value.trim(),ty:$('type').value,d:$('date').value,pl:$('venue').value.trim(),g:$('guests').value.trim(),pk:$('pkg').value,ad:picked(),
+      return {id:qid,at:today(),st:$('start').value,en:$('end').value,dy:+$('day').value||0,ck:+$('chk').value||0,dm:$('depm').value.trim(),ym:$('daym').value.trim(),sg:$('sign').checked?1:0,os:$('opts').checked?1:0,vd:$('vid').checked&&setFor($('type').value)===SETS.wedding?1:0,v:1,t:'q',n:$('names').value.trim(),ty:$('type').value,d:$('date').value,pl:$('venue').value.trim(),g:$('guests').value.trim(),pk:$('pkg').value,ad:picked(),
         ex:$('extra').value.split('\n').map(function(x){return x.trim();}).filter(Boolean),pr:+$('price').value||0,dp:+$('dep').value||0,vu:$('valid').value,msg:$('letter').value.trim(),h:hero};
     }
     function problem(o){
@@ -684,7 +753,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       $('pkg').value=o.pk; ADDONS.forEach(function(a){ var x=o.ad.filter(function(y){return y.k===a[0];})[0]; $('ad-'+a[0]).checked=!!x; $('adp-'+a[0]).value=x?x.p:a[2]; });
       $('start').value=o.st||''; $('end').value=o.en||''; hoursTouched=true; $('day').value=o.dy||''; dayManual=!!o.dy&&o.dy!==o.pr-o.dp-(o.ck||0); $('chk').value=o.ck||''; if(o.dm!==undefined){ $('depm').value=o.dm; $('daym').value=o.ym; } $('sign').checked=o.sg!==0; $('opts').checked=o.os!==0; qid='';
       $('extra').value=o.ex.join('\n'); $('price').value=o.pr; $('dep').value=o.dp||''; $('valid').value=o.vu; $('letter').value=o.msg; letterTouched=!!o.msg; hero=o.h; manual=true;
-      pkgChanged(); heroes(); $('out').classList.add('hidden'); window.scrollTo({top:0,behavior:'smooth'});
+      pkgChanged(); heroes(); video(); if(o.vd!==undefined) $('vid').checked=!!o.vd; $('out').classList.add('hidden'); window.scrollTo({top:0,behavior:'smooth'});
     }
     $('saved-list').onclick=function(e){
       var b=e.target.closest('button'); if(!b) return; var i=+b.closest('.q').dataset.i, item=memory[i], a=b.dataset.a;
@@ -710,7 +779,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
         }).catch(function(){ btn.disabled=false; m.className='msg err'; m.textContent='יצירת הקישור נכשלה. בדקו את החיבור לאינטרנט ונסו שוב.'; });
     };
 
-    pkgChanged(); heroes(); letter(); hours(); renderSaved();
+    pkgChanged(); heroes(); letter(); hours(); video(); renderSaved();
   }
 
   function fail(text){ document.body.innerHTML='<div class="state">'+text+'</div>'; }
