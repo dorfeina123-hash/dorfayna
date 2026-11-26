@@ -1,6 +1,7 @@
 /* Site assistant: fixed answers + a short event questionnaire that ends in a ready WhatsApp message.
    No AI, no server: nothing typed here is stored or sent until the visitor presses a WhatsApp button.
-   Keep texts and prices in step with weddings-prices.html. */
+   The chat shows no prices: price questions lead to the questionnaire and a personal quote.
+   Keep package texts in step with weddings-prices.html. */
 (function () {
   'use strict';
   if (window.dorSiteAgent) return;
@@ -10,16 +11,11 @@
 
   /* ---------- content ---------- */
   var PACKAGES = [
-    { name: 'Standard', price: '5,500', regular: '7,500', extra: 'סט אלבומים בתוספת 1,000 ₪.',
-      items: ['שני צלמי סטילס: אחד מההכנות, השני מצטרף לצילומי המשפחות באולם', 'כל התמונות בעריכה מקצועית, בגלריה דיגיטלית פרטית', 'וידאו ואלבומים אינם כלולים'] },
-    { name: 'STANDART PLUS', price: '6,500', regular: '8,000', extra: 'סט אלבומים בתוספת 1,000 ₪ (סה״כ 7,500 ₪).',
-      items: ['לחתונות קטנות: צלם סטילס אחד וצלם וידאו מההכנות', 'תמונות ערוכות בגלריה פרטית', 'סרט מלא, סרט מקוצר, היילייטס ו־REELS', 'רחפן, בכפוף לתנאי ההטסה', 'אלבומים ומגנטים אינם כלולים'] },
-    { name: 'Premium', price: '9,500', regular: '11,500',
-      items: ['שני צלמי סטילס (השני מצילומי המשפחות באולם)', 'צלם וידאו מההכנות, בשתי מצלמות', 'סרט ארוך, סרט מקוצר, היילייטס ו־REELS', 'רחפן, בכפוף לתנאי ההטסה', 'אלבום זוגי 30×60 + 2 אלבומי הורים 20×40'] },
-    { name: 'Premium Plus', price: '11,000', regular: '13,000',
-      items: ['כל מה שב־Premium', 'מגנטים ללא הגבלת כמות בשעות שסוכמו', '10 הגדלות מגנט ו־2–4 פוטובלוק, לפי ההצעה'] },
-    { name: 'Diamond', price: '13,000', regular: '15,000',
-      items: ['כל מה שב־Premium Plus', 'צילומי זוגיות (Save the Date) לפני האירוע', 'קנבס לזוג ושני קנבסים להורים, או הגדלת זכוכית, לפי ההצעה'] }
+    { name: 'Standard', items: ['שני צלמי סטילס: אחד מההכנות, השני מצטרף לצילומי המשפחות באולם', 'כל התמונות בעריכה מקצועית, בגלריה דיגיטלית פרטית', 'וידאו ואלבומים אינם כלולים'] },
+    { name: 'STANDART PLUS', items: ['לחתונות קטנות: צלם סטילס אחד וצלם וידאו מההכנות', 'תמונות ערוכות בגלריה פרטית', 'סרט מלא, סרט מקוצר, היילייטס ו־REELS', 'רחפן, בכפוף לתנאי ההטסה', 'אלבומים ומגנטים אינם כלולים'] },
+    { name: 'Premium', items: ['שני צלמי סטילס (השני מצילומי המשפחות באולם)', 'צלם וידאו מההכנות, בשתי מצלמות', 'סרט ארוך, סרט מקוצר, היילייטס ו־REELS', 'רחפן, בכפוף לתנאי ההטסה', 'אלבום זוגי 30×60 + 2 אלבומי הורים 20×40'] },
+    { name: 'Premium Plus', items: ['כל מה שב־Premium', 'מגנטים ללא הגבלת כמות בשעות שסוכמו', '10 הגדלות מגנט ו־2–4 פוטובלוק, לפי ההצעה'] },
+    { name: 'Diamond', items: ['כל מה שב־Premium Plus', 'צילומי זוגיות (Save the Date) לפני האירוע', 'קנבס לזוג ושני קנבסים להורים, או הגדלת זכוכית, לפי ההצעה'] }
   ];
 
   /* keys: word stems. A key with a space is a phrase and weighs more. */
@@ -29,7 +25,7 @@
     { id: 'delivery', keys: ['מתי מקבלים', 'כמה זמן', 'מסירה', 'תוך כמה', 'מתי התמונות', 'מתי הסרט', 'מתי האלבום'],
       text: 'מועדי המסירה:\n• תמונות: עד 21 ימי עסקים מהאירוע\n• וידאו: עד 45 ימי עסקים מבחירת השירים\n• אלבומים: עד 30 ימי עסקים מאישור העיצוב' },
     { id: 'albums', keys: ['אלבום', 'אלבומים', 'כריכה', 'אלבומי הורים', 'עולה אלבום'],
-      text: 'סט האלבומים: אלבום זוגי 30×60 ס״מ ושני אלבומי הורים 20×40 ס״מ.\nכלול ב־Premium ומעלה, ובתוספת של 1,000 ₪ ל־Standard ול־STANDART PLUS.\nיש כמה גוונים של דמוי עור ובד, ואפשר לשדרג גדלים וכריכות.' },
+      text: 'סט האלבומים: אלבום זוגי 30×60 ס״מ ושני אלבומי הורים 20×40 ס״מ.\nכלול ב־Premium ומעלה, ואפשר להוסיף אותו בתשלום ל־Standard ול־STANDART PLUS.\nיש כמה גוונים של דמוי עור ובד, ואפשר לשדרג גדלים וכריכות.' },
     { id: 'magnets', keys: ['מגנט', 'מגנטים', 'פוטובלוק', 'עולה מגנטים'],
       text: 'המגנטים מודפסים באירוע עצמו והאורחים לוקחים אותם הביתה.\nבחבילות Premium Plus ו־Diamond הם כלולים. אפשר גם להזמין מגנטים בלבד, בהצעה נפרדת לפי המקום והשעות.',
       link: { text: 'בחירת מסגרת למגנטים', href: './magnets.html' } },
@@ -65,7 +61,7 @@
     { id: 'social', keys: ['סושיאל', 'צלמת סושיאל', 'צלם סושיאל'],
       text: 'אם מגיע צלם או צלמת סושיאל, אשמח שתעדכנו אותי לפני האירוע כדי שנתאם מראש.' },
     { id: 'discount', keys: ['הנחה', 'הנחות', 'מבצע', 'קופון', 'יותר זול', 'להוזיל', 'יקר'],
-      text: 'המחירים באתר הם כבר אחרי הנחה:\n• 2,000 ₪ ב־Standard, Premium, Premium Plus ו־Diamond\n• 1,500 ₪ ב־STANDART PLUS\nאפשר גם להתאים את ההצעה לצרכים שלכם.', lead: 'לקבל הצעה אישית' },
+      text: 'כן, יש עכשיו הנחה על חבילות החתונה. את המחיר אחרי ההנחה דור שולח בהצעה אישית, לפי מה שאתם צריכים.', lead: 'קבלת הצעת מחיר', quote: true },
     { id: 'who', keys: ['מי מצלם', 'מי הצלם', 'מי אתה', 'ניסיון', 'ותק', 'כמה שנים', 'אתה בעצמך'],
       text: 'אני, דור, הצלם הראשי שמלווה אתכם, עם ניסיון של מעל עשור. צלם נוסף וצוות וידאו מצטרפים בהתאם לחבילה.' },
     { id: 'couple', keys: ['זוגיות', 'צילומי זוגיות', 'save the date', 'סייב דה דייט', 'שקיעה', 'לוקיישן', 'איפה מצטלמים'],
@@ -95,7 +91,7 @@
   ];
 
   var MENU = [
-    ['חבילות ומחירים', 'prices'], ['יש הנחה?', 'discount'], ['מתי מקבלים?', 'delivery'],
+    ['הצעת מחיר', 'prices'], ['יש הנחה?', 'discount'], ['מתי מקבלים?', 'delivery'],
     ['מגנטים', 'magnets'], ['אירוע שאינו חתונה', 'events'], ['המלצות', 'reviews'], ['לדבר עם דור', 'human']
   ];
   var MORE = [
@@ -215,7 +211,7 @@
   /* options: [label, handler] buttons, or {text, href, wa} links */
   function options(list) {
     var box = el('div', 'da-opts');
-    if (lead && lead.paused) list = [['להמשיך בבדיקת התאריך', resume]].concat(list);
+    if (lead && lead.paused) list = [[lead.quote ? 'להמשיך להצעת המחיר' : 'להמשיך בבדיקת התאריך', resume]].concat(list);
     list.forEach(function (o) {
       var n;
       if (Array.isArray(o)) {
@@ -265,36 +261,31 @@
   }
 
   function showPackages() {
-    var m = say('חבילות החתונה (לחצו לפירוט ולמחיר):');
+    var m = say('חבילות החתונה (לחצו לפירוט):');
     options(PACKAGES.map(function (p) { return [p.name, function () { showPackage(p); }]; })
-      .concat([['כל המחירים', showAllPrices]]));
+      .concat(lead ? [] : [['קבלת הצעת מחיר', askQuote]]));
     reveal(m);
   }
   function packageLead(p) {
-    return ['בדיקת זמינות ל־' + p.name, function () { startLead({ event: 'חתונה', pack: p.name }); }];
+    return ['הצעת מחיר ל־' + p.name, function () { startLead({ event: 'חתונה', pack: p.name }, true); }];
   }
   function showPackage(p) {
-    var m = say(p.name + '\n' + p.items.map(function (i) { return '• ' + i; }).join('\n'));
-    options([
-      ['הצג מחיר', function () {
-        track('price_reveal', { placement: 'site-agent:' + p.name, page: location.pathname.split('/').pop() || 'index.html' });
-        var r = say('מחיר ‏' + p.name + '‏: ' + p.price + ' ₪ כולל מע״מ\n(מחיר רגיל ' + p.regular + ' ₪)' + (p.extra ? '\n' + p.extra : ''));
-        followUp([packageLead(p), ['חבילות נוספות', showPackages]]); reveal(r);
-      }],
-      packageLead(p),
-      ['חבילות נוספות', showPackages]
-    ]);
+    var m = say(p.name + '\n' + p.items.map(function (i) { return '• ' + i; }).join('\n') + '\n\nאת המחיר דור שולח בהצעה אישית.');
+    options((lead ? [] : [packageLead(p)]).concat([['חבילות נוספות', showPackages]]));
     reveal(m);
   }
-  function showAllPrices() {
-    track('price_reveal', { placement: 'site-agent:all', page: location.pathname.split('/').pop() || 'index.html' });
-    var m = say(PACKAGES.map(function (p) { return '‏' + p.name + '‏: ' + p.price + ' ₪ (רגיל ' + p.regular + ' ₪)'; }).join('\n') + '\nכולל מע״מ. הצעה אישית לפני סגירה.');
-    followUp([['פירוט החבילות', showPackages], { text: 'לעמוד המחירון', href: './weddings-prices.html#packages' }]);
-    reveal(m);
+  /* no prices in the chat: collect the details and hand over to WhatsApp */
+  function askQuote() {
+    if (lead) {
+      say('את המחיר דור שולח בהצעה אישית, אחרי שמקבל את הפרטים.');
+      return options([['מה כלול בחבילות?', showPackages]]);
+    }
+    say('המחיר נקבע בהצעה אישית, לפי מה שאתם צריכים. ענו על כמה שאלות קצרות, שלחו לדור בוואטסאפ והוא יחזור אליכם עם הצעה.');
+    startLead(null, true);
   }
 
   function answer(id, question) {
-    if (id === 'prices') return showPackages();
+    if (id === 'prices') return askQuote();
     if (id === 'date') return lead ? resume() : startLead();
     var topic = TOPICS.filter(function (t) { return t.id === id; })[0];
     var ask = { text: 'שליחת השאלה לדור בוואטסאפ', href: waLink('היי דור, הגעתי מהאתר. ' + (question || 'יש לי שאלה:')), wa: true };
@@ -315,7 +306,7 @@
     var m = say(topic.text), first = [];
     if (topic.wa) first.push(ask);
     if (topic.link) first.push({ text: topic.link.text, href: topic.link.href });
-    if (topic.lead && !lead) first.push([topic.lead, function () { startLead(); }]);
+    if (topic.lead && !lead) first.push([topic.lead, function () { startLead(null, topic.quote); }]);
     followUp(first);
     reveal(m);
   }
@@ -329,8 +320,8 @@
   var LABELS = { event: 'אירוע', date: 'תאריך', place: 'מקום', guests: 'מוזמנים', services: 'שירותים', style: 'סגנון', pack: 'חבילה' };
   var cancel = ['ביטול', function () { lead = null; resetInput(); cta.hidden = false; say('בוטל. אפשר לשאול כל שאלה.'); menu(); }];
 
-  function startLead(preset) {
-    lead = { data: {} };
+  function startLead(preset, quote) {
+    lead = { data: {}, quote: !!quote };
     if (preset) Object.keys(preset).forEach(function (k) { lead.data[k] = preset[k]; });
     nextStep();
   }
@@ -351,8 +342,9 @@
     var count = ' (' + (FIELDS.indexOf(step) + 1) + '/' + FIELDS.length + ')';
     var extra = ('place' in d) ? [['לדלג לסוף', toContact], cancel] : [cancel];
     if (step === 'event') {
-      say('מעולה, כמה שאלות קצרות. איזה אירוע?');
-      return options(EVENTS.map(function (e) { return choice(e, 'event'); }).concat(extra));
+      say(lead.quote ? 'איזה אירוע?' : 'מעולה, כמה שאלות קצרות. איזה אירוע?');
+      var included = lead.quote ? [['מה כלול בחבילות?', function () { lead.paused = true; cta.hidden = false; showPackages(); }]] : [];
+      return options(EVENTS.map(function (e) { return choice(e, 'event'); }).concat(included, extra));
     }
     if (step === 'date') {
       var now = new Date(), pad = function (n) { return (n < 10 ? '0' : '') + n; };
@@ -400,13 +392,13 @@
   }
 
   function finish() {
-    var d = lead.data; lead = null; resetInput(); cta.hidden = true;
+    var d = lead.data, quote = lead.quote; lead = null; resetInput(); cta.hidden = true;
     var lines = ['event', 'date', 'place', 'guests', 'services', 'style', 'pack']
       .filter(function (k) { return d[k]; }).map(function (k) { return LABELS[k] + ': ' + d[k]; });
     say('מוכן! לחצו על הכפתור הירוק ואז ״שליחה״ בוואטסאפ, ודור יחזור אליכם בהקדם, בדרך כלל עוד באותו יום.\n' + lines.join('\n') + '\n\nהתאריך נשמר רק לפי הסכם.');
     options([
-      { text: 'שליחה לדור בוואטסאפ', href: waLink('היי דור, הגעתי מהאתר ואשמח לבדוק זמינות.\n' + lines.join('\n')), wa: true },
-      ['תיקון פרטים', function () { startLead(); }],
+      { text: 'שליחה לדור בוואטסאפ', href: waLink('היי דור, הגעתי מהאתר ואשמח ' + (quote ? 'לקבל הצעת מחיר ולבדוק זמינות.' : 'לבדוק זמינות.') + '\n' + lines.join('\n')), wa: true },
+      ['תיקון פרטים', function () { startLead(d.pack ? { pack: d.pack } : null, quote); }],
       ['שאלה אחרת', function () { cta.hidden = false; say('בשמחה, מה לבדוק?'); menu(); }]
     ]);
     log.scrollTop = log.scrollHeight;
@@ -457,7 +449,7 @@
     panel.hidden = false; launch.hidden = true;
     if (!started) {
       started = true; resetInput();
-      say('היי! כאן אפשר לשאול על חבילות, מחירים, מגנטים ואירועים, ולבדוק אם התאריך שלכם פנוי.');
+      say('היי! כאן אפשר לשאול על חבילות, מגנטים ואירועים, לקבל הצעת מחיר ולבדוק אם התאריך שלכם פנוי.');
       menu(); log.scrollTop = 0;
     }
     track('site_agent_open', { page: location.pathname.split('/').pop() || 'index.html' });
