@@ -257,7 +257,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     /* events other than weddings: contents and prices exactly as Dor gave them */
     'ev_stills': {title:'צילום סטילס לאירוע', price:1200, has:[], event:true, sec:[['צילום סטילס',['צילום סטילס באירוע, 3–4 שעות.']]]},
     'ev_magnets': {title:'סטילס + מגנטים לאירוע', price:2000, has:['magnets'], event:true, sec:[['צילום סטילס',['צילום סטילס באירוע, בשעות שסוכמו.']],['מגנטים',['צילום והדפסת מגנטים באירוע ללא הגבלת כמות, בשעות השירות שסוכמו.','8–10 הגדלות.','2–4 תמונות על בלוק עץ.']]]},
-    'ev_booth': {title:'עמדת צילום לאירוע', price:1800, has:['booth'], event:true, booth:true, sec:[['עמדת צילום',['עמדת צילום ל־4 שעות בסך הכל, בדרך כלל בקבלת הפנים ובמהלך האירוע (משתנה בהתאם לאירוע).','הדפסת תמונות במקום.','רצועות תמונות עם פפיון (אפשר גם ללא).','עיצוב אישי עם שמות ולוגו.']]]},
+    'ev_booth': {title:'עמדת צילום לאירוע', price:1800, has:['booth'], event:true, booth:true, sec:[['עמדת צילום',['עד 4 שעות פעילות בסך הכל, בדרך כלל בקבלת הפנים ובמהלך האירוע (משתנה בהתאם לאירוע).','הדפסת סטריפים במקום ללא הגבלה.','תאורה.','מסגרת לסטריפ עם פפיון (אפשר גם ללא).','עיצוב אישי עם שמות ולוגו.']]]},
     'custom': {title:'הצעה מותאמת אישית', price:0, has:[], sec:[]}
   };
   var ADDONS = [
@@ -266,7 +266,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     ['magnets','חבילת מגנטים ללא הגבלה עד 5 שעות עד השעה 00:00, כולל חבילה אישית לחתן ולכלה: 25–40 מגנטים קטנים לזוג + 10 הגדלות בגודל A5',1600],
     ['couple','צילומי זוגיות / טראש במרכז עד 2–3 שעות (ים המלח בתוספת 1,000 ₪)',1500],
     ['video2','צלם וידאו נוסף לאירוע (מומלץ מעל 500 מוזמנים או באירוע מופרד)',1800],
-    ['booth','עמדת צילום: 4 שעות, הדפסה במקום, רצועות תמונות עם פפיון (אפשר ללא), עיצוב שמות ולוגו',1800]
+    ['booth','עמדת צילום (Photo Booth): עד 4 שעות פעילות בקבלת הפנים ובמהלך האירוע, הדפסת סטריפים במקום ללא הגבלה, מסגרת לסטריפ עם פפיון (או בלי, לבחירתכם), עיצוב אישי עם שמות ולוגו ותאורה',1800]
   ];
   var DELIVERY = {stills:'תמונות סטילס: עד 21 ימי עסקים לאחר האירוע.', video:'חומרי וידאו: עד 45 ימי עסקים מבחירת השירים על ידי המזמין.', albums:'אלבומים מעוצבים: עד 30 ימי עסקים מרגע אישור העיצוב.'};
 
@@ -287,7 +287,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     'Premium':['שני צלמי סטילס','צלם וידאו ורחפן*','שלושה אלבומים','סרט, קליפ וטיזר'],
     'Premium Plus':['שני צלמי סטילס','צלם וידאו ורחפן*','שלושה אלבומים','סרט, קליפ וטיזר','מגנטים ללא הגבלה','הגדלות ופוטובלוק'],
     'Diamond':['שני צלמי סטילס','צלם וידאו ורחפן*','שלושה אלבומים','מגנטים ללא הגבלה','צילומי זוגיות','קנבס או זכוכית'],
-    'ev_booth':['4 שעות','הדפסה במקום','רצועות עם פפיון','עיצוב שמות ולוגו'],
+    'ev_booth':['4 שעות','הדפסה ללא הגבלה','תאורה','רצועות עם פפיון'],
     'ev_stills':['צילום סטילס','3–4 שעות'],
     'ev_magnets':['צילום סטילס','מגנטים ללא הגבלה','8–10 הגדלות','2–4 תמונות על בלוק עץ']
   };
@@ -424,7 +424,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
         card+='<div class="feat">'+img(photo)+'<div><b>'+title+'</b><p>'+line+'</p><p class="small">'+esc(a[1])+'</p><strong>'+money(a[2])+'</strong></div></div>';
       }
       if(type==='חתונה' && more.some(function(a){return a[0]==='couple';})) feat('couple',hero==='p2'?'p4':'p2','צילומי זוגיות','זמן צילום רגוע, רק לשניכם.');
-      if(p.has.indexOf('booth')<0 && !ads.some(function(a){return a.k==='booth';})) feat('booth','bo3','עמדת צילום','תמונות שמודפסות במקום, בעיצוב אישי.');
+      if(p.has.indexOf('booth')<0 && !ads.some(function(a){return a.k==='booth';})) feat('booth','bo3','עמדת צילום','הדפסה במקום ללא הגבלה, בעיצוב אישי.');
       var rowsUp=more.map(function(a){return [a[1],money(a[2])];});
       if(o.pk==='ev_stills') rowsUp.unshift([PKGS.ev_magnets.title+' (במקום סטילס בלבד)',money(PKGS.ev_magnets.price)]);
       if(rowsUp.length||card) h+=sec('אפשר להוסיף',(rowsUp.length?table(rowsUp,'money'):'')+card+'<a class="more" href="'+esc(waUrl(WA,'היי דור, נשמח לשמוע על תוספות להצעה '+ref+'.'))+'" target="_blank" rel="noopener">מעניין אתכם? כתבו לנו</a>');
