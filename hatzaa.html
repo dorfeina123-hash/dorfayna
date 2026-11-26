@@ -380,7 +380,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     booth:{title:'עמדת הצילום', heroes:['bo2','bo1','bo4'], gal:['bo3','bo4','bo1','bo2']}
   };
   /* finished magnets: of the same kind of event when there are such, otherwise the products themselves */
-  var MAGS = {wedding:['mw1','mw2','mw3','mp2','mw6','mw4','mw5','mp1','mp3','mg2'], brit:['mb2','mb1','mb4','mb3','mp1','mp2','mp3'], other:['mp1','mp2','mg1','mp3','mg3','mg2','g1','g3']};
+  var MAGS = {wedding:['mw1','mw2','mw3','mp2','mw6','mw4','mw5','mp1','mp3','mg2'], brit:['mb2','mb1','mb4','mb3','mp1','mp3'], other:['mp1','mp3','g3']};
   var FRAMES = {'חתונה':'wedding','אירוסין':'wedding','חינה':'henna','בר מצווה':'bar','עלייה לתורה':'bar','בת מצווה':'bat','ברית / בריתה':'brit'};
   /* the clip from the top of the site: wedding footage, so only for wedding-type events */
   var VIDEO = LIVE ? 'https://dorfayna.co.il/assets/video/hero-mobile-s.mp4#t=11' : './video.mp4#t=11';
@@ -402,7 +402,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     if(/מגנט/.test(words)){
       var kind=type==='חתונה'||type==='אירוסין'?'wedding':type==='ברית / בריתה'?'brit':'other';
       out.push({id:'mg',title:'מגנטים לדוגמה',list:MAGS[kind],n:6,link:['https://dorfayna.co.il/magnets.html'+(FRAMES[type]?'?type='+FRAMES[type]:''),'לבחירת מסגרת למגנטים שלכם']});
-    } else if(/בלוק|הגדל|זכוכית/.test(words)) out.push({id:'pr',title:'הדפסות ובלוקי עץ',list:['mp2','mg2','mg1'],n:2});
+    } else if(/בלוק|הגדל|זכוכית/.test(words)) out.push({id:'pr',title:'הדפסות ובלוקי עץ',list:set===SETS.wedding?['mp2','mg2','mg1']:['mp1','mp3'],n:2});
     if(hasAlb) out.push({id:'al',title:'אלבומים לדוגמה',list:['cv4','cv2','cv1','cv3','cv5'],n:4});
     if(set!==SETS.mitzvah && /תורה|בית ה?כנסת|שבת חתן/.test(words)) out.push({id:'to',title:'רגעים מעלייה לתורה',list:SETS.mitzvah.gal,n:3,link:SETS.mitzvah.link});
     if(!booth && /עמדת צילום|photo ?booth/i.test(words)) out.push({id:'bo',title:'עמדת הצילום',list:SETS.booth.gal,n:3});
