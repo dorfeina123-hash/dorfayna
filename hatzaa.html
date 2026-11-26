@@ -869,7 +869,8 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       Object.keys(was).forEach(function(k){ if($('ad-'+k)){ $('ad-'+k).checked=was[k].on; $('adp-'+k).value=was[k].p; } });
     }
     renderAddons();
-    var lastDep=store('df_quote_dep'); if(lastDep) $('dep').value=lastDep;
+    /* the remembered deposit is only a suggestion: it never goes into a quote it would swallow */
+    var lastDep=store('df_quote_dep'), depAuto=true; if(lastDep) $('dep').value=lastDep;
 
     function addonVisible(k,pk){
       var p=info(pk); if(!addonDef(k)) return false; if(k.indexOf('x_')===0) return true;
@@ -991,7 +992,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     };
     $('addons').onchange=function(e){ if(e.target.type!=='checkbox') return; var k=e.target.id.slice(3); if(e.target.checked) addonSection(k); else dropSection(k); renderItems(); };
     $('base').oninput=function(){ manual=false; reprice(); };
-    function split(){ if(dayManual) return; var pr=+$('price').value||0, d=+$('dep').value||0, c=+$('chk').value||0; $('day').value=(d||c)&&pr-d-c>0?pr-d-c:''; }
+    function split(){ if(depAuto){ var full=+$('price').value||0; $('dep').value=lastDep&&(!full||+lastDep<full)?lastDep:''; } if(dayManual) return; var pr=+$('price').value||0, d=+$('dep').value||0, c=+$('chk').value||0; $('day').value=(d||c)&&pr-d-c>0?pr-d-c:''; }
     function reprice(){ if(!manual){ var c=computed(); $('price').value=c||''; } calcNote(); split(); }
     function hours(){ if(hoursTouched) return; var q=info($('pkg').value), wed=$('type').value==='חתונה' && !q.hrs && !q.booth && !q.open; $('start').value=wed?'14:30':''; $('end').value=wed?'01:00':''; }
     function pkgChanged(){
@@ -1040,6 +1041,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     function video(){ var t=$('type').value; $('vidline').classList.toggle('hidden',setFor(t)!==SETS.wedding); $('vid').checked=t==='חתונה'; }
     $('type').onchange=typeChanged;
     ['start','end'].forEach(function(id){ $(id).addEventListener('input',function(){ hoursTouched=true; }); });
+    $('dep').addEventListener('input',function(){ depAuto=false; });
     ['dep','chk'].forEach(function(id){ $(id).addEventListener('input',split); });
     $('day').oninput=function(){ dayManual=this.value!==''; };
     $('pkg').onchange=function(){ chose=true; manual=false; pkgChanged(); heroes(); };
@@ -1052,7 +1054,8 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       var r=parse($('paste').value), got=[], m=$('fill-msg');
       if(!$('paste').value.trim()){ m.className='msg err'; m.textContent='אין טקסט למילוי.'; return; }
       /* clear what an earlier auto fill wrote, so details of one client never stay in the next quote */
-      auto.forEach(function(x){ if($(x[0]).value===x[1]){ $(x[0]).value=''; if(x[0]==='price') manual=false; } }); auto=[];
+      auto.forEach(function(x){ if($(x[0]).value===x[1]){ $(x[0]).value=''; if(x[0]==='price') manual=false; if(x[0]==='dep') depAuto=true; } }); auto=[];
+      if(r.names && $('names').value.trim() && r.names!==$('names').value.trim()) depAuto=true;
       /* a new client starts from the clean package, not from the last client's changes */
       if(r.names && r.names!==$('names').value.trim()){ ed.pk=null; picks={}; shown=''; chose=false; }
       function put(id,val,name){ if(val!==undefined&&val!==''){ $(id).value=val; if(id!=='type') auto.push([id,$(id).value]); if(name) got.push(name); } }
@@ -1095,6 +1098,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
       });
       pkgChanged(); heroes();
       if($('pkg').value==='custom' && r.lines.length && !$('extra').value.trim()) put('extra',r.lines.join('\n'),'מה כלול');
+      if(r.dep!==undefined) depAuto=false;
       put('dep',r.dep,'מקדמה');
       if(r.price){ put('price',r.price,'מחיר'); manual=true; }
       if(r.start){ $('start').value=r.start; $('end').value=r.end||''; hoursTouched=true; got.push('שעות'); }
@@ -1188,7 +1192,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
         +'<button type="button" class="btn ghost small" data-a="edit">עריכה</button><button type="button" class="btn ghost small" data-a="share">קישור</button><button type="button" class="btn ghost small" data-a="agree">הסכם</button><button type="button" class="btn ghost small" data-a="del">הסרה</button></div></div>'; }).join('');
     }
     function load(item){
-      var o=item.data; $('names').value=o.n; $('type').value=o.ty; $('date').value=o.d; $('venue').value=o.pl; $('guests').value=o.g; $('phone').value=item.phone||'';
+      var o=item.data; depAuto=false; $('names').value=o.n; $('type').value=o.ty; $('date').value=o.d; $('venue').value=o.pl; $('guests').value=o.g; $('phone').value=item.phone||'';
       C=catalog(); pkgOptions();
       if(![].some.call($('pkg').options,function(x){return x.value===o.pk;})){ C.pkgs[o.pk]=assign(PKGS[o.pk]||PKGS.custom,{title:o.tt||'חבילה',price:o.bp||0,sec:o.sec||[],event:!!(o.fl&&o.fl.ev),booth:!!(o.fl&&o.fl.bt),couple:!!(o.fl&&o.fl.cp),hrs:o.fl&&o.fl.hr||'',has:o.fl&&o.fl.hs||[]}); $('pkg').add(new Option(C.pkgs[o.pk].title,o.pk)); }
       $('pkg').value=o.pk; $('addons').innerHTML=''; renderAddons(o.ad.map(function(a){ return [a.k,a.t||a.k,a.p]; }));
@@ -1211,7 +1215,7 @@ blockquote cite{display:block;color:var(--gold);font-style:normal;font-size:13px
     $('make').onclick=function(){
       var o=ready(false); if(!o) return;
       var item={at:Date.now(),phone:$('phone').value.trim(),data:o,url:''};
-      store('df_quote_dep',o.dp||'');
+      if(o.dp||!depAuto){ lastDep=o.dp||''; store('df_quote_dep',lastDep); }
       if(!LIVE){ keep(item); showOut(item); return; }
       var btn=this, m=$('msg'); btn.disabled=true; m.className='msg'; m.textContent='יוצר קישור…';
       function create(data){ return fetch(MAIL_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'create',data:data})})
